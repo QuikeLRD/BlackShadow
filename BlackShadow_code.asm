@@ -237,57 +237,48 @@ L__main102:
 L__main103:
 	BSF         PORTA+0, 4 
 L__main104:
-;BlackShadow_code.c,126 :: 		while(1){
+;BlackShadow_code.c,125 :: 		while(1){
 L_main4:
-;BlackShadow_code.c,129 :: 		if (linea_izq_detectada || linea_der_detectada) {
-	MOVF        _linea_izq_detectada+0, 1 
-	BTFSS       STATUS+0, 2 
-	GOTO        L__main73
-	MOVF        _linea_der_detectada+0, 1 
-	BTFSS       STATUS+0, 2 
-	GOTO        L__main73
-	GOTO        L_main8
+;BlackShadow_code.c,145 :: 		while(S4 != 0 && S3 != 0){
+L_main6:
+	BTFSS       PORTB+0, 2 
+	GOTO        L_main7
+	BTFSS       PORTB+0, 1 
+	GOTO        L_main7
 L__main73:
-;BlackShadow_code.c,130 :: 		linea_izq_detectada = 0;
-	CLRF        _linea_izq_detectada+0 
-;BlackShadow_code.c,131 :: 		linea_der_detectada = 0;
-	CLRF        _linea_der_detectada+0 
-;BlackShadow_code.c,132 :: 		BRAKE();
-	CALL        _BRAKE+0, 0
-;BlackShadow_code.c,133 :: 		delay_ms(1000);
-	MOVLW       11
-	MOVWF       R11, 0
-	MOVLW       38
-	MOVWF       R12, 0
-	MOVLW       93
-	MOVWF       R13, 0
-L_main9:
-	DECFSZ      R13, 1, 1
-	BRA         L_main9
-	DECFSZ      R12, 1, 1
-	BRA         L_main9
-	DECFSZ      R11, 1, 1
-	BRA         L_main9
-	NOP
-	NOP
-;BlackShadow_code.c,134 :: 		} else {
-	GOTO        L_main10
-L_main8:
-;BlackShadow_code.c,135 :: 		REC();
+;BlackShadow_code.c,146 :: 		REC();
 	CALL        _REC+0, 0
-;BlackShadow_code.c,136 :: 		}
+;BlackShadow_code.c,147 :: 		}
+	GOTO        L_main6
+L_main7:
+;BlackShadow_code.c,148 :: 		HARD();
+	CALL        _HARD+0, 0
+;BlackShadow_code.c,149 :: 		delay_ms(8000);
+	MOVLW       82
+	MOVWF       R11, 0
+	MOVLW       43
+	MOVWF       R12, 0
+	MOVLW       0
+	MOVWF       R13, 0
 L_main10:
-;BlackShadow_code.c,143 :: 		}
+	DECFSZ      R13, 1, 1
+	BRA         L_main10
+	DECFSZ      R12, 1, 1
+	BRA         L_main10
+	DECFSZ      R11, 1, 1
+	BRA         L_main10
+	NOP
+;BlackShadow_code.c,172 :: 		}
 	GOTO        L_main4
-;BlackShadow_code.c,144 :: 		}
+;BlackShadow_code.c,173 :: 		}
 L_end_main:
 	GOTO        $+0
 ; end of _main
 
 _SELEC:
 
-;BlackShadow_code.c,148 :: 		void SELEC(){
-;BlackShadow_code.c,150 :: 		seleccion=SW0*1+SW1*2+SW2*4+SW3*8;
+;BlackShadow_code.c,177 :: 		void SELEC(){
+;BlackShadow_code.c,179 :: 		seleccion=SW0*1+SW1*2+SW2*4+SW3*8;
 	MOVLW       0
 	BTFSC       PORTA+0, 3 
 	MOVLW       1
@@ -348,9 +339,9 @@ L__SELEC107:
 	ADDWF       SELEC_seleccion_L0+0, 1 
 	MOVF        R1, 0 
 	ADDWFC      SELEC_seleccion_L0+1, 1 
-;BlackShadow_code.c,152 :: 		switch(seleccion){
+;BlackShadow_code.c,181 :: 		switch(seleccion){
 	GOTO        L_SELEC11
-;BlackShadow_code.c,153 :: 		case 0: L0=L1=L2=L3=1;
+;BlackShadow_code.c,182 :: 		case 0: L0=L1=L2=L3=1;
 L_SELEC13:
 	BSF         PORTA+0, 4 
 	BTFSC       PORTA+0, 4 
@@ -374,9 +365,9 @@ L__SELEC111:
 L__SELEC112:
 	BSF         PORTA+0, 6 
 L__SELEC113:
-;BlackShadow_code.c,156 :: 		break;
+;BlackShadow_code.c,185 :: 		break;
 	GOTO        L_SELEC12
-;BlackShadow_code.c,158 :: 		case 1: L0=0; L3=L2=L1=1;
+;BlackShadow_code.c,187 :: 		case 1: L0=0; L3=L2=L1=1;
 L_SELEC14:
 	BCF         PORTA+0, 6 
 	BSF         PORTA+0, 7 
@@ -394,9 +385,9 @@ L__SELEC115:
 L__SELEC116:
 	BSF         PORTA+0, 4 
 L__SELEC117:
-;BlackShadow_code.c,160 :: 		REC();
+;BlackShadow_code.c,189 :: 		REC();
 	CALL        _REC+0, 0
-;BlackShadow_code.c,161 :: 		delay_ms(300);
+;BlackShadow_code.c,190 :: 		delay_ms(300);
 	MOVLW       4
 	MOVWF       R11, 0
 	MOVLW       12
@@ -412,9 +403,9 @@ L_SELEC15:
 	BRA         L_SELEC15
 	NOP
 	NOP
-;BlackShadow_code.c,162 :: 		LIBRE();
+;BlackShadow_code.c,191 :: 		LIBRE();
 	CALL        _LIBRE+0, 0
-;BlackShadow_code.c,163 :: 		delay_ms(4000);
+;BlackShadow_code.c,192 :: 		delay_ms(4000);
 	MOVLW       41
 	MOVWF       R11, 0
 	MOVLW       150
@@ -428,9 +419,9 @@ L_SELEC16:
 	BRA         L_SELEC16
 	DECFSZ      R11, 1, 1
 	BRA         L_SELEC16
-;BlackShadow_code.c,167 :: 		break;
+;BlackShadow_code.c,196 :: 		break;
 	GOTO        L_SELEC12
-;BlackShadow_code.c,169 :: 		case 2: L1=0; L3=L2=L0=1;
+;BlackShadow_code.c,198 :: 		case 2: L1=0; L3=L2=L0=1;
 L_SELEC17:
 	BCF         PORTA+0, 7 
 	BSF         PORTA+0, 6 
@@ -448,9 +439,9 @@ L__SELEC119:
 L__SELEC120:
 	BSF         PORTA+0, 4 
 L__SELEC121:
-;BlackShadow_code.c,170 :: 		REC();
+;BlackShadow_code.c,199 :: 		REC();
 	CALL        _REC+0, 0
-;BlackShadow_code.c,171 :: 		delay_ms(300);
+;BlackShadow_code.c,200 :: 		delay_ms(300);
 	MOVLW       4
 	MOVWF       R11, 0
 	MOVLW       12
@@ -466,9 +457,9 @@ L_SELEC18:
 	BRA         L_SELEC18
 	NOP
 	NOP
-;BlackShadow_code.c,172 :: 		BRAKE();
+;BlackShadow_code.c,201 :: 		BRAKE();
 	CALL        _BRAKE+0, 0
-;BlackShadow_code.c,173 :: 		delay_ms(4000);
+;BlackShadow_code.c,202 :: 		delay_ms(4000);
 	MOVLW       41
 	MOVWF       R11, 0
 	MOVLW       150
@@ -482,9 +473,9 @@ L_SELEC19:
 	BRA         L_SELEC19
 	DECFSZ      R11, 1, 1
 	BRA         L_SELEC19
-;BlackShadow_code.c,175 :: 		break;
+;BlackShadow_code.c,204 :: 		break;
 	GOTO        L_SELEC12
-;BlackShadow_code.c,177 :: 		case 3: L0=L1=0; L2=L3==1;
+;BlackShadow_code.c,206 :: 		case 3: L0=L1=0; L2=L3==1;
 L_SELEC20:
 	BCF         PORTA+0, 7 
 	BTFSC       PORTA+0, 7 
@@ -501,9 +492,9 @@ L__SELEC123:
 L__SELEC124:
 	BSF         PORTA+0, 5 
 L__SELEC125:
-;BlackShadow_code.c,178 :: 		IZQ();
+;BlackShadow_code.c,207 :: 		IZQ();
 	CALL        _IZQ+0, 0
-;BlackShadow_code.c,179 :: 		delay_ms(250);
+;BlackShadow_code.c,208 :: 		delay_ms(250);
 	MOVLW       3
 	MOVWF       R11, 0
 	MOVLW       138
@@ -519,9 +510,9 @@ L_SELEC21:
 	BRA         L_SELEC21
 	NOP
 	NOP
-;BlackShadow_code.c,180 :: 		LIBRE();
+;BlackShadow_code.c,209 :: 		LIBRE();
 	CALL        _LIBRE+0, 0
-;BlackShadow_code.c,181 :: 		delay_ms(4000);
+;BlackShadow_code.c,210 :: 		delay_ms(4000);
 	MOVLW       41
 	MOVWF       R11, 0
 	MOVLW       150
@@ -535,9 +526,9 @@ L_SELEC22:
 	BRA         L_SELEC22
 	DECFSZ      R11, 1, 1
 	BRA         L_SELEC22
-;BlackShadow_code.c,183 :: 		break;
+;BlackShadow_code.c,212 :: 		break;
 	GOTO        L_SELEC12
-;BlackShadow_code.c,185 :: 		case 4: L2=0; L3=L1=L0=1;
+;BlackShadow_code.c,214 :: 		case 4: L2=0; L3=L1=L0=1;
 L_SELEC23:
 	BCF         PORTA+0, 5 
 	BSF         PORTA+0, 6 
@@ -555,9 +546,9 @@ L__SELEC127:
 L__SELEC128:
 	BSF         PORTA+0, 4 
 L__SELEC129:
-;BlackShadow_code.c,186 :: 		DER();
+;BlackShadow_code.c,215 :: 		DER();
 	CALL        _DER+0, 0
-;BlackShadow_code.c,187 :: 		delay_ms(250);
+;BlackShadow_code.c,216 :: 		delay_ms(250);
 	MOVLW       3
 	MOVWF       R11, 0
 	MOVLW       138
@@ -573,9 +564,9 @@ L_SELEC24:
 	BRA         L_SELEC24
 	NOP
 	NOP
-;BlackShadow_code.c,188 :: 		LIBRE();
+;BlackShadow_code.c,217 :: 		LIBRE();
 	CALL        _LIBRE+0, 0
-;BlackShadow_code.c,189 :: 		delay_ms(4000);
+;BlackShadow_code.c,218 :: 		delay_ms(4000);
 	MOVLW       41
 	MOVWF       R11, 0
 	MOVLW       150
@@ -589,9 +580,9 @@ L_SELEC25:
 	BRA         L_SELEC25
 	DECFSZ      R11, 1, 1
 	BRA         L_SELEC25
-;BlackShadow_code.c,190 :: 		break;
+;BlackShadow_code.c,219 :: 		break;
 	GOTO        L_SELEC12
-;BlackShadow_code.c,192 :: 		case 5: L2=L0=0; L3=L1=1;
+;BlackShadow_code.c,221 :: 		case 5: L2=L0=0; L3=L1=1;
 L_SELEC26:
 	BCF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
@@ -609,11 +600,11 @@ L__SELEC131:
 L__SELEC132:
 	BSF         PORTA+0, 4 
 L__SELEC133:
-;BlackShadow_code.c,193 :: 		DER();
+;BlackShadow_code.c,222 :: 		DER();
 	CALL        _DER+0, 0
-;BlackShadow_code.c,194 :: 		break;
+;BlackShadow_code.c,223 :: 		break;
 	GOTO        L_SELEC12
-;BlackShadow_code.c,196 :: 		case 6: L1=L2=0; L3=L0=1;
+;BlackShadow_code.c,225 :: 		case 6: L1=L2=0; L3=L0=1;
 L_SELEC27:
 	BCF         PORTA+0, 5 
 	BTFSC       PORTA+0, 5 
@@ -631,11 +622,11 @@ L__SELEC135:
 L__SELEC136:
 	BSF         PORTA+0, 4 
 L__SELEC137:
-;BlackShadow_code.c,197 :: 		GIRO180();
+;BlackShadow_code.c,226 :: 		GIRO180();
 	CALL        _GIRO180+0, 0
-;BlackShadow_code.c,199 :: 		break;
+;BlackShadow_code.c,228 :: 		break;
 	GOTO        L_SELEC12
-;BlackShadow_code.c,201 :: 		case 7: L2=L1=L0=0; L3=1;
+;BlackShadow_code.c,230 :: 		case 7: L2=L1=L0=0; L3=1;
 L_SELEC28:
 	BCF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
@@ -653,9 +644,9 @@ L__SELEC140:
 	BSF         PORTA+0, 5 
 L__SELEC141:
 	BSF         PORTA+0, 4 
-;BlackShadow_code.c,203 :: 		break;
+;BlackShadow_code.c,232 :: 		break;
 	GOTO        L_SELEC12
-;BlackShadow_code.c,205 :: 		case 8: L3=0; L1=L2=L0=1;
+;BlackShadow_code.c,234 :: 		case 8: L3=0; L1=L2=L0=1;
 L_SELEC29:
 	BCF         PORTA+0, 4 
 	BSF         PORTA+0, 6 
@@ -673,9 +664,9 @@ L__SELEC143:
 L__SELEC144:
 	BSF         PORTA+0, 7 
 L__SELEC145:
-;BlackShadow_code.c,207 :: 		break;
+;BlackShadow_code.c,236 :: 		break;
 	GOTO        L_SELEC12
-;BlackShadow_code.c,209 :: 		case 9: L0=L3=0; L1=L2=1;
+;BlackShadow_code.c,238 :: 		case 9: L0=L3=0; L1=L2=1;
 L_SELEC30:
 	BCF         PORTA+0, 4 
 	BTFSC       PORTA+0, 4 
@@ -693,9 +684,9 @@ L__SELEC147:
 L__SELEC148:
 	BSF         PORTA+0, 7 
 L__SELEC149:
-;BlackShadow_code.c,212 :: 		break;
+;BlackShadow_code.c,241 :: 		break;
 	GOTO        L_SELEC12
-;BlackShadow_code.c,214 :: 		case 10: L3=L1=0; L2=L0=1;
+;BlackShadow_code.c,243 :: 		case 10: L3=L1=0; L2=L0=1;
 L_SELEC31:
 	BCF         PORTA+0, 7 
 	BTFSC       PORTA+0, 7 
@@ -713,9 +704,9 @@ L__SELEC151:
 L__SELEC152:
 	BSF         PORTA+0, 5 
 L__SELEC153:
-;BlackShadow_code.c,215 :: 		break;
+;BlackShadow_code.c,244 :: 		break;
 	GOTO        L_SELEC12
-;BlackShadow_code.c,217 :: 		case 11: L0=L1=L3=0; L2=1;
+;BlackShadow_code.c,246 :: 		case 11: L0=L1=L3=0; L2=1;
 L_SELEC32:
 	BCF         PORTA+0, 4 
 	BTFSC       PORTA+0, 4 
@@ -733,9 +724,9 @@ L__SELEC156:
 	BSF         PORTA+0, 6 
 L__SELEC157:
 	BSF         PORTA+0, 5 
-;BlackShadow_code.c,218 :: 		break;
+;BlackShadow_code.c,247 :: 		break;
 	GOTO        L_SELEC12
-;BlackShadow_code.c,220 :: 		case 12: L3=L2=0; L1=L0=1;
+;BlackShadow_code.c,249 :: 		case 12: L3=L2=0; L1=L0=1;
 L_SELEC33:
 	BCF         PORTA+0, 5 
 	BTFSC       PORTA+0, 5 
@@ -753,9 +744,9 @@ L__SELEC159:
 L__SELEC160:
 	BSF         PORTA+0, 7 
 L__SELEC161:
-;BlackShadow_code.c,221 :: 		break;
+;BlackShadow_code.c,250 :: 		break;
 	GOTO        L_SELEC12
-;BlackShadow_code.c,223 :: 		case 13: L3=L2=L0=0; L1=1;
+;BlackShadow_code.c,252 :: 		case 13: L3=L2=L0=0; L1=1;
 L_SELEC34:
 	BCF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
@@ -773,9 +764,9 @@ L__SELEC164:
 	BSF         PORTA+0, 4 
 L__SELEC165:
 	BSF         PORTA+0, 7 
-;BlackShadow_code.c,224 :: 		break;
+;BlackShadow_code.c,253 :: 		break;
 	GOTO        L_SELEC12
-;BlackShadow_code.c,226 :: 		case 14: L3=L2=L1=0; L0=1;
+;BlackShadow_code.c,255 :: 		case 14: L3=L2=L1=0; L0=1;
 L_SELEC35:
 	BCF         PORTA+0, 7 
 	BTFSC       PORTA+0, 7 
@@ -793,9 +784,9 @@ L__SELEC168:
 	BSF         PORTA+0, 4 
 L__SELEC169:
 	BSF         PORTA+0, 6 
-;BlackShadow_code.c,227 :: 		break;
+;BlackShadow_code.c,256 :: 		break;
 	GOTO        L_SELEC12
-;BlackShadow_code.c,229 :: 		default: L0=L1=L2=L3=0;
+;BlackShadow_code.c,258 :: 		default: L0=L1=L2=L3=0;
 L_SELEC36:
 	BCF         PORTA+0, 4 
 	BTFSC       PORTA+0, 4 
@@ -819,7 +810,7 @@ L__SELEC173:
 L__SELEC174:
 	BSF         PORTA+0, 6 
 L__SELEC175:
-;BlackShadow_code.c,230 :: 		}
+;BlackShadow_code.c,259 :: 		}
 	GOTO        L_SELEC12
 L_SELEC11:
 	MOVLW       0
@@ -959,179 +950,179 @@ L__SELEC190:
 	GOTO        L_SELEC35
 	GOTO        L_SELEC36
 L_SELEC12:
-;BlackShadow_code.c,233 :: 		}
+;BlackShadow_code.c,262 :: 		}
 L_end_SELEC:
 	RETURN      0
 ; end of _SELEC
 
 _Start:
 
-;BlackShadow_code.c,235 :: 		void Start(){
-;BlackShadow_code.c,236 :: 		PWM1_Start();
+;BlackShadow_code.c,264 :: 		void Start(){
+;BlackShadow_code.c,265 :: 		PWM1_Start();
 	CALL        _PWM1_Start+0, 0
-;BlackShadow_code.c,237 :: 		PWM2_Start();
+;BlackShadow_code.c,266 :: 		PWM2_Start();
 	CALL        _PWM2_Start+0, 0
-;BlackShadow_code.c,238 :: 		PWM3_Start();
+;BlackShadow_code.c,267 :: 		PWM3_Start();
 	CALL        _PWM3_Start+0, 0
-;BlackShadow_code.c,239 :: 		PWM4_Start();
+;BlackShadow_code.c,268 :: 		PWM4_Start();
 	CALL        _PWM4_Start+0, 0
-;BlackShadow_code.c,240 :: 		PWM5_Start();
+;BlackShadow_code.c,269 :: 		PWM5_Start();
 	CALL        _PWM5_Start+0, 0
-;BlackShadow_code.c,241 :: 		return;
-;BlackShadow_code.c,242 :: 		}
+;BlackShadow_code.c,270 :: 		return;
+;BlackShadow_code.c,271 :: 		}
 L_end_Start:
 	RETURN      0
 ; end of _Start
 
 _Stop:
 
-;BlackShadow_code.c,243 :: 		void Stop(){
-;BlackShadow_code.c,244 :: 		PWM1_Stop();
+;BlackShadow_code.c,272 :: 		void Stop(){
+;BlackShadow_code.c,273 :: 		PWM1_Stop();
 	CALL        _PWM1_Stop+0, 0
-;BlackShadow_code.c,245 :: 		PWM2_Stop();
+;BlackShadow_code.c,274 :: 		PWM2_Stop();
 	CALL        _PWM2_Stop+0, 0
-;BlackShadow_code.c,246 :: 		PWM3_Stop();
+;BlackShadow_code.c,275 :: 		PWM3_Stop();
 	CALL        _PWM3_Stop+0, 0
-;BlackShadow_code.c,247 :: 		PWM4_Stop();
+;BlackShadow_code.c,276 :: 		PWM4_Stop();
 	CALL        _PWM4_Stop+0, 0
-;BlackShadow_code.c,248 :: 		PWM5_Stop();
+;BlackShadow_code.c,277 :: 		PWM5_Stop();
 	CALL        _PWM5_Stop+0, 0
-;BlackShadow_code.c,249 :: 		}
+;BlackShadow_code.c,278 :: 		}
 L_end_Stop:
 	RETURN      0
 ; end of _Stop
 
 _REC:
 
-;BlackShadow_code.c,256 :: 		void REC(){
-;BlackShadow_code.c,258 :: 		Start();
+;BlackShadow_code.c,285 :: 		void REC(){
+;BlackShadow_code.c,287 :: 		Start();
 	CALL        _Start+0, 0
-;BlackShadow_code.c,260 :: 		PWM1_Set_Duty(190); // IN1 = PWM
+;BlackShadow_code.c,289 :: 		PWM1_Set_Duty(190); // IN1 = PWM
 	MOVLW       190
 	MOVWF       FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;BlackShadow_code.c,261 :: 		PWM2_Set_Duty(0);
+;BlackShadow_code.c,290 :: 		PWM2_Set_Duty(0);
 	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;BlackShadow_code.c,264 :: 		PWM3_Set_Duty(140);    // IN1 = 0
+;BlackShadow_code.c,293 :: 		PWM3_Set_Duty(140);    // IN1 = 0
 	MOVLW       140
 	MOVWF       FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;BlackShadow_code.c,265 :: 		PWM4_Set_Duty(0);
+;BlackShadow_code.c,294 :: 		PWM4_Set_Duty(0);
 	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;BlackShadow_code.c,266 :: 		}
+;BlackShadow_code.c,295 :: 		}
 L_end_REC:
 	RETURN      0
 ; end of _REC
 
 _DER:
 
-;BlackShadow_code.c,267 :: 		void DER(){
-;BlackShadow_code.c,268 :: 		Start();
+;BlackShadow_code.c,296 :: 		void DER(){
+;BlackShadow_code.c,297 :: 		Start();
 	CALL        _Start+0, 0
-;BlackShadow_code.c,269 :: 		PWM1_Set_Duty(200);
+;BlackShadow_code.c,298 :: 		PWM1_Set_Duty(200);
 	MOVLW       200
 	MOVWF       FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;BlackShadow_code.c,270 :: 		PWM2_Set_Duty(0);
+;BlackShadow_code.c,299 :: 		PWM2_Set_Duty(0);
 	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;BlackShadow_code.c,272 :: 		PWM3_Set_Duty(0);
+;BlackShadow_code.c,301 :: 		PWM3_Set_Duty(0);
 	CLRF        FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;BlackShadow_code.c,273 :: 		PWM4_Set_Duty(0);
+;BlackShadow_code.c,302 :: 		PWM4_Set_Duty(0);
 	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;BlackShadow_code.c,275 :: 		}
+;BlackShadow_code.c,304 :: 		}
 L_end_DER:
 	RETURN      0
 ; end of _DER
 
 _IZQ:
 
-;BlackShadow_code.c,276 :: 		void IZQ(){
-;BlackShadow_code.c,277 :: 		Start();
+;BlackShadow_code.c,305 :: 		void IZQ(){
+;BlackShadow_code.c,306 :: 		Start();
 	CALL        _Start+0, 0
-;BlackShadow_code.c,278 :: 		PWM1_Set_Duty(0);
+;BlackShadow_code.c,307 :: 		PWM1_Set_Duty(0);
 	CLRF        FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;BlackShadow_code.c,279 :: 		PWM2_Set_Duty(0);
+;BlackShadow_code.c,308 :: 		PWM2_Set_Duty(0);
 	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;BlackShadow_code.c,281 :: 		PWM3_Set_Duty(160);
+;BlackShadow_code.c,310 :: 		PWM3_Set_Duty(160);
 	MOVLW       160
 	MOVWF       FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;BlackShadow_code.c,282 :: 		PWM4_Set_Duty(0);
+;BlackShadow_code.c,311 :: 		PWM4_Set_Duty(0);
 	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;BlackShadow_code.c,283 :: 		}
+;BlackShadow_code.c,312 :: 		}
 L_end_IZQ:
 	RETURN      0
 ; end of _IZQ
 
 _REV:
 
-;BlackShadow_code.c,285 :: 		void REV(){
-;BlackShadow_code.c,286 :: 		PWM1_Stop();
-	CALL        _PWM1_Stop+0, 0
-;BlackShadow_code.c,287 :: 		LATC.F2 = 0;
-	BCF         LATC+0, 2 
-;BlackShadow_code.c,288 :: 		PWM2_Set_Duty(190);
+;BlackShadow_code.c,314 :: 		void REV(){
+;BlackShadow_code.c,315 :: 		Start();
+	CALL        _Start+0, 0
+;BlackShadow_code.c,316 :: 		PWM1_Set_Duty(0);
+	CLRF        FARG_PWM1_Set_Duty_new_duty+0 
+	CALL        _PWM1_Set_Duty+0, 0
+;BlackShadow_code.c,317 :: 		PWM2_Set_Duty(190);
 	MOVLW       190
 	MOVWF       FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;BlackShadow_code.c,290 :: 		PWM3_Stop();
-	CALL        _PWM3_Stop+0, 0
-;BlackShadow_code.c,291 :: 		LATB.F5 =0;
-	BCF         LATB+0, 5 
-;BlackShadow_code.c,292 :: 		PWM4_Set_Duty(190);
+;BlackShadow_code.c,318 :: 		PWM3_Set_Duty(0);
+	CLRF        FARG_PWM3_Set_Duty_new_duty+0 
+	CALL        _PWM3_Set_Duty+0, 0
+;BlackShadow_code.c,319 :: 		PWM4_Set_Duty(190);
 	MOVLW       190
 	MOVWF       FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;BlackShadow_code.c,294 :: 		}
+;BlackShadow_code.c,321 :: 		}
 L_end_REV:
 	RETURN      0
 ; end of _REV
 
 _LIBRE:
 
-;BlackShadow_code.c,296 :: 		void LIBRE(){
-;BlackShadow_code.c,298 :: 		PWM1_Set_Duty(0);
+;BlackShadow_code.c,323 :: 		void LIBRE(){
+;BlackShadow_code.c,325 :: 		PWM1_Set_Duty(0);
 	CLRF        FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;BlackShadow_code.c,299 :: 		PWM2_Set_Duty(0);
+;BlackShadow_code.c,326 :: 		PWM2_Set_Duty(0);
 	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;BlackShadow_code.c,300 :: 		PWM3_Set_Duty(0);
+;BlackShadow_code.c,327 :: 		PWM3_Set_Duty(0);
 	CLRF        FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;BlackShadow_code.c,301 :: 		PWM4_Set_Duty(0);
+;BlackShadow_code.c,328 :: 		PWM4_Set_Duty(0);
 	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;BlackShadow_code.c,302 :: 		}
+;BlackShadow_code.c,329 :: 		}
 L_end_LIBRE:
 	RETURN      0
 ; end of _LIBRE
 
 _GIRO180:
 
-;BlackShadow_code.c,306 :: 		void GIRO180(){
-;BlackShadow_code.c,307 :: 		PWM1_Set_Duty(255);
+;BlackShadow_code.c,333 :: 		void GIRO180(){
+;BlackShadow_code.c,334 :: 		PWM1_Set_Duty(255);
 	MOVLW       255
 	MOVWF       FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;BlackShadow_code.c,308 :: 		PWM2_Set_Duty(0);
+;BlackShadow_code.c,335 :: 		PWM2_Set_Duty(0);
 	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;BlackShadow_code.c,310 :: 		PWM3_Set_Duty(0);
+;BlackShadow_code.c,337 :: 		PWM3_Set_Duty(0);
 	CLRF        FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;BlackShadow_code.c,311 :: 		PWM4_Set_Duty(0);
+;BlackShadow_code.c,338 :: 		PWM4_Set_Duty(0);
 	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;BlackShadow_code.c,312 :: 		Delay_ms(40);
+;BlackShadow_code.c,339 :: 		Delay_ms(40);
 	MOVLW       104
 	MOVWF       R12, 0
 	MOVLW       228
@@ -1142,17 +1133,17 @@ L_GIRO18037:
 	DECFSZ      R12, 1, 1
 	BRA         L_GIRO18037
 	NOP
-;BlackShadow_code.c,315 :: 		}
+;BlackShadow_code.c,342 :: 		}
 L_end_GIRO180:
 	RETURN      0
 ; end of _GIRO180
 
 _GIRO360:
 
-;BlackShadow_code.c,317 :: 		void GIRO360(){
-;BlackShadow_code.c,318 :: 		IZQ();
+;BlackShadow_code.c,344 :: 		void GIRO360(){
+;BlackShadow_code.c,345 :: 		IZQ();
 	CALL        _IZQ+0, 0
-;BlackShadow_code.c,319 :: 		delay_ms(500);
+;BlackShadow_code.c,346 :: 		delay_ms(500);
 	MOVLW       6
 	MOVWF       R11, 0
 	MOVLW       19
@@ -1168,9 +1159,9 @@ L_GIRO36038:
 	BRA         L_GIRO36038
 	NOP
 	NOP
-;BlackShadow_code.c,320 :: 		LIBRE();
+;BlackShadow_code.c,347 :: 		LIBRE();
 	CALL        _LIBRE+0, 0
-;BlackShadow_code.c,321 :: 		delay_ms(4000);
+;BlackShadow_code.c,348 :: 		delay_ms(4000);
 	MOVLW       41
 	MOVWF       R11, 0
 	MOVLW       150
@@ -1184,109 +1175,133 @@ L_GIRO36039:
 	BRA         L_GIRO36039
 	DECFSZ      R11, 1, 1
 	BRA         L_GIRO36039
-;BlackShadow_code.c,322 :: 		}
+;BlackShadow_code.c,349 :: 		}
 L_end_GIRO360:
 	RETURN      0
 ; end of _GIRO360
 
 _BRAKE:
 
-;BlackShadow_code.c,324 :: 		void BRAKE(){
-;BlackShadow_code.c,326 :: 		Stop();
+;BlackShadow_code.c,351 :: 		void BRAKE(){
+;BlackShadow_code.c,353 :: 		Stop();
 	CALL        _Stop+0, 0
-;BlackShadow_code.c,327 :: 		LATC.F2=0;                                //PWM1
+;BlackShadow_code.c,354 :: 		LATC.F2=0;                                //PWM1
 	BCF         LATC+0, 2 
-;BlackShadow_code.c,328 :: 		LATC.F1=0;                                //PWM2                                 -
+;BlackShadow_code.c,355 :: 		LATC.F1=0;                                //PWM2                                 -
 	BCF         LATC+0, 1 
-;BlackShadow_code.c,329 :: 		LATB.F5=0;                                //PWM3
+;BlackShadow_code.c,356 :: 		LATB.F5=0;                                //PWM3
 	BCF         LATB+0, 5 
-;BlackShadow_code.c,330 :: 		LATB.F0=0;                                //PWM4
+;BlackShadow_code.c,357 :: 		LATB.F0=0;                                //PWM4
 	BCF         LATB+0, 0 
-;BlackShadow_code.c,333 :: 		}
+;BlackShadow_code.c,360 :: 		}
 L_end_BRAKE:
 	RETURN      0
 ; end of _BRAKE
 
+_HARD:
+
+;BlackShadow_code.c,361 :: 		void HARD(){
+;BlackShadow_code.c,362 :: 		PWM1_Set_Duty(255);
+	MOVLW       255
+	MOVWF       FARG_PWM1_Set_Duty_new_duty+0 
+	CALL        _PWM1_Set_Duty+0, 0
+;BlackShadow_code.c,363 :: 		PWM2_Set_Duty(255);
+	MOVLW       255
+	MOVWF       FARG_PWM2_Set_Duty_new_duty+0 
+	CALL        _PWM2_Set_Duty+0, 0
+;BlackShadow_code.c,364 :: 		PWM3_Set_Duty(255);
+	MOVLW       255
+	MOVWF       FARG_PWM3_Set_Duty_new_duty+0 
+	CALL        _PWM3_Set_Duty+0, 0
+;BlackShadow_code.c,365 :: 		PWM4_Set_Duty(255);
+	MOVLW       255
+	MOVWF       FARG_PWM4_Set_Duty_new_duty+0 
+	CALL        _PWM4_Set_Duty+0, 0
+;BlackShadow_code.c,367 :: 		}
+L_end_HARD:
+	RETURN      0
+; end of _HARD
+
 _Basura:
 
-;BlackShadow_code.c,335 :: 		void Basura(){
-;BlackShadow_code.c,339 :: 		if(SL1==0 && SL2==1)       //SL1=Sensor izquierdo, SL2= Sensor de linea derecho
+;BlackShadow_code.c,369 :: 		void Basura(){
+;BlackShadow_code.c,373 :: 		if(SL1==0 && SL2==1)       //SL1=Sensor izquierdo, SL2= Sensor de linea derecho
 	BTFSC       PORTC+0, 0 
 	GOTO        L_Basura42
 	BTFSS       PORTC+0, 4 
 	GOTO        L_Basura42
 L__Basura81:
-;BlackShadow_code.c,340 :: 		DER();                 //Si veo por la izquierda hago una reversa por la derecha.
+;BlackShadow_code.c,374 :: 		DER();                 //Si veo por la izquierda hago una reversa por la derecha.
 	CALL        _DER+0, 0
 	GOTO        L_Basura43
 L_Basura42:
-;BlackShadow_code.c,341 :: 		else if(SL1==1 && SL2==0)
+;BlackShadow_code.c,375 :: 		else if(SL1==1 && SL2==0)
 	BTFSS       PORTC+0, 0 
 	GOTO        L_Basura46
 	BTFSC       PORTC+0, 4 
 	GOTO        L_Basura46
 L__Basura80:
-;BlackShadow_code.c,342 :: 		IZQ();
+;BlackShadow_code.c,376 :: 		IZQ();
 	CALL        _IZQ+0, 0
 	GOTO        L_Basura47
 L_Basura46:
-;BlackShadow_code.c,343 :: 		else if(SL1==0 && SL2==0)
+;BlackShadow_code.c,377 :: 		else if(SL1==0 && SL2==0)
 	BTFSC       PORTC+0, 0 
 	GOTO        L_Basura50
 	BTFSC       PORTC+0, 4 
 	GOTO        L_Basura50
 L__Basura79:
-;BlackShadow_code.c,344 :: 		GIRO180();
+;BlackShadow_code.c,378 :: 		GIRO180();
 	CALL        _GIRO180+0, 0
 	GOTO        L_Basura51
 L_Basura50:
-;BlackShadow_code.c,345 :: 		else if(SL1==1 && SL2==1)
+;BlackShadow_code.c,379 :: 		else if(SL1==1 && SL2==1)
 	BTFSS       PORTC+0, 0 
 	GOTO        L_Basura54
 	BTFSS       PORTC+0, 4 
 	GOTO        L_Basura54
 L__Basura78:
-;BlackShadow_code.c,346 :: 		REC();
+;BlackShadow_code.c,380 :: 		REC();
 	CALL        _REC+0, 0
 	GOTO        L_Basura55
 L_Basura54:
-;BlackShadow_code.c,353 :: 		else if(S1==1 && S2==0)
+;BlackShadow_code.c,387 :: 		else if(S1==1 && S2==0)
 	BTFSS       PORTC+0, 5 
 	GOTO        L_Basura58
 	BTFSC       PORTC+0, 6 
 	GOTO        L_Basura58
 L__Basura77:
-;BlackShadow_code.c,354 :: 		IZQ();
+;BlackShadow_code.c,388 :: 		IZQ();
 	CALL        _IZQ+0, 0
 	GOTO        L_Basura59
 L_Basura58:
-;BlackShadow_code.c,355 :: 		else if(S1==0 && S2==1)
+;BlackShadow_code.c,389 :: 		else if(S1==0 && S2==1)
 	BTFSC       PORTC+0, 5 
 	GOTO        L_Basura62
 	BTFSS       PORTC+0, 6 
 	GOTO        L_Basura62
 L__Basura76:
-;BlackShadow_code.c,356 :: 		DER();
+;BlackShadow_code.c,390 :: 		DER();
 	CALL        _DER+0, 0
 	GOTO        L_Basura63
 L_Basura62:
-;BlackShadow_code.c,357 :: 		else if(S1==1 && S2==1)
+;BlackShadow_code.c,391 :: 		else if(S1==1 && S2==1)
 	BTFSS       PORTC+0, 5 
 	GOTO        L_Basura66
 	BTFSS       PORTC+0, 6 
 	GOTO        L_Basura66
 L__Basura75:
-;BlackShadow_code.c,358 :: 		REC();
+;BlackShadow_code.c,392 :: 		REC();
 	CALL        _REC+0, 0
 	GOTO        L_Basura67
 L_Basura66:
-;BlackShadow_code.c,359 :: 		else if(S1==0 && S2==0)
+;BlackShadow_code.c,393 :: 		else if(S1==0 && S2==0)
 	BTFSC       PORTC+0, 5 
 	GOTO        L_Basura70
 	BTFSC       PORTC+0, 6 
 	GOTO        L_Basura70
 L__Basura74:
-;BlackShadow_code.c,360 :: 		GIRO180();
+;BlackShadow_code.c,394 :: 		GIRO180();
 	CALL        _GIRO180+0, 0
 L_Basura70:
 L_Basura67:
@@ -1296,36 +1311,36 @@ L_Basura55:
 L_Basura51:
 L_Basura47:
 L_Basura43:
-;BlackShadow_code.c,361 :: 		}
+;BlackShadow_code.c,395 :: 		}
 L_end_Basura:
 	RETURN      0
 ; end of _Basura
 
 _INTERRUPT:
 
-;BlackShadow_code.c,363 :: 		void INTERRUPT(){
-;BlackShadow_code.c,366 :: 		if (INTCON3.INT1IF) {
+;BlackShadow_code.c,397 :: 		void INTERRUPT(){
+;BlackShadow_code.c,400 :: 		if (INTCON3.INT1IF) {
 	BTFSS       INTCON3+0, 0 
 	GOTO        L_INTERRUPT71
-;BlackShadow_code.c,367 :: 		INTCON3.INT1IF = 0; // Limpia la bandera de INT1
+;BlackShadow_code.c,401 :: 		INTCON3.INT1IF = 0; // Limpia la bandera de INT1
 	BCF         INTCON3+0, 0 
-;BlackShadow_code.c,368 :: 		linea_izq_detectada = 1;    // Solo activa la bandera
+;BlackShadow_code.c,402 :: 		linea_izq_detectada = 1;    // Solo activa la bandera
 	MOVLW       1
 	MOVWF       _linea_izq_detectada+0 
-;BlackShadow_code.c,369 :: 		}
+;BlackShadow_code.c,404 :: 		}
 L_INTERRUPT71:
-;BlackShadow_code.c,371 :: 		if (INTCON3.INT2IF) {
+;BlackShadow_code.c,406 :: 		if (INTCON3.INT2IF) {
 	BTFSS       INTCON3+0, 1 
 	GOTO        L_INTERRUPT72
-;BlackShadow_code.c,372 :: 		INTCON3.INT2IF = 0; // Limpia la bandera de INT2
+;BlackShadow_code.c,407 :: 		INTCON3.INT2IF = 0; // Limpia la bandera de INT2
 	BCF         INTCON3+0, 1 
-;BlackShadow_code.c,373 :: 		linea_der_detectada = 1;    // Solo activa la bandera
+;BlackShadow_code.c,408 :: 		linea_der_detectada = 1;    // Solo activa la bandera
 	MOVLW       1
 	MOVWF       _linea_der_detectada+0 
-;BlackShadow_code.c,374 :: 		}
+;BlackShadow_code.c,409 :: 		}
 L_INTERRUPT72:
-;BlackShadow_code.c,375 :: 		}
+;BlackShadow_code.c,410 :: 		}
 L_end_INTERRUPT:
-L__INTERRUPT203:
+L__INTERRUPT204:
 	RETFIE      1
 ; end of _INTERRUPT

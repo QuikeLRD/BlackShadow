@@ -775,6 +775,7 @@ go_done
 go_done_bit
 go_not_done
 go_not_done_bit
+hard
 hfiofs
 hfiofs_bit
 hlvdcon

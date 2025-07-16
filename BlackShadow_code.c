@@ -40,7 +40,7 @@ void Start();
 void Stop();
 void SELEC();
 void INTERRUPT();
-
+void HARD();
 
 void REC();
 void REV();
@@ -122,21 +122,50 @@ void main() {
  delay_ms(300);
  L3=L2=L1=L0=1;
 
- 
- while(1){
+while(1){
 
-
-    if (linea_izq_detectada || linea_der_detectada) {
+    /*if (linea_izq_detectada == 1) {
         linea_izq_detectada = 0;
-        linea_der_detectada = 0;
-        BRAKE();
+        L2 = 0;
+        LIBRE();
         delay_ms(1000);
-    } else {
-        REC();
-    }
+        }
+    else if (linea_der_detectada == 1){
+         linea_der_detectada = 0;
+         L0 =0;
+         LIBRE();
+         delay_ms(1000);
+         }
+    else {
+         L3=L1=L2=L0= 1;
+         REC();
+
+         }
+         */
+         while(S4 != 0 && S3 != 0){
+         REC();
+         }
+         HARD();
+         delay_ms(8000);
+
+         /*if(S3 == 0) {
+         DER();
+         delay_ms(300); // Ajusta el tiempo para el giro
+         LIBRE();
+         }
+         // Si S4 fue el que detectó, gira a la izquierda:
+         else if(S4 == 0) {
+         IZQ();
+         delay_ms(300);
+         LIBRE();
+         }*/
 
 
 
+
+         //Prueba sensores de linea)
+         /*if(S4 == 0) L0 = 0; else L0 = 1; // Si es blanco, LED encendido
+         if(S3 == 0) L2 = 0; else L2 = 1;*/
 
 
 
@@ -283,12 +312,10 @@ void IZQ(){
      }
 
 void REV(){
-     PWM1_Stop();
-     LATC.F2 = 0;
+     Start();
+     PWM1_Set_Duty(0);
      PWM2_Set_Duty(190);
-     
-     PWM3_Stop();
-     LATB.F5 =0;
+     PWM3_Set_Duty(0);
      PWM4_Set_Duty(190);
 
      }
@@ -331,6 +358,13 @@ void BRAKE(){
 
 
 }
+void HARD(){
+     PWM1_Set_Duty(255);
+     PWM2_Set_Duty(255);
+     PWM3_Set_Duty(255);
+     PWM4_Set_Duty(255);
+
+}
 
 void Basura(){
 //0-Linea blanca
@@ -366,7 +400,8 @@ void INTERRUPT(){
     if (INTCON3.INT1IF) {
         INTCON3.INT1IF = 0; // Limpia la bandera de INT1
         linea_izq_detectada = 1;    // Solo activa la bandera
-    }
+
+}
     // INT2 - Sensor de línea derecha
     if (INTCON3.INT2IF) {
         INTCON3.INT2IF = 0; // Limpia la bandera de INT2

@@ -11,7 +11,7 @@ void Start();
 void Stop();
 void SELEC();
 void INTERRUPT();
-
+void HARD();
 
 void REC();
 void REV();
@@ -93,24 +93,14 @@ void main() {
  delay_ms(300);
   PORTA.F4 = PORTA.F5 = PORTA.F7 = PORTA.F6 =1;
 
-
- while(1){
-
-
- if (linea_izq_detectada || linea_der_detectada) {
- linea_izq_detectada = 0;
- linea_der_detectada = 0;
- BRAKE();
- delay_ms(1000);
- } else {
+while(1){
+#line 145 "G:/Mi unidad/UPIITA/AR UPIITA/Diseños de Minisumos/Black Shadow/Programación/BlackShadow_code.c"
+ while( PORTB.F2  != 0 &&  PORTB.F1  != 0){
  REC();
  }
-
-
-
-
-
-
+ HARD();
+ delay_ms(8000);
+#line 172 "G:/Mi unidad/UPIITA/AR UPIITA/Diseños de Minisumos/Black Shadow/Programación/BlackShadow_code.c"
 }
 }
 
@@ -254,12 +244,10 @@ void IZQ(){
  }
 
 void REV(){
- PWM1_Stop();
- LATC.F2 = 0;
+ Start();
+ PWM1_Set_Duty(0);
  PWM2_Set_Duty(190);
-
- PWM3_Stop();
- LATB.F5 =0;
+ PWM3_Set_Duty(0);
  PWM4_Set_Duty(190);
 
  }
@@ -302,6 +290,13 @@ void BRAKE(){
 
 
 }
+void HARD(){
+ PWM1_Set_Duty(255);
+ PWM2_Set_Duty(255);
+ PWM3_Set_Duty(255);
+ PWM4_Set_Duty(255);
+
+}
 
 void Basura(){
 
@@ -337,7 +332,8 @@ void INTERRUPT(){
  if (INTCON3.INT1IF) {
  INTCON3.INT1IF = 0;
  linea_izq_detectada = 1;
- }
+
+}
 
  if (INTCON3.INT2IF) {
  INTCON3.INT2IF = 0;
