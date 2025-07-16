@@ -853,6 +853,7 @@ intedg1
 intedg1_bit
 intedg2
 intedg2_bit
+interrupt
 intsrc
 intsrc_bit
 iocb
@@ -975,6 +976,8 @@ ldiv
 lfiofs
 lfiofs_bit
 libre
+linea_der_detectada
+linea_izq_detectada
 log
 log10
 longint2double

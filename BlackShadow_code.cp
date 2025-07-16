@@ -1,9 +1,17 @@
 #line 1 "G:/Mi unidad/UPIITA/AR UPIITA/Diseños de Minisumos/Black Shadow/Programación/BlackShadow_code.c"
-#line 38 "G:/Mi unidad/UPIITA/AR UPIITA/Diseños de Minisumos/Black Shadow/Programación/BlackShadow_code.c"
+#line 32 "G:/Mi unidad/UPIITA/AR UPIITA/Diseños de Minisumos/Black Shadow/Programación/BlackShadow_code.c"
+volatile char linea_izq_detectada = 0;
+volatile char linea_der_detectada = 0;
+
+
+
+
 void SELEC();
 void Start();
 void Stop();
 void SELEC();
+void INTERRUPT();
+
 
 void REC();
 void REV();
@@ -15,6 +23,9 @@ void GIRO180();
 void GIRO360();
 
 void Basura();
+
+
+
 
 
 
@@ -34,6 +45,19 @@ void main() {
  ANSELA= 0b00000000;
  ANSELB= 0b00000000;
  ANSELC= 0b00000000;
+
+
+
+ INTCON3.INT1IE =1;
+ INTCON3.INT2IE =1;
+
+ INTCON2.INTEDG1 =0;
+ INTCON2.INTEDG2 =0;
+
+ INTCON.GIE =1;
+ INTCON.PEIE =1;
+
+
 
 
 
@@ -72,7 +96,24 @@ void main() {
 
  while(1){
 
- SELEC();
+
+ if (linea_izq_detectada) {
+ linea_izq_detectada = 0;
+ BRAKE();
+ IZQ();
+ }
+
+ else if (linea_der_detectada) {
+ linea_der_detectada = 0;
+ BRAKE();
+ DER();
+ }
+ else {
+ REC();
+ }
+
+
+
 
 
 
@@ -295,4 +336,18 @@ DER();
  REC();
  else if( PORTC.F5 ==0 &&  PORTC.F6 ==0)
  GIRO180();
+}
+
+void INTERRUPT(){
+
+
+ if (INTCON3.INT1IF) {
+ INTCON3.INT1IF = 0;
+ linea_izq_detectada = 1;
+ }
+
+ if (INTCON3.INT2IF) {
+ INTCON3.INT2IF = 0;
+ linea_der_detectada = 1;
+ }
 }

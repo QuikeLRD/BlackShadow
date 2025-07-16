@@ -29,8 +29,8 @@
 //======================//
 //==Variables globales==//
 //=====================//
-
-
+volatile char linea_izq_detectada = 0;
+volatile char linea_der_detectada = 0;
 
 //==========================//
 //==Prototipos de función==//
@@ -39,6 +39,8 @@ void SELEC();
 void Start();
 void Stop();
 void SELEC();
+void INTERRUPT();
+
 
 void REC();
 void REV();
@@ -50,6 +52,9 @@ void GIRO180();
 void GIRO360();
 
 void Basura();
+
+
+
 //======================//
 //==Codigo General=====//
 //====================//
@@ -69,6 +74,19 @@ void main() {
  ANSELA= 0b00000000;
  ANSELB= 0b00000000;
  ANSELC= 0b00000000;
+
+ //CONFIGURACIÓN DE INTERRUPCIONES
+ //CONFIGURAMOS INTERRUPCIONES
+ INTCON3.INT1IE =1;                               //habilitamos interrupción INT1 (RB1)
+ INTCON3.INT2IE =1;                                //habilitamos interrupción INT2 (RB2)
+ //ACTIVACIÓN POR FLANCO DE BAJADA
+ INTCON2.INTEDG1 =0;                               //INT1: Interrumpe en flanco de bajada
+ INTCON2.INTEDG2 =0;                                //INT2: Interrumpe en flanco de bajada
+ //HABILITAMOS INTERRUPCIONES GLOBALES
+ INTCON.GIE =1;                                    //Interrupciones globales
+ INTCON.PEIE =1;                                   //Interrupciones perifericas
+ 
+
 
 
 //=====================//
@@ -107,7 +125,24 @@ void main() {
  
  while(1){
 
-          SELEC();
+         // Si detecta línea izquierda
+        if (linea_izq_detectada) {
+            linea_izq_detectada = 0; // Limpia la bandera
+            BRAKE();
+            IZQ();                   // Gira a la izquierda
+        }
+        // Si detecta línea derecha
+        else if (linea_der_detectada) {
+            linea_der_detectada = 0; // Limpia la bandera
+            BRAKE();
+            DER();                   // Gira a la derecha
+        }
+        else {
+            REC(); // Avanza mientras no detecta línea
+        }
+        // ... cualquier otro código que quieras agregar ...
+
+
 
 
 
@@ -330,4 +365,18 @@ DER();                 //Si veo por la izquierda hago una reversa por la derecha
          REC();
           else if(S1==0 && S2==0)
           GIRO180();
+}
+
+void INTERRUPT(){
+
+  // INT1 - Sensor de línea izquierda
+    if (INTCON3.INT1IF) {
+        INTCON3.INT1IF = 0; // Limpia la bandera de INT1
+        linea_izq_detectada = 1;    // Solo activa la bandera
+    }
+    // INT2 - Sensor de línea derecha
+    if (INTCON3.INT2IF) {
+        INTCON3.INT2IF = 0; // Limpia la bandera de INT2
+         linea_der_detectada = 1;    // Solo activa la bandera
+    }
 }
