@@ -97,18 +97,12 @@ void main() {
  while(1){
 
 
- if (linea_izq_detectada) {
+ if (linea_izq_detectada || linea_der_detectada) {
  linea_izq_detectada = 0;
- BRAKE();
- IZQ();
- }
-
- else if (linea_der_detectada) {
  linea_der_detectada = 0;
  BRAKE();
- DER();
- }
- else {
+ delay_ms(1000);
+ } else {
  REC();
  }
 
@@ -119,7 +113,6 @@ void main() {
 
 }
 }
-
 
 
 
@@ -235,11 +228,11 @@ void REC(){
 
  Start();
 
- PWM1_Set_Duty(255);
+ PWM1_Set_Duty(190);
  PWM2_Set_Duty(0);
 
 
- PWM3_Set_Duty(205);
+ PWM3_Set_Duty(140);
  PWM4_Set_Duty(0);
  }
 void DER(){

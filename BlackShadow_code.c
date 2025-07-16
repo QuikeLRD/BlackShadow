@@ -125,22 +125,16 @@ void main() {
  
  while(1){
 
-         // Si detecta línea izquierda
-        if (linea_izq_detectada) {
-            linea_izq_detectada = 0; // Limpia la bandera
-            BRAKE();
-            IZQ();                   // Gira a la izquierda
-        }
-        // Si detecta línea derecha
-        else if (linea_der_detectada) {
-            linea_der_detectada = 0; // Limpia la bandera
-            BRAKE();
-            DER();                   // Gira a la derecha
-        }
-        else {
-            REC(); // Avanza mientras no detecta línea
-        }
-        // ... cualquier otro código que quieras agregar ...
+
+    if (linea_izq_detectada || linea_der_detectada) {
+        linea_izq_detectada = 0;
+        linea_der_detectada = 0;
+        BRAKE();
+        delay_ms(1000);
+    } else {
+        REC();
+    }
+
 
 
 
@@ -148,7 +142,6 @@ void main() {
 
 }
 }
-
 //======================//
 //======Funciones======//
 //====================//
@@ -264,11 +257,11 @@ void REC(){
 
     Start();
      // Motor I (PWM1 y PWM2)
-    PWM1_Set_Duty(255); // IN1 = PWM
+    PWM1_Set_Duty(190); // IN1 = PWM
     PWM2_Set_Duty(0);
 
     // Motor D (PWM3 y PWM4)
-    PWM3_Set_Duty(205);    // IN1 = 0
+    PWM3_Set_Duty(140);    // IN1 = 0
     PWM4_Set_Duty(0);
      }
 void DER(){
