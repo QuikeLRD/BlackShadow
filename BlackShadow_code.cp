@@ -94,17 +94,33 @@ void main() {
   PORTA.F4 = PORTA.F5 = PORTA.F7 = PORTA.F6 =1;
 
 while(1){
-#line 145 "G:/Mi unidad/UPIITA/AR UPIITA/Diseños de Minisumos/Black Shadow/Programación/BlackShadow_code.c"
+
  if( PORTB.F2  != 0 &&  PORTB.F1  != 0){
  REC();
  }
- else{
+
+ else if( PORTB.F2  == 0 &&  PORTB.F1  == 0){
+ HARD();
+ delay_ms(100);
+ GIRO180();
+ delay_ms(100);
+ }
+ else if ( PORTB.F1  == 0){
  HARD();
  delay_ms(100);
  GIRO360();
  delay_ms(100);
-}
-#line 175 "G:/Mi unidad/UPIITA/AR UPIITA/Diseños de Minisumos/Black Shadow/Programación/BlackShadow_code.c"
+ }
+ else if ( PORTB.F2  == 0){
+ HARD();
+ delay_ms(100);
+ DER();
+ delay_ms(100);
+ }
+
+
+
+
 }
 }
 
@@ -222,11 +238,11 @@ void REC(){
 
  Start();
 
- PWM1_Set_Duty(190);
+ PWM1_Set_Duty(170);
  PWM2_Set_Duty(0);
 
 
- PWM3_Set_Duty(140);
+ PWM3_Set_Duty(120);
  PWM4_Set_Duty(0);
  }
 void DER(){
@@ -267,21 +283,22 @@ void LIBRE(){
 
 
 void GIRO180(){
- PWM1_Set_Duty(255);
+ Start();
+ PWM1_Set_Duty(0);
  PWM2_Set_Duty(0);
 
  PWM3_Set_Duty(0);
- PWM4_Set_Duty(0);
- Delay_ms(40);
+ PWM4_Set_Duty(170);
+ delay_ms(250);
 
 
 }
 
 void GIRO360(){
  IZQ();
+ delay_ms(250);
+ HARD();
  delay_ms(500);
- LIBRE();
- delay_ms(4000);
 }
 
 void BRAKE(){

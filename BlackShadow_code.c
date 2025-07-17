@@ -124,54 +124,32 @@ void main() {
 
 while(1){
 
-    /*if (linea_izq_detectada == 1) {
-        linea_izq_detectada = 0;
-        L2 = 0;
-        LIBRE();
-        delay_ms(1000);
-        }
-    else if (linea_der_detectada == 1){
-         linea_der_detectada = 0;
-         L0 =0;
-         LIBRE();
-         delay_ms(1000);
-         }
-    else {
-         L3=L1=L2=L0= 1;
-         REC();
-
-         }
-         */
-         if(S4 != 0 && S3 != 0){
-         REC();
-         }
-         else{
+    if(S4 != 0 && S3 != 0){
+        REC();
+    }
+    
+    else if(S4 == 0 && S3 == 0){
          HARD();
          delay_ms(100);
-         GIRO360();
+         GIRO180();
          delay_ms(100);
-}
-         /*if(S3 == 0) {
-         DER();
-         delay_ms(300); // Ajusta el tiempo para el giro
-         LIBRE();
-         }
-         // Si S4 fue el que detectó, gira a la izquierda:
-         else if(S4 == 0) {
-         IZQ();
-         delay_ms(300);
-         LIBRE();
-         }*/
+    }
+    else if (S3 == 0){
+        HARD();
+        delay_ms(100);
+        GIRO360();
+        delay_ms(100);
+    }
+    else if (S4 == 0){
+        HARD();
+        delay_ms(100);
+        DER();
+        delay_ms(100);
+    }
 
-
-
-
-         //Prueba sensores de linea)
-         /*if(S4 == 0) L0 = 0; else L0 = 1; // Si es blanco, LED encendido
-         if(S3 == 0) L2 = 0; else L2 = 1;*/
-
-
-
+    // Prueba sensores de línea:
+    // if(S4 == 0) L0 = 0; else L0 = 1; // Si es blanco, LED encendido
+    // if(S3 == 0) L2 = 0; else L2 = 1;
 }
 }
 //======================//
@@ -289,11 +267,11 @@ void REC(){
 
     Start();
      // Motor I (PWM1 y PWM2)
-    PWM1_Set_Duty(190); // IN1 = PWM
+    PWM1_Set_Duty(170); // IN1 = PWM
     PWM2_Set_Duty(0);
 
     // Motor D (PWM3 y PWM4)
-    PWM3_Set_Duty(140);    // IN1 = 0
+    PWM3_Set_Duty(120);    // IN1 = 0
     PWM4_Set_Duty(0);
      }
 void DER(){
@@ -334,21 +312,22 @@ void LIBRE(){
      
      
 void GIRO180(){
-     PWM1_Set_Duty(255);
+     Start();
+     PWM1_Set_Duty(0);
      PWM2_Set_Duty(0);
 
      PWM3_Set_Duty(0);
-     PWM4_Set_Duty(0);
-     Delay_ms(40);
+     PWM4_Set_Duty(170);
+     delay_ms(250);
 
 
 }
 
 void GIRO360(){                     //Produce un grio que beneficia si se activo el sesnor de linea
      IZQ();                         //de la Izquierda
+     delay_ms(250);
+     HARD();
      delay_ms(500);
-     LIBRE();
-     delay_ms(4000);
 }
 
 void BRAKE(){
