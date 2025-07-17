@@ -124,28 +124,7 @@ void main() {
 
 while(1){
 
-    if(S4 != 0 && S3 != 0){
-        REC();
-    }
-    
-    else if(S4 == 0 && S3 == 0){
-         HARD();
-         delay_ms(100);
-         GIRO180();
-         delay_ms(100);
-    }
-    else if (S3 == 0){
-        HARD();
-        delay_ms(100);
-        GIRO360();
-        delay_ms(100);
-    }
-    else if (S4 == 0){
-        HARD();
-        delay_ms(100);
-        DER();
-        delay_ms(100);
-    }
+    SELEC();
 
     // Prueba sensores de línea:
     // if(S4 == 0) L0 = 0; else L0 = 1; // Si es blanco, LED encendido
@@ -167,20 +146,35 @@ void SELEC(){
 
    case 1: L0=0; L3=L2=L1=1;
 
-           REC();
-           delay_ms(300);
-           LIBRE();
-           delay_ms(4000);
+    while(1){
+    if(S4 != 0 && S3 != 0){
+        REC();
+    }
 
-
-
+    else if(S4 == 0 && S3 == 0){
+         HARD();
+         delay_ms(100);
+         GIRO180();
+         delay_ms(100);
+    }
+    else if (S3 == 0){
+        HARD();
+        delay_ms(100);
+        GIRO360();
+        delay_ms(100);
+    }
+    else if (S4 == 0){
+        HARD();
+        delay_ms(100);
+        DER();
+        delay_ms(100);
+    }
+  }
    break;
 
    case 2: L1=0; L3=L2=L0=1;
-           REC();
-           delay_ms(300);
-           BRAKE();
-           delay_ms(4000);
+
+           GIRO180();
 
    break;
 
@@ -313,12 +307,14 @@ void LIBRE(){
      
 void GIRO180(){
      Start();
+
      PWM1_Set_Duty(0);
      PWM2_Set_Duty(0);
 
      PWM3_Set_Duty(0);
-     PWM4_Set_Duty(170);
-     delay_ms(250);
+     PWM4_Set_Duty(180);
+     delay_ms(200);
+     HARD();
 
 
 }
@@ -327,7 +323,7 @@ void GIRO360(){                     //Produce un grio que beneficia si se activo
      IZQ();                         //de la Izquierda
      delay_ms(250);
      HARD();
-     delay_ms(500);
+
 }
 
 void BRAKE(){

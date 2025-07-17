@@ -95,6 +95,29 @@ void main() {
 
 while(1){
 
+ SELEC();
+
+
+
+
+}
+}
+
+
+
+void SELEC(){
+ int seleccion;
+ seleccion= PORTA.F3 *1+ PORTA.F2 *2+ PORTA.F1 *4+ PORTA.F0 *8;
+
+ switch(seleccion){
+ case 0:  PORTA.F6 = PORTA.F7 = PORTA.F5 = PORTA.F4 =1;
+
+
+ break;
+
+ case 1:  PORTA.F6 =0;  PORTA.F4 = PORTA.F5 = PORTA.F7 =1;
+
+ while(1){
  if( PORTB.F2  != 0 &&  PORTB.F1  != 0){
  REC();
  }
@@ -117,41 +140,12 @@ while(1){
  DER();
  delay_ms(100);
  }
-
-
-
-
-}
-}
-
-
-
-void SELEC(){
- int seleccion;
- seleccion= PORTA.F3 *1+ PORTA.F2 *2+ PORTA.F1 *4+ PORTA.F0 *8;
-
- switch(seleccion){
- case 0:  PORTA.F6 = PORTA.F7 = PORTA.F5 = PORTA.F4 =1;
-
-
- break;
-
- case 1:  PORTA.F6 =0;  PORTA.F4 = PORTA.F5 = PORTA.F7 =1;
-
- REC();
- delay_ms(300);
- LIBRE();
- delay_ms(4000);
-
-
-
+ }
  break;
 
  case 2:  PORTA.F7 =0;  PORTA.F4 = PORTA.F5 = PORTA.F6 =1;
- REC();
- delay_ms(300);
- BRAKE();
- delay_ms(4000);
+
+ GIRO180();
 
  break;
 
@@ -284,12 +278,14 @@ void LIBRE(){
 
 void GIRO180(){
  Start();
+
  PWM1_Set_Duty(0);
  PWM2_Set_Duty(0);
 
  PWM3_Set_Duty(0);
- PWM4_Set_Duty(170);
- delay_ms(250);
+ PWM4_Set_Duty(180);
+ delay_ms(200);
+ HARD();
 
 
 }
@@ -298,7 +294,7 @@ void GIRO360(){
  IZQ();
  delay_ms(250);
  HARD();
- delay_ms(500);
+
 }
 
 void BRAKE(){
