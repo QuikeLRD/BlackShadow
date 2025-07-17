@@ -95,12 +95,16 @@ void main() {
 
 while(1){
 #line 145 "G:/Mi unidad/UPIITA/AR UPIITA/Diseños de Minisumos/Black Shadow/Programación/BlackShadow_code.c"
- while( PORTB.F2  != 0 &&  PORTB.F1  != 0){
+ if( PORTB.F2  != 0 &&  PORTB.F1  != 0){
  REC();
  }
+ else{
  HARD();
- delay_ms(8000);
-#line 172 "G:/Mi unidad/UPIITA/AR UPIITA/Diseños de Minisumos/Black Shadow/Programación/BlackShadow_code.c"
+ delay_ms(100);
+ GIRO360();
+ delay_ms(100);
+}
+#line 175 "G:/Mi unidad/UPIITA/AR UPIITA/Diseños de Minisumos/Black Shadow/Programación/BlackShadow_code.c"
 }
 }
 

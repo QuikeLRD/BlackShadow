@@ -142,12 +142,15 @@ while(1){
 
          }
          */
-         while(S4 != 0 && S3 != 0){
+         if(S4 != 0 && S3 != 0){
          REC();
          }
+         else{
          HARD();
-         delay_ms(8000);
-
+         delay_ms(100);
+         GIRO360();
+         delay_ms(100);
+}
          /*if(S3 == 0) {
          DER();
          delay_ms(300); // Ajusta el tiempo para el giro
@@ -341,8 +344,8 @@ void GIRO180(){
 
 }
 
-void GIRO360(){
-     IZQ();
+void GIRO360(){                     //Produce un grio que beneficia si se activo el sesnor de linea
+     IZQ();                         //de la Izquierda
      delay_ms(500);
      LIBRE();
      delay_ms(4000);

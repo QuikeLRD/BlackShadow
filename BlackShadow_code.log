@@ -1,11 +1,11 @@
 0	1	mikroCPIC1618.exe -MSF -DBG -pP18F26K22 -DL -O11111114 -fo8 -N"G:\Mi unidad\UPIITA\AR UPIITA\Diseños de Minisumos\Black Shadow\Programación\BlackShadow_code.mcppi" -SP"Q:\Programas\MikroCpro\mikroC PRO for PIC\Defs\" -SP"Q:\Programas\MikroCpro\mikroC PRO for PIC\uses\P18\" -SP"G:\Mi unidad\UPIITA\AR UPIITA\Diseños de Minisumos\Black Shadow\Programación\" -IP"Q:\Programas\MikroCpro\mikroC PRO for PIC\uses\P18\" -IP"G:\Mi unidad\UPIITA\AR UPIITA\Diseños de Minisumos\Black Shadow\Programación\" "BlackShadow_code.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl" "__Lib_CType.mcl" "__Lib_CString.mcl" "__Lib_CStdlib.mcl" "__Lib_CMath.mcl" "__Lib_PWM_c21.mcl" "__Lib_PWM_b50a4.mcl"	 
 hint: 0	1139	Available RAM: 3875 [bytes], Available ROM: 65536 [bytes]	 
 diagnostics: 0	122	Compilation Started	BlackShadow_code.c
-diagnostics: 410	123	Compiled Successfully	BlackShadow_code.c
-diagnostics: 0	127	All files Compiled in 156 ms	 
+diagnostics: 413	123	Compiled Successfully	BlackShadow_code.c
+diagnostics: 0	127	All files Compiled in 218 ms	 
 hint: 0	1144	Used RAM (bytes): 7 (1%)  Free RAM (bytes): 3868 (99%)	Used RAM (bytes): 7 (1%)  Free RAM (bytes): 3868 (99%)
-hint: 0	1144	Used ROM (bytes): 1108 (2%)  Free ROM (bytes): 64428 (98%)	Used ROM (bytes): 1108 (2%)  Free ROM (bytes): 64428 (98%)
+hint: 0	1144	Used ROM (bytes): 1234 (2%)  Free ROM (bytes): 64302 (98%)	Used ROM (bytes): 1234 (2%)  Free ROM (bytes): 64302 (98%)
 diagnostics: 0	125	Project Linked Successfully	BlackShadow_code.mcppi
-diagnostics: 0	128	Linked in 125 ms	 
-diagnostics: 0	129	Project 'BlackShadow_code.mcppi' completed: 313 ms	 
-diagnostics: 0	103	Finished successfully: 16 jul. 2025, 17:22:39	BlackShadow_code.mcppi
+diagnostics: 0	128	Linked in 157 ms	 
+diagnostics: 0	129	Project 'BlackShadow_code.mcppi' completed: 407 ms	 
+diagnostics: 0	103	Finished successfully: 16 jul. 2025, 20:50:43	BlackShadow_code.mcppi
