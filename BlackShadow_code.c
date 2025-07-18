@@ -12,18 +12,18 @@
 #define S3  PORTB.F1
 #define S4  PORTB.F2
 #define S5  PORTB.F3
-#define S6  PORTB.F4
+#define S6  PORTB.F4                           //SENSOR LATERAL DERECHO
 #define I1  PORTB.F5
 #define CLK PORTB.F6
 #define DAT PORTB.F7
 
-#define SL1 PORTC.F0
+#define SL1 PORTC.F0                          //SENSOR LATERAL IZQUIERDO
 #define D2  PORTC.F1
 #define D1  PORTC.F2
 #define CH2 PORTC.F3
 #define SL2 PORTC.F4
 #define S1  PORTC.F5
-#define S2  PORTC.F6
+#define S2  PORTC.F6                          //SENSOR FRONTAL
 #define GO  PORTC.F7
 
 //======================//
@@ -50,10 +50,6 @@ void BRAKE();
 void LIBRE();
 void GIRO180();
 void GIRO360();
-
-void Basura();
-
-
 
 //======================//
 //==Codigo General=====//
@@ -124,7 +120,16 @@ void main() {
 
 while(1){
 
-    SELEC();
+    if (S2 ==1 && S6 ==0 && SL1 ==0){
+       REC();
+    }
+    else if (S2 ==0 && S6 ==1 && SL1 ==0){
+       DER();
+    }
+    else if (S2 ==0 && S6 ==0 && SL1 ==1){
+       IZQ();
+    
+    }
 
     // Prueba sensores de línea:
     // if(S4 == 0) L0 = 0; else L0 = 1; // Si es blanco, LED encendido
@@ -344,33 +349,6 @@ void HARD(){
 
 }
 
-void Basura(){
-//0-Linea blanca
-//1-Linea negra
-
-if(SL1==0 && SL2==1)       //SL1=Sensor izquierdo, SL2= Sensor de linea derecho
-DER();                 //Si veo por la izquierda hago una reversa por la derecha.
- else if(SL1==1 && SL2==0)
- IZQ();
-  else if(SL1==0 && SL2==0)
-  GIRO180();
-   else if(SL1==1 && SL2==1)
-   REC();
-//1-Hay objeto    S1=Sensor izquierda
-//0-No hay nada   S2=Sensor centro
-//                S3=Sensor derecha
-//                S4=Sensor lateral izquierdo
-//                S5=Sensor lateral derecho
-
-       else if(S1==1 && S2==0)
-       IZQ();
-        else if(S1==0 && S2==1)
-        DER();
-         else if(S1==1 && S2==1)
-         REC();
-          else if(S1==0 && S2==0)
-          GIRO180();
-}
 
 void INTERRUPT(){
 

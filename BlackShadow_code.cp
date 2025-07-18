@@ -22,10 +22,6 @@ void LIBRE();
 void GIRO180();
 void GIRO360();
 
-void Basura();
-
-
-
 
 
 
@@ -95,7 +91,16 @@ void main() {
 
 while(1){
 
- SELEC();
+ if ( PORTC.F6  ==1 &&  PORTB.F4  ==0 &&  PORTC.F0  ==0){
+ REC();
+ }
+ else if ( PORTC.F6  ==0 &&  PORTB.F4  ==1 &&  PORTC.F0  ==0){
+ DER();
+ }
+ else if ( PORTC.F6  ==0 &&  PORTB.F4  ==0 &&  PORTC.F0  ==1){
+ IZQ();
+
+ }
 
 
 
@@ -315,33 +320,6 @@ void HARD(){
 
 }
 
-void Basura(){
-
-
-
-if( PORTC.F0 ==0 &&  PORTC.F4 ==1)
-DER();
- else if( PORTC.F0 ==1 &&  PORTC.F4 ==0)
- IZQ();
- else if( PORTC.F0 ==0 &&  PORTC.F4 ==0)
- GIRO180();
- else if( PORTC.F0 ==1 &&  PORTC.F4 ==1)
- REC();
-
-
-
-
-
-
- else if( PORTC.F5 ==1 &&  PORTC.F6 ==0)
- IZQ();
- else if( PORTC.F5 ==0 &&  PORTC.F6 ==1)
- DER();
- else if( PORTC.F5 ==1 &&  PORTC.F6 ==1)
- REC();
- else if( PORTC.F5 ==0 &&  PORTC.F6 ==0)
- GIRO180();
-}
 
 void INTERRUPT(){
 
