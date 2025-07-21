@@ -91,17 +91,44 @@ void main() {
 
 while(1){
 
- if ( PORTC.F6  ==1 &&  PORTB.F4  ==0 &&  PORTC.F0  ==0){
+ if ( PORTC.F0  ==0 &&  PORTB.F4  ==0 &&  PORTC.F6  ==0){
+ REC();
+ delay_ms(20);
+ BRAKE();
+ }
+ else if ( PORTC.F0  ==1 &&  PORTB.F4  ==0 &&  PORTC.F6  ==0){
+ IZQ();
+ delay_ms(100);
+ HARD();
+
+ }
+ else if ( PORTC.F0  ==0 &&  PORTB.F4  ==1 &&  PORTC.F6  ==0){
  REC();
  }
- else if ( PORTC.F6  ==0 &&  PORTB.F4  ==1 &&  PORTC.F0  ==0){
- DER();
- }
- else if ( PORTC.F6  ==0 &&  PORTB.F4  ==0 &&  PORTC.F0  ==1){
+ else if ( PORTC.F0  ==1 &&  PORTB.F4 ==1 &&  PORTC.F6  ==0){
  IZQ();
+ delay_ms(20);
+ REC();
 
  }
-
+ else if ( PORTC.F0  ==0 &&  PORTB.F4 ==0 &&  PORTC.F6  ==1){
+ DER();
+ delay_ms(100);
+ }
+ else if ( PORTC.F0  ==1 &&  PORTB.F4 ==0 &&  PORTC.F6  ==1){
+ HARD();
+ }
+ else if ( PORTC.F0  ==0 &&  PORTB.F4 ==1 &&  PORTC.F6  ==1){
+ DER();
+ delay_ms(20);
+ REC();
+ }
+ else if ( PORTC.F0  ==1 &&  PORTB.F4 ==1 &&  PORTC.F6  ==1){
+ HARD();
+ }
+ else{
+ HARD();
+ }
 
 
 

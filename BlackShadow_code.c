@@ -120,17 +120,44 @@ void main() {
 
 while(1){
 
-    if (S2 ==1 && S6 ==0 && SL1 ==0){
-       REC();
+    if      (SL1 ==0 && S6 ==0 && S2 ==0){
+    REC();
+    delay_ms(20);
+    BRAKE();
     }
-    else if (S2 ==0 && S6 ==1 && SL1 ==0){
-       DER();
+    else if (SL1 ==1 && S6 ==0 && S2 ==0){
+    IZQ();
+    delay_ms(100);
+    HARD();
+
     }
-    else if (S2 ==0 && S6 ==0 && SL1 ==1){
-       IZQ();
+    else if (SL1 ==0 && S6 ==1 && S2 ==0){
+    REC();
+    }
+    else if (SL1 ==1 && S6==1 && S2 ==0){
+    IZQ();
+    delay_ms(20);
+    REC();
     
     }
-
+    else if (SL1 ==0 && S6==0 && S2 ==1){
+    DER();
+    delay_ms(100);
+    }
+    else if (SL1 ==1 && S6==0 && S2 ==1){
+    HARD();
+    }
+    else if (SL1 ==0 && S6==1 && S2 ==1){
+    DER();
+    delay_ms(20);
+    REC();
+    }
+    else if (SL1 ==1 && S6==1 && S2 ==1){
+    HARD();
+    }
+    else{
+    HARD();
+    }
     // Prueba sensores de línea:
     // if(S4 == 0) L0 = 0; else L0 = 1; // Si es blanco, LED encendido
     // if(S3 == 0) L2 = 0; else L2 = 1;

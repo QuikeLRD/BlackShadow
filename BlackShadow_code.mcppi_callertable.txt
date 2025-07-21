@@ -31,7 +31,14 @@ main
 			Mul_16X16_U
 		PWM4_Set_Duty
 			Mul_16X16_U
-	DER
+	BRAKE
+		Stop
+			PWM1_Stop
+			PWM2_Stop
+			PWM3_Stop
+			PWM4_Stop
+			PWM5_Stop
+	IZQ
 		Start
 			PWM1_Start
 			PWM2_Start
@@ -46,7 +53,16 @@ main
 			Mul_16X16_U
 		PWM4_Set_Duty
 			Mul_16X16_U
-	IZQ
+	HARD
+		PWM1_Set_Duty
+			Mul_16X16_U
+		PWM2_Set_Duty
+			Mul_16X16_U
+		PWM3_Set_Duty
+			Mul_16X16_U
+		PWM4_Set_Duty
+			Mul_16X16_U
+	DER
 		Start
 			PWM1_Start
 			PWM2_Start
