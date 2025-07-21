@@ -41,6 +41,7 @@ void Stop();
 void SELEC();
 void INTERRUPT();
 void HARD();
+void PUSH();
 
 void REC();
 void REV();
@@ -50,6 +51,7 @@ void BRAKE();
 void LIBRE();
 void GIRO180();
 void GIRO360();
+void HIT();
 
 //======================//
 //==Codigo General=====//
@@ -117,47 +119,11 @@ void main() {
  L3=0; L0=L1=L2=1;
  delay_ms(300);
  L3=L2=L1=L0=1;
+ delay_ms(1000);
 
 while(1){
 
-    if      (SL1 ==0 && S6 ==0 && S2 ==0){
-    REC();
-    delay_ms(20);
-    BRAKE();
-    }
-    else if (SL1 ==1 && S6 ==0 && S2 ==0){
-    IZQ();
-    delay_ms(100);
-    HARD();
-
-    }
-    else if (SL1 ==0 && S6 ==1 && S2 ==0){
-    REC();
-    }
-    else if (SL1 ==1 && S6==1 && S2 ==0){
-    IZQ();
-    delay_ms(20);
-    REC();
-    
-    }
-    else if (SL1 ==0 && S6==0 && S2 ==1){
-    DER();
-    delay_ms(100);
-    }
-    else if (SL1 ==1 && S6==0 && S2 ==1){
-    HARD();
-    }
-    else if (SL1 ==0 && S6==1 && S2 ==1){
-    DER();
-    delay_ms(20);
-    REC();
-    }
-    else if (SL1 ==1 && S6==1 && S2 ==1){
-    HARD();
-    }
-    else{
-    HARD();
-    }
+         SELEC();
     // Prueba sensores de línea:
     // if(S4 == 0) L0 = 0; else L0 = 1; // Si es blanco, LED encendido
     // if(S3 == 0) L2 = 0; else L2 = 1;
@@ -204,17 +170,71 @@ void SELEC(){
   }
    break;
 
-   case 2: L1=0; L3=L2=L0=1;
+   case 2: L1=0; L3=L2=L0=1; delay_ms(250);
+   
 
-           GIRO180();
+    while(1){
+    if      (SL1 ==0 && S6 ==0 && S2 ==0){
+    
+    L0=L1=L2=L3=1;
+    REC();
+    delay_ms(20);
+    LIBRE();
+    delay_ms(100);
+    }
+    else if (SL1 ==1 && S6 ==0 && S2 ==0){
+    L0=0;   L1=L2=L3=1;
+    IZQ();
+    delay_ms(100);
+    HARD();
 
+    }
+    else if (SL1 ==0 && S6 ==1 && S2 ==0){
+    L1=0;   L0=L2=L3=1;
+    HIT();
+    }
+    else if (SL1 ==1 && S6==1 && S2 ==0){
+    L0=L1=0;     L2=L3=1;
+    IZQ();
+    delay_ms(20);
+    HIT();
+
+    }
+    else if (SL1 ==0 && S6==0 && S2 ==1){
+    L2=0;   L0=L1=L3=1;
+    DER();
+    delay_ms(100);
+    HARD();
+    
+    }
+    else if (SL1 ==1 && S6==0 && S2 ==1){
+    L0=L2=0;     L1=L3=1;
+    
+    LIBRE();
+    }
+    else if (SL1 ==0 && S6==1 && S2 ==1){
+    L1=L2=0;     L0=L3=0;
+    DER();
+    delay_ms(30);
+    HIT();
+    }
+    else if (SL1 ==1 && S6==1 && S2 ==1){
+    L0=L1=L2=0;  L3=1;
+    HIT();
+    }
+    else{
+    L0=L1=L2=L3=0;
+    LIBRE();
+    }
+          
+          
+    }
    break;
 
    case 3: L0=L1=0; L2=L3==1;
-           IZQ();
-           delay_ms(250);
-           LIBRE();
-           delay_ms(4000);
+           HIT();
+
+
 
    break;
 
@@ -297,12 +317,12 @@ void REC(){
     PWM2_Set_Duty(0);
 
     // Motor D (PWM3 y PWM4)
-    PWM3_Set_Duty(120);    // IN1 = 0
+    PWM3_Set_Duty(140);    // IN1 = 0
     PWM4_Set_Duty(0);
      }
 void DER(){
      Start();
-     PWM1_Set_Duty(200);
+     PWM1_Set_Duty(170);
      PWM2_Set_Duty(0);
 
      PWM3_Set_Duty(0);
@@ -375,7 +395,24 @@ void HARD(){
      PWM4_Set_Duty(255);
 
 }
+void PUSH(){
+     Start();
+     // Motor I (PWM1 y PWM2)
+    PWM1_Set_Duty(255); // IN1 = PWM
+    PWM2_Set_Duty(0);
 
+    // Motor D (PWM3 y PWM4)
+    PWM3_Set_Duty(205);    // IN1 = 0
+    PWM4_Set_Duty(0);
+
+}
+void HIT(){
+     
+     REC();
+     delay_ms(20);
+     PUSH();
+     delay_ms(250);
+}
 
 void INTERRUPT(){
 

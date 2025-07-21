@@ -777,6 +777,7 @@ go_not_done_bit
 hard
 hfiofs
 hfiofs_bit
+hit
 hlvdcon
 hlvden
 hlvden_bit
@@ -1371,6 +1372,7 @@ pstr1con
 pstr2con
 pstr3con
 pstrcon
+push
 pvcfg0
 pvcfg0_bit
 pvcfg1

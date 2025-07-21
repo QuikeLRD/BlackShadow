@@ -12,6 +12,7 @@ void Stop();
 void SELEC();
 void INTERRUPT();
 void HARD();
+void PUSH();
 
 void REC();
 void REV();
@@ -21,6 +22,7 @@ void BRAKE();
 void LIBRE();
 void GIRO180();
 void GIRO360();
+void HIT();
 
 
 
@@ -88,47 +90,11 @@ void main() {
   PORTA.F4 =0;  PORTA.F6 = PORTA.F7 = PORTA.F5 =1;
  delay_ms(300);
   PORTA.F4 = PORTA.F5 = PORTA.F7 = PORTA.F6 =1;
+ delay_ms(1000);
 
 while(1){
 
- if ( PORTC.F0  ==0 &&  PORTB.F4  ==0 &&  PORTC.F6  ==0){
- REC();
- delay_ms(20);
- BRAKE();
- }
- else if ( PORTC.F0  ==1 &&  PORTB.F4  ==0 &&  PORTC.F6  ==0){
- IZQ();
- delay_ms(100);
- HARD();
-
- }
- else if ( PORTC.F0  ==0 &&  PORTB.F4  ==1 &&  PORTC.F6  ==0){
- REC();
- }
- else if ( PORTC.F0  ==1 &&  PORTB.F4 ==1 &&  PORTC.F6  ==0){
- IZQ();
- delay_ms(20);
- REC();
-
- }
- else if ( PORTC.F0  ==0 &&  PORTB.F4 ==0 &&  PORTC.F6  ==1){
- DER();
- delay_ms(100);
- }
- else if ( PORTC.F0  ==1 &&  PORTB.F4 ==0 &&  PORTC.F6  ==1){
- HARD();
- }
- else if ( PORTC.F0  ==0 &&  PORTB.F4 ==1 &&  PORTC.F6  ==1){
- DER();
- delay_ms(20);
- REC();
- }
- else if ( PORTC.F0  ==1 &&  PORTB.F4 ==1 &&  PORTC.F6  ==1){
- HARD();
- }
- else{
- HARD();
- }
+ SELEC();
 
 
 
@@ -175,17 +141,71 @@ void SELEC(){
  }
  break;
 
- case 2:  PORTA.F7 =0;  PORTA.F4 = PORTA.F5 = PORTA.F6 =1;
+ case 2:  PORTA.F7 =0;  PORTA.F4 = PORTA.F5 = PORTA.F6 =1; delay_ms(250);
 
- GIRO180();
 
+ while(1){
+ if ( PORTC.F0  ==0 &&  PORTB.F4  ==0 &&  PORTC.F6  ==0){
+
+  PORTA.F6 = PORTA.F7 = PORTA.F5 = PORTA.F4 =1;
+ REC();
+ delay_ms(20);
+ LIBRE();
+ delay_ms(100);
+ }
+ else if ( PORTC.F0  ==1 &&  PORTB.F4  ==0 &&  PORTC.F6  ==0){
+  PORTA.F6 =0;  PORTA.F7 = PORTA.F5 = PORTA.F4 =1;
+ IZQ();
+ delay_ms(100);
+ HARD();
+
+ }
+ else if ( PORTC.F0  ==0 &&  PORTB.F4  ==1 &&  PORTC.F6  ==0){
+  PORTA.F7 =0;  PORTA.F6 = PORTA.F5 = PORTA.F4 =1;
+ HIT();
+ }
+ else if ( PORTC.F0  ==1 &&  PORTB.F4 ==1 &&  PORTC.F6  ==0){
+  PORTA.F6 = PORTA.F7 =0;  PORTA.F5 = PORTA.F4 =1;
+ IZQ();
+ delay_ms(20);
+ HIT();
+
+ }
+ else if ( PORTC.F0  ==0 &&  PORTB.F4 ==0 &&  PORTC.F6  ==1){
+  PORTA.F5 =0;  PORTA.F6 = PORTA.F7 = PORTA.F4 =1;
+ DER();
+ delay_ms(100);
+ HARD();
+
+ }
+ else if ( PORTC.F0  ==1 &&  PORTB.F4 ==0 &&  PORTC.F6  ==1){
+  PORTA.F6 = PORTA.F5 =0;  PORTA.F7 = PORTA.F4 =1;
+
+ LIBRE();
+ }
+ else if ( PORTC.F0  ==0 &&  PORTB.F4 ==1 &&  PORTC.F6  ==1){
+  PORTA.F7 = PORTA.F5 =0;  PORTA.F6 = PORTA.F4 =0;
+ DER();
+ delay_ms(30);
+ HIT();
+ }
+ else if ( PORTC.F0  ==1 &&  PORTB.F4 ==1 &&  PORTC.F6  ==1){
+  PORTA.F6 = PORTA.F7 = PORTA.F5 =0;  PORTA.F4 =1;
+ HIT();
+ }
+ else{
+  PORTA.F6 = PORTA.F7 = PORTA.F5 = PORTA.F4 =0;
+ LIBRE();
+ }
+
+
+ }
  break;
 
  case 3:  PORTA.F6 = PORTA.F7 =0;  PORTA.F5 = PORTA.F4 ==1;
- IZQ();
- delay_ms(250);
- LIBRE();
- delay_ms(4000);
+ HIT();
+
+
 
  break;
 
@@ -268,12 +288,12 @@ void REC(){
  PWM2_Set_Duty(0);
 
 
- PWM3_Set_Duty(120);
+ PWM3_Set_Duty(140);
  PWM4_Set_Duty(0);
  }
 void DER(){
  Start();
- PWM1_Set_Duty(200);
+ PWM1_Set_Duty(170);
  PWM2_Set_Duty(0);
 
  PWM3_Set_Duty(0);
@@ -346,7 +366,24 @@ void HARD(){
  PWM4_Set_Duty(255);
 
 }
+void PUSH(){
+ Start();
 
+ PWM1_Set_Duty(255);
+ PWM2_Set_Duty(0);
+
+
+ PWM3_Set_Duty(205);
+ PWM4_Set_Duty(0);
+
+}
+void HIT(){
+
+ REC();
+ delay_ms(20);
+ PUSH();
+ delay_ms(250);
+}
 
 void INTERRUPT(){
 
