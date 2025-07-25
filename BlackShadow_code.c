@@ -31,6 +31,7 @@
 //=====================//
 volatile char linea_izq_detectada = 0;
 volatile char linea_der_detectada = 0;
+volatile char golpe = 0;
 
 //==========================//
 //==Prototipos de función==//
@@ -194,31 +195,37 @@ void SELEC(){
    
 
 
-    if      (SL1 ==0 && S6 ==0 && S2 ==0){
+    if(SL1 ==0 && S6 ==0 && S2 ==0){
     
     L0=L1=L2=L3=1;
     REC();
-    delay_ms(20);
+    delay_ms(250);
     LIBRE();
-    delay_ms(100);
+    delay_ms(200);
+    golpe = 0;
     }
     else if (SL1 ==1 && S6 ==0 && S2 ==0){
     L0=0;   L1=L2=L3=1;
     IZQ();
     delay_ms(100);
     HARD();
+    golpe = 0;
 
     }
     else if (SL1 ==0 && S6 ==1 && S2 ==0){
     L1=0;   L0=L2=L3=1;
     HIT();
+    golpe = 1;
     }
     else if (SL1 ==1 && S6==1 && S2 ==0){
     L0=L1=0;     L2=L3=1;
     IZQ();
     delay_ms(20);
+    golpe = 1;
+    }
+    else if (golpe ==1){
     HIT();
-
+    golpe = 0;
     }
     else if (SL1 ==0 && S6==0 && S2 ==1){
     L2=0;   L0=L1=L3=1;

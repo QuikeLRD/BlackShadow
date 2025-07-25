@@ -2,6 +2,7 @@
 #line 32 "G:/Mi unidad/UPIITA/AR UPIITA/Diseños de Minisumos/Black Shadow/Programación/BlackShadow_code.c"
 volatile char linea_izq_detectada = 0;
 volatile char linea_der_detectada = 0;
+volatile char golpe = 0;
 
 
 
@@ -165,31 +166,37 @@ void SELEC(){
 
 
 
- if ( PORTC.F0  ==0 &&  PORTB.F4  ==0 &&  PORTC.F6  ==0){
+ if( PORTC.F0  ==0 &&  PORTB.F4  ==0 &&  PORTC.F6  ==0){
 
   PORTA.F6 = PORTA.F7 = PORTA.F5 = PORTA.F4 =1;
  REC();
- delay_ms(20);
+ delay_ms(250);
  LIBRE();
- delay_ms(100);
+ delay_ms(200);
+ golpe = 0;
  }
  else if ( PORTC.F0  ==1 &&  PORTB.F4  ==0 &&  PORTC.F6  ==0){
   PORTA.F6 =0;  PORTA.F7 = PORTA.F5 = PORTA.F4 =1;
  IZQ();
  delay_ms(100);
  HARD();
+ golpe = 0;
 
  }
  else if ( PORTC.F0  ==0 &&  PORTB.F4  ==1 &&  PORTC.F6  ==0){
   PORTA.F7 =0;  PORTA.F6 = PORTA.F5 = PORTA.F4 =1;
  HIT();
+ golpe = 1;
  }
  else if ( PORTC.F0  ==1 &&  PORTB.F4 ==1 &&  PORTC.F6  ==0){
   PORTA.F6 = PORTA.F7 =0;  PORTA.F5 = PORTA.F4 =1;
  IZQ();
  delay_ms(20);
+ golpe = 1;
+ }
+ else if (golpe ==1){
  HIT();
-
+ golpe = 0;
  }
  else if ( PORTC.F0  ==0 &&  PORTB.F4 ==0 &&  PORTC.F6  ==1){
   PORTA.F5 =0;  PORTA.F6 = PORTA.F7 = PORTA.F4 =1;
