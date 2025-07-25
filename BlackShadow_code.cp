@@ -81,6 +81,8 @@ void main() {
 
 
 
+
+while ( PORTB.F7  == 0){
   PORTA.F6 =0;  PORTA.F4 = PORTA.F5 = PORTA.F7 =1;
  delay_ms(300);
   PORTA.F7 =0;  PORTA.F4 = PORTA.F5 = PORTA.F6 =1;
@@ -91,9 +93,28 @@ void main() {
  delay_ms(300);
   PORTA.F4 = PORTA.F5 = PORTA.F7 = PORTA.F6 =1;
  delay_ms(1000);
-
+ LIBRE();
+ delay_ms(250);
+}
 while(1){
+ if ( PORTB.F7 ==0){
+ LIBRE();
 
+ while ( PORTB.F7  == 0){
+  PORTA.F6 =0;  PORTA.F4 = PORTA.F5 = PORTA.F7 =1;
+ delay_ms(300);
+  PORTA.F7 =0;  PORTA.F4 = PORTA.F5 = PORTA.F6 =1;
+ delay_ms(300);
+  PORTA.F5 =0;  PORTA.F4 = PORTA.F7 = PORTA.F6 =1;
+ delay_ms(300);
+  PORTA.F4 =0;  PORTA.F6 = PORTA.F7 = PORTA.F5 =1;
+ delay_ms(300);
+  PORTA.F4 = PORTA.F5 = PORTA.F7 = PORTA.F6 =1;
+ delay_ms(1000);
+ LIBRE();
+ delay_ms(250);
+ }
+ }
  SELEC();
 
 
@@ -115,7 +136,6 @@ void SELEC(){
 
  case 1:  PORTA.F6 =0;  PORTA.F4 = PORTA.F5 = PORTA.F7 =1;
 
- while(1){
  if( PORTB.F2  != 0 &&  PORTB.F1  != 0){
  REC();
  }
@@ -138,13 +158,13 @@ void SELEC(){
  DER();
  delay_ms(100);
  }
- }
+
  break;
 
  case 2:  PORTA.F7 =0;  PORTA.F4 = PORTA.F5 = PORTA.F6 =1; delay_ms(250);
 
 
- while(1){
+
  if ( PORTC.F0  ==0 &&  PORTB.F4  ==0 &&  PORTC.F6  ==0){
 
   PORTA.F6 = PORTA.F7 = PORTA.F5 = PORTA.F4 =1;
@@ -199,7 +219,7 @@ void SELEC(){
  }
 
 
- }
+
  break;
 
  case 3:  PORTA.F6 = PORTA.F7 =0;  PORTA.F5 = PORTA.F4 ==1;

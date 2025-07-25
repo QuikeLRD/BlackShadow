@@ -110,6 +110,8 @@ void main() {
 //======================//
 //==Codigo General=====//
 //====================//
+ //Parpadeo de leds para esperar arranque
+while (DAT == 0){
  L0=0; L3=L2=L1=1;
  delay_ms(300);
  L1=0; L3=L2=L0=1;
@@ -120,9 +122,28 @@ void main() {
  delay_ms(300);
  L3=L2=L1=L0=1;
  delay_ms(1000);
-
+ LIBRE();
+ delay_ms(250);
+}
 while(1){
-
+         if (DAT==0){
+            LIBRE();                                     //Deten motores
+         //Los leds parpadean mientras se espera nuevo arranque
+             while (DAT == 0){
+             L0=0; L3=L2=L1=1;
+             delay_ms(300);
+             L1=0; L3=L2=L0=1;
+             delay_ms(300);
+             L2=0; L3=L1=L0=1;
+             delay_ms(300);
+             L3=0; L0=L1=L2=1;
+             delay_ms(300);
+             L3=L2=L1=L0=1;
+             delay_ms(1000);
+             LIBRE();
+             delay_ms(250);
+             }
+         }
          SELEC();
     // Prueba sensores de línea:
     // if(S4 == 0) L0 = 0; else L0 = 1; // Si es blanco, LED encendido
@@ -144,7 +165,6 @@ void SELEC(){
 
    case 1: L0=0; L3=L2=L1=1;
 
-    while(1){
     if(S4 != 0 && S3 != 0){
         REC();
     }
@@ -167,13 +187,13 @@ void SELEC(){
         DER();
         delay_ms(100);
     }
-  }
+
    break;
 
    case 2: L1=0; L3=L2=L0=1; delay_ms(250);
    
 
-    while(1){
+
     if      (SL1 ==0 && S6 ==0 && S2 ==0){
     
     L0=L1=L2=L3=1;
@@ -228,7 +248,7 @@ void SELEC(){
     }
           
           
-    }
+
    break;
 
    case 3: L0=L1=0; L2=L3==1;
