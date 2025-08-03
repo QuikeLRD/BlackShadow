@@ -5,13 +5,27 @@ volatile char linea_der_detectada = 0;
 volatile char golpe = 0;
 
 
+typedef enum{
+
+CMB_ESPERA,
+CMB_REC,
+CMB_IZQ_HARD,
+CMB_HIT,
+CMB_IZQ_GOLPE,
+CMB_DER_HARD,
+CMB_LIBRE,
+CMB_DER_HIT,
+CMB_HIT_FULL
+} EstadoCombate;
+
+volatile EstadoCombate estado_combate = CMB_ESPERA;
+
+
 
 
 void SELEC();
 void Start();
 void Stop();
-void SELEC();
-void INTERRUPT();
 void HARD();
 void PUSH();
 
@@ -24,7 +38,8 @@ void LIBRE();
 void GIRO180();
 void GIRO360();
 void HIT();
-
+void INTERRUPT();
+void combate_estado();
 
 
 
@@ -55,7 +70,6 @@ void main() {
 
  INTCON.GIE =1;
  INTCON.PEIE =1;
-
 
 
 
@@ -118,8 +132,6 @@ while(1){
  }
  SELEC();
 
-
-
 }
 }
 
@@ -136,11 +148,9 @@ void SELEC(){
  break;
 
  case 1:  PORTA.F6 =0;  PORTA.F4 = PORTA.F5 = PORTA.F7 =1;
-
  if( PORTB.F2  != 0 &&  PORTB.F1  != 0){
  REC();
  }
-
  else if( PORTB.F2  == 0 &&  PORTB.F1  == 0){
  HARD();
  delay_ms(100);
@@ -162,70 +172,8 @@ void SELEC(){
 
  break;
 
- case 2:  PORTA.F7 =0;  PORTA.F4 = PORTA.F5 = PORTA.F6 =1; delay_ms(250);
-
-
-
- if( PORTC.F0  ==0 &&  PORTB.F4  ==0 &&  PORTC.F6  ==0){
-
-  PORTA.F6 = PORTA.F7 = PORTA.F5 = PORTA.F4 =1;
- REC();
- delay_ms(250);
- LIBRE();
- delay_ms(200);
- golpe = 0;
- }
- else if ( PORTC.F0  ==1 &&  PORTB.F4  ==0 &&  PORTC.F6  ==0){
-  PORTA.F6 =0;  PORTA.F7 = PORTA.F5 = PORTA.F4 =1;
- IZQ();
- delay_ms(100);
- HARD();
- golpe = 0;
-
- }
- else if ( PORTC.F0  ==0 &&  PORTB.F4  ==1 &&  PORTC.F6  ==0){
-  PORTA.F7 =0;  PORTA.F6 = PORTA.F5 = PORTA.F4 =1;
- HIT();
- golpe = 1;
- }
- else if ( PORTC.F0  ==1 &&  PORTB.F4 ==1 &&  PORTC.F6  ==0){
-  PORTA.F6 = PORTA.F7 =0;  PORTA.F5 = PORTA.F4 =1;
- IZQ();
- delay_ms(20);
- golpe = 1;
- }
- else if (golpe ==1){
- HIT();
- golpe = 0;
- }
- else if ( PORTC.F0  ==0 &&  PORTB.F4 ==0 &&  PORTC.F6  ==1){
-  PORTA.F5 =0;  PORTA.F6 = PORTA.F7 = PORTA.F4 =1;
- DER();
- delay_ms(100);
- HARD();
-
- }
- else if ( PORTC.F0  ==1 &&  PORTB.F4 ==0 &&  PORTC.F6  ==1){
-  PORTA.F6 = PORTA.F5 =0;  PORTA.F7 = PORTA.F4 =1;
-
- LIBRE();
- }
- else if ( PORTC.F0  ==0 &&  PORTB.F4 ==1 &&  PORTC.F6  ==1){
-  PORTA.F7 = PORTA.F5 =0;  PORTA.F6 = PORTA.F4 =0;
- DER();
- delay_ms(30);
- HIT();
- }
- else if ( PORTC.F0  ==1 &&  PORTB.F4 ==1 &&  PORTC.F6  ==1){
-  PORTA.F6 = PORTA.F7 = PORTA.F5 =0;  PORTA.F4 =1;
- HIT();
- }
- else{
-  PORTA.F6 = PORTA.F7 = PORTA.F5 = PORTA.F4 =0;
- LIBRE();
- }
-
-
+ case 2:  PORTA.F7 =0;  PORTA.F4 = PORTA.F5 = PORTA.F6 =1;
+ combate_estado();
 
  break;
 
@@ -284,6 +232,114 @@ void SELEC(){
  }
 
 
+}
+
+
+
+void combate_estado() {
+ switch (estado_combate) {
+ case CMB_ESPERA:
+ if( PORTC.F0  == 0 &&  PORTB.F4  == 0 &&  PORTC.F6  == 0){
+ estado_combate = CMB_REC;
+ }
+ else if ( PORTC.F0  == 1 &&  PORTB.F4  == 0 &&  PORTC.F6  == 0){
+ estado_combate = CMB_IZQ_HARD;
+ }
+ else if ( PORTC.F0  == 0 &&  PORTB.F4  == 1 &&  PORTC.F6  == 0){
+ estado_combate = CMB_HIT;
+ }
+ else if ( PORTC.F0  == 1 &&  PORTB.F4  == 1 &&  PORTC.F6  == 0){
+ estado_combate = CMB_IZQ_GOLPE;
+ }
+ else if (golpe == 1){
+ estado_combate = CMB_HIT;
+ }
+ else if ( PORTC.F0  == 0 &&  PORTB.F4  == 0 &&  PORTC.F6  == 1){
+ estado_combate = CMB_DER_HARD;
+ }
+ else if ( PORTC.F0  == 1 &&  PORTB.F4  == 0 &&  PORTC.F6  == 1){
+ estado_combate = CMB_LIBRE;
+ }
+ else if ( PORTC.F0  == 0 &&  PORTB.F4  == 1 &&  PORTC.F6  == 1){
+ estado_combate = CMB_DER_HIT;
+ }
+ else if ( PORTC.F0  == 1 &&  PORTB.F4  == 1 &&  PORTC.F6  == 1){
+ estado_combate = CMB_HIT_FULL;
+ }
+ else{
+ LIBRE();
+ }
+ break;
+
+ case CMB_REC:
+  PORTA.F6 = PORTA.F7 = PORTA.F5 = PORTA.F4 =1;
+ REC();
+ delay_ms(250);
+ LIBRE();
+ delay_ms(200);
+ golpe = 0;
+ estado_combate = CMB_ESPERA;
+ break;
+
+ case CMB_IZQ_HARD:
+  PORTA.F6 =0;  PORTA.F7 = PORTA.F5 = PORTA.F4 =1;
+ IZQ();
+ delay_ms(100);
+ HARD();
+ delay_ms(250);
+ golpe = 0;
+ estado_combate = CMB_ESPERA;
+ break;
+
+ case CMB_HIT:
+  PORTA.F7 =0;  PORTA.F6 = PORTA.F5 = PORTA.F4 =1;
+ HIT();
+ golpe = 1;
+ estado_combate = CMB_ESPERA;
+ break;
+
+ case CMB_IZQ_GOLPE:
+  PORTA.F6 = PORTA.F7 =0;  PORTA.F5 = PORTA.F4 =1;
+ IZQ();
+ delay_ms(20);
+ golpe = 1;
+ estado_combate = CMB_ESPERA;
+ break;
+
+ case CMB_DER_HARD:
+  PORTA.F5 =0;  PORTA.F6 = PORTA.F7 = PORTA.F4 =1;
+ DER();
+ delay_ms(100);
+ HARD();
+ delay_ms(250);
+ estado_combate = CMB_ESPERA;
+ break;
+
+ case CMB_LIBRE:
+  PORTA.F6 = PORTA.F5 =0;  PORTA.F7 = PORTA.F4 =1;
+ LIBRE();
+ estado_combate = CMB_ESPERA;
+ break;
+
+ case CMB_DER_HIT:
+  PORTA.F7 = PORTA.F5 =0;  PORTA.F6 = PORTA.F4 =1;
+ DER();
+ delay_ms(30);
+ HIT();
+ estado_combate = CMB_ESPERA;
+ break;
+
+ case CMB_HIT_FULL:
+  PORTA.F6 = PORTA.F7 = PORTA.F5 =0;  PORTA.F4 =1;
+ HIT();
+ estado_combate = CMB_ESPERA;
+ break;
+
+ default:
+ LIBRE();
+ estado_combate = CMB_ESPERA;
+ break;
+ }
 }
 
 void Start(){
@@ -391,6 +447,7 @@ void HARD(){
  PWM2_Set_Duty(255);
  PWM3_Set_Duty(255);
  PWM4_Set_Duty(255);
+
 
 }
 void PUSH(){

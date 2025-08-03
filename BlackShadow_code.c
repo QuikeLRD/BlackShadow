@@ -33,14 +33,28 @@ volatile char linea_izq_detectada = 0;
 volatile char linea_der_detectada = 0;
 volatile char golpe = 0;
 
+//MAQUINA DE ESTADOS
+typedef enum{
+
+CMB_ESPERA,
+CMB_REC,
+CMB_IZQ_HARD,
+CMB_HIT,
+CMB_IZQ_GOLPE,
+CMB_DER_HARD,
+CMB_LIBRE,
+CMB_DER_HIT,
+CMB_HIT_FULL
+} EstadoCombate;
+
+volatile EstadoCombate estado_combate = CMB_ESPERA;
+
 //==========================//
 //==Prototipos de función==//
 //========================//
 void SELEC();
 void Start();
 void Stop();
-void SELEC();
-void INTERRUPT();
 void HARD();
 void PUSH();
 
@@ -53,7 +67,8 @@ void LIBRE();
 void GIRO180();
 void GIRO360();
 void HIT();
-
+void INTERRUPT();
+void combate_estado();
 //======================//
 //==Codigo General=====//
 //====================//
@@ -85,7 +100,6 @@ void main() {
  INTCON.GIE =1;                                    //Interrupciones globales
  INTCON.PEIE =1;                                   //Interrupciones perifericas
  
-
 
 
 //=====================//
@@ -146,9 +160,7 @@ while(1){
              }
          }
          SELEC();
-    // Prueba sensores de línea:
-    // if(S4 == 0) L0 = 0; else L0 = 1; // Si es blanco, LED encendido
-    // if(S3 == 0) L2 = 0; else L2 = 1;
+
 }
 }
 //======================//
@@ -165,11 +177,9 @@ void SELEC(){
    break;
 
    case 1: L0=0; L3=L2=L1=1;
-
     if(S4 != 0 && S3 != 0){
         REC();
     }
-
     else if(S4 == 0 && S3 == 0){
          HARD();
          delay_ms(100);
@@ -191,70 +201,8 @@ void SELEC(){
 
    break;
 
-   case 2: L1=0; L3=L2=L0=1; delay_ms(250);
-   
-
-
-    if(SL1 ==0 && S6 ==0 && S2 ==0){
-    
-    L0=L1=L2=L3=1;
-    REC();
-    delay_ms(250);
-    LIBRE();
-    delay_ms(200);
-    golpe = 0;
-    }
-    else if (SL1 ==1 && S6 ==0 && S2 ==0){
-    L0=0;   L1=L2=L3=1;
-    IZQ();
-    delay_ms(100);
-    HARD();
-    golpe = 0;
-
-    }
-    else if (SL1 ==0 && S6 ==1 && S2 ==0){
-    L1=0;   L0=L2=L3=1;
-    HIT();
-    golpe = 1;
-    }
-    else if (SL1 ==1 && S6==1 && S2 ==0){
-    L0=L1=0;     L2=L3=1;
-    IZQ();
-    delay_ms(20);
-    golpe = 1;
-    }
-    else if (golpe ==1){
-    HIT();
-    golpe = 0;
-    }
-    else if (SL1 ==0 && S6==0 && S2 ==1){
-    L2=0;   L0=L1=L3=1;
-    DER();
-    delay_ms(100);
-    HARD();
-    
-    }
-    else if (SL1 ==1 && S6==0 && S2 ==1){
-    L0=L2=0;     L1=L3=1;
-    
-    LIBRE();
-    }
-    else if (SL1 ==0 && S6==1 && S2 ==1){
-    L1=L2=0;     L0=L3=0;
-    DER();
-    delay_ms(30);
-    HIT();
-    }
-    else if (SL1 ==1 && S6==1 && S2 ==1){
-    L0=L1=L2=0;  L3=1;
-    HIT();
-    }
-    else{
-    L0=L1=L2=L3=0;
-    LIBRE();
-    }
-          
-          
+   case 2: L1=0; L3=L2=L0=1;
+           combate_estado();
 
    break;
 
@@ -313,6 +261,114 @@ void SELEC(){
   }
 
 
+}
+//=========================//
+//==STATE MACHINE====//
+//=======================//
+void combate_estado() {
+    switch (estado_combate) {
+    case CMB_ESPERA:
+        if(SL1 == 0 && S6 == 0 && S2 == 0){
+            estado_combate = CMB_REC;
+        }
+        else if (SL1 == 1 && S6 == 0 && S2 == 0){
+            estado_combate = CMB_IZQ_HARD;
+        }
+        else if (SL1 == 0 && S6 == 1 && S2 == 0){
+            estado_combate = CMB_HIT;
+        }
+        else if (SL1 == 1 && S6 == 1 && S2 == 0){
+            estado_combate = CMB_IZQ_GOLPE;
+        }
+        else if (golpe == 1){
+            estado_combate = CMB_HIT;
+        }
+        else if (SL1 == 0 && S6 == 0 && S2 == 1){
+            estado_combate = CMB_DER_HARD;
+        }
+        else if (SL1 == 1 && S6 == 0 && S2 == 1){
+            estado_combate = CMB_LIBRE;
+        }
+        else if (SL1 == 0 && S6 == 1 && S2 == 1){
+            estado_combate = CMB_DER_HIT;
+        }
+        else if (SL1 == 1 && S6 == 1 && S2 == 1){
+            estado_combate = CMB_HIT_FULL;
+        }
+        else{
+            LIBRE();
+        }
+        break;
+
+    case CMB_REC:
+        L0=L1=L2=L3=1;
+        REC();
+        delay_ms(250);
+        LIBRE();
+        delay_ms(200);
+        golpe = 0;
+        estado_combate = CMB_ESPERA;
+        break;
+
+    case CMB_IZQ_HARD:
+        L0=0; L1=L2=L3=1;
+        IZQ();
+        delay_ms(100);
+        HARD();
+        delay_ms(250);
+        golpe = 0;
+        estado_combate = CMB_ESPERA;
+        break;
+
+    case CMB_HIT:
+        L1=0; L0=L2=L3=1;
+        HIT();
+        golpe = 1;
+        estado_combate = CMB_ESPERA;
+        break;
+
+    case CMB_IZQ_GOLPE:
+        L0=L1=0; L2=L3=1;
+        IZQ();
+        delay_ms(20);
+        golpe = 1;
+        estado_combate = CMB_ESPERA;
+        break;
+
+    case CMB_DER_HARD:
+        L2=0; L0=L1=L3=1;
+        DER();
+        delay_ms(100);
+        HARD();
+        delay_ms(250);
+        estado_combate = CMB_ESPERA;
+        break;
+
+    case CMB_LIBRE:
+        L0=L2=0; L1=L3=1;
+        LIBRE();
+        estado_combate = CMB_ESPERA;
+        break;
+
+    case CMB_DER_HIT:
+        L1=L2=0; L0=L3=1;
+        DER();
+        delay_ms(30);
+        HIT();
+        estado_combate = CMB_ESPERA;
+        break;
+
+    case CMB_HIT_FULL:
+        L0=L1=L2=0; L3=1;
+        HIT();
+        estado_combate = CMB_ESPERA;
+        break;
+
+    default:
+        LIBRE();
+        estado_combate = CMB_ESPERA;
+        break;
+    }
 }
 
 void Start(){
@@ -420,6 +476,7 @@ void HARD(){
      PWM2_Set_Duty(255);
      PWM3_Set_Duty(255);
      PWM4_Set_Duty(255);
+
 
 }
 void PUSH(){

@@ -505,6 +505,7 @@ cmp1md
 cmp1md_bit
 cmp2md
 cmp2md_bit
+combate_estado
 comfrem
 compare_double
 cos
@@ -715,6 +716,7 @@ eeip_bit
 eepgd
 eepgd_bit
 equals_double
+estado_combate
 exp
 f
 fabs
