@@ -38,7 +38,7 @@ typedef enum{
 
 CMB_ESPERA,
 CMB_REC,
-CMB_IZQ_HARD,
+CMB_IZQ,
 CMB_HIT,
 CMB_IZQ_GOLPE,
 CMB_DER_HARD,
@@ -268,31 +268,28 @@ void SELEC(){
 void combate_estado() {
     switch (estado_combate) {
     case CMB_ESPERA:
-        if(SL1 == 0 && S6 == 0 && S2 == 0){
+        if(SL1 == 0 && S2 == 0 && S6 == 0){
             estado_combate = CMB_REC;
         }
-        else if (SL1 == 1 && S6 == 0 && S2 == 0){
-            estado_combate = CMB_IZQ_HARD;
+        else if (SL1 == 1 && S2 == 0 && S6 == 0){
+            estado_combate = CMB_IZQ;
         }
-        else if (SL1 == 0 && S6 == 1 && S2 == 0){
+        else if (SL1 == 0 && S2 == 1 && S6 == 0){
             estado_combate = CMB_HIT;
         }
-        else if (SL1 == 1 && S6 == 1 && S2 == 0){
+        else if (SL1 == 1 && S2 == 1 && S6 == 0){
             estado_combate = CMB_IZQ_GOLPE;
         }
-        else if (golpe == 1){
-            estado_combate = CMB_HIT;
-        }
-        else if (SL1 == 0 && S6 == 0 && S2 == 1){
+        else if (SL1 == 0 && S2 == 0 && S6 == 1){
             estado_combate = CMB_DER_HARD;
         }
-        else if (SL1 == 1 && S6 == 0 && S2 == 1){
+        else if (SL1 == 1 && S2 == 0 && S6 == 1){
             estado_combate = CMB_LIBRE;
         }
-        else if (SL1 == 0 && S6 == 1 && S2 == 1){
+        else if (SL1 == 0 && S2 == 1 && S6 == 1){
             estado_combate = CMB_DER_HIT;
         }
-        else if (SL1 == 1 && S6 == 1 && S2 == 1){
+        else if (SL1 == 1 && S2 == 1 && S6 == 1){
             estado_combate = CMB_HIT_FULL;
         }
         else{
@@ -306,24 +303,21 @@ void combate_estado() {
         delay_ms(250);
         LIBRE();
         delay_ms(200);
-        golpe = 0;
         estado_combate = CMB_ESPERA;
         break;
 
-    case CMB_IZQ_HARD:
+    case CMB_IZQ:
         L0=0; L1=L2=L3=1;
         IZQ();
         delay_ms(100);
         HARD();
         delay_ms(250);
-        golpe = 0;
         estado_combate = CMB_ESPERA;
         break;
 
     case CMB_HIT:
         L1=0; L0=L2=L3=1;
         HIT();
-        golpe = 1;
         estado_combate = CMB_ESPERA;
         break;
 
@@ -331,7 +325,7 @@ void combate_estado() {
         L0=L1=0; L2=L3=1;
         IZQ();
         delay_ms(20);
-        golpe = 1;
+        HIT();
         estado_combate = CMB_ESPERA;
         break;
 

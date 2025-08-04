@@ -9,7 +9,7 @@ typedef enum{
 
 CMB_ESPERA,
 CMB_REC,
-CMB_IZQ_HARD,
+CMB_IZQ,
 CMB_HIT,
 CMB_IZQ_GOLPE,
 CMB_DER_HARD,
@@ -239,31 +239,28 @@ void SELEC(){
 void combate_estado() {
  switch (estado_combate) {
  case CMB_ESPERA:
- if( PORTC.F0  == 0 &&  PORTB.F4  == 0 &&  PORTC.F6  == 0){
+ if( PORTC.F0  == 0 &&  PORTC.F6  == 0 &&  PORTB.F4  == 0){
  estado_combate = CMB_REC;
  }
- else if ( PORTC.F0  == 1 &&  PORTB.F4  == 0 &&  PORTC.F6  == 0){
- estado_combate = CMB_IZQ_HARD;
+ else if ( PORTC.F0  == 1 &&  PORTC.F6  == 0 &&  PORTB.F4  == 0){
+ estado_combate = CMB_IZQ;
  }
- else if ( PORTC.F0  == 0 &&  PORTB.F4  == 1 &&  PORTC.F6  == 0){
+ else if ( PORTC.F0  == 0 &&  PORTC.F6  == 1 &&  PORTB.F4  == 0){
  estado_combate = CMB_HIT;
  }
- else if ( PORTC.F0  == 1 &&  PORTB.F4  == 1 &&  PORTC.F6  == 0){
+ else if ( PORTC.F0  == 1 &&  PORTC.F6  == 1 &&  PORTB.F4  == 0){
  estado_combate = CMB_IZQ_GOLPE;
  }
- else if (golpe == 1){
- estado_combate = CMB_HIT;
- }
- else if ( PORTC.F0  == 0 &&  PORTB.F4  == 0 &&  PORTC.F6  == 1){
+ else if ( PORTC.F0  == 0 &&  PORTC.F6  == 0 &&  PORTB.F4  == 1){
  estado_combate = CMB_DER_HARD;
  }
- else if ( PORTC.F0  == 1 &&  PORTB.F4  == 0 &&  PORTC.F6  == 1){
+ else if ( PORTC.F0  == 1 &&  PORTC.F6  == 0 &&  PORTB.F4  == 1){
  estado_combate = CMB_LIBRE;
  }
- else if ( PORTC.F0  == 0 &&  PORTB.F4  == 1 &&  PORTC.F6  == 1){
+ else if ( PORTC.F0  == 0 &&  PORTC.F6  == 1 &&  PORTB.F4  == 1){
  estado_combate = CMB_DER_HIT;
  }
- else if ( PORTC.F0  == 1 &&  PORTB.F4  == 1 &&  PORTC.F6  == 1){
+ else if ( PORTC.F0  == 1 &&  PORTC.F6  == 1 &&  PORTB.F4  == 1){
  estado_combate = CMB_HIT_FULL;
  }
  else{
@@ -277,24 +274,21 @@ void combate_estado() {
  delay_ms(250);
  LIBRE();
  delay_ms(200);
- golpe = 0;
  estado_combate = CMB_ESPERA;
  break;
 
- case CMB_IZQ_HARD:
+ case CMB_IZQ:
   PORTA.F6 =0;  PORTA.F7 = PORTA.F5 = PORTA.F4 =1;
  IZQ();
  delay_ms(100);
  HARD();
  delay_ms(250);
- golpe = 0;
  estado_combate = CMB_ESPERA;
  break;
 
  case CMB_HIT:
   PORTA.F7 =0;  PORTA.F6 = PORTA.F5 = PORTA.F4 =1;
  HIT();
- golpe = 1;
  estado_combate = CMB_ESPERA;
  break;
 
@@ -302,7 +296,7 @@ void combate_estado() {
   PORTA.F6 = PORTA.F7 =0;  PORTA.F5 = PORTA.F4 =1;
  IZQ();
  delay_ms(20);
- golpe = 1;
+ HIT();
  estado_combate = CMB_ESPERA;
  break;
 

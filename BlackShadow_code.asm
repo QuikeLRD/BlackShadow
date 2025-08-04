@@ -90,19 +90,19 @@ L_main0:
 	BCF         PORTA+0, 6 
 	BSF         PORTA+0, 7 
 	BTFSC       PORTA+0, 7 
-	GOTO        L__main127
+	GOTO        L__main125
 	BCF         PORTA+0, 5 
+	GOTO        L__main126
+L__main125:
+	BSF         PORTA+0, 5 
+L__main126:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__main127
+	BCF         PORTA+0, 4 
 	GOTO        L__main128
 L__main127:
-	BSF         PORTA+0, 5 
-L__main128:
-	BTFSC       PORTA+0, 5 
-	GOTO        L__main129
-	BCF         PORTA+0, 4 
-	GOTO        L__main130
-L__main129:
 	BSF         PORTA+0, 4 
-L__main130:
+L__main128:
 ;BlackShadow_code.c,131 :: 		delay_ms(300);
 	MOVLW       4
 	MOVWF       R11, 0
@@ -123,19 +123,19 @@ L_main2:
 	BCF         PORTA+0, 7 
 	BSF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
-	GOTO        L__main131
+	GOTO        L__main129
 	BCF         PORTA+0, 5 
+	GOTO        L__main130
+L__main129:
+	BSF         PORTA+0, 5 
+L__main130:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__main131
+	BCF         PORTA+0, 4 
 	GOTO        L__main132
 L__main131:
-	BSF         PORTA+0, 5 
-L__main132:
-	BTFSC       PORTA+0, 5 
-	GOTO        L__main133
-	BCF         PORTA+0, 4 
-	GOTO        L__main134
-L__main133:
 	BSF         PORTA+0, 4 
-L__main134:
+L__main132:
 ;BlackShadow_code.c,133 :: 		delay_ms(300);
 	MOVLW       4
 	MOVWF       R11, 0
@@ -156,19 +156,19 @@ L_main3:
 	BCF         PORTA+0, 5 
 	BSF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
-	GOTO        L__main135
+	GOTO        L__main133
 	BCF         PORTA+0, 7 
+	GOTO        L__main134
+L__main133:
+	BSF         PORTA+0, 7 
+L__main134:
+	BTFSC       PORTA+0, 7 
+	GOTO        L__main135
+	BCF         PORTA+0, 4 
 	GOTO        L__main136
 L__main135:
-	BSF         PORTA+0, 7 
-L__main136:
-	BTFSC       PORTA+0, 7 
-	GOTO        L__main137
-	BCF         PORTA+0, 4 
-	GOTO        L__main138
-L__main137:
 	BSF         PORTA+0, 4 
-L__main138:
+L__main136:
 ;BlackShadow_code.c,135 :: 		delay_ms(300);
 	MOVLW       4
 	MOVWF       R11, 0
@@ -189,19 +189,19 @@ L_main4:
 	BCF         PORTA+0, 4 
 	BSF         PORTA+0, 5 
 	BTFSC       PORTA+0, 5 
-	GOTO        L__main139
+	GOTO        L__main137
 	BCF         PORTA+0, 7 
+	GOTO        L__main138
+L__main137:
+	BSF         PORTA+0, 7 
+L__main138:
+	BTFSC       PORTA+0, 7 
+	GOTO        L__main139
+	BCF         PORTA+0, 6 
 	GOTO        L__main140
 L__main139:
-	BSF         PORTA+0, 7 
-L__main140:
-	BTFSC       PORTA+0, 7 
-	GOTO        L__main141
-	BCF         PORTA+0, 6 
-	GOTO        L__main142
-L__main141:
 	BSF         PORTA+0, 6 
-L__main142:
+L__main140:
 ;BlackShadow_code.c,137 :: 		delay_ms(300);
 	MOVLW       4
 	MOVWF       R11, 0
@@ -221,26 +221,26 @@ L_main5:
 ;BlackShadow_code.c,138 :: 		L3=L2=L1=L0=1;
 	BSF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
-	GOTO        L__main143
+	GOTO        L__main141
 	BCF         PORTA+0, 7 
+	GOTO        L__main142
+L__main141:
+	BSF         PORTA+0, 7 
+L__main142:
+	BTFSC       PORTA+0, 7 
+	GOTO        L__main143
+	BCF         PORTA+0, 5 
 	GOTO        L__main144
 L__main143:
-	BSF         PORTA+0, 7 
+	BSF         PORTA+0, 5 
 L__main144:
-	BTFSC       PORTA+0, 7 
+	BTFSC       PORTA+0, 5 
 	GOTO        L__main145
-	BCF         PORTA+0, 5 
+	BCF         PORTA+0, 4 
 	GOTO        L__main146
 L__main145:
-	BSF         PORTA+0, 5 
-L__main146:
-	BTFSC       PORTA+0, 5 
-	GOTO        L__main147
-	BCF         PORTA+0, 4 
-	GOTO        L__main148
-L__main147:
 	BSF         PORTA+0, 4 
-L__main148:
+L__main146:
 ;BlackShadow_code.c,139 :: 		delay_ms(1000);
 	MOVLW       11
 	MOVWF       R11, 0
@@ -293,19 +293,19 @@ L_main11:
 	BCF         PORTA+0, 6 
 	BSF         PORTA+0, 7 
 	BTFSC       PORTA+0, 7 
-	GOTO        L__main149
+	GOTO        L__main147
 	BCF         PORTA+0, 5 
+	GOTO        L__main148
+L__main147:
+	BSF         PORTA+0, 5 
+L__main148:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__main149
+	BCF         PORTA+0, 4 
 	GOTO        L__main150
 L__main149:
-	BSF         PORTA+0, 5 
-L__main150:
-	BTFSC       PORTA+0, 5 
-	GOTO        L__main151
-	BCF         PORTA+0, 4 
-	GOTO        L__main152
-L__main151:
 	BSF         PORTA+0, 4 
-L__main152:
+L__main150:
 ;BlackShadow_code.c,149 :: 		delay_ms(300);
 	MOVLW       4
 	MOVWF       R11, 0
@@ -326,19 +326,19 @@ L_main13:
 	BCF         PORTA+0, 7 
 	BSF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
-	GOTO        L__main153
+	GOTO        L__main151
 	BCF         PORTA+0, 5 
+	GOTO        L__main152
+L__main151:
+	BSF         PORTA+0, 5 
+L__main152:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__main153
+	BCF         PORTA+0, 4 
 	GOTO        L__main154
 L__main153:
-	BSF         PORTA+0, 5 
-L__main154:
-	BTFSC       PORTA+0, 5 
-	GOTO        L__main155
-	BCF         PORTA+0, 4 
-	GOTO        L__main156
-L__main155:
 	BSF         PORTA+0, 4 
-L__main156:
+L__main154:
 ;BlackShadow_code.c,151 :: 		delay_ms(300);
 	MOVLW       4
 	MOVWF       R11, 0
@@ -359,19 +359,19 @@ L_main14:
 	BCF         PORTA+0, 5 
 	BSF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
-	GOTO        L__main157
+	GOTO        L__main155
 	BCF         PORTA+0, 7 
+	GOTO        L__main156
+L__main155:
+	BSF         PORTA+0, 7 
+L__main156:
+	BTFSC       PORTA+0, 7 
+	GOTO        L__main157
+	BCF         PORTA+0, 4 
 	GOTO        L__main158
 L__main157:
-	BSF         PORTA+0, 7 
-L__main158:
-	BTFSC       PORTA+0, 7 
-	GOTO        L__main159
-	BCF         PORTA+0, 4 
-	GOTO        L__main160
-L__main159:
 	BSF         PORTA+0, 4 
-L__main160:
+L__main158:
 ;BlackShadow_code.c,153 :: 		delay_ms(300);
 	MOVLW       4
 	MOVWF       R11, 0
@@ -392,19 +392,19 @@ L_main15:
 	BCF         PORTA+0, 4 
 	BSF         PORTA+0, 5 
 	BTFSC       PORTA+0, 5 
-	GOTO        L__main161
+	GOTO        L__main159
 	BCF         PORTA+0, 7 
+	GOTO        L__main160
+L__main159:
+	BSF         PORTA+0, 7 
+L__main160:
+	BTFSC       PORTA+0, 7 
+	GOTO        L__main161
+	BCF         PORTA+0, 6 
 	GOTO        L__main162
 L__main161:
-	BSF         PORTA+0, 7 
-L__main162:
-	BTFSC       PORTA+0, 7 
-	GOTO        L__main163
-	BCF         PORTA+0, 6 
-	GOTO        L__main164
-L__main163:
 	BSF         PORTA+0, 6 
-L__main164:
+L__main162:
 ;BlackShadow_code.c,155 :: 		delay_ms(300);
 	MOVLW       4
 	MOVWF       R11, 0
@@ -424,26 +424,26 @@ L_main16:
 ;BlackShadow_code.c,156 :: 		L3=L2=L1=L0=1;
 	BSF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
-	GOTO        L__main165
+	GOTO        L__main163
 	BCF         PORTA+0, 7 
+	GOTO        L__main164
+L__main163:
+	BSF         PORTA+0, 7 
+L__main164:
+	BTFSC       PORTA+0, 7 
+	GOTO        L__main165
+	BCF         PORTA+0, 5 
 	GOTO        L__main166
 L__main165:
-	BSF         PORTA+0, 7 
+	BSF         PORTA+0, 5 
 L__main166:
-	BTFSC       PORTA+0, 7 
+	BTFSC       PORTA+0, 5 
 	GOTO        L__main167
-	BCF         PORTA+0, 5 
+	BCF         PORTA+0, 4 
 	GOTO        L__main168
 L__main167:
-	BSF         PORTA+0, 5 
-L__main168:
-	BTFSC       PORTA+0, 5 
-	GOTO        L__main169
-	BCF         PORTA+0, 4 
-	GOTO        L__main170
-L__main169:
 	BSF         PORTA+0, 4 
-L__main170:
+L__main168:
 ;BlackShadow_code.c,157 :: 		delay_ms(1000);
 	MOVLW       11
 	MOVWF       R11, 0
@@ -544,14 +544,14 @@ _SELEC:
 	MOVLW       0
 	MOVWF       R1 
 	MOVF        R2, 0 
-L__SELEC172:
-	BZ          L__SELEC173
+L__SELEC170:
+	BZ          L__SELEC171
 	RLCF        R0, 1 
 	BCF         R0, 0 
 	RLCF        R1, 1 
 	ADDLW       255
-	GOTO        L__SELEC172
-L__SELEC173:
+	GOTO        L__SELEC170
+L__SELEC171:
 	MOVF        R0, 0 
 	ADDWF       SELEC_seleccion_L0+0, 1 
 	MOVF        R1, 0 
@@ -562,26 +562,26 @@ L__SELEC173:
 L_SELEC21:
 	BSF         PORTA+0, 4 
 	BTFSC       PORTA+0, 4 
-	GOTO        L__SELEC174
+	GOTO        L__SELEC172
 	BCF         PORTA+0, 5 
+	GOTO        L__SELEC173
+L__SELEC172:
+	BSF         PORTA+0, 5 
+L__SELEC173:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__SELEC174
+	BCF         PORTA+0, 7 
 	GOTO        L__SELEC175
 L__SELEC174:
-	BSF         PORTA+0, 5 
+	BSF         PORTA+0, 7 
 L__SELEC175:
-	BTFSC       PORTA+0, 5 
+	BTFSC       PORTA+0, 7 
 	GOTO        L__SELEC176
-	BCF         PORTA+0, 7 
+	BCF         PORTA+0, 6 
 	GOTO        L__SELEC177
 L__SELEC176:
-	BSF         PORTA+0, 7 
-L__SELEC177:
-	BTFSC       PORTA+0, 7 
-	GOTO        L__SELEC178
-	BCF         PORTA+0, 6 
-	GOTO        L__SELEC179
-L__SELEC178:
 	BSF         PORTA+0, 6 
-L__SELEC179:
+L__SELEC177:
 ;BlackShadow_code.c,177 :: 		break;
 	GOTO        L_SELEC20
 ;BlackShadow_code.c,179 :: 		case 1: L0=0; L3=L2=L1=1;
@@ -589,25 +589,25 @@ L_SELEC22:
 	BCF         PORTA+0, 6 
 	BSF         PORTA+0, 7 
 	BTFSC       PORTA+0, 7 
-	GOTO        L__SELEC180
+	GOTO        L__SELEC178
 	BCF         PORTA+0, 5 
+	GOTO        L__SELEC179
+L__SELEC178:
+	BSF         PORTA+0, 5 
+L__SELEC179:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__SELEC180
+	BCF         PORTA+0, 4 
 	GOTO        L__SELEC181
 L__SELEC180:
-	BSF         PORTA+0, 5 
-L__SELEC181:
-	BTFSC       PORTA+0, 5 
-	GOTO        L__SELEC182
-	BCF         PORTA+0, 4 
-	GOTO        L__SELEC183
-L__SELEC182:
 	BSF         PORTA+0, 4 
-L__SELEC183:
+L__SELEC181:
 ;BlackShadow_code.c,180 :: 		if(S4 != 0 && S3 != 0){
 	BTFSS       PORTB+0, 2 
 	GOTO        L_SELEC25
 	BTFSS       PORTB+0, 1 
 	GOTO        L_SELEC25
-L__SELEC117:
+L__SELEC115:
 ;BlackShadow_code.c,181 :: 		REC();
 	CALL        _REC+0, 0
 ;BlackShadow_code.c,182 :: 		}
@@ -618,7 +618,7 @@ L_SELEC25:
 	GOTO        L_SELEC29
 	BTFSC       PORTB+0, 1 
 	GOTO        L_SELEC29
-L__SELEC116:
+L__SELEC114:
 ;BlackShadow_code.c,184 :: 		HARD();
 	CALL        _HARD+0, 0
 ;BlackShadow_code.c,185 :: 		delay_ms(100);
@@ -745,19 +745,19 @@ L_SELEC40:
 	BCF         PORTA+0, 7 
 	BSF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
-	GOTO        L__SELEC184
+	GOTO        L__SELEC182
 	BCF         PORTA+0, 5 
+	GOTO        L__SELEC183
+L__SELEC182:
+	BSF         PORTA+0, 5 
+L__SELEC183:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__SELEC184
+	BCF         PORTA+0, 4 
 	GOTO        L__SELEC185
 L__SELEC184:
-	BSF         PORTA+0, 5 
-L__SELEC185:
-	BTFSC       PORTA+0, 5 
-	GOTO        L__SELEC186
-	BCF         PORTA+0, 4 
-	GOTO        L__SELEC187
-L__SELEC186:
 	BSF         PORTA+0, 4 
-L__SELEC187:
+L__SELEC185:
 ;BlackShadow_code.c,205 :: 		combate_estado();
 	CALL        _combate_estado+0, 0
 ;BlackShadow_code.c,207 :: 		break;
@@ -766,19 +766,19 @@ L__SELEC187:
 L_SELEC41:
 	BCF         PORTA+0, 7 
 	BTFSC       PORTA+0, 7 
-	GOTO        L__SELEC188
+	GOTO        L__SELEC186
 	BCF         PORTA+0, 6 
+	GOTO        L__SELEC187
+L__SELEC186:
+	BSF         PORTA+0, 6 
+L__SELEC187:
+	BTFSC       PORTA+0, 4 
+	GOTO        L__SELEC188
+	BCF         PORTA+0, 5 
 	GOTO        L__SELEC189
 L__SELEC188:
-	BSF         PORTA+0, 6 
-L__SELEC189:
-	BTFSC       PORTA+0, 4 
-	GOTO        L__SELEC190
-	BCF         PORTA+0, 5 
-	GOTO        L__SELEC191
-L__SELEC190:
 	BSF         PORTA+0, 5 
-L__SELEC191:
+L__SELEC189:
 ;BlackShadow_code.c,210 :: 		HIT();
 	CALL        _HIT+0, 0
 ;BlackShadow_code.c,214 :: 		break;
@@ -788,19 +788,19 @@ L_SELEC42:
 	BCF         PORTA+0, 5 
 	BSF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
-	GOTO        L__SELEC192
+	GOTO        L__SELEC190
 	BCF         PORTA+0, 7 
+	GOTO        L__SELEC191
+L__SELEC190:
+	BSF         PORTA+0, 7 
+L__SELEC191:
+	BTFSC       PORTA+0, 7 
+	GOTO        L__SELEC192
+	BCF         PORTA+0, 4 
 	GOTO        L__SELEC193
 L__SELEC192:
-	BSF         PORTA+0, 7 
-L__SELEC193:
-	BTFSC       PORTA+0, 7 
-	GOTO        L__SELEC194
-	BCF         PORTA+0, 4 
-	GOTO        L__SELEC195
-L__SELEC194:
 	BSF         PORTA+0, 4 
-L__SELEC195:
+L__SELEC193:
 ;BlackShadow_code.c,217 :: 		DER();
 	CALL        _DER+0, 0
 ;BlackShadow_code.c,218 :: 		delay_ms(250);
@@ -841,20 +841,20 @@ L_SELEC44:
 L_SELEC45:
 	BCF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
-	GOTO        L__SELEC196
+	GOTO        L__SELEC194
 	BCF         PORTA+0, 5 
-	GOTO        L__SELEC197
-L__SELEC196:
+	GOTO        L__SELEC195
+L__SELEC194:
 	BSF         PORTA+0, 5 
-L__SELEC197:
+L__SELEC195:
 	BSF         PORTA+0, 7 
 	BTFSC       PORTA+0, 7 
-	GOTO        L__SELEC198
+	GOTO        L__SELEC196
 	BCF         PORTA+0, 4 
-	GOTO        L__SELEC199
-L__SELEC198:
+	GOTO        L__SELEC197
+L__SELEC196:
 	BSF         PORTA+0, 4 
-L__SELEC199:
+L__SELEC197:
 ;BlackShadow_code.c,224 :: 		DER();
 	CALL        _DER+0, 0
 ;BlackShadow_code.c,225 :: 		break;
@@ -863,20 +863,20 @@ L__SELEC199:
 L_SELEC46:
 	BCF         PORTA+0, 5 
 	BTFSC       PORTA+0, 5 
-	GOTO        L__SELEC200
+	GOTO        L__SELEC198
 	BCF         PORTA+0, 7 
-	GOTO        L__SELEC201
-L__SELEC200:
+	GOTO        L__SELEC199
+L__SELEC198:
 	BSF         PORTA+0, 7 
-L__SELEC201:
+L__SELEC199:
 	BSF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
-	GOTO        L__SELEC202
+	GOTO        L__SELEC200
 	BCF         PORTA+0, 4 
-	GOTO        L__SELEC203
-L__SELEC202:
+	GOTO        L__SELEC201
+L__SELEC200:
 	BSF         PORTA+0, 4 
-L__SELEC203:
+L__SELEC201:
 ;BlackShadow_code.c,228 :: 		GIRO180();
 	CALL        _GIRO180+0, 0
 ;BlackShadow_code.c,230 :: 		break;
@@ -885,19 +885,19 @@ L__SELEC203:
 L_SELEC47:
 	BCF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
-	GOTO        L__SELEC204
+	GOTO        L__SELEC202
 	BCF         PORTA+0, 7 
+	GOTO        L__SELEC203
+L__SELEC202:
+	BSF         PORTA+0, 7 
+L__SELEC203:
+	BTFSC       PORTA+0, 7 
+	GOTO        L__SELEC204
+	BCF         PORTA+0, 5 
 	GOTO        L__SELEC205
 L__SELEC204:
-	BSF         PORTA+0, 7 
-L__SELEC205:
-	BTFSC       PORTA+0, 7 
-	GOTO        L__SELEC206
-	BCF         PORTA+0, 5 
-	GOTO        L__SELEC207
-L__SELEC206:
 	BSF         PORTA+0, 5 
-L__SELEC207:
+L__SELEC205:
 	BSF         PORTA+0, 4 
 ;BlackShadow_code.c,234 :: 		break;
 	GOTO        L_SELEC20
@@ -906,78 +906,78 @@ L_SELEC48:
 	BCF         PORTA+0, 4 
 	BSF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
-	GOTO        L__SELEC208
+	GOTO        L__SELEC206
 	BCF         PORTA+0, 5 
+	GOTO        L__SELEC207
+L__SELEC206:
+	BSF         PORTA+0, 5 
+L__SELEC207:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__SELEC208
+	BCF         PORTA+0, 7 
 	GOTO        L__SELEC209
 L__SELEC208:
-	BSF         PORTA+0, 5 
-L__SELEC209:
-	BTFSC       PORTA+0, 5 
-	GOTO        L__SELEC210
-	BCF         PORTA+0, 7 
-	GOTO        L__SELEC211
-L__SELEC210:
 	BSF         PORTA+0, 7 
-L__SELEC211:
+L__SELEC209:
 ;BlackShadow_code.c,238 :: 		break;
 	GOTO        L_SELEC20
 ;BlackShadow_code.c,240 :: 		case 9: L0=L3=0; L1=L2=1;
 L_SELEC49:
 	BCF         PORTA+0, 4 
 	BTFSC       PORTA+0, 4 
-	GOTO        L__SELEC212
+	GOTO        L__SELEC210
 	BCF         PORTA+0, 6 
-	GOTO        L__SELEC213
-L__SELEC212:
+	GOTO        L__SELEC211
+L__SELEC210:
 	BSF         PORTA+0, 6 
-L__SELEC213:
+L__SELEC211:
 	BSF         PORTA+0, 5 
 	BTFSC       PORTA+0, 5 
-	GOTO        L__SELEC214
+	GOTO        L__SELEC212
 	BCF         PORTA+0, 7 
-	GOTO        L__SELEC215
-L__SELEC214:
+	GOTO        L__SELEC213
+L__SELEC212:
 	BSF         PORTA+0, 7 
-L__SELEC215:
+L__SELEC213:
 ;BlackShadow_code.c,243 :: 		break;
 	GOTO        L_SELEC20
 ;BlackShadow_code.c,245 :: 		case 10: L3=L1=0; L2=L0=1;
 L_SELEC50:
 	BCF         PORTA+0, 7 
 	BTFSC       PORTA+0, 7 
-	GOTO        L__SELEC216
+	GOTO        L__SELEC214
 	BCF         PORTA+0, 4 
-	GOTO        L__SELEC217
-L__SELEC216:
+	GOTO        L__SELEC215
+L__SELEC214:
 	BSF         PORTA+0, 4 
-L__SELEC217:
+L__SELEC215:
 	BSF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
-	GOTO        L__SELEC218
+	GOTO        L__SELEC216
 	BCF         PORTA+0, 5 
-	GOTO        L__SELEC219
-L__SELEC218:
+	GOTO        L__SELEC217
+L__SELEC216:
 	BSF         PORTA+0, 5 
-L__SELEC219:
+L__SELEC217:
 ;BlackShadow_code.c,246 :: 		break;
 	GOTO        L_SELEC20
 ;BlackShadow_code.c,248 :: 		case 11: L0=L1=L3=0; L2=1;
 L_SELEC51:
 	BCF         PORTA+0, 4 
 	BTFSC       PORTA+0, 4 
-	GOTO        L__SELEC220
+	GOTO        L__SELEC218
 	BCF         PORTA+0, 7 
+	GOTO        L__SELEC219
+L__SELEC218:
+	BSF         PORTA+0, 7 
+L__SELEC219:
+	BTFSC       PORTA+0, 7 
+	GOTO        L__SELEC220
+	BCF         PORTA+0, 6 
 	GOTO        L__SELEC221
 L__SELEC220:
-	BSF         PORTA+0, 7 
-L__SELEC221:
-	BTFSC       PORTA+0, 7 
-	GOTO        L__SELEC222
-	BCF         PORTA+0, 6 
-	GOTO        L__SELEC223
-L__SELEC222:
 	BSF         PORTA+0, 6 
-L__SELEC223:
+L__SELEC221:
 	BSF         PORTA+0, 5 
 ;BlackShadow_code.c,249 :: 		break;
 	GOTO        L_SELEC20
@@ -985,39 +985,39 @@ L__SELEC223:
 L_SELEC52:
 	BCF         PORTA+0, 5 
 	BTFSC       PORTA+0, 5 
-	GOTO        L__SELEC224
+	GOTO        L__SELEC222
 	BCF         PORTA+0, 4 
-	GOTO        L__SELEC225
-L__SELEC224:
+	GOTO        L__SELEC223
+L__SELEC222:
 	BSF         PORTA+0, 4 
-L__SELEC225:
+L__SELEC223:
 	BSF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
-	GOTO        L__SELEC226
+	GOTO        L__SELEC224
 	BCF         PORTA+0, 7 
-	GOTO        L__SELEC227
-L__SELEC226:
+	GOTO        L__SELEC225
+L__SELEC224:
 	BSF         PORTA+0, 7 
-L__SELEC227:
+L__SELEC225:
 ;BlackShadow_code.c,252 :: 		break;
 	GOTO        L_SELEC20
 ;BlackShadow_code.c,254 :: 		case 13: L3=L2=L0=0; L1=1;
 L_SELEC53:
 	BCF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
-	GOTO        L__SELEC228
+	GOTO        L__SELEC226
 	BCF         PORTA+0, 5 
+	GOTO        L__SELEC227
+L__SELEC226:
+	BSF         PORTA+0, 5 
+L__SELEC227:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__SELEC228
+	BCF         PORTA+0, 4 
 	GOTO        L__SELEC229
 L__SELEC228:
-	BSF         PORTA+0, 5 
-L__SELEC229:
-	BTFSC       PORTA+0, 5 
-	GOTO        L__SELEC230
-	BCF         PORTA+0, 4 
-	GOTO        L__SELEC231
-L__SELEC230:
 	BSF         PORTA+0, 4 
-L__SELEC231:
+L__SELEC229:
 	BSF         PORTA+0, 7 
 ;BlackShadow_code.c,255 :: 		break;
 	GOTO        L_SELEC20
@@ -1025,19 +1025,19 @@ L__SELEC231:
 L_SELEC54:
 	BCF         PORTA+0, 7 
 	BTFSC       PORTA+0, 7 
-	GOTO        L__SELEC232
+	GOTO        L__SELEC230
 	BCF         PORTA+0, 5 
+	GOTO        L__SELEC231
+L__SELEC230:
+	BSF         PORTA+0, 5 
+L__SELEC231:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__SELEC232
+	BCF         PORTA+0, 4 
 	GOTO        L__SELEC233
 L__SELEC232:
-	BSF         PORTA+0, 5 
-L__SELEC233:
-	BTFSC       PORTA+0, 5 
-	GOTO        L__SELEC234
-	BCF         PORTA+0, 4 
-	GOTO        L__SELEC235
-L__SELEC234:
 	BSF         PORTA+0, 4 
-L__SELEC235:
+L__SELEC233:
 	BSF         PORTA+0, 6 
 ;BlackShadow_code.c,258 :: 		break;
 	GOTO        L_SELEC20
@@ -1045,162 +1045,162 @@ L__SELEC235:
 L_SELEC55:
 	BCF         PORTA+0, 4 
 	BTFSC       PORTA+0, 4 
-	GOTO        L__SELEC236
+	GOTO        L__SELEC234
 	BCF         PORTA+0, 5 
+	GOTO        L__SELEC235
+L__SELEC234:
+	BSF         PORTA+0, 5 
+L__SELEC235:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__SELEC236
+	BCF         PORTA+0, 7 
 	GOTO        L__SELEC237
 L__SELEC236:
-	BSF         PORTA+0, 5 
+	BSF         PORTA+0, 7 
 L__SELEC237:
-	BTFSC       PORTA+0, 5 
+	BTFSC       PORTA+0, 7 
 	GOTO        L__SELEC238
-	BCF         PORTA+0, 7 
+	BCF         PORTA+0, 6 
 	GOTO        L__SELEC239
 L__SELEC238:
-	BSF         PORTA+0, 7 
-L__SELEC239:
-	BTFSC       PORTA+0, 7 
-	GOTO        L__SELEC240
-	BCF         PORTA+0, 6 
-	GOTO        L__SELEC241
-L__SELEC240:
 	BSF         PORTA+0, 6 
-L__SELEC241:
+L__SELEC239:
 ;BlackShadow_code.c,261 :: 		}
 	GOTO        L_SELEC20
 L_SELEC19:
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC242
+	GOTO        L__SELEC240
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC242:
+L__SELEC240:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC21
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC243
+	GOTO        L__SELEC241
 	MOVLW       1
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC243:
+L__SELEC241:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC22
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC244
+	GOTO        L__SELEC242
 	MOVLW       2
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC244:
+L__SELEC242:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC40
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC245
+	GOTO        L__SELEC243
 	MOVLW       3
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC245:
+L__SELEC243:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC41
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC246
+	GOTO        L__SELEC244
 	MOVLW       4
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC246:
+L__SELEC244:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC42
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC247
+	GOTO        L__SELEC245
 	MOVLW       5
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC247:
+L__SELEC245:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC45
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC248
+	GOTO        L__SELEC246
 	MOVLW       6
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC248:
+L__SELEC246:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC46
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC249
+	GOTO        L__SELEC247
 	MOVLW       7
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC249:
+L__SELEC247:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC47
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC250
+	GOTO        L__SELEC248
 	MOVLW       8
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC250:
+L__SELEC248:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC48
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC251
+	GOTO        L__SELEC249
 	MOVLW       9
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC251:
+L__SELEC249:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC49
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC252
+	GOTO        L__SELEC250
 	MOVLW       10
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC252:
+L__SELEC250:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC50
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC253
+	GOTO        L__SELEC251
 	MOVLW       11
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC253:
+L__SELEC251:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC51
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC254
+	GOTO        L__SELEC252
 	MOVLW       12
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC254:
+L__SELEC252:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC52
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC255
+	GOTO        L__SELEC253
 	MOVLW       13
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC255:
+L__SELEC253:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC53
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC256
+	GOTO        L__SELEC254
 	MOVLW       14
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC256:
+L__SELEC254:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC54
 	GOTO        L_SELEC55
@@ -1217,194 +1217,221 @@ _combate_estado:
 	GOTO        L_combate_estado56
 ;BlackShadow_code.c,270 :: 		case CMB_ESPERA:
 L_combate_estado58:
-;BlackShadow_code.c,271 :: 		if(SL1 == 0 && S6 == 0 && S2 == 0){
+;BlackShadow_code.c,271 :: 		if(SL1 == 0 && S2 == 0 && S6 == 0){
 	BTFSC       PORTC+0, 0 
-	GOTO        L_combate_estado61
-	BTFSC       PORTB+0, 4 
 	GOTO        L_combate_estado61
 	BTFSC       PORTC+0, 6 
 	GOTO        L_combate_estado61
-L__combate_estado125:
+	BTFSC       PORTB+0, 4 
+	GOTO        L_combate_estado61
+L__combate_estado123:
 ;BlackShadow_code.c,272 :: 		estado_combate = CMB_REC;
 	MOVLW       1
 	MOVWF       _estado_combate+0 
 ;BlackShadow_code.c,273 :: 		}
 	GOTO        L_combate_estado62
 L_combate_estado61:
-;BlackShadow_code.c,274 :: 		else if (SL1 == 1 && S6 == 0 && S2 == 0){
+;BlackShadow_code.c,274 :: 		else if (SL1 == 1 && S2 == 0 && S6 == 0){
 	BTFSS       PORTC+0, 0 
-	GOTO        L_combate_estado65
-	BTFSC       PORTB+0, 4 
 	GOTO        L_combate_estado65
 	BTFSC       PORTC+0, 6 
 	GOTO        L_combate_estado65
-L__combate_estado124:
-;BlackShadow_code.c,275 :: 		estado_combate = CMB_IZQ_HARD;
+	BTFSC       PORTB+0, 4 
+	GOTO        L_combate_estado65
+L__combate_estado122:
+;BlackShadow_code.c,275 :: 		estado_combate = CMB_IZQ;
 	MOVLW       2
 	MOVWF       _estado_combate+0 
 ;BlackShadow_code.c,276 :: 		}
 	GOTO        L_combate_estado66
 L_combate_estado65:
-;BlackShadow_code.c,277 :: 		else if (SL1 == 0 && S6 == 1 && S2 == 0){
+;BlackShadow_code.c,277 :: 		else if (SL1 == 0 && S2 == 1 && S6 == 0){
 	BTFSC       PORTC+0, 0 
 	GOTO        L_combate_estado69
-	BTFSS       PORTB+0, 4 
+	BTFSS       PORTC+0, 6 
 	GOTO        L_combate_estado69
-	BTFSC       PORTC+0, 6 
+	BTFSC       PORTB+0, 4 
 	GOTO        L_combate_estado69
-L__combate_estado123:
+L__combate_estado121:
 ;BlackShadow_code.c,278 :: 		estado_combate = CMB_HIT;
 	MOVLW       3
 	MOVWF       _estado_combate+0 
 ;BlackShadow_code.c,279 :: 		}
 	GOTO        L_combate_estado70
 L_combate_estado69:
-;BlackShadow_code.c,280 :: 		else if (SL1 == 1 && S6 == 1 && S2 == 0){
+;BlackShadow_code.c,280 :: 		else if (SL1 == 1 && S2 == 1 && S6 == 0){
 	BTFSS       PORTC+0, 0 
 	GOTO        L_combate_estado73
-	BTFSS       PORTB+0, 4 
+	BTFSS       PORTC+0, 6 
 	GOTO        L_combate_estado73
-	BTFSC       PORTC+0, 6 
+	BTFSC       PORTB+0, 4 
 	GOTO        L_combate_estado73
-L__combate_estado122:
+L__combate_estado120:
 ;BlackShadow_code.c,281 :: 		estado_combate = CMB_IZQ_GOLPE;
 	MOVLW       4
 	MOVWF       _estado_combate+0 
 ;BlackShadow_code.c,282 :: 		}
 	GOTO        L_combate_estado74
 L_combate_estado73:
-;BlackShadow_code.c,283 :: 		else if (golpe == 1){
-	MOVF        _golpe+0, 0 
-	XORLW       1
-	BTFSS       STATUS+0, 2 
-	GOTO        L_combate_estado75
-;BlackShadow_code.c,284 :: 		estado_combate = CMB_HIT;
-	MOVLW       3
-	MOVWF       _estado_combate+0 
-;BlackShadow_code.c,285 :: 		}
-	GOTO        L_combate_estado76
-L_combate_estado75:
-;BlackShadow_code.c,286 :: 		else if (SL1 == 0 && S6 == 0 && S2 == 1){
+;BlackShadow_code.c,283 :: 		else if (SL1 == 0 && S2 == 0 && S6 == 1){
 	BTFSC       PORTC+0, 0 
-	GOTO        L_combate_estado79
-	BTFSC       PORTB+0, 4 
-	GOTO        L_combate_estado79
-	BTFSS       PORTC+0, 6 
-	GOTO        L_combate_estado79
-L__combate_estado121:
-;BlackShadow_code.c,287 :: 		estado_combate = CMB_DER_HARD;
+	GOTO        L_combate_estado77
+	BTFSC       PORTC+0, 6 
+	GOTO        L_combate_estado77
+	BTFSS       PORTB+0, 4 
+	GOTO        L_combate_estado77
+L__combate_estado119:
+;BlackShadow_code.c,284 :: 		estado_combate = CMB_DER_HARD;
 	MOVLW       5
 	MOVWF       _estado_combate+0 
-;BlackShadow_code.c,288 :: 		}
-	GOTO        L_combate_estado80
-L_combate_estado79:
-;BlackShadow_code.c,289 :: 		else if (SL1 == 1 && S6 == 0 && S2 == 1){
+;BlackShadow_code.c,285 :: 		}
+	GOTO        L_combate_estado78
+L_combate_estado77:
+;BlackShadow_code.c,286 :: 		else if (SL1 == 1 && S2 == 0 && S6 == 1){
 	BTFSS       PORTC+0, 0 
-	GOTO        L_combate_estado83
-	BTFSC       PORTB+0, 4 
-	GOTO        L_combate_estado83
-	BTFSS       PORTC+0, 6 
-	GOTO        L_combate_estado83
-L__combate_estado120:
-;BlackShadow_code.c,290 :: 		estado_combate = CMB_LIBRE;
+	GOTO        L_combate_estado81
+	BTFSC       PORTC+0, 6 
+	GOTO        L_combate_estado81
+	BTFSS       PORTB+0, 4 
+	GOTO        L_combate_estado81
+L__combate_estado118:
+;BlackShadow_code.c,287 :: 		estado_combate = CMB_LIBRE;
 	MOVLW       6
 	MOVWF       _estado_combate+0 
-;BlackShadow_code.c,291 :: 		}
-	GOTO        L_combate_estado84
-L_combate_estado83:
-;BlackShadow_code.c,292 :: 		else if (SL1 == 0 && S6 == 1 && S2 == 1){
+;BlackShadow_code.c,288 :: 		}
+	GOTO        L_combate_estado82
+L_combate_estado81:
+;BlackShadow_code.c,289 :: 		else if (SL1 == 0 && S2 == 1 && S6 == 1){
 	BTFSC       PORTC+0, 0 
-	GOTO        L_combate_estado87
-	BTFSS       PORTB+0, 4 
-	GOTO        L_combate_estado87
+	GOTO        L_combate_estado85
 	BTFSS       PORTC+0, 6 
-	GOTO        L_combate_estado87
-L__combate_estado119:
-;BlackShadow_code.c,293 :: 		estado_combate = CMB_DER_HIT;
+	GOTO        L_combate_estado85
+	BTFSS       PORTB+0, 4 
+	GOTO        L_combate_estado85
+L__combate_estado117:
+;BlackShadow_code.c,290 :: 		estado_combate = CMB_DER_HIT;
 	MOVLW       7
 	MOVWF       _estado_combate+0 
-;BlackShadow_code.c,294 :: 		}
-	GOTO        L_combate_estado88
-L_combate_estado87:
-;BlackShadow_code.c,295 :: 		else if (SL1 == 1 && S6 == 1 && S2 == 1){
+;BlackShadow_code.c,291 :: 		}
+	GOTO        L_combate_estado86
+L_combate_estado85:
+;BlackShadow_code.c,292 :: 		else if (SL1 == 1 && S2 == 1 && S6 == 1){
 	BTFSS       PORTC+0, 0 
-	GOTO        L_combate_estado91
-	BTFSS       PORTB+0, 4 
-	GOTO        L_combate_estado91
+	GOTO        L_combate_estado89
 	BTFSS       PORTC+0, 6 
-	GOTO        L_combate_estado91
-L__combate_estado118:
-;BlackShadow_code.c,296 :: 		estado_combate = CMB_HIT_FULL;
+	GOTO        L_combate_estado89
+	BTFSS       PORTB+0, 4 
+	GOTO        L_combate_estado89
+L__combate_estado116:
+;BlackShadow_code.c,293 :: 		estado_combate = CMB_HIT_FULL;
 	MOVLW       8
 	MOVWF       _estado_combate+0 
-;BlackShadow_code.c,297 :: 		}
-	GOTO        L_combate_estado92
-L_combate_estado91:
-;BlackShadow_code.c,299 :: 		LIBRE();
+;BlackShadow_code.c,294 :: 		}
+	GOTO        L_combate_estado90
+L_combate_estado89:
+;BlackShadow_code.c,296 :: 		LIBRE();
 	CALL        _LIBRE+0, 0
-;BlackShadow_code.c,300 :: 		}
-L_combate_estado92:
-L_combate_estado88:
-L_combate_estado84:
-L_combate_estado80:
-L_combate_estado76:
+;BlackShadow_code.c,297 :: 		}
+L_combate_estado90:
+L_combate_estado86:
+L_combate_estado82:
+L_combate_estado78:
 L_combate_estado74:
 L_combate_estado70:
 L_combate_estado66:
 L_combate_estado62:
-;BlackShadow_code.c,301 :: 		break;
+;BlackShadow_code.c,298 :: 		break;
 	GOTO        L_combate_estado57
-;BlackShadow_code.c,303 :: 		case CMB_REC:
-L_combate_estado93:
-;BlackShadow_code.c,304 :: 		L0=L1=L2=L3=1;
+;BlackShadow_code.c,300 :: 		case CMB_REC:
+L_combate_estado91:
+;BlackShadow_code.c,301 :: 		L0=L1=L2=L3=1;
 	BSF         PORTA+0, 4 
 	BTFSC       PORTA+0, 4 
-	GOTO        L__combate_estado258
+	GOTO        L__combate_estado256
 	BCF         PORTA+0, 5 
+	GOTO        L__combate_estado257
+L__combate_estado256:
+	BSF         PORTA+0, 5 
+L__combate_estado257:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__combate_estado258
+	BCF         PORTA+0, 7 
 	GOTO        L__combate_estado259
 L__combate_estado258:
-	BSF         PORTA+0, 5 
+	BSF         PORTA+0, 7 
 L__combate_estado259:
-	BTFSC       PORTA+0, 5 
+	BTFSC       PORTA+0, 7 
 	GOTO        L__combate_estado260
-	BCF         PORTA+0, 7 
+	BCF         PORTA+0, 6 
 	GOTO        L__combate_estado261
 L__combate_estado260:
-	BSF         PORTA+0, 7 
-L__combate_estado261:
-	BTFSC       PORTA+0, 7 
-	GOTO        L__combate_estado262
-	BCF         PORTA+0, 6 
-	GOTO        L__combate_estado263
-L__combate_estado262:
 	BSF         PORTA+0, 6 
-L__combate_estado263:
-;BlackShadow_code.c,305 :: 		REC();
+L__combate_estado261:
+;BlackShadow_code.c,302 :: 		REC();
 	CALL        _REC+0, 0
-;BlackShadow_code.c,306 :: 		delay_ms(250);
+;BlackShadow_code.c,303 :: 		delay_ms(250);
 	MOVLW       3
 	MOVWF       R11, 0
 	MOVLW       138
 	MOVWF       R12, 0
 	MOVLW       85
 	MOVWF       R13, 0
-L_combate_estado94:
+L_combate_estado92:
 	DECFSZ      R13, 1, 1
-	BRA         L_combate_estado94
+	BRA         L_combate_estado92
 	DECFSZ      R12, 1, 1
-	BRA         L_combate_estado94
+	BRA         L_combate_estado92
 	DECFSZ      R11, 1, 1
-	BRA         L_combate_estado94
+	BRA         L_combate_estado92
 	NOP
 	NOP
-;BlackShadow_code.c,307 :: 		LIBRE();
+;BlackShadow_code.c,304 :: 		LIBRE();
 	CALL        _LIBRE+0, 0
-;BlackShadow_code.c,308 :: 		delay_ms(200);
+;BlackShadow_code.c,305 :: 		delay_ms(200);
 	MOVLW       3
 	MOVWF       R11, 0
 	MOVLW       8
 	MOVWF       R12, 0
 	MOVLW       119
+	MOVWF       R13, 0
+L_combate_estado93:
+	DECFSZ      R13, 1, 1
+	BRA         L_combate_estado93
+	DECFSZ      R12, 1, 1
+	BRA         L_combate_estado93
+	DECFSZ      R11, 1, 1
+	BRA         L_combate_estado93
+;BlackShadow_code.c,306 :: 		estado_combate = CMB_ESPERA;
+	CLRF        _estado_combate+0 
+;BlackShadow_code.c,307 :: 		break;
+	GOTO        L_combate_estado57
+;BlackShadow_code.c,309 :: 		case CMB_IZQ:
+L_combate_estado94:
+;BlackShadow_code.c,310 :: 		L0=0; L1=L2=L3=1;
+	BCF         PORTA+0, 6 
+	BSF         PORTA+0, 4 
+	BTFSC       PORTA+0, 4 
+	GOTO        L__combate_estado262
+	BCF         PORTA+0, 5 
+	GOTO        L__combate_estado263
+L__combate_estado262:
+	BSF         PORTA+0, 5 
+L__combate_estado263:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__combate_estado264
+	BCF         PORTA+0, 7 
+	GOTO        L__combate_estado265
+L__combate_estado264:
+	BSF         PORTA+0, 7 
+L__combate_estado265:
+;BlackShadow_code.c,311 :: 		IZQ();
+	CALL        _IZQ+0, 0
+;BlackShadow_code.c,312 :: 		delay_ms(100);
+	MOVLW       2
+	MOVWF       R11, 0
+	MOVLW       4
+	MOVWF       R12, 0
+	MOVLW       186
 	MOVWF       R13, 0
 L_combate_estado95:
 	DECFSZ      R13, 1, 1
@@ -1413,294 +1440,247 @@ L_combate_estado95:
 	BRA         L_combate_estado95
 	DECFSZ      R11, 1, 1
 	BRA         L_combate_estado95
-;BlackShadow_code.c,309 :: 		golpe = 0;
-	CLRF        _golpe+0 
-;BlackShadow_code.c,310 :: 		estado_combate = CMB_ESPERA;
-	CLRF        _estado_combate+0 
-;BlackShadow_code.c,311 :: 		break;
-	GOTO        L_combate_estado57
-;BlackShadow_code.c,313 :: 		case CMB_IZQ_HARD:
-L_combate_estado96:
-;BlackShadow_code.c,314 :: 		L0=0; L1=L2=L3=1;
-	BCF         PORTA+0, 6 
-	BSF         PORTA+0, 4 
-	BTFSC       PORTA+0, 4 
-	GOTO        L__combate_estado264
-	BCF         PORTA+0, 5 
-	GOTO        L__combate_estado265
-L__combate_estado264:
-	BSF         PORTA+0, 5 
-L__combate_estado265:
-	BTFSC       PORTA+0, 5 
-	GOTO        L__combate_estado266
-	BCF         PORTA+0, 7 
-	GOTO        L__combate_estado267
-L__combate_estado266:
-	BSF         PORTA+0, 7 
-L__combate_estado267:
-;BlackShadow_code.c,315 :: 		IZQ();
-	CALL        _IZQ+0, 0
-;BlackShadow_code.c,316 :: 		delay_ms(100);
-	MOVLW       2
-	MOVWF       R11, 0
-	MOVLW       4
-	MOVWF       R12, 0
-	MOVLW       186
-	MOVWF       R13, 0
-L_combate_estado97:
-	DECFSZ      R13, 1, 1
-	BRA         L_combate_estado97
-	DECFSZ      R12, 1, 1
-	BRA         L_combate_estado97
-	DECFSZ      R11, 1, 1
-	BRA         L_combate_estado97
 	NOP
-;BlackShadow_code.c,317 :: 		HARD();
+;BlackShadow_code.c,313 :: 		HARD();
 	CALL        _HARD+0, 0
-;BlackShadow_code.c,318 :: 		delay_ms(250);
+;BlackShadow_code.c,314 :: 		delay_ms(250);
 	MOVLW       3
 	MOVWF       R11, 0
 	MOVLW       138
 	MOVWF       R12, 0
 	MOVLW       85
 	MOVWF       R13, 0
-L_combate_estado98:
+L_combate_estado96:
 	DECFSZ      R13, 1, 1
-	BRA         L_combate_estado98
+	BRA         L_combate_estado96
 	DECFSZ      R12, 1, 1
-	BRA         L_combate_estado98
+	BRA         L_combate_estado96
 	DECFSZ      R11, 1, 1
-	BRA         L_combate_estado98
+	BRA         L_combate_estado96
 	NOP
 	NOP
-;BlackShadow_code.c,319 :: 		golpe = 0;
-	CLRF        _golpe+0 
-;BlackShadow_code.c,320 :: 		estado_combate = CMB_ESPERA;
+;BlackShadow_code.c,315 :: 		estado_combate = CMB_ESPERA;
 	CLRF        _estado_combate+0 
-;BlackShadow_code.c,321 :: 		break;
+;BlackShadow_code.c,316 :: 		break;
 	GOTO        L_combate_estado57
-;BlackShadow_code.c,323 :: 		case CMB_HIT:
-L_combate_estado99:
-;BlackShadow_code.c,324 :: 		L1=0; L0=L2=L3=1;
+;BlackShadow_code.c,318 :: 		case CMB_HIT:
+L_combate_estado97:
+;BlackShadow_code.c,319 :: 		L1=0; L0=L2=L3=1;
 	BCF         PORTA+0, 7 
 	BSF         PORTA+0, 4 
 	BTFSC       PORTA+0, 4 
-	GOTO        L__combate_estado268
+	GOTO        L__combate_estado266
 	BCF         PORTA+0, 5 
+	GOTO        L__combate_estado267
+L__combate_estado266:
+	BSF         PORTA+0, 5 
+L__combate_estado267:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__combate_estado268
+	BCF         PORTA+0, 6 
 	GOTO        L__combate_estado269
 L__combate_estado268:
-	BSF         PORTA+0, 5 
+	BSF         PORTA+0, 6 
 L__combate_estado269:
-	BTFSC       PORTA+0, 5 
+;BlackShadow_code.c,320 :: 		HIT();
+	CALL        _HIT+0, 0
+;BlackShadow_code.c,321 :: 		estado_combate = CMB_ESPERA;
+	CLRF        _estado_combate+0 
+;BlackShadow_code.c,322 :: 		break;
+	GOTO        L_combate_estado57
+;BlackShadow_code.c,324 :: 		case CMB_IZQ_GOLPE:
+L_combate_estado98:
+;BlackShadow_code.c,325 :: 		L0=L1=0; L2=L3=1;
+	BCF         PORTA+0, 7 
+	BTFSC       PORTA+0, 7 
 	GOTO        L__combate_estado270
 	BCF         PORTA+0, 6 
 	GOTO        L__combate_estado271
 L__combate_estado270:
 	BSF         PORTA+0, 6 
 L__combate_estado271:
-;BlackShadow_code.c,325 :: 		HIT();
-	CALL        _HIT+0, 0
-;BlackShadow_code.c,326 :: 		golpe = 1;
-	MOVLW       1
-	MOVWF       _golpe+0 
-;BlackShadow_code.c,327 :: 		estado_combate = CMB_ESPERA;
-	CLRF        _estado_combate+0 
-;BlackShadow_code.c,328 :: 		break;
-	GOTO        L_combate_estado57
-;BlackShadow_code.c,330 :: 		case CMB_IZQ_GOLPE:
-L_combate_estado100:
-;BlackShadow_code.c,331 :: 		L0=L1=0; L2=L3=1;
-	BCF         PORTA+0, 7 
-	BTFSC       PORTA+0, 7 
-	GOTO        L__combate_estado272
-	BCF         PORTA+0, 6 
-	GOTO        L__combate_estado273
-L__combate_estado272:
-	BSF         PORTA+0, 6 
-L__combate_estado273:
 	BSF         PORTA+0, 4 
 	BTFSC       PORTA+0, 4 
-	GOTO        L__combate_estado274
+	GOTO        L__combate_estado272
 	BCF         PORTA+0, 5 
-	GOTO        L__combate_estado275
-L__combate_estado274:
+	GOTO        L__combate_estado273
+L__combate_estado272:
 	BSF         PORTA+0, 5 
-L__combate_estado275:
-;BlackShadow_code.c,332 :: 		IZQ();
+L__combate_estado273:
+;BlackShadow_code.c,326 :: 		IZQ();
 	CALL        _IZQ+0, 0
-;BlackShadow_code.c,333 :: 		delay_ms(20);
+;BlackShadow_code.c,327 :: 		delay_ms(20);
 	MOVLW       52
 	MOVWF       R12, 0
 	MOVLW       241
 	MOVWF       R13, 0
-L_combate_estado101:
+L_combate_estado99:
 	DECFSZ      R13, 1, 1
-	BRA         L_combate_estado101
+	BRA         L_combate_estado99
 	DECFSZ      R12, 1, 1
-	BRA         L_combate_estado101
+	BRA         L_combate_estado99
 	NOP
 	NOP
-;BlackShadow_code.c,334 :: 		golpe = 1;
-	MOVLW       1
-	MOVWF       _golpe+0 
-;BlackShadow_code.c,335 :: 		estado_combate = CMB_ESPERA;
+;BlackShadow_code.c,328 :: 		HIT();
+	CALL        _HIT+0, 0
+;BlackShadow_code.c,329 :: 		estado_combate = CMB_ESPERA;
 	CLRF        _estado_combate+0 
-;BlackShadow_code.c,336 :: 		break;
+;BlackShadow_code.c,330 :: 		break;
 	GOTO        L_combate_estado57
-;BlackShadow_code.c,338 :: 		case CMB_DER_HARD:
-L_combate_estado102:
-;BlackShadow_code.c,339 :: 		L2=0; L0=L1=L3=1;
+;BlackShadow_code.c,332 :: 		case CMB_DER_HARD:
+L_combate_estado100:
+;BlackShadow_code.c,333 :: 		L2=0; L0=L1=L3=1;
 	BCF         PORTA+0, 5 
 	BSF         PORTA+0, 4 
 	BTFSC       PORTA+0, 4 
-	GOTO        L__combate_estado276
+	GOTO        L__combate_estado274
 	BCF         PORTA+0, 7 
+	GOTO        L__combate_estado275
+L__combate_estado274:
+	BSF         PORTA+0, 7 
+L__combate_estado275:
+	BTFSC       PORTA+0, 7 
+	GOTO        L__combate_estado276
+	BCF         PORTA+0, 6 
 	GOTO        L__combate_estado277
 L__combate_estado276:
-	BSF         PORTA+0, 7 
-L__combate_estado277:
-	BTFSC       PORTA+0, 7 
-	GOTO        L__combate_estado278
-	BCF         PORTA+0, 6 
-	GOTO        L__combate_estado279
-L__combate_estado278:
 	BSF         PORTA+0, 6 
-L__combate_estado279:
-;BlackShadow_code.c,340 :: 		DER();
+L__combate_estado277:
+;BlackShadow_code.c,334 :: 		DER();
 	CALL        _DER+0, 0
-;BlackShadow_code.c,341 :: 		delay_ms(100);
+;BlackShadow_code.c,335 :: 		delay_ms(100);
 	MOVLW       2
 	MOVWF       R11, 0
 	MOVLW       4
 	MOVWF       R12, 0
 	MOVLW       186
 	MOVWF       R13, 0
-L_combate_estado103:
+L_combate_estado101:
 	DECFSZ      R13, 1, 1
-	BRA         L_combate_estado103
+	BRA         L_combate_estado101
 	DECFSZ      R12, 1, 1
-	BRA         L_combate_estado103
+	BRA         L_combate_estado101
 	DECFSZ      R11, 1, 1
-	BRA         L_combate_estado103
+	BRA         L_combate_estado101
 	NOP
-;BlackShadow_code.c,342 :: 		HARD();
+;BlackShadow_code.c,336 :: 		HARD();
 	CALL        _HARD+0, 0
-;BlackShadow_code.c,343 :: 		delay_ms(250);
+;BlackShadow_code.c,337 :: 		delay_ms(250);
 	MOVLW       3
 	MOVWF       R11, 0
 	MOVLW       138
 	MOVWF       R12, 0
 	MOVLW       85
 	MOVWF       R13, 0
-L_combate_estado104:
+L_combate_estado102:
 	DECFSZ      R13, 1, 1
-	BRA         L_combate_estado104
+	BRA         L_combate_estado102
 	DECFSZ      R12, 1, 1
-	BRA         L_combate_estado104
+	BRA         L_combate_estado102
 	DECFSZ      R11, 1, 1
-	BRA         L_combate_estado104
+	BRA         L_combate_estado102
 	NOP
 	NOP
+;BlackShadow_code.c,338 :: 		estado_combate = CMB_ESPERA;
+	CLRF        _estado_combate+0 
+;BlackShadow_code.c,339 :: 		break;
+	GOTO        L_combate_estado57
+;BlackShadow_code.c,341 :: 		case CMB_LIBRE:
+L_combate_estado103:
+;BlackShadow_code.c,342 :: 		L0=L2=0; L1=L3=1;
+	BCF         PORTA+0, 5 
+	BTFSC       PORTA+0, 5 
+	GOTO        L__combate_estado278
+	BCF         PORTA+0, 6 
+	GOTO        L__combate_estado279
+L__combate_estado278:
+	BSF         PORTA+0, 6 
+L__combate_estado279:
+	BSF         PORTA+0, 4 
+	BTFSC       PORTA+0, 4 
+	GOTO        L__combate_estado280
+	BCF         PORTA+0, 7 
+	GOTO        L__combate_estado281
+L__combate_estado280:
+	BSF         PORTA+0, 7 
+L__combate_estado281:
+;BlackShadow_code.c,343 :: 		LIBRE();
+	CALL        _LIBRE+0, 0
 ;BlackShadow_code.c,344 :: 		estado_combate = CMB_ESPERA;
 	CLRF        _estado_combate+0 
 ;BlackShadow_code.c,345 :: 		break;
 	GOTO        L_combate_estado57
-;BlackShadow_code.c,347 :: 		case CMB_LIBRE:
-L_combate_estado105:
-;BlackShadow_code.c,348 :: 		L0=L2=0; L1=L3=1;
+;BlackShadow_code.c,347 :: 		case CMB_DER_HIT:
+L_combate_estado104:
+;BlackShadow_code.c,348 :: 		L1=L2=0; L0=L3=1;
 	BCF         PORTA+0, 5 
 	BTFSC       PORTA+0, 5 
-	GOTO        L__combate_estado280
-	BCF         PORTA+0, 6 
-	GOTO        L__combate_estado281
-L__combate_estado280:
-	BSF         PORTA+0, 6 
-L__combate_estado281:
-	BSF         PORTA+0, 4 
-	BTFSC       PORTA+0, 4 
 	GOTO        L__combate_estado282
 	BCF         PORTA+0, 7 
 	GOTO        L__combate_estado283
 L__combate_estado282:
 	BSF         PORTA+0, 7 
 L__combate_estado283:
-;BlackShadow_code.c,349 :: 		LIBRE();
-	CALL        _LIBRE+0, 0
-;BlackShadow_code.c,350 :: 		estado_combate = CMB_ESPERA;
-	CLRF        _estado_combate+0 
-;BlackShadow_code.c,351 :: 		break;
-	GOTO        L_combate_estado57
-;BlackShadow_code.c,353 :: 		case CMB_DER_HIT:
-L_combate_estado106:
-;BlackShadow_code.c,354 :: 		L1=L2=0; L0=L3=1;
-	BCF         PORTA+0, 5 
-	BTFSC       PORTA+0, 5 
-	GOTO        L__combate_estado284
-	BCF         PORTA+0, 7 
-	GOTO        L__combate_estado285
-L__combate_estado284:
-	BSF         PORTA+0, 7 
-L__combate_estado285:
 	BSF         PORTA+0, 4 
 	BTFSC       PORTA+0, 4 
-	GOTO        L__combate_estado286
+	GOTO        L__combate_estado284
 	BCF         PORTA+0, 6 
-	GOTO        L__combate_estado287
-L__combate_estado286:
+	GOTO        L__combate_estado285
+L__combate_estado284:
 	BSF         PORTA+0, 6 
-L__combate_estado287:
-;BlackShadow_code.c,355 :: 		DER();
+L__combate_estado285:
+;BlackShadow_code.c,349 :: 		DER();
 	CALL        _DER+0, 0
-;BlackShadow_code.c,356 :: 		delay_ms(30);
+;BlackShadow_code.c,350 :: 		delay_ms(30);
 	MOVLW       78
 	MOVWF       R12, 0
 	MOVLW       235
 	MOVWF       R13, 0
-L_combate_estado107:
+L_combate_estado105:
 	DECFSZ      R13, 1, 1
-	BRA         L_combate_estado107
+	BRA         L_combate_estado105
 	DECFSZ      R12, 1, 1
-	BRA         L_combate_estado107
+	BRA         L_combate_estado105
+;BlackShadow_code.c,351 :: 		HIT();
+	CALL        _HIT+0, 0
+;BlackShadow_code.c,352 :: 		estado_combate = CMB_ESPERA;
+	CLRF        _estado_combate+0 
+;BlackShadow_code.c,353 :: 		break;
+	GOTO        L_combate_estado57
+;BlackShadow_code.c,355 :: 		case CMB_HIT_FULL:
+L_combate_estado106:
+;BlackShadow_code.c,356 :: 		L0=L1=L2=0; L3=1;
+	BCF         PORTA+0, 5 
+	BTFSC       PORTA+0, 5 
+	GOTO        L__combate_estado286
+	BCF         PORTA+0, 7 
+	GOTO        L__combate_estado287
+L__combate_estado286:
+	BSF         PORTA+0, 7 
+L__combate_estado287:
+	BTFSC       PORTA+0, 7 
+	GOTO        L__combate_estado288
+	BCF         PORTA+0, 6 
+	GOTO        L__combate_estado289
+L__combate_estado288:
+	BSF         PORTA+0, 6 
+L__combate_estado289:
+	BSF         PORTA+0, 4 
 ;BlackShadow_code.c,357 :: 		HIT();
 	CALL        _HIT+0, 0
 ;BlackShadow_code.c,358 :: 		estado_combate = CMB_ESPERA;
 	CLRF        _estado_combate+0 
 ;BlackShadow_code.c,359 :: 		break;
 	GOTO        L_combate_estado57
-;BlackShadow_code.c,361 :: 		case CMB_HIT_FULL:
-L_combate_estado108:
-;BlackShadow_code.c,362 :: 		L0=L1=L2=0; L3=1;
-	BCF         PORTA+0, 5 
-	BTFSC       PORTA+0, 5 
-	GOTO        L__combate_estado288
-	BCF         PORTA+0, 7 
-	GOTO        L__combate_estado289
-L__combate_estado288:
-	BSF         PORTA+0, 7 
-L__combate_estado289:
-	BTFSC       PORTA+0, 7 
-	GOTO        L__combate_estado290
-	BCF         PORTA+0, 6 
-	GOTO        L__combate_estado291
-L__combate_estado290:
-	BSF         PORTA+0, 6 
-L__combate_estado291:
-	BSF         PORTA+0, 4 
-;BlackShadow_code.c,363 :: 		HIT();
-	CALL        _HIT+0, 0
-;BlackShadow_code.c,364 :: 		estado_combate = CMB_ESPERA;
-	CLRF        _estado_combate+0 
-;BlackShadow_code.c,365 :: 		break;
-	GOTO        L_combate_estado57
-;BlackShadow_code.c,367 :: 		default:
-L_combate_estado109:
-;BlackShadow_code.c,368 :: 		LIBRE();
+;BlackShadow_code.c,361 :: 		default:
+L_combate_estado107:
+;BlackShadow_code.c,362 :: 		LIBRE();
 	CALL        _LIBRE+0, 0
-;BlackShadow_code.c,369 :: 		estado_combate = CMB_ESPERA;
+;BlackShadow_code.c,363 :: 		estado_combate = CMB_ESPERA;
 	CLRF        _estado_combate+0 
-;BlackShadow_code.c,370 :: 		break;
+;BlackShadow_code.c,364 :: 		break;
 	GOTO        L_combate_estado57
-;BlackShadow_code.c,371 :: 		}
+;BlackShadow_code.c,365 :: 		}
 L_combate_estado56:
 	MOVF        _estado_combate+0, 0 
 	XORLW       0
@@ -1709,391 +1689,391 @@ L_combate_estado56:
 	MOVF        _estado_combate+0, 0 
 	XORLW       1
 	BTFSC       STATUS+0, 2 
-	GOTO        L_combate_estado93
+	GOTO        L_combate_estado91
 	MOVF        _estado_combate+0, 0 
 	XORLW       2
 	BTFSC       STATUS+0, 2 
-	GOTO        L_combate_estado96
+	GOTO        L_combate_estado94
 	MOVF        _estado_combate+0, 0 
 	XORLW       3
 	BTFSC       STATUS+0, 2 
-	GOTO        L_combate_estado99
+	GOTO        L_combate_estado97
 	MOVF        _estado_combate+0, 0 
 	XORLW       4
 	BTFSC       STATUS+0, 2 
-	GOTO        L_combate_estado100
+	GOTO        L_combate_estado98
 	MOVF        _estado_combate+0, 0 
 	XORLW       5
 	BTFSC       STATUS+0, 2 
-	GOTO        L_combate_estado102
+	GOTO        L_combate_estado100
 	MOVF        _estado_combate+0, 0 
 	XORLW       6
 	BTFSC       STATUS+0, 2 
-	GOTO        L_combate_estado105
+	GOTO        L_combate_estado103
 	MOVF        _estado_combate+0, 0 
 	XORLW       7
 	BTFSC       STATUS+0, 2 
-	GOTO        L_combate_estado106
+	GOTO        L_combate_estado104
 	MOVF        _estado_combate+0, 0 
 	XORLW       8
 	BTFSC       STATUS+0, 2 
-	GOTO        L_combate_estado108
-	GOTO        L_combate_estado109
+	GOTO        L_combate_estado106
+	GOTO        L_combate_estado107
 L_combate_estado57:
-;BlackShadow_code.c,372 :: 		}
+;BlackShadow_code.c,366 :: 		}
 L_end_combate_estado:
 	RETURN      0
 ; end of _combate_estado
 
 _Start:
 
-;BlackShadow_code.c,374 :: 		void Start(){
-;BlackShadow_code.c,375 :: 		PWM1_Start();
+;BlackShadow_code.c,368 :: 		void Start(){
+;BlackShadow_code.c,369 :: 		PWM1_Start();
 	CALL        _PWM1_Start+0, 0
-;BlackShadow_code.c,376 :: 		PWM2_Start();
+;BlackShadow_code.c,370 :: 		PWM2_Start();
 	CALL        _PWM2_Start+0, 0
-;BlackShadow_code.c,377 :: 		PWM3_Start();
+;BlackShadow_code.c,371 :: 		PWM3_Start();
 	CALL        _PWM3_Start+0, 0
-;BlackShadow_code.c,378 :: 		PWM4_Start();
+;BlackShadow_code.c,372 :: 		PWM4_Start();
 	CALL        _PWM4_Start+0, 0
-;BlackShadow_code.c,379 :: 		PWM5_Start();
+;BlackShadow_code.c,373 :: 		PWM5_Start();
 	CALL        _PWM5_Start+0, 0
-;BlackShadow_code.c,380 :: 		return;
-;BlackShadow_code.c,381 :: 		}
+;BlackShadow_code.c,374 :: 		return;
+;BlackShadow_code.c,375 :: 		}
 L_end_Start:
 	RETURN      0
 ; end of _Start
 
 _Stop:
 
-;BlackShadow_code.c,382 :: 		void Stop(){
-;BlackShadow_code.c,383 :: 		PWM1_Stop();
+;BlackShadow_code.c,376 :: 		void Stop(){
+;BlackShadow_code.c,377 :: 		PWM1_Stop();
 	CALL        _PWM1_Stop+0, 0
-;BlackShadow_code.c,384 :: 		PWM2_Stop();
+;BlackShadow_code.c,378 :: 		PWM2_Stop();
 	CALL        _PWM2_Stop+0, 0
-;BlackShadow_code.c,385 :: 		PWM3_Stop();
+;BlackShadow_code.c,379 :: 		PWM3_Stop();
 	CALL        _PWM3_Stop+0, 0
-;BlackShadow_code.c,386 :: 		PWM4_Stop();
+;BlackShadow_code.c,380 :: 		PWM4_Stop();
 	CALL        _PWM4_Stop+0, 0
-;BlackShadow_code.c,387 :: 		PWM5_Stop();
+;BlackShadow_code.c,381 :: 		PWM5_Stop();
 	CALL        _PWM5_Stop+0, 0
-;BlackShadow_code.c,388 :: 		}
+;BlackShadow_code.c,382 :: 		}
 L_end_Stop:
 	RETURN      0
 ; end of _Stop
 
 _REC:
 
-;BlackShadow_code.c,395 :: 		void REC(){
-;BlackShadow_code.c,397 :: 		Start();
+;BlackShadow_code.c,389 :: 		void REC(){
+;BlackShadow_code.c,391 :: 		Start();
 	CALL        _Start+0, 0
-;BlackShadow_code.c,399 :: 		PWM1_Set_Duty(170); // IN1 = PWM
+;BlackShadow_code.c,393 :: 		PWM1_Set_Duty(170); // IN1 = PWM
 	MOVLW       170
 	MOVWF       FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;BlackShadow_code.c,400 :: 		PWM2_Set_Duty(0);
+;BlackShadow_code.c,394 :: 		PWM2_Set_Duty(0);
 	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;BlackShadow_code.c,403 :: 		PWM3_Set_Duty(140);    // IN1 = 0
+;BlackShadow_code.c,397 :: 		PWM3_Set_Duty(140);    // IN1 = 0
 	MOVLW       140
 	MOVWF       FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;BlackShadow_code.c,404 :: 		PWM4_Set_Duty(0);
+;BlackShadow_code.c,398 :: 		PWM4_Set_Duty(0);
 	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;BlackShadow_code.c,405 :: 		}
+;BlackShadow_code.c,399 :: 		}
 L_end_REC:
 	RETURN      0
 ; end of _REC
 
 _DER:
 
-;BlackShadow_code.c,406 :: 		void DER(){
-;BlackShadow_code.c,407 :: 		Start();
+;BlackShadow_code.c,400 :: 		void DER(){
+;BlackShadow_code.c,401 :: 		Start();
 	CALL        _Start+0, 0
-;BlackShadow_code.c,408 :: 		PWM1_Set_Duty(170);
+;BlackShadow_code.c,402 :: 		PWM1_Set_Duty(170);
 	MOVLW       170
 	MOVWF       FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;BlackShadow_code.c,409 :: 		PWM2_Set_Duty(0);
+;BlackShadow_code.c,403 :: 		PWM2_Set_Duty(0);
 	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;BlackShadow_code.c,411 :: 		PWM3_Set_Duty(0);
+;BlackShadow_code.c,405 :: 		PWM3_Set_Duty(0);
 	CLRF        FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;BlackShadow_code.c,412 :: 		PWM4_Set_Duty(0);
+;BlackShadow_code.c,406 :: 		PWM4_Set_Duty(0);
 	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;BlackShadow_code.c,414 :: 		}
+;BlackShadow_code.c,408 :: 		}
 L_end_DER:
 	RETURN      0
 ; end of _DER
 
 _IZQ:
 
-;BlackShadow_code.c,415 :: 		void IZQ(){
-;BlackShadow_code.c,416 :: 		Start();
+;BlackShadow_code.c,409 :: 		void IZQ(){
+;BlackShadow_code.c,410 :: 		Start();
 	CALL        _Start+0, 0
-;BlackShadow_code.c,417 :: 		PWM1_Set_Duty(0);
+;BlackShadow_code.c,411 :: 		PWM1_Set_Duty(0);
 	CLRF        FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;BlackShadow_code.c,418 :: 		PWM2_Set_Duty(0);
+;BlackShadow_code.c,412 :: 		PWM2_Set_Duty(0);
 	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;BlackShadow_code.c,420 :: 		PWM3_Set_Duty(160);
+;BlackShadow_code.c,414 :: 		PWM3_Set_Duty(160);
 	MOVLW       160
 	MOVWF       FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;BlackShadow_code.c,421 :: 		PWM4_Set_Duty(0);
+;BlackShadow_code.c,415 :: 		PWM4_Set_Duty(0);
 	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;BlackShadow_code.c,422 :: 		}
+;BlackShadow_code.c,416 :: 		}
 L_end_IZQ:
 	RETURN      0
 ; end of _IZQ
 
 _REV:
 
-;BlackShadow_code.c,424 :: 		void REV(){
-;BlackShadow_code.c,425 :: 		Start();
+;BlackShadow_code.c,418 :: 		void REV(){
+;BlackShadow_code.c,419 :: 		Start();
 	CALL        _Start+0, 0
-;BlackShadow_code.c,426 :: 		PWM1_Set_Duty(0);
+;BlackShadow_code.c,420 :: 		PWM1_Set_Duty(0);
 	CLRF        FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;BlackShadow_code.c,427 :: 		PWM2_Set_Duty(190);
+;BlackShadow_code.c,421 :: 		PWM2_Set_Duty(190);
 	MOVLW       190
 	MOVWF       FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;BlackShadow_code.c,428 :: 		PWM3_Set_Duty(0);
+;BlackShadow_code.c,422 :: 		PWM3_Set_Duty(0);
 	CLRF        FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;BlackShadow_code.c,429 :: 		PWM4_Set_Duty(190);
+;BlackShadow_code.c,423 :: 		PWM4_Set_Duty(190);
 	MOVLW       190
 	MOVWF       FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;BlackShadow_code.c,431 :: 		}
+;BlackShadow_code.c,425 :: 		}
 L_end_REV:
 	RETURN      0
 ; end of _REV
 
 _LIBRE:
 
-;BlackShadow_code.c,433 :: 		void LIBRE(){
-;BlackShadow_code.c,435 :: 		PWM1_Set_Duty(0);
+;BlackShadow_code.c,427 :: 		void LIBRE(){
+;BlackShadow_code.c,429 :: 		PWM1_Set_Duty(0);
 	CLRF        FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;BlackShadow_code.c,436 :: 		PWM2_Set_Duty(0);
+;BlackShadow_code.c,430 :: 		PWM2_Set_Duty(0);
 	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;BlackShadow_code.c,437 :: 		PWM3_Set_Duty(0);
+;BlackShadow_code.c,431 :: 		PWM3_Set_Duty(0);
 	CLRF        FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;BlackShadow_code.c,438 :: 		PWM4_Set_Duty(0);
+;BlackShadow_code.c,432 :: 		PWM4_Set_Duty(0);
 	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;BlackShadow_code.c,439 :: 		}
+;BlackShadow_code.c,433 :: 		}
 L_end_LIBRE:
 	RETURN      0
 ; end of _LIBRE
 
 _GIRO180:
 
-;BlackShadow_code.c,443 :: 		void GIRO180(){
-;BlackShadow_code.c,444 :: 		Start();
+;BlackShadow_code.c,437 :: 		void GIRO180(){
+;BlackShadow_code.c,438 :: 		Start();
 	CALL        _Start+0, 0
-;BlackShadow_code.c,446 :: 		PWM1_Set_Duty(0);
+;BlackShadow_code.c,440 :: 		PWM1_Set_Duty(0);
 	CLRF        FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;BlackShadow_code.c,447 :: 		PWM2_Set_Duty(0);
+;BlackShadow_code.c,441 :: 		PWM2_Set_Duty(0);
 	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;BlackShadow_code.c,449 :: 		PWM3_Set_Duty(0);
+;BlackShadow_code.c,443 :: 		PWM3_Set_Duty(0);
 	CLRF        FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;BlackShadow_code.c,450 :: 		PWM4_Set_Duty(180);
+;BlackShadow_code.c,444 :: 		PWM4_Set_Duty(180);
 	MOVLW       180
 	MOVWF       FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;BlackShadow_code.c,451 :: 		delay_ms(200);
+;BlackShadow_code.c,445 :: 		delay_ms(200);
 	MOVLW       3
 	MOVWF       R11, 0
 	MOVLW       8
 	MOVWF       R12, 0
 	MOVLW       119
 	MOVWF       R13, 0
-L_GIRO180110:
+L_GIRO180108:
 	DECFSZ      R13, 1, 1
-	BRA         L_GIRO180110
+	BRA         L_GIRO180108
 	DECFSZ      R12, 1, 1
-	BRA         L_GIRO180110
+	BRA         L_GIRO180108
 	DECFSZ      R11, 1, 1
-	BRA         L_GIRO180110
-;BlackShadow_code.c,452 :: 		HARD();
+	BRA         L_GIRO180108
+;BlackShadow_code.c,446 :: 		HARD();
 	CALL        _HARD+0, 0
-;BlackShadow_code.c,455 :: 		}
+;BlackShadow_code.c,449 :: 		}
 L_end_GIRO180:
 	RETURN      0
 ; end of _GIRO180
 
 _GIRO360:
 
-;BlackShadow_code.c,457 :: 		void GIRO360(){                     //Produce un grio que beneficia si se activo el sesnor de linea
-;BlackShadow_code.c,458 :: 		IZQ();                         //de la Izquierda
+;BlackShadow_code.c,451 :: 		void GIRO360(){                     //Produce un grio que beneficia si se activo el sesnor de linea
+;BlackShadow_code.c,452 :: 		IZQ();                         //de la Izquierda
 	CALL        _IZQ+0, 0
-;BlackShadow_code.c,459 :: 		delay_ms(250);
+;BlackShadow_code.c,453 :: 		delay_ms(250);
 	MOVLW       3
 	MOVWF       R11, 0
 	MOVLW       138
 	MOVWF       R12, 0
 	MOVLW       85
 	MOVWF       R13, 0
-L_GIRO360111:
+L_GIRO360109:
 	DECFSZ      R13, 1, 1
-	BRA         L_GIRO360111
+	BRA         L_GIRO360109
 	DECFSZ      R12, 1, 1
-	BRA         L_GIRO360111
+	BRA         L_GIRO360109
 	DECFSZ      R11, 1, 1
-	BRA         L_GIRO360111
+	BRA         L_GIRO360109
 	NOP
 	NOP
-;BlackShadow_code.c,460 :: 		HARD();
+;BlackShadow_code.c,454 :: 		HARD();
 	CALL        _HARD+0, 0
-;BlackShadow_code.c,462 :: 		}
+;BlackShadow_code.c,456 :: 		}
 L_end_GIRO360:
 	RETURN      0
 ; end of _GIRO360
 
 _BRAKE:
 
-;BlackShadow_code.c,464 :: 		void BRAKE(){
-;BlackShadow_code.c,466 :: 		Stop();
+;BlackShadow_code.c,458 :: 		void BRAKE(){
+;BlackShadow_code.c,460 :: 		Stop();
 	CALL        _Stop+0, 0
-;BlackShadow_code.c,467 :: 		LATC.F2=0;                                //PWM1
+;BlackShadow_code.c,461 :: 		LATC.F2=0;                                //PWM1
 	BCF         LATC+0, 2 
-;BlackShadow_code.c,468 :: 		LATC.F1=0;                                //PWM2                                 -
+;BlackShadow_code.c,462 :: 		LATC.F1=0;                                //PWM2                                 -
 	BCF         LATC+0, 1 
-;BlackShadow_code.c,469 :: 		LATB.F5=0;                                //PWM3
+;BlackShadow_code.c,463 :: 		LATB.F5=0;                                //PWM3
 	BCF         LATB+0, 5 
-;BlackShadow_code.c,470 :: 		LATB.F0=0;                                //PWM4
+;BlackShadow_code.c,464 :: 		LATB.F0=0;                                //PWM4
 	BCF         LATB+0, 0 
-;BlackShadow_code.c,473 :: 		}
+;BlackShadow_code.c,467 :: 		}
 L_end_BRAKE:
 	RETURN      0
 ; end of _BRAKE
 
 _HARD:
 
-;BlackShadow_code.c,474 :: 		void HARD(){
-;BlackShadow_code.c,475 :: 		PWM1_Set_Duty(255);
+;BlackShadow_code.c,468 :: 		void HARD(){
+;BlackShadow_code.c,469 :: 		PWM1_Set_Duty(255);
 	MOVLW       255
 	MOVWF       FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;BlackShadow_code.c,476 :: 		PWM2_Set_Duty(255);
+;BlackShadow_code.c,470 :: 		PWM2_Set_Duty(255);
 	MOVLW       255
 	MOVWF       FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;BlackShadow_code.c,477 :: 		PWM3_Set_Duty(255);
+;BlackShadow_code.c,471 :: 		PWM3_Set_Duty(255);
 	MOVLW       255
 	MOVWF       FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;BlackShadow_code.c,478 :: 		PWM4_Set_Duty(255);
+;BlackShadow_code.c,472 :: 		PWM4_Set_Duty(255);
 	MOVLW       255
 	MOVWF       FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;BlackShadow_code.c,481 :: 		}
+;BlackShadow_code.c,475 :: 		}
 L_end_HARD:
 	RETURN      0
 ; end of _HARD
 
 _PUSH:
 
-;BlackShadow_code.c,482 :: 		void PUSH(){
-;BlackShadow_code.c,483 :: 		Start();
+;BlackShadow_code.c,476 :: 		void PUSH(){
+;BlackShadow_code.c,477 :: 		Start();
 	CALL        _Start+0, 0
-;BlackShadow_code.c,485 :: 		PWM1_Set_Duty(255); // IN1 = PWM
+;BlackShadow_code.c,479 :: 		PWM1_Set_Duty(255); // IN1 = PWM
 	MOVLW       255
 	MOVWF       FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;BlackShadow_code.c,486 :: 		PWM2_Set_Duty(0);
+;BlackShadow_code.c,480 :: 		PWM2_Set_Duty(0);
 	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;BlackShadow_code.c,489 :: 		PWM3_Set_Duty(205);    // IN1 = 0
+;BlackShadow_code.c,483 :: 		PWM3_Set_Duty(205);    // IN1 = 0
 	MOVLW       205
 	MOVWF       FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;BlackShadow_code.c,490 :: 		PWM4_Set_Duty(0);
+;BlackShadow_code.c,484 :: 		PWM4_Set_Duty(0);
 	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;BlackShadow_code.c,492 :: 		}
+;BlackShadow_code.c,486 :: 		}
 L_end_PUSH:
 	RETURN      0
 ; end of _PUSH
 
 _HIT:
 
-;BlackShadow_code.c,493 :: 		void HIT(){
-;BlackShadow_code.c,495 :: 		REC();
+;BlackShadow_code.c,487 :: 		void HIT(){
+;BlackShadow_code.c,489 :: 		REC();
 	CALL        _REC+0, 0
-;BlackShadow_code.c,496 :: 		delay_ms(20);
+;BlackShadow_code.c,490 :: 		delay_ms(20);
 	MOVLW       52
 	MOVWF       R12, 0
 	MOVLW       241
 	MOVWF       R13, 0
-L_HIT112:
+L_HIT110:
 	DECFSZ      R13, 1, 1
-	BRA         L_HIT112
+	BRA         L_HIT110
 	DECFSZ      R12, 1, 1
-	BRA         L_HIT112
+	BRA         L_HIT110
 	NOP
 	NOP
-;BlackShadow_code.c,497 :: 		PUSH();
+;BlackShadow_code.c,491 :: 		PUSH();
 	CALL        _PUSH+0, 0
-;BlackShadow_code.c,498 :: 		delay_ms(250);
+;BlackShadow_code.c,492 :: 		delay_ms(250);
 	MOVLW       3
 	MOVWF       R11, 0
 	MOVLW       138
 	MOVWF       R12, 0
 	MOVLW       85
 	MOVWF       R13, 0
-L_HIT113:
+L_HIT111:
 	DECFSZ      R13, 1, 1
-	BRA         L_HIT113
+	BRA         L_HIT111
 	DECFSZ      R12, 1, 1
-	BRA         L_HIT113
+	BRA         L_HIT111
 	DECFSZ      R11, 1, 1
-	BRA         L_HIT113
+	BRA         L_HIT111
 	NOP
 	NOP
-;BlackShadow_code.c,499 :: 		}
+;BlackShadow_code.c,493 :: 		}
 L_end_HIT:
 	RETURN      0
 ; end of _HIT
 
 _INTERRUPT:
 
-;BlackShadow_code.c,501 :: 		void INTERRUPT(){
-;BlackShadow_code.c,504 :: 		if (INTCON3.INT1IF) {
+;BlackShadow_code.c,495 :: 		void INTERRUPT(){
+;BlackShadow_code.c,498 :: 		if (INTCON3.INT1IF) {
 	BTFSS       INTCON3+0, 0 
-	GOTO        L_INTERRUPT114
-;BlackShadow_code.c,505 :: 		INTCON3.INT1IF = 0; // Limpia la bandera de INT1
+	GOTO        L_INTERRUPT112
+;BlackShadow_code.c,499 :: 		INTCON3.INT1IF = 0; // Limpia la bandera de INT1
 	BCF         INTCON3+0, 0 
-;BlackShadow_code.c,506 :: 		linea_izq_detectada = 1;    // Solo activa la bandera
+;BlackShadow_code.c,500 :: 		linea_izq_detectada = 1;    // Solo activa la bandera
 	MOVLW       1
 	MOVWF       _linea_izq_detectada+0 
-;BlackShadow_code.c,508 :: 		}
-L_INTERRUPT114:
-;BlackShadow_code.c,510 :: 		if (INTCON3.INT2IF) {
+;BlackShadow_code.c,502 :: 		}
+L_INTERRUPT112:
+;BlackShadow_code.c,504 :: 		if (INTCON3.INT2IF) {
 	BTFSS       INTCON3+0, 1 
-	GOTO        L_INTERRUPT115
-;BlackShadow_code.c,511 :: 		INTCON3.INT2IF = 0; // Limpia la bandera de INT2
+	GOTO        L_INTERRUPT113
+;BlackShadow_code.c,505 :: 		INTCON3.INT2IF = 0; // Limpia la bandera de INT2
 	BCF         INTCON3+0, 1 
-;BlackShadow_code.c,512 :: 		linea_der_detectada = 1;    // Solo activa la bandera
+;BlackShadow_code.c,506 :: 		linea_der_detectada = 1;    // Solo activa la bandera
 	MOVLW       1
 	MOVWF       _linea_der_detectada+0 
-;BlackShadow_code.c,513 :: 		}
-L_INTERRUPT115:
-;BlackShadow_code.c,514 :: 		}
+;BlackShadow_code.c,507 :: 		}
+L_INTERRUPT113:
+;BlackShadow_code.c,508 :: 		}
 L_end_INTERRUPT:
-L__INTERRUPT306:
+L__INTERRUPT304:
 	RETFIE      1
 ; end of _INTERRUPT
