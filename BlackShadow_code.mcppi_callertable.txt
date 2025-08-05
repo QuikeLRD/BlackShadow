@@ -1,5 +1,4 @@
 main
-	__CC2DW
 	PWM1_Init
 	PWM2_Init
 	PWM3_Init
