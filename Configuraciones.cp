@@ -10,6 +10,7 @@ void PUSH();
 void REC();
 void REV();
 void DER();
+void DER_Z();
 void IZQ();
 void BRAKE();
 void LIBRE();
@@ -84,7 +85,11 @@ void SELEC(){
  break;
 
  case 3:  PORTA.F6 = PORTA.F7 =0;  PORTA.F5 = PORTA.F4 ==1;
- HIT();
+ DER_Z();
+ delay_ms(400);
+ HARD();
+ delay_ms(50);
+
 
 
 
@@ -188,7 +193,7 @@ void combate_estado() {
  IZQ();
  delay_ms(100);
  HARD();
- delay_ms(250);
+ delay_ms(100);
  estado_combate = CMB_ESPERA;
  break;
 
@@ -202,16 +207,17 @@ void combate_estado() {
   PORTA.F6 = PORTA.F7 =0;  PORTA.F5 = PORTA.F4 =1;
  IZQ();
  delay_ms(20);
- HIT();
+ HARD;
+ delay_ms(100);
  estado_combate = CMB_ESPERA;
  break;
 
  case CMB_DER_HARD:
   PORTA.F5 =0;  PORTA.F6 = PORTA.F7 = PORTA.F4 =1;
- DER();
- delay_ms(100);
+ DER_Z();
+ delay_ms(400);
  HARD();
- delay_ms(250);
+ delay_ms(50);
  estado_combate = CMB_ESPERA;
  break;
 
@@ -223,9 +229,10 @@ void combate_estado() {
 
  case CMB_DER_HIT:
   PORTA.F7 = PORTA.F5 =0;  PORTA.F6 = PORTA.F4 =1;
- DER();
- delay_ms(30);
- HIT();
+ DER_Z();
+ delay_ms(400);
+ HARD();
+ delay_ms(50);
  estado_combate = CMB_ESPERA;
  break;
 
@@ -283,6 +290,18 @@ void DER(){
  PWM4_Set_Duty(0);
 
  }
+void DER_Z(){
+ Start();
+ PWM1_Set_Duty(230);
+ PWM2_Set_Duty(0);
+
+ PWM3_Set_Duty(0);
+ PWM4_Set_Duty(0);
+
+
+}
+
+
 void IZQ(){
  Start();
  PWM1_Set_Duty(0);

@@ -37,6 +37,7 @@ void PUSH();
 void REC();
 void REV();
 void DER();
+void DER_Z();
 void IZQ();
 void BRAKE();
 void LIBRE();
@@ -45,4 +46,3 @@ void GIRO360();
 void HIT();
 void INTERRUPT();
 void combate_estado();
-

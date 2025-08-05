@@ -624,6 +624,7 @@ delay_80us
 delay_8ms
 delay_cyc
 der
+der_z
 dhen
 dhen_bit
 dhen_ssp1con3_bit

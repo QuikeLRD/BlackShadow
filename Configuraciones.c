@@ -67,7 +67,11 @@ void SELEC(){
    break;
 
    case 3: L0=L1=0; L2=L3==1;
-           HIT();
+        DER_Z();
+        delay_ms(400);
+        HARD();
+        delay_ms(50);
+
 
 
 
@@ -171,7 +175,7 @@ void combate_estado() {
         IZQ();
         delay_ms(100);
         HARD();
-        delay_ms(250);
+        delay_ms(100);
         estado_combate = CMB_ESPERA;
         break;
 
@@ -185,16 +189,17 @@ void combate_estado() {
         L0=L1=0; L2=L3=1;
         IZQ();
         delay_ms(20);
-        HIT();
+        HARD;
+        delay_ms(100);
         estado_combate = CMB_ESPERA;
         break;
 
     case CMB_DER_HARD:
         L2=0; L0=L1=L3=1;
-        DER();
-        delay_ms(100);
+        DER_Z();
+        delay_ms(400);
         HARD();
-        delay_ms(250);
+        delay_ms(50);
         estado_combate = CMB_ESPERA;
         break;
 
@@ -206,9 +211,10 @@ void combate_estado() {
 
     case CMB_DER_HIT:
         L1=L2=0; L0=L3=1;
-        DER();
-        delay_ms(30);
-        HIT();
+        DER_Z();
+        delay_ms(400);
+        HARD();
+        delay_ms(50);
         estado_combate = CMB_ESPERA;
         break;
 
@@ -266,6 +272,18 @@ void DER(){
      PWM4_Set_Duty(0);
 
      }
+void DER_Z(){
+     Start();
+     PWM1_Set_Duty(230);
+     PWM2_Set_Duty(0);
+
+     PWM3_Set_Duty(0);
+     PWM4_Set_Duty(0);
+
+
+}
+     
+     
 void IZQ(){
      Start();
      PWM1_Set_Duty(0);

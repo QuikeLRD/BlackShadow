@@ -10,6 +10,7 @@ void PUSH();
 void REC();
 void REV();
 void DER();
+void DER_Z();
 void IZQ();
 void BRAKE();
 void LIBRE();
