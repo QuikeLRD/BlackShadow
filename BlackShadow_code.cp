@@ -19,6 +19,7 @@ void GIRO360();
 void HIT();
 void INTERRUPT();
 void combate_estado();
+void LOGICA_LINEA();
 #line 2 "G:/Mi unidad/UPIITA/AR UPIITA/Diseños de Minisumos/Black Shadow/Programación/BlackShadow_code.c"
 void main() {
  OSCCON = 0b01100110;

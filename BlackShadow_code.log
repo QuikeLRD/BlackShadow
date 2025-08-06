@@ -3,12 +3,12 @@ hint: 0	1139	Available RAM: 3875 [bytes], Available ROM: 65536 [bytes]
 diagnostics: 0	122	Compilation Started	configuraciones.h
 diagnostics: 91	123	Compiled Successfully	BlackShadow_code.c
 diagnostics: 0	122	Compilation Started	configuraciones.h
-hint: 192	1171	Statement "HARD;" has no effect, missing "( )" to become function call	Configuraciones.c
-diagnostics: 386	123	Compiled Successfully	Configuraciones.c
-diagnostics: 0	127	All files Compiled in 313 ms	 
-hint: 0	1144	Used RAM (bytes): 8 (1%)  Free RAM (bytes): 3867 (99%)	Used RAM (bytes): 8 (1%)  Free RAM (bytes): 3867 (99%)
-hint: 0	1144	Used ROM (bytes): 3535 (5%)  Free ROM (bytes): 62001 (95%)	Used ROM (bytes): 3535 (5%)  Free ROM (bytes): 62001 (95%)
+hint: 216	1171	Statement "HARD;" has no effect, missing "( )" to become function call	Configuraciones.c
+diagnostics: 421	123	Compiled Successfully	Configuraciones.c
+diagnostics: 0	127	All files Compiled in 250 ms	 
+hint: 0	1144	Used RAM (bytes): 9 (1%)  Free RAM (bytes): 3866 (99%)	Used RAM (bytes): 9 (1%)  Free RAM (bytes): 3866 (99%)
+hint: 0	1144	Used ROM (bytes): 3758 (6%)  Free ROM (bytes): 61778 (94%)	Used ROM (bytes): 3758 (6%)  Free ROM (bytes): 61778 (94%)
 diagnostics: 0	125	Project Linked Successfully	BlackShadow_code.mcppi
-diagnostics: 0	128	Linked in 125 ms	 
-diagnostics: 0	129	Project 'BlackShadow_code.mcppi' completed: 453 ms	 
-diagnostics: 0	103	Finished successfully: 05 ago. 2025, 16:13:57	BlackShadow_code.mcppi
+diagnostics: 0	128	Linked in 109 ms	 
+diagnostics: 0	129	Project 'BlackShadow_code.mcppi' completed: 375 ms	 
+diagnostics: 0	103	Finished successfully: 06 ago. 2025, 16:28:48	BlackShadow_code.mcppi

@@ -4,6 +4,7 @@
 //=====================//
 volatile char linea_izq_detectada = 0;
 volatile char linea_der_detectada = 0;
+volatile char linea_detectada = 0;
 volatile char golpe = 0;
 
 //MAQUINA DE ESTADOS
@@ -26,6 +27,23 @@ volatile EstadoCombate estado_combate = CMB_ESPERA;
 //======================//
 //======Funciones======//
 //====================//
+void INTERRUPT(){
+
+  // INT1 - Sensor de línea izquierda
+    if (INTCON3.INT1IF) {
+        INTCON3.INT1IF = 0; // Limpia la bandera de INT1
+        linea_izq_detectada = 1;    // Solo activa la bandera
+        linea_detectada = 1;        //Activamos bandera global
+}
+    // INT2 - Sensor de línea derecha
+    if (INTCON3.INT2IF) {
+        INTCON3.INT2IF = 0; // Limpia la bandera de INT2
+         linea_der_detectada = 1;    // Solo activa la bandera
+         linea_detectada = 1;
+    }
+}
+
+
 void SELEC(){
      int seleccion;
  seleccion=SW0*1+SW1*2+SW2*4+SW3*8;
@@ -130,6 +148,12 @@ void SELEC(){
 //==STATE MACHINE====//
 //=======================//
 void combate_estado() {
+    if(linea_detectada){
+    LOGICA_LINEA();
+    linea_detectada = 0;
+    estado_combate = CMB_ESPERA;
+    return;
+    }
     switch (estado_combate) {
     case CMB_ESPERA:
         if(SL1 == 0 && S2 == 0 && S6 == 0){
@@ -369,18 +393,29 @@ void HIT(){
      PUSH();
      delay_ms(250);
 }
-
-void INTERRUPT(){
-
-  // INT1 - Sensor de línea izquierda
-    if (INTCON3.INT1IF) {
-        INTCON3.INT1IF = 0; // Limpia la bandera de INT1
-        linea_izq_detectada = 1;    // Solo activa la bandera
-
-}
-    // INT2 - Sensor de línea derecha
-    if (INTCON3.INT2IF) {
-        INTCON3.INT2IF = 0; // Limpia la bandera de INT2
-         linea_der_detectada = 1;    // Solo activa la bandera
+void LOGICA_LINEA(){
+   if(S4 != 0 && S3 != 0){
+        REC();
     }
+    else if(S4 == 0 && S3 == 0){
+         HARD();
+         delay_ms(100);
+         GIRO180();
+         delay_ms(100);
+    }
+    else if (S3 == 0){
+        HARD();
+        delay_ms(100);
+        GIRO360();
+        delay_ms(100);
+    }
+    else if (S4 == 0){
+        HARD();
+        delay_ms(100);
+        DER();
+        delay_ms(100);
+    }
+
+
+
 }

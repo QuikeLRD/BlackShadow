@@ -19,9 +19,11 @@ void GIRO360();
 void HIT();
 void INTERRUPT();
 void combate_estado();
+void LOGICA_LINEA();
 #line 5 "G:/Mi unidad/UPIITA/AR UPIITA/Diseños de Minisumos/Black Shadow/Programación/Configuraciones.c"
 volatile char linea_izq_detectada = 0;
 volatile char linea_der_detectada = 0;
+volatile char linea_detectada = 0;
 volatile char golpe = 0;
 
 
@@ -42,6 +44,23 @@ volatile EstadoCombate estado_combate = CMB_ESPERA;
 
 
 
+
+
+void INTERRUPT(){
+
+
+ if (INTCON3.INT1IF) {
+ INTCON3.INT1IF = 0;
+ linea_izq_detectada = 1;
+ linea_detectada = 1;
+}
+
+ if (INTCON3.INT2IF) {
+ INTCON3.INT2IF = 0;
+ linea_der_detectada = 1;
+ linea_detectada = 1;
+ }
+}
 
 
 void SELEC(){
@@ -148,6 +167,12 @@ void SELEC(){
 
 
 void combate_estado() {
+ if(linea_detectada){
+ LOGICA_LINEA();
+ linea_detectada = 0;
+ estado_combate = CMB_ESPERA;
+ return;
+ }
  switch (estado_combate) {
  case CMB_ESPERA:
  if( PORTC.F0  == 0 &&  PORTC.F6  == 0 &&  PORTB.F4  == 0){
@@ -387,18 +412,29 @@ void HIT(){
  PUSH();
  delay_ms(250);
 }
-
-void INTERRUPT(){
-
-
- if (INTCON3.INT1IF) {
- INTCON3.INT1IF = 0;
- linea_izq_detectada = 1;
-
-}
-
- if (INTCON3.INT2IF) {
- INTCON3.INT2IF = 0;
- linea_der_detectada = 1;
+void LOGICA_LINEA(){
+ if( PORTB.F2  != 0 &&  PORTB.F1  != 0){
+ REC();
  }
+ else if( PORTB.F2  == 0 &&  PORTB.F1  == 0){
+ HARD();
+ delay_ms(100);
+ GIRO180();
+ delay_ms(100);
+ }
+ else if ( PORTB.F1  == 0){
+ HARD();
+ delay_ms(100);
+ GIRO360();
+ delay_ms(100);
+ }
+ else if ( PORTB.F2  == 0){
+ HARD();
+ delay_ms(100);
+ DER();
+ delay_ms(100);
+ }
+
+
+
 }

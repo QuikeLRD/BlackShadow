@@ -982,9 +982,11 @@ lfiofs
 lfiofs_bit
 libre
 linea_der_detectada
+linea_detectada
 linea_izq_detectada
 log
 log10
+logica_linea
 longint2double
 longjmp
 longword2double

@@ -46,3 +46,6 @@ void GIRO360();
 void HIT();
 void INTERRUPT();
 void combate_estado();
+void LOGICA_LINEA();
+
+
