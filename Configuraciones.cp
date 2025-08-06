@@ -17,34 +17,72 @@ void LIBRE();
 void GIRO180();
 void GIRO360();
 void HIT();
+void HIT_NO_BLOQUEANTE();
 void INTERRUPT();
+void INTERRUPT_ISR();
 void combate_estado();
 void LOGICA_LINEA();
-#line 5 "G:/Mi unidad/UPIITA/AR UPIITA/Diseños de Minisumos/Black Shadow/Programación/Configuraciones.c"
+
+
+
+typedef enum {
+ MOV_IDLE,
+ MOV_HIT_REC,
+ MOV_HIT_PUSH
+} EstadoMovimiento;
+
+typedef enum {
+ CMB_ESPERA,
+ CMB_REC,
+ CMB_IZQ,
+ CMB_HIT,
+ CMB_IZQ_GOLPE,
+ CMB_DER_HARD,
+ CMB_LIBRE,
+ CMB_DER_HIT,
+ CMB_HIT_FULL
+} EstadoCombate;
+
+extern volatile EstadoMovimiento estado_movimiento;
+extern volatile EstadoCombate estado_combate;
+extern volatile unsigned long tiempo_movimiento;
+extern volatile unsigned long ms_ticks;
+
+extern unsigned long millis();
+#line 1 "g:/mi unidad/upiita/ar upiita/diseños de minisumos/black shadow/programación/milis.h"
+
+
+
+void millis_init(void);
+unsigned long millis(void);
+
+extern volatile unsigned long ms_ticks;
+#line 6 "G:/Mi unidad/UPIITA/AR UPIITA/Diseños de Minisumos/Black Shadow/Programación/Configuraciones.c"
 volatile char linea_izq_detectada = 0;
 volatile char linea_der_detectada = 0;
 volatile char linea_detectada = 0;
 volatile char golpe = 0;
 
-
-typedef enum{
-
-CMB_ESPERA,
-CMB_REC,
-CMB_IZQ,
-CMB_HIT,
-CMB_IZQ_GOLPE,
-CMB_DER_HARD,
-CMB_LIBRE,
-CMB_DER_HIT,
-CMB_HIT_FULL
-} EstadoCombate;
-
+volatile EstadoMovimiento estado_movimiento = MOV_IDLE;
 volatile EstadoCombate estado_combate = CMB_ESPERA;
+volatile unsigned long tiempo_movimiento = 0;
+volatile unsigned long ms_ticks = 0;
 
 
 
 
+
+void INTERRUPT_ISR(void) {
+
+ if (INTCON.TMR0IF) {
+ INTCON.TMR0IF = 0;
+ TMR0L = 131;
+ ms_ticks++;
+ }
+
+
+ INTERRUPT();
+}
 
 void INTERRUPT(){
 
@@ -168,9 +206,11 @@ void SELEC(){
 
 void combate_estado() {
  if(linea_detectada){
+ HARD();
  LOGICA_LINEA();
  linea_detectada = 0;
  estado_combate = CMB_ESPERA;
+ estado_movimiento = MOV_IDLE;
  return;
  }
  switch (estado_combate) {
@@ -224,7 +264,7 @@ void combate_estado() {
 
  case CMB_HIT:
   PORTA.F7 =0;  PORTA.F6 = PORTA.F5 = PORTA.F4 =1;
- HIT();
+ HIT_NO_BLOQUEANTE();
  estado_combate = CMB_ESPERA;
  break;
 
@@ -412,6 +452,51 @@ void HIT(){
  PUSH();
  delay_ms(250);
 }
+void HIT_NO_BLOQUEANTE();
+ unsigned long = millis();
+
+ switch (estado_movimiento) {
+ case MOV_IDLE:
+ REC();
+ tiempo_movimiento = now;
+ estado_movimiento = MOV_HIT_REC;
+ break;
+
+ case MOV_HIT_REC:
+
+ if (now - tiempo_movimiento >= 20) {
+ PUSH();
+ tiempo_movimiento = now;
+ estado_movimiento = MOV_HIT_PUSH;
+ }
+ break;
+
+ case MOV_HIT_PUSH:
+
+ if ( PORTC.F6  == 0) {
+
+ PUSH();
+ tiempo_movimiento = now;
+ } else {
+
+ LIBRE();
+ estado_movimiento = MOV_IDLE;
+ estado_combate = CMB_ESPERA;
+ }
+
+
+
+
+
+
+ break;
+ }
+}
+
+
+
+
+
 void LOGICA_LINEA(){
  if( PORTB.F2  != 0 &&  PORTB.F1  != 0){
  REC();
@@ -434,7 +519,4 @@ void LOGICA_LINEA(){
  DER();
  delay_ms(100);
  }
-
-
-
 }

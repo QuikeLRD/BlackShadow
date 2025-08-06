@@ -28,7 +28,8 @@ CODEGRIP_PROGRAMMING_TYPE=
 [FILES]
 File0=BlackShadow_code.c
 File1=Configuraciones.c
-Count=2
+File2=millis.c
+Count=3
 [BINARIES]
 Count=0
 [IMAGES]
@@ -38,7 +39,9 @@ ActiveImageIndex=-1
 File0=BlackShadow_code.c
 File1=Configuraciones.h
 File2=Configuraciones.c
-Count=3
+File3=millis.c
+File4=milis.h
+Count=5
 [EEPROM]
 Count=0
 [ACTIVE_COMMENTS_FILES]
@@ -51,7 +54,8 @@ Count=0
 Count=0
 [HEADERS]
 File0=Configuraciones.h
-Count=1
+File1=milis.h
+Count=2
 [PLDS]
 Count=0
 [Useses]
@@ -65,7 +69,8 @@ Count=6
 [EXPANDED_NODES]
 0=BlackShadow_code.mcppi
 1=Sources
-Count=2
+5=Header Files
+Count=3
 [LIB_EXPANDED_NODES]
 0=mikroE Libraries
 1=System Libraries

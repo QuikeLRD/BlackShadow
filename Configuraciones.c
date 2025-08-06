@@ -1,4 +1,5 @@
 #include "Configuraciones.h"
+#include "milis.h"
 //======================//
 //==Variables globales==//
 //=====================//
@@ -7,26 +8,27 @@ volatile char linea_der_detectada = 0;
 volatile char linea_detectada = 0;
 volatile char golpe = 0;
 
-//MAQUINA DE ESTADOS
-typedef enum{
-
-CMB_ESPERA,
-CMB_REC,
-CMB_IZQ,
-CMB_HIT,
-CMB_IZQ_GOLPE,
-CMB_DER_HARD,
-CMB_LIBRE,
-CMB_DER_HIT,
-CMB_HIT_FULL
-} EstadoCombate;
-
+volatile EstadoMovimiento estado_movimiento = MOV_IDLE;
 volatile EstadoCombate estado_combate = CMB_ESPERA;
+volatile unsigned long tiempo_movimiento = 0;
+volatile unsigned long ms_ticks = 0;
 
 
 //======================//
 //======Funciones======//
 //====================//
+void INTERRUPT_ISR(void) {
+    // Timer0: incremento de milisegundos
+    if (INTCON.TMR0IF) {
+        INTCON.TMR0IF = 0;
+        TMR0L = 131;
+        ms_ticks++;
+    }
+
+    // Aquí van otras interrupciones, por ejemplo las de línea:
+    INTERRUPT();
+}
+
 void INTERRUPT(){
 
   // INT1 - Sensor de línea izquierda
@@ -144,14 +146,16 @@ void SELEC(){
 
 
 }
-//=========================//
-//==STATE MACHINE====//
-//=======================//
+//===================================//
+//==STATE MACHINE PARA EL COMBATE====//
+//===================================//
 void combate_estado() {
     if(linea_detectada){
+    HARD();
     LOGICA_LINEA();
     linea_detectada = 0;
     estado_combate = CMB_ESPERA;
+    estado_movimiento = MOV_IDLE;
     return;
     }
     switch (estado_combate) {
@@ -205,7 +209,7 @@ void combate_estado() {
 
     case CMB_HIT:
         L1=0; L0=L2=L3=1;
-        HIT();
+        HIT_NO_BLOQUEANTE();
         estado_combate = CMB_ESPERA;
         break;
 
@@ -393,6 +397,51 @@ void HIT(){
      PUSH();
      delay_ms(250);
 }
+void HIT_NO_BLOQUEANTE();
+   unsigned long = millis(); // Usa tu función de tiempo
+
+    switch (estado_movimiento) {
+        case MOV_IDLE:
+            REC(); // Avanza rápido
+            tiempo_movimiento = now;
+            estado_movimiento = MOV_HIT_REC;
+            break;
+
+        case MOV_HIT_REC:
+            // Espera 20 ms avanzando
+            if (now - tiempo_movimiento >= 20) {
+                PUSH(); // Empuje fuerte
+                tiempo_movimiento = now;
+                estado_movimiento = MOV_HIT_PUSH;
+            }
+            break;
+
+        case MOV_HIT_PUSH:
+            // Mantiene empuje mientras S2 detecte rival al frente
+            if (S2 == 0) {
+                // Sigue empujando
+                PUSH();
+                tiempo_movimiento = now; // Actualiza tiempo si quieres tiempo máximo de empuje
+            } else {
+                // Si ya no hay rival, termina empuje
+                LIBRE();
+                estado_movimiento = MOV_IDLE;
+                estado_combate = CMB_ESPERA;
+            }
+            // Puedes agregar un timeout de empuje, ejemplo:
+            // if (now - tiempo_movimiento >= 1500) { // máximo 1.5 s de empuje frontal
+            //     LIBRE();
+            //     estado_movimiento = MOV_IDLE;
+            //     estado_combate = CMB_ESPERA;
+            // }
+            break;
+    }
+}
+
+
+
+
+
 void LOGICA_LINEA(){
    if(S4 != 0 && S3 != 0){
         REC();
@@ -415,7 +464,4 @@ void LOGICA_LINEA(){
         DER();
         delay_ms(100);
     }
-
-
-
 }

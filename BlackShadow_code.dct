@@ -1036,8 +1036,10 @@ mfiofs
 mfiofs_bit
 mfiosel
 mfiosel_bit
+millis
 min
 modf
+ms_ticks
 msk0
 msk0_bit
 msk0_ssp1msk_bit

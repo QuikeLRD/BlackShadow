@@ -1,5 +1,8 @@
 #include "Configuraciones.h"
+#include "milis.h"
 void main() {
+  
+  millis_init();
   OSCCON = 0b01100110;
  
  //LIMPIAMOS LOS PUERTOS

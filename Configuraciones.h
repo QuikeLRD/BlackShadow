@@ -44,8 +44,35 @@ void LIBRE();
 void GIRO180();
 void GIRO360();
 void HIT();
+void HIT_NO_BLOQUEANTE();
 void INTERRUPT();
+void INTERRUPT_ISR();
 void combate_estado();
 void LOGICA_LINEA();
 
 
+// Definición de enums
+typedef enum {
+    MOV_IDLE,
+    MOV_HIT_REC,
+    MOV_HIT_PUSH
+} EstadoMovimiento;
+
+typedef enum {
+    CMB_ESPERA,
+    CMB_REC,
+    CMB_IZQ,
+    CMB_HIT,
+    CMB_IZQ_GOLPE,
+    CMB_DER_HARD,
+    CMB_LIBRE,
+    CMB_DER_HIT,
+    CMB_HIT_FULL
+} EstadoCombate;
+
+extern volatile EstadoMovimiento estado_movimiento;
+extern volatile EstadoCombate estado_combate;
+extern volatile unsigned long tiempo_movimiento;
+extern volatile unsigned long ms_ticks;
+
+extern unsigned long millis();
