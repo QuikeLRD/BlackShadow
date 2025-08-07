@@ -22,16 +22,6 @@ void millis_init(void) {
 }
 
 
-void interrupt ISR(void) {
- if (INTCON.TMR0IF) {
- INTCON.TMR0IF = 0;
- TMR0L = 131;
- ms_ticks++;
- }
-
-}
-
-
 unsigned long millis(void) {
  unsigned long temp;
 

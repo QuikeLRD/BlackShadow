@@ -718,6 +718,7 @@ eepgd
 eepgd_bit
 equals_double
 estado_combate
+estado_movimiento
 exp
 f
 fabs
@@ -782,6 +783,7 @@ hard
 hfiofs
 hfiofs_bit
 hit
+hit_no_bloqueante
 hlvdcon
 hlvden
 hlvden_bit
@@ -859,6 +861,7 @@ intedg1_bit
 intedg2
 intedg2_bit
 interrupt
+interrupt_isr
 intsrc
 intsrc_bit
 iocb
@@ -1037,6 +1040,7 @@ mfiofs_bit
 mfiosel
 mfiosel_bit
 millis
+millis_init
 min
 modf
 ms_ticks
@@ -2042,6 +2046,7 @@ tblptrl
 tblptru
 tgen
 tgen_bit
+tiempo_movimiento
 tmr0h
 tmr0ie
 tmr0ie_bit

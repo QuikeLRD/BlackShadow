@@ -66,7 +66,7 @@ volatile char golpe = 0;
 volatile EstadoMovimiento estado_movimiento = MOV_IDLE;
 volatile EstadoCombate estado_combate = CMB_ESPERA;
 volatile unsigned long tiempo_movimiento = 0;
-volatile unsigned long ms_ticks = 0;
+
 
 
 
@@ -79,7 +79,6 @@ void INTERRUPT_ISR(void) {
  TMR0L = 131;
  ms_ticks++;
  }
-
 
  INTERRUPT();
 }
@@ -452,8 +451,8 @@ void HIT(){
  PUSH();
  delay_ms(250);
 }
-void HIT_NO_BLOQUEANTE();
- unsigned long = millis();
+void HIT_NO_BLOQUEANTE(){
+ unsigned long now = millis();
 
  switch (estado_movimiento) {
  case MOV_IDLE:

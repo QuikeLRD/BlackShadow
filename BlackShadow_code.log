@@ -3,23 +3,14 @@ hint: 0	1139	Available RAM: 3875 [bytes], Available ROM: 65536 [bytes]
 diagnostics: 0	122	Compilation Started	configuraciones.h
 diagnostics: 94	123	Compiled Successfully	BlackShadow_code.c
 diagnostics: 0	122	Compilation Started	configuraciones.h
-hint: 220	1171	Statement "HARD;" has no effect, missing "( )" to become function call	Configuraciones.c
-error: 401	396	Invalid declarator expected'(' or identifier	Configuraciones.c
-error: 403	371	Specifier needed	Configuraciones.c
-error: 403	396	Invalid declarator expected'(' or identifier	Configuraciones.c
-error: 403	393	'' Identifier redefined	Configuraciones.c
-error: 403	300	Syntax Error: '(' expected,  but '{' found	Configuraciones.c
-error: 404	407	'case' out of switch	Configuraciones.c
-error: 405	424	'}' expected ';' found	Configuraciones.c
-warning: 416	1503	Result is not defined in function: ''	Configuraciones.c
-error: 417	371	Specifier needed	Configuraciones.c
-error: 417	396	Invalid declarator expected'(' or identifier	Configuraciones.c
-error: 417	393	'' Identifier redefined	Configuraciones.c
-error: 419	371	Specifier needed	Configuraciones.c
-error: 419	396	Invalid declarator expected'(' or identifier	Configuraciones.c
-error: 421	300	Syntax Error: ')' expected,  but '.' found	Configuraciones.c
-error: 423	312	Internal error ''	Configuraciones.c
+hint: 219	1171	Statement "HARD;" has no effect, missing "( )" to become function call	Configuraciones.c
+diagnostics: 466	123	Compiled Successfully	Configuraciones.c
 diagnostics: 0	122	Compilation Started	milis.h
-error: 18	402	; expected, but 'ISR' found	millis.c
-warning: 25	1503	Result is not defined in function: 'ISR'	millis.c
-error: 0	102	Finished (with errors): 06 ago. 2025, 17:39:05	BlackShadow_code.mcppi
+diagnostics: 25	123	Compiled Successfully	millis.c
+diagnostics: 0	127	All files Compiled in 406 ms	 
+hint: 0	1144	Used RAM (bytes): 22 (1%)  Free RAM (bytes): 3853 (99%)	Used RAM (bytes): 22 (1%)  Free RAM (bytes): 3853 (99%)
+hint: 0	1144	Used ROM (bytes): 4003 (6%)  Free ROM (bytes): 61533 (94%)	Used ROM (bytes): 4003 (6%)  Free ROM (bytes): 61533 (94%)
+diagnostics: 0	125	Project Linked Successfully	BlackShadow_code.mcppi
+diagnostics: 0	128	Linked in 125 ms	 
+diagnostics: 0	129	Project 'BlackShadow_code.mcppi' completed: 547 ms	 
+diagnostics: 0	103	Finished successfully: 06 ago. 2025, 18:41:03	BlackShadow_code.mcppi

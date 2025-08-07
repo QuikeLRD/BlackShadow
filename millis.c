@@ -14,16 +14,6 @@ void millis_init(void) {
     INTCON.GIE = 1;     // Habilita interrupciones globales
 }
 
-// En tu función global de interrupción:
-void interrupt ISR(void) {
-    if (INTCON.TMR0IF) {
-        INTCON.TMR0IF = 0;
-        TMR0L = 131;
-        ms_ticks++;
-    }
-    // otras interrupciones...
-}
-
 // Devuelve el tiempo actual en milisegundos
 unsigned long millis(void) {
     unsigned long temp;
