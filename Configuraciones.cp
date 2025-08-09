@@ -478,7 +478,7 @@ void HIT_NO_BLOQUEANTE(){
  tiempo_movimiento = now;
  } else {
 
- LIBRE();
+ HARD();
  estado_movimiento = MOV_IDLE;
  estado_combate = CMB_ESPERA;
  }

@@ -423,7 +423,7 @@ void HIT_NO_BLOQUEANTE(){
                 tiempo_movimiento = now; // Actualiza tiempo si quieres tiempo máximo de empuje
             } else {
                 // Si ya no hay rival, termina empuje
-                LIBRE();
+                HARD();
                 estado_movimiento = MOV_IDLE;
                 estado_combate = CMB_ESPERA;
             }

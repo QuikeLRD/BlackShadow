@@ -1830,8 +1830,8 @@ L_HIT_NO_BLOQUEANTE106:
 ;Configuraciones.c,424 :: 		} else {
 	GOTO        L_HIT_NO_BLOQUEANTE108
 L_HIT_NO_BLOQUEANTE107:
-;Configuraciones.c,426 :: 		LIBRE();
-	CALL        _LIBRE+0, 0
+;Configuraciones.c,426 :: 		HARD();
+	CALL        _HARD+0, 0
 ;Configuraciones.c,427 :: 		estado_movimiento = MOV_IDLE;
 	CLRF        _estado_movimiento+0 
 ;Configuraciones.c,428 :: 		estado_combate = CMB_ESPERA;

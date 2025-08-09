@@ -269,7 +269,7 @@ main
 						Mul_16X16_U
 					PWM4_Set_Duty
 						Mul_16X16_U
-				LIBRE
+				HARD
 					PWM1_Set_Duty
 						Mul_16X16_U
 					PWM2_Set_Duty
