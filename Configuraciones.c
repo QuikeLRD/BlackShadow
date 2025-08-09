@@ -401,7 +401,7 @@ void HIT_NO_BLOQUEANTE(){
 
     switch (estado_movimiento) {
         case MOV_IDLE:
-            REC(); // Avanza rápido
+            PUSH(); // Avanza rápido
             tiempo_movimiento = now;
             estado_movimiento = MOV_HIT_REC;
             break;

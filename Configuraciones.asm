@@ -1741,8 +1741,8 @@ _HIT_NO_BLOQUEANTE:
 	GOTO        L_HIT_NO_BLOQUEANTE101
 ;Configuraciones.c,403 :: 		case MOV_IDLE:
 L_HIT_NO_BLOQUEANTE103:
-;Configuraciones.c,404 :: 		REC(); // Avanza rápido
-	CALL        _REC+0, 0
+;Configuraciones.c,404 :: 		PUSH(); // Avanza rápido
+	CALL        _PUSH+0, 0
 ;Configuraciones.c,405 :: 		tiempo_movimiento = now;
 	MOVF        HIT_NO_BLOQUEANTE_now_L0+0, 0 
 	MOVWF       _tiempo_movimiento+0 
