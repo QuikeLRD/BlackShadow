@@ -25,6 +25,9 @@
 #define S2  PORTC.F6                          //SENSOR FRONTAL
 #define GO  PORTC.F7
 
+
+#define MAX_GIRO_IZQ_MS 250                   // Ajusta: tiempo máximo de giro si no hay detección
+
 //==========================//
 //==Prototipos de función==//
 //========================//
@@ -39,6 +42,7 @@ void REV();
 void DER();
 void DER_Z();
 void IZQ();
+void IZQ_M();
 void BRAKE();
 void LIBRE();
 void GIRO180();
@@ -70,9 +74,22 @@ typedef enum {
     CMB_HIT_FULL
 } EstadoCombate;
 
+typedef enum{
+    SUB_IZQ_INICIO =0,
+    SUB_IZQ_GIRO,
+    SUB_IZQ_HARD
+    
+}   SubEstadoIzq;
+
+
+extern unsigned long millis();
+extern volatile unsigned long ms_ticks;
+
+//HIT_NO_BLOQUEANTE
 extern volatile EstadoMovimiento estado_movimiento;
 extern volatile EstadoCombate estado_combate;
 extern volatile unsigned long tiempo_movimiento;
-extern volatile unsigned long ms_ticks;
 
-extern unsigned long millis();
+//IZQ_M
+extern volatile SubEstadoIzq sub_cmb_izq = SUB_IZQ_INICIO;
+extern volatile unsigned long t_cmb_izq = 0;

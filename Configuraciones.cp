@@ -1,6 +1,6 @@
 #line 1 "G:/Mi unidad/UPIITA/AR UPIITA/Diseños de Minisumos/Black Shadow/Programación/Configuraciones.c"
 #line 1 "g:/mi unidad/upiita/ar upiita/diseños de minisumos/black shadow/programación/configuraciones.h"
-#line 31 "g:/mi unidad/upiita/ar upiita/diseños de minisumos/black shadow/programación/configuraciones.h"
+#line 34 "g:/mi unidad/upiita/ar upiita/diseños de minisumos/black shadow/programación/configuraciones.h"
 void SELEC();
 void Start();
 void Stop();
@@ -12,6 +12,7 @@ void REV();
 void DER();
 void DER_Z();
 void IZQ();
+void IZQ_M();
 void BRAKE();
 void LIBRE();
 void GIRO180();
@@ -43,12 +44,25 @@ typedef enum {
  CMB_HIT_FULL
 } EstadoCombate;
 
+typedef enum{
+ SUB_IZQ_INICIO =0,
+ SUB_IZQ_GIRO,
+ SUB_IZQ_HARD
+
+} SubEstadoIzq;
+
+
+extern unsigned long millis();
+extern volatile unsigned long ms_ticks;
+
+
 extern volatile EstadoMovimiento estado_movimiento;
 extern volatile EstadoCombate estado_combate;
 extern volatile unsigned long tiempo_movimiento;
-extern volatile unsigned long ms_ticks;
 
-extern unsigned long millis();
+
+extern volatile SubEstadoIzq sub_cmb_izq = SUB_IZQ_INICIO;
+extern volatile unsigned long t_cmb_izq = 0;
 #line 1 "g:/mi unidad/upiita/ar upiita/diseños de minisumos/black shadow/programación/milis.h"
 
 
@@ -67,6 +81,8 @@ volatile EstadoMovimiento estado_movimiento = MOV_IDLE;
 volatile EstadoCombate estado_combate = CMB_ESPERA;
 volatile unsigned long tiempo_movimiento = 0;
 
+volatile SubEstadoIzq sub_cmb_izq = SUB_IZQ_INICIO;
+volatile unsigned long t_cmb_izq = 0;
 
 
 
@@ -254,11 +270,7 @@ void combate_estado() {
 
  case CMB_IZQ:
   PORTA.F6 =0;  PORTA.F7 = PORTA.F5 = PORTA.F4 =1;
- IZQ();
- delay_ms(100);
- HARD();
- delay_ms(100);
- estado_combate = CMB_ESPERA;
+ IZQ_M();
  break;
 
  case CMB_HIT:
@@ -371,7 +383,7 @@ void IZQ(){
  PWM1_Set_Duty(0);
  PWM2_Set_Duty(0);
 
- PWM3_Set_Duty(160);
+ PWM3_Set_Duty(200);
  PWM4_Set_Duty(0);
  }
 
@@ -491,11 +503,36 @@ void HIT_NO_BLOQUEANTE(){
  break;
  }
 }
+void IZQ_M(){
+ unsigned long now = millis();
+ switch (sub_cmb_izq) {
 
+ case SUB_IZQ_INICIO:
+ IZQ();
+ t_cmb_izq = now;
+ sub_cmb_izq = SUB_IZQ_GIRO;
+ break;
 
+ case SUB_IZQ_GIRO:
+ if (now - t_cmb_izq >= 100) {
+ HARD();
+ t_cmb_izq = now;
+ sub_cmb_izq = SUB_IZQ_HARD;
+ } else {
+ IZQ();
+ }
+ break;
 
-
-
+ case SUB_IZQ_HARD:
+ if (now - t_cmb_izq >= 100) {
+ sub_cmb_izq = SUB_IZQ_INICIO;
+ estado_combate = CMB_ESPERA;
+ } else {
+ HARD();
+ }
+ break;
+ }
+}
 void LOGICA_LINEA(){
  if( PORTB.F2  != 0 &&  PORTB.F1  != 0){
  REC();

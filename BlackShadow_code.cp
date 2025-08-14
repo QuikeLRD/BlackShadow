@@ -1,6 +1,6 @@
 #line 1 "G:/Mi unidad/UPIITA/AR UPIITA/Diseños de Minisumos/Black Shadow/Programación/BlackShadow_code.c"
 #line 1 "g:/mi unidad/upiita/ar upiita/diseños de minisumos/black shadow/programación/configuraciones.h"
-#line 31 "g:/mi unidad/upiita/ar upiita/diseños de minisumos/black shadow/programación/configuraciones.h"
+#line 34 "g:/mi unidad/upiita/ar upiita/diseños de minisumos/black shadow/programación/configuraciones.h"
 void SELEC();
 void Start();
 void Stop();
@@ -12,6 +12,7 @@ void REV();
 void DER();
 void DER_Z();
 void IZQ();
+void IZQ_M();
 void BRAKE();
 void LIBRE();
 void GIRO180();
@@ -43,12 +44,25 @@ typedef enum {
  CMB_HIT_FULL
 } EstadoCombate;
 
+typedef enum{
+ SUB_IZQ_INICIO =0,
+ SUB_IZQ_GIRO,
+ SUB_IZQ_HARD
+
+} SubEstadoIzq;
+
+
+extern unsigned long millis();
+extern volatile unsigned long ms_ticks;
+
+
 extern volatile EstadoMovimiento estado_movimiento;
 extern volatile EstadoCombate estado_combate;
 extern volatile unsigned long tiempo_movimiento;
-extern volatile unsigned long ms_ticks;
 
-extern unsigned long millis();
+
+extern volatile SubEstadoIzq sub_cmb_izq = SUB_IZQ_INICIO;
+extern volatile unsigned long t_cmb_izq = 0;
 #line 1 "g:/mi unidad/upiita/ar upiita/diseños de minisumos/black shadow/programación/milis.h"
 
 
