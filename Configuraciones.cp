@@ -317,8 +317,7 @@ void combate_estado() {
 
  case CMB_DER:
   PORTA.F5 =0;  PORTA.F6 = PORTA.F7 = PORTA.F4 =1;
- DER_Z();
- estado_combate = CMB_ESPERA;
+ DER_M();
  break;
 
  case CMB_LIBRE:
@@ -557,30 +556,42 @@ void IZQ_M(){
  break;
  }
 }
-void DER_M(){
+void DER_M() {
  unsigned long now = millis();
- switch (sub_cmb_der) {
 
+ switch (sub_cmb_der) {
  case SUB_DER_INICIO:
- DER();
+ DER_Z();
  t_cmb_der = now;
  sub_cmb_der = SUB_DER_GIRO;
  break;
 
  case SUB_DER_GIRO:
+
+ if ( PORTB.F4  ==0) {
+ estado_combate = CMB_ESPERA;
+ sub_cmb_der = SUB_DER_INICIO;
+ break;
+ }
  if (now - t_cmb_der >= 100) {
  HARD();
  t_cmb_der = now;
  sub_cmb_der = SUB_DER_HARD;
  } else {
- DER();
+ DER_Z();
  }
  break;
 
  case SUB_DER_HARD:
- if (now - t_cmb_der >= 100) {
- sub_cmb_der = SUB_DER_INICIO;
+
+ if ( PORTB.F4 ==0) {
  estado_combate = CMB_ESPERA;
+ sub_cmb_der = SUB_DER_INICIO;
+ break;
+ }
+ if (now - t_cmb_der >= 100) {
+ estado_combate = CMB_ESPERA;
+ sub_cmb_der = SUB_DER_INICIO;
  } else {
  HARD();
  }

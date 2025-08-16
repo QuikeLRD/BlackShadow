@@ -224,8 +224,7 @@ void combate_estado() {
 
     case CMB_DER:
         L2=0; L0=L1=L3=1;
-        DER_Z();
-        estado_combate = CMB_ESPERA;
+        DER_M();
         break;
 
     case CMB_LIBRE:
@@ -464,32 +463,44 @@ void IZQ_M(){
             break;
     }
 }
-void DER_M(){
-        unsigned long now = millis();
+void DER_M() {
+    unsigned long now = millis();
+    // Aquí asumo que detecto_rival_der es true cuando detecta, false cuando no.
     switch (sub_cmb_der) {
-
         case SUB_DER_INICIO:
-            DER();
+            DER_Z();
             t_cmb_der = now;
             sub_cmb_der = SUB_DER_GIRO;
             break;
 
         case SUB_DER_GIRO:
+            // SALE si ya NO detecta
+            if (S6 ==0) {
+                estado_combate = CMB_ESPERA;
+                sub_cmb_der = SUB_DER_INICIO;
+                break;
+            }
             if (now - t_cmb_der >= 100) {
                 HARD();
                 t_cmb_der = now;
                 sub_cmb_der = SUB_DER_HARD;
             } else {
-                DER(); // si necesitas mantener comando
+                DER_Z();
             }
             break;
 
         case SUB_DER_HARD:
-            if (now - t_cmb_der >= 100) {
-                sub_cmb_der = SUB_DER_INICIO;
+            // SALE si ya NO detecta
+            if (S6==0) {
                 estado_combate = CMB_ESPERA;
+                sub_cmb_der = SUB_DER_INICIO;
+                break;
+            }
+            if (now - t_cmb_der >= 100) {
+                estado_combate = CMB_ESPERA;
+                sub_cmb_der = SUB_DER_INICIO;
             } else {
-                HARD(); // si necesitas mantener comando
+                HARD();
             }
             break;
     }
