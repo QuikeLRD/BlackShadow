@@ -41,6 +41,7 @@ void REC();
 void REV();
 void DER();
 void DER_Z();
+void DER_M();
 void IZQ();
 void IZQ_M();
 void BRAKE();
@@ -68,7 +69,7 @@ typedef enum {
     CMB_IZQ,
     CMB_HIT,
     CMB_IZQ_GOLPE,
-    CMB_DER_HARD,
+    CMB_DER,
     CMB_LIBRE,
     CMB_DER_HIT,
     CMB_HIT_FULL
@@ -80,6 +81,15 @@ typedef enum{
     SUB_IZQ_HARD
     
 }   SubEstadoIzq;
+
+typedef enum{
+
+    SUB_DER_INICIO =0,
+    SUB_DER_GIRO,
+    SUB_DER_HARD
+
+}   SubEstadoDer;
+
 
 
 extern unsigned long millis();
@@ -93,3 +103,7 @@ extern volatile unsigned long tiempo_movimiento;
 //IZQ_M
 extern volatile SubEstadoIzq sub_cmb_izq = SUB_IZQ_INICIO;
 extern volatile unsigned long t_cmb_izq = 0;
+
+//DER_M
+extern volatile SubEstadoDer sub_cmb_der = SUB_DER_INICIO;
+extern volatile unsigned long t_cmb_der = 0;

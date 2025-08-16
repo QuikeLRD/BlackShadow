@@ -11,6 +11,7 @@ void REC();
 void REV();
 void DER();
 void DER_Z();
+void DER_M();
 void IZQ();
 void IZQ_M();
 void BRAKE();
@@ -38,7 +39,7 @@ typedef enum {
  CMB_IZQ,
  CMB_HIT,
  CMB_IZQ_GOLPE,
- CMB_DER_HARD,
+ CMB_DER,
  CMB_LIBRE,
  CMB_DER_HIT,
  CMB_HIT_FULL
@@ -50,6 +51,15 @@ typedef enum{
  SUB_IZQ_HARD
 
 } SubEstadoIzq;
+
+typedef enum{
+
+ SUB_DER_INICIO =0,
+ SUB_DER_GIRO,
+ SUB_DER_HARD
+
+} SubEstadoDer;
+
 
 
 extern unsigned long millis();
@@ -63,6 +73,10 @@ extern volatile unsigned long tiempo_movimiento;
 
 extern volatile SubEstadoIzq sub_cmb_izq = SUB_IZQ_INICIO;
 extern volatile unsigned long t_cmb_izq = 0;
+
+
+extern volatile SubEstadoDer sub_cmb_der = SUB_DER_INICIO;
+extern volatile unsigned long t_cmb_der = 0;
 #line 1 "g:/mi unidad/upiita/ar upiita/diseños de minisumos/black shadow/programación/milis.h"
 
 
@@ -83,6 +97,10 @@ volatile unsigned long tiempo_movimiento = 0;
 
 volatile SubEstadoIzq sub_cmb_izq = SUB_IZQ_INICIO;
 volatile unsigned long t_cmb_izq = 0;
+
+
+volatile SubEstadoDer sub_cmb_der = SUB_DER_INICIO;
+volatile unsigned long t_cmb_der = 0;
 
 
 
@@ -243,7 +261,7 @@ void combate_estado() {
  estado_combate = CMB_IZQ_GOLPE;
  }
  else if ( PORTC.F0  == 0 &&  PORTC.F6  == 0 &&  PORTB.F4  == 1){
- estado_combate = CMB_DER_HARD;
+ estado_combate = CMB_DER;
  }
  else if ( PORTC.F0  == 1 &&  PORTC.F6  == 0 &&  PORTB.F4  == 1){
  estado_combate = CMB_LIBRE;
@@ -288,12 +306,9 @@ void combate_estado() {
  estado_combate = CMB_ESPERA;
  break;
 
- case CMB_DER_HARD:
+ case CMB_DER:
   PORTA.F5 =0;  PORTA.F6 = PORTA.F7 = PORTA.F4 =1;
  DER_Z();
- delay_ms(400);
- HARD();
- delay_ms(50);
  estado_combate = CMB_ESPERA;
  break;
 
@@ -526,6 +541,36 @@ void IZQ_M(){
  case SUB_IZQ_HARD:
  if (now - t_cmb_izq >= 100) {
  sub_cmb_izq = SUB_IZQ_INICIO;
+ estado_combate = CMB_ESPERA;
+ } else {
+ HARD();
+ }
+ break;
+ }
+}
+void DER_M(){
+ unsigned long now = millis();
+ switch (sub_cmb_der) {
+
+ case SUB_DER_INICIO:
+ DER();
+ t_cmb_der = now;
+ sub_cmb_der = SUB_DER_GIRO;
+ break;
+
+ case SUB_DER_GIRO:
+ if (now - t_cmb_der >= 100) {
+ HARD();
+ t_cmb_der = now;
+ sub_cmb_der = SUB_DER_HARD;
+ } else {
+ DER();
+ }
+ break;
+
+ case SUB_DER_HARD:
+ if (now - t_cmb_der >= 100) {
+ sub_cmb_der = SUB_DER_INICIO;
  estado_combate = CMB_ESPERA;
  } else {
  HARD();

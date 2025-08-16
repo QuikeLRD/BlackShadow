@@ -1,20 +1,24 @@
 0	1	mikroCPIC1618.exe -MSF -DBG -pP18F26K22 -DL -O11111114 -fo8 -N"G:\Mi unidad\UPIITA\AR UPIITA\Diseños de Minisumos\Black Shadow\Programación\BlackShadow_code.mcppi" -SP"Q:\Programas\MikroCpro\mikroC PRO for PIC\Defs\" -SP"Q:\Programas\MikroCpro\mikroC PRO for PIC\uses\P18\" -SP"G:\Mi unidad\UPIITA\AR UPIITA\Diseños de Minisumos\Black Shadow\Programación\" -IP"Q:\Programas\MikroCpro\mikroC PRO for PIC\uses\P18\" -IP"G:\Mi unidad\UPIITA\AR UPIITA\Diseños de Minisumos\Black Shadow\Programación\" "BlackShadow_code.c" "Configuraciones.c" "millis.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl" "__Lib_CType.mcl" "__Lib_CString.mcl" "__Lib_CStdlib.mcl" "__Lib_CMath.mcl" "__Lib_PWM_c21.mcl" "__Lib_PWM_b50a4.mcl"	 
 hint: 0	1139	Available RAM: 3875 [bytes], Available ROM: 65536 [bytes]	 
 diagnostics: 0	122	Compilation Started	configuraciones.h
-warning: 94	1504	Initialization of extern object 'sub_cmb_izq'	configuraciones.h
-warning: 95	1504	Initialization of extern object 't_cmb_izq'	configuraciones.h
+warning: 104	1504	Initialization of extern object 'sub_cmb_izq'	configuraciones.h
+warning: 105	1504	Initialization of extern object 't_cmb_izq'	configuraciones.h
+warning: 108	1504	Initialization of extern object 'sub_cmb_der'	configuraciones.h
+warning: 109	1504	Initialization of extern object 't_cmb_der'	configuraciones.h
 diagnostics: 94	123	Compiled Successfully	BlackShadow_code.c
 diagnostics: 0	122	Compilation Started	configuraciones.h
-warning: 94	1504	Initialization of extern object 'sub_cmb_izq'	configuraciones.h
-warning: 95	1504	Initialization of extern object 't_cmb_izq'	configuraciones.h
-hint: 217	1171	Statement "HARD;" has no effect, missing "( )" to become function call	Configuraciones.c
-diagnostics: 489	123	Compiled Successfully	Configuraciones.c
+warning: 104	1504	Initialization of extern object 'sub_cmb_izq'	configuraciones.h
+warning: 105	1504	Initialization of extern object 't_cmb_izq'	configuraciones.h
+warning: 108	1504	Initialization of extern object 'sub_cmb_der'	configuraciones.h
+warning: 109	1504	Initialization of extern object 't_cmb_der'	configuraciones.h
+hint: 221	1171	Statement "HARD;" has no effect, missing "( )" to become function call	Configuraciones.c
+diagnostics: 520	123	Compiled Successfully	Configuraciones.c
 diagnostics: 0	122	Compilation Started	milis.h
 diagnostics: 25	123	Compiled Successfully	millis.c
-diagnostics: 0	127	All files Compiled in 1391 ms	 
+diagnostics: 0	127	All files Compiled in 375 ms	 
 hint: 0	1144	Used RAM (bytes): 27 (1%)  Free RAM (bytes): 3848 (99%)	Used RAM (bytes): 27 (1%)  Free RAM (bytes): 3848 (99%)
-hint: 0	1144	Used ROM (bytes): 4174 (6%)  Free ROM (bytes): 61362 (94%)	Used ROM (bytes): 4174 (6%)  Free ROM (bytes): 61362 (94%)
+hint: 0	1144	Used ROM (bytes): 4122 (6%)  Free ROM (bytes): 61414 (94%)	Used ROM (bytes): 4122 (6%)  Free ROM (bytes): 61414 (94%)
 diagnostics: 0	125	Project Linked Successfully	BlackShadow_code.mcppi
-diagnostics: 0	128	Linked in 578 ms	 
-diagnostics: 0	129	Project 'BlackShadow_code.mcppi' completed: 2063 ms	 
-diagnostics: 0	103	Finished successfully: 14 ago. 2025, 17:46:40	BlackShadow_code.mcppi
+diagnostics: 0	128	Linked in 172 ms	 
+diagnostics: 0	129	Project 'BlackShadow_code.mcppi' completed: 578 ms	 
+diagnostics: 0	103	Finished successfully: 16 ago. 2025, 14:13:00	BlackShadow_code.mcppi

@@ -15,6 +15,10 @@ volatile unsigned long tiempo_movimiento = 0;
 volatile SubEstadoIzq sub_cmb_izq = SUB_IZQ_INICIO;
 volatile unsigned long t_cmb_izq = 0;
 
+//VARIABLES GIRO DERECHA
+volatile SubEstadoDer sub_cmb_der = SUB_DER_INICIO;
+volatile unsigned long t_cmb_der = 0;
+
 
 //======================//
 //======Funciones======//
@@ -174,7 +178,7 @@ void combate_estado() {
             estado_combate = CMB_IZQ_GOLPE;
         }
         else if (SL1 == 0 && S2 == 0 && S6 == 1){
-            estado_combate = CMB_DER_HARD;
+            estado_combate = CMB_DER;
         }
         else if (SL1 == 1 && S2 == 0 && S6 == 1){
             estado_combate = CMB_LIBRE;
@@ -219,12 +223,9 @@ void combate_estado() {
         estado_combate = CMB_ESPERA;
         break;
 
-    case CMB_DER_HARD:
+    case CMB_DER:
         L2=0; L0=L1=L3=1;
         DER_Z();
-        delay_ms(400);
-        HARD();
-        delay_ms(50);
         estado_combate = CMB_ESPERA;
         break;
 
@@ -457,6 +458,36 @@ void IZQ_M(){
         case SUB_IZQ_HARD:
             if (now - t_cmb_izq >= 100) {
                 sub_cmb_izq = SUB_IZQ_INICIO;
+                estado_combate = CMB_ESPERA;
+            } else {
+                HARD(); // si necesitas mantener comando
+            }
+            break;
+    }
+}
+void DER_M(){
+        unsigned long now = millis();
+    switch (sub_cmb_der) {
+
+        case SUB_DER_INICIO:
+            DER();
+            t_cmb_der = now;
+            sub_cmb_der = SUB_DER_GIRO;
+            break;
+
+        case SUB_DER_GIRO:
+            if (now - t_cmb_der >= 100) {
+                HARD();
+                t_cmb_der = now;
+                sub_cmb_der = SUB_DER_HARD;
+            } else {
+                DER(); // si necesitas mantener comando
+            }
+            break;
+
+        case SUB_DER_HARD:
+            if (now - t_cmb_der >= 100) {
+                sub_cmb_der = SUB_DER_INICIO;
                 estado_combate = CMB_ESPERA;
             } else {
                 HARD(); // si necesitas mantener comando

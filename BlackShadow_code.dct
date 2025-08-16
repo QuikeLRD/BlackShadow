@@ -624,6 +624,7 @@ delay_80us
 delay_8ms
 delay_cyc
 der
+der_m
 der_z
 dhen
 dhen_bit
@@ -1858,6 +1859,7 @@ strspn
 strstr
 strtok
 sub_32x32_fp
+sub_cmb_der
 sub_cmb_izq
 swap
 swdte
@@ -1871,6 +1873,7 @@ sync1
 sync1_bit
 sync2
 sync2_bit
+t_cmb_der
 t_cmb_izq
 t08bit
 t08bit_bit
