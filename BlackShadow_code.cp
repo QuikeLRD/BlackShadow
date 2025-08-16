@@ -8,6 +8,7 @@ void HARD();
 void PUSH();
 
 void REC();
+void REC_M();
 void REV();
 void DER();
 void DER_Z();
@@ -59,8 +60,13 @@ typedef enum{
  SUB_DER_HARD
 
 } SubEstadoDer;
+typedef enum{
+ SUB_REC_INICIO =0,
+ SUB_REC_REC,
+ SUB_REC_LIBRE,
+ SUB_REC_FIN
 
-
+} SubEstadoREC;
 
 extern unsigned long millis();
 extern volatile unsigned long ms_ticks;
@@ -77,6 +83,10 @@ extern volatile unsigned long t_cmb_izq = 0;
 
 extern volatile SubEstadoDer sub_cmb_der = SUB_DER_INICIO;
 extern volatile unsigned long t_cmb_der = 0;
+
+
+extern volatile SubEstadoREC sub_cmb_rec = SUB_REC_INICIO;
+extern volatile unsigned long t_cmb_rec = 0;
 #line 1 "g:/mi unidad/upiita/ar upiita/diseños de minisumos/black shadow/programación/milis.h"
 
 

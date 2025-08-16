@@ -19,6 +19,9 @@ volatile unsigned long t_cmb_izq = 0;
 volatile SubEstadoDer sub_cmb_der = SUB_DER_INICIO;
 volatile unsigned long t_cmb_der = 0;
 
+//VARIABLES RECTO
+volatile unsigned long t_cmb_rec = 0;
+volatile SubEstadoREC sub_cmb_rec = SUB_REC_INICIO;
 
 //======================//
 //======Funciones======//
@@ -92,10 +95,10 @@ void SELEC(){
    break;
 
    case 3: L0=L1=0; L2=L3==1;
-        DER_Z();
-        delay_ms(400);
+        REC();
+        delay_ms(2000);
         HARD();
-        delay_ms(50);
+        delay_ms(500);
 
 
 
@@ -196,11 +199,7 @@ void combate_estado() {
 
     case CMB_REC:
         L0=L1=L2=L3=1;
-        REC();
-        delay_ms(250);
-        LIBRE();
-        delay_ms(200);
-        estado_combate = CMB_ESPERA;
+        REC_M();
         break;
 
     case CMB_IZQ:
@@ -282,7 +281,7 @@ void REC(){
 
     Start();
      // Motor I (PWM1 y PWM2)
-    PWM1_Set_Duty(170); // IN1 = PWM
+    PWM1_Set_Duty(200); // IN1 = PWM
     PWM2_Set_Duty(0);
 
     // Motor D (PWM3 y PWM4)
@@ -492,6 +491,35 @@ void DER_M(){
             } else {
                 HARD(); // si necesitas mantener comando
             }
+            break;
+    }
+}
+void REC_M() {
+    unsigned long now = millis();
+    switch (sub_cmb_rec) {
+        case SUB_REC_INICIO:
+            REC();
+            t_cmb_rec = now;
+            sub_cmb_rec = SUB_REC_REC;
+            break;
+
+        case SUB_REC_REC:
+            if (now - t_cmb_rec >= 50) { // Espera 250 ms
+                LIBRE();
+                t_cmb_rec = now;
+                sub_cmb_rec = SUB_REC_LIBRE;
+            }
+            break;
+
+        case SUB_REC_LIBRE:
+            if (now - t_cmb_rec >= 100) { // Espera 200 ms
+                sub_cmb_rec = SUB_REC_FIN;
+            }
+            break;
+
+        case SUB_REC_FIN:
+            estado_combate = CMB_ESPERA;
+            sub_cmb_rec = SUB_REC_INICIO; // Reinicia para próxima vez
             break;
     }
 }

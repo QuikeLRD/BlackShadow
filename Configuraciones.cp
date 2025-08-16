@@ -8,6 +8,7 @@ void HARD();
 void PUSH();
 
 void REC();
+void REC_M();
 void REV();
 void DER();
 void DER_Z();
@@ -59,8 +60,13 @@ typedef enum{
  SUB_DER_HARD
 
 } SubEstadoDer;
+typedef enum{
+ SUB_REC_INICIO =0,
+ SUB_REC_REC,
+ SUB_REC_LIBRE,
+ SUB_REC_FIN
 
-
+} SubEstadoREC;
 
 extern unsigned long millis();
 extern volatile unsigned long ms_ticks;
@@ -77,6 +83,10 @@ extern volatile unsigned long t_cmb_izq = 0;
 
 extern volatile SubEstadoDer sub_cmb_der = SUB_DER_INICIO;
 extern volatile unsigned long t_cmb_der = 0;
+
+
+extern volatile SubEstadoREC sub_cmb_rec = SUB_REC_INICIO;
+extern volatile unsigned long t_cmb_rec = 0;
 #line 1 "g:/mi unidad/upiita/ar upiita/diseños de minisumos/black shadow/programación/milis.h"
 
 
@@ -102,6 +112,9 @@ volatile unsigned long t_cmb_izq = 0;
 volatile SubEstadoDer sub_cmb_der = SUB_DER_INICIO;
 volatile unsigned long t_cmb_der = 0;
 
+
+volatile unsigned long t_cmb_rec = 0;
+volatile SubEstadoREC sub_cmb_rec = SUB_REC_INICIO;
 
 
 
@@ -175,10 +188,10 @@ void SELEC(){
  break;
 
  case 3:  PORTA.F6 = PORTA.F7 =0;  PORTA.F5 = PORTA.F4 ==1;
- DER_Z();
- delay_ms(400);
+ REC();
+ delay_ms(2000);
  HARD();
- delay_ms(50);
+ delay_ms(500);
 
 
 
@@ -279,11 +292,7 @@ void combate_estado() {
 
  case CMB_REC:
   PORTA.F6 = PORTA.F7 = PORTA.F5 = PORTA.F4 =1;
- REC();
- delay_ms(250);
- LIBRE();
- delay_ms(200);
- estado_combate = CMB_ESPERA;
+ REC_M();
  break;
 
  case CMB_IZQ:
@@ -365,7 +374,7 @@ void REC(){
 
  Start();
 
- PWM1_Set_Duty(170);
+ PWM1_Set_Duty(200);
  PWM2_Set_Duty(0);
 
 
@@ -575,6 +584,35 @@ void DER_M(){
  } else {
  HARD();
  }
+ break;
+ }
+}
+void REC_M() {
+ unsigned long now = millis();
+ switch (sub_cmb_rec) {
+ case SUB_REC_INICIO:
+ REC();
+ t_cmb_rec = now;
+ sub_cmb_rec = SUB_REC_REC;
+ break;
+
+ case SUB_REC_REC:
+ if (now - t_cmb_rec >= 50) {
+ LIBRE();
+ t_cmb_rec = now;
+ sub_cmb_rec = SUB_REC_LIBRE;
+ }
+ break;
+
+ case SUB_REC_LIBRE:
+ if (now - t_cmb_rec >= 100) {
+ sub_cmb_rec = SUB_REC_FIN;
+ }
+ break;
+
+ case SUB_REC_FIN:
+ estado_combate = CMB_ESPERA;
+ sub_cmb_rec = SUB_REC_INICIO;
  break;
  }
 }

@@ -38,6 +38,7 @@ void HARD();
 void PUSH();
 
 void REC();
+void REC_M();
 void REV();
 void DER();
 void DER_Z();
@@ -62,7 +63,7 @@ typedef enum {
     MOV_HIT_REC,
     MOV_HIT_PUSH
 } EstadoMovimiento;
-
+//ENUM PARA MAQUINA DE COMBATES
 typedef enum {
     CMB_ESPERA,
     CMB_REC,
@@ -74,14 +75,14 @@ typedef enum {
     CMB_DER_HIT,
     CMB_HIT_FULL
 } EstadoCombate;
-
+//ENUM PARA GIRO IZQ
 typedef enum{
     SUB_IZQ_INICIO =0,
     SUB_IZQ_GIRO,
     SUB_IZQ_HARD
     
 }   SubEstadoIzq;
-
+//ENUM PARA GIRO DERECHO
 typedef enum{
 
     SUB_DER_INICIO =0,
@@ -89,8 +90,13 @@ typedef enum{
     SUB_DER_HARD
 
 }   SubEstadoDer;
+typedef enum{
+    SUB_REC_INICIO =0,
+    SUB_REC_REC,
+    SUB_REC_LIBRE,
+    SUB_REC_FIN
 
-
+}   SubEstadoREC;
 
 extern unsigned long millis();
 extern volatile unsigned long ms_ticks;
@@ -107,3 +113,7 @@ extern volatile unsigned long t_cmb_izq = 0;
 //DER_M
 extern volatile SubEstadoDer sub_cmb_der = SUB_DER_INICIO;
 extern volatile unsigned long t_cmb_der = 0;
+
+//REC
+extern volatile SubEstadoREC sub_cmb_rec = SUB_REC_INICIO;
+extern volatile unsigned long t_cmb_rec = 0;
