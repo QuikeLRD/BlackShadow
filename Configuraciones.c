@@ -27,6 +27,13 @@ volatile SubEstadoREC sub_cmb_rec = SUB_REC_INICIO;
 volatile unsigned long t_cmb_izq_giro =0;
 volatile SubEstadoIZQ_GIRO sub_cmb_izq_giro = SUB_IZQ_GIRO;
 
+//VARIABLES GIRO DERECHA
+volatile unsigned long t_cmb_der_giro =0;
+volatile SubEstadoDER_GIRO sub_cmb_der_giro = SUB_DER_GIRO_INICIO;
+
+//VARIABLES BUSCAR
+volatile unsigned long t_cmb_buscar = 0;
+volatile SubEstadoBUSCAR sub_cmb_buscar = SUB_BUSCAR_IZQ;
 
 //======================//
 //======Funciones======//
@@ -189,7 +196,9 @@ void combate_estado() {
             estado_combate = CMB_DER;
         }
         else if (SL1 == 1 && S2 == 0 && S6 == 1){
-            estado_combate = CMB_LIBRE;
+            estado_combate = CMB_BUSCAR;
+            sub_cmb_buscar = SUB_BUSCAR_IZQ;
+            t_cmb_buscar = millis();
         }
         else if (SL1 == 0 && S2 == 1 && S6 == 1){
             estado_combate = CMB_DER_HIT;
@@ -227,19 +236,14 @@ void combate_estado() {
         DER_M();
         break;
 
-    case CMB_LIBRE:
+    case CMB_BUSCAR:
         L0=L2=0; L1=L3=1;
-        LIBRE();
-        estado_combate = CMB_ESPERA;
+        BUSCAR();
         break;
 
     case CMB_DER_HIT:
         L1=L2=0; L0=L3=1;
-        DER_Z();
-        delay_ms(400);
-        HARD();
-        delay_ms(50);
-        estado_combate = CMB_ESPERA;
+        DER_GIRO();
         break;
 
     case CMB_HIT_FULL:
@@ -556,6 +560,50 @@ unsigned long now = millis();
             HIT_NO_BLOQUEANTE(); // función de ataque
             estado_combate = CMB_ESPERA;
             sub_cmb_izq_giro = SUB_IZQ_GIRO; // Reinicia para próxima vez
+            break;
+    }
+}
+void DER_GIRO(){
+unsigned long now = millis();
+    switch(sub_cmb_der_giro){
+        case SUB_DER_GIRO_INICIO:
+            DER();
+            t_cmb_der_giro = now;
+            sub_cmb_der_giro = SUB_DER_BUSCAR_CENTRO;
+            break;
+        
+        case SUB_DER_BUSCAR_CENTRO:
+            if(SL1 ==0 && S2 ==1 && S6==0){
+               sub_cmb_der_giro = SUB_DER_ATAQUE;
+            }
+            break;
+        
+        case SUB_DER_ATAQUE:
+            HIT_NO_BLOQUEANTE();
+            estado_combate = CMB_ESPERA;
+            sub_cmb_der_giro = SUB_DER_GIRO_INICIO;
+            break;
+    }
+
+}
+void BUSCAR(){
+    switch (sub_cmb_buscar) {
+        case SUB_BUSCAR_IZQ:
+            IZQ(); // Ejecuta giro izquierda
+            if (S2 == 1) { // Rival al frente detectado
+                estado_combate = CMB_HIT;
+            } else if (millis() - t_cmb_buscar > T_BUSCAR_GIRO_MS) {
+                sub_cmb_buscar = SUB_BUSCAR_DER;
+                t_cmb_buscar = millis();
+            }
+            break;
+        case SUB_BUSCAR_DER:
+            DER(); // Ejecuta giro derecha
+            if (S2 == 1) { // Rival al frente detectado
+                estado_combate = CMB_HIT;
+            } else if (millis() - t_cmb_buscar > T_BUSCAR_GIRO_MS) {
+                estado_combate = CMB_ESPERA; // O vuelve a búsqueda, como prefieras
+            }
             break;
     }
 }

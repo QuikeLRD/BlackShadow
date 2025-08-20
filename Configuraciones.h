@@ -27,7 +27,7 @@
 
 
 #define MAX_GIRO_IZQ_MS 250                   // Ajusta: tiempo máximo de giro si no hay detección
-
+#define T_BUSCAR_GIRO_MS 200                  // Tiempo para cada giro antes de alternar
 //==========================//
 //==Prototipos de función==//
 //========================//
@@ -42,6 +42,7 @@ void REC_M();
 void REV();
 void DER();
 void DER_Z();
+void DER_GIRO();
 void DER_M();
 void IZQ();
 void IZQ_M();
@@ -57,6 +58,7 @@ void INTERRUPT();
 void INTERRUPT_ISR();
 void combate_estado();
 void LOGICA_LINEA();
+void BUSCAR();
 
 
 // Definición de enums
@@ -73,7 +75,7 @@ typedef enum {
     CMB_HIT,
     CMB_IZQ_GOLPE,
     CMB_DER,
-    CMB_LIBRE,
+    CMB_BUSCAR,
     CMB_DER_HIT,
     CMB_HIT_FULL
 } EstadoCombate;
@@ -106,6 +108,19 @@ typedef enum{
 
 }   SubEstadoIZQ_GIRO;
 
+typedef enum{
+    SUB_DER_GIRO_INICIO,
+    SUB_DER_BUSCAR_CENTRO,
+    SUB_DER_ATAQUE
+    
+}   SubEstadoDER_GIRO;
+
+typedef enum{
+    SUB_BUSCAR_IZQ,
+    SUB_BUSCAR_DER
+
+}   SubEstadoBUSCAR;
+
 extern unsigned long millis();
 extern volatile unsigned long ms_ticks;
 
@@ -129,3 +144,11 @@ extern volatile unsigned long t_cmb_rec = 0;
 //IZQ_GIRO
 extern volatile SubEstadoIZQ_GIRO sub_cmb_izq_giro = SUB_IZQ_GIRO_INICIO;
 extern volatile unsigned long t_cmb_izq_giro = 0;
+
+//DER_GIRO
+extern volatile SubEstadoDER_GIRO sub_cmb_der_giro = SUB_DER_GIRO_INICIO;
+extern volatile unsigned long t_cmb_der_giro = 0;
+
+//BUSCAR
+extern volatile SubEstadoBUSCAR sub_cmb_buscar = SUB_BUSCAR_IZQ;
+extern volatile unsigned long t_cmb_buscar = 0;

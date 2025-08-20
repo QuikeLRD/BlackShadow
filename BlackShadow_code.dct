@@ -219,6 +219,7 @@ brgh1_bit
 brgh2
 brgh2_bit
 bsr
+buscar
 byte2double
 c
 c_bit
@@ -624,6 +625,7 @@ delay_80us
 delay_8ms
 delay_cyc
 der
+der_giro
 der_m
 der_z
 dhen
@@ -1861,7 +1863,9 @@ strspn
 strstr
 strtok
 sub_32x32_fp
+sub_cmb_buscar
 sub_cmb_der
+sub_cmb_der_giro
 sub_cmb_izq
 sub_cmb_izq_giro
 sub_cmb_rec
@@ -1877,7 +1881,9 @@ sync1
 sync1_bit
 sync2
 sync2_bit
+t_cmb_buscar
 t_cmb_der
+t_cmb_der_giro
 t_cmb_izq
 t_cmb_izq_giro
 t_cmb_rec
