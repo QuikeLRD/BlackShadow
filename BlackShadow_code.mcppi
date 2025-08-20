@@ -37,10 +37,10 @@ Count=0
 ActiveImageIndex=-1
 [OPENED_FILES]
 File0=BlackShadow_code.c
-File1=Configuraciones.h
-File2=Configuraciones.c
-File3=millis.c
-File4=milis.h
+File1=Configuraciones.c
+File2=millis.c
+File3=milis.h
+File4=Configuraciones.h
 Count=5
 [EEPROM]
 Count=0
@@ -74,4 +74,4 @@ Count=3
 [LIB_EXPANDED_NODES]
 0=mikroE Libraries
 1=System Libraries
-Count=2
+Count=3

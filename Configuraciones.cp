@@ -320,7 +320,6 @@ void combate_estado() {
  case CMB_HIT:
   PORTA.F7 =0;  PORTA.F6 = PORTA.F5 = PORTA.F4 =1;
  HIT_NO_BLOQUEANTE();
- estado_combate = CMB_ESPERA;
  break;
 
  case CMB_IZQ_GOLPE:
@@ -659,7 +658,7 @@ unsigned long now = millis();
 
  case SUB_IZQ_ATAQUE:
 
- HIT();
+ HIT_NO_BLOQUEANTE();
  estado_combate = CMB_ESPERA;
  sub_cmb_izq_giro = SUB_IZQ_GIRO;
  break;
