@@ -23,6 +23,11 @@ volatile unsigned long t_cmb_der = 0;
 volatile unsigned long t_cmb_rec = 0;
 volatile SubEstadoREC sub_cmb_rec = SUB_REC_INICIO;
 
+//VARIABLES GIRO IZQUIERDA
+volatile unsigned long t_cmb_izq_giro =0;
+volatile SubEstadoIZQ_GIRO sub_cmb_izq_giro = SUB_IZQ_GIRO;
+
+
 //======================//
 //======Funciones======//
 //====================//
@@ -215,11 +220,7 @@ void combate_estado() {
 
     case CMB_IZQ_GOLPE:
         L0=L1=0; L2=L3=1;
-        IZQ();
-        delay_ms(20);
-        HARD;
-        delay_ms(100);
-        estado_combate = CMB_ESPERA;
+        IZQ_GIRO();
         break;
 
     case CMB_DER:
@@ -531,6 +532,31 @@ void REC_M() {
         case SUB_REC_FIN:
             estado_combate = CMB_ESPERA;
             sub_cmb_rec = SUB_REC_INICIO; // Reinicia para próxima vez
+            break;
+    }
+}
+void IZQ_GIRO(){
+unsigned long now = millis();
+    switch (sub_cmb_izq_giro) {
+        case SUB_IZQ_GIRO:
+            // Girar a la izquierda por cierto tiempo
+            IZQ(); // función de giro izquierda
+            t_cmb_izq_giro = now;
+            sub_cmb_izq_giro = SUB_IZQ_BUSCAR_CENTRO;
+            break;
+
+        case SUB_IZQ_BUSCAR_CENTRO:
+            // Espera a que solo S2 detecte
+            if (SL1 == 0 && S2 == 1 && S6 == 0) {
+                sub_cmb_izq_giro = SUB_IZQ_ATAQUE;
+            }
+            break;
+
+        case SUB_IZQ_ATAQUE:
+            // Ataque fuerte
+            HIT(); // función de ataque
+            estado_combate = CMB_ESPERA;
+            sub_cmb_izq_giro = SUB_IZQ_GIRO; // Reinicia para próxima vez
             break;
     }
 }

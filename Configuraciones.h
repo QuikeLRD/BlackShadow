@@ -45,6 +45,8 @@ void DER_Z();
 void DER_M();
 void IZQ();
 void IZQ_M();
+void IZQ_GIRO();
+
 void BRAKE();
 void LIBRE();
 void GIRO180();
@@ -97,6 +99,12 @@ typedef enum{
     SUB_REC_FIN
 
 }   SubEstadoREC;
+typedef enum{
+    SUB_IZQ_GIRO_INICIO,
+    SUB_IZQ_BUSCAR_CENTRO,
+    SUB_IZQ_ATAQUE
+
+}   SubEstadoIZQ_GIRO;
 
 extern unsigned long millis();
 extern volatile unsigned long ms_ticks;
@@ -117,3 +125,7 @@ extern volatile unsigned long t_cmb_der = 0;
 //REC
 extern volatile SubEstadoREC sub_cmb_rec = SUB_REC_INICIO;
 extern volatile unsigned long t_cmb_rec = 0;
+
+//IZQ_GIRO
+extern volatile SubEstadoIZQ_GIRO sub_cmb_izq_giro = SUB_IZQ_GIRO_INICIO;
+extern volatile unsigned long t_cmb_izq_giro = 0;

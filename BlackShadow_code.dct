@@ -920,6 +920,7 @@ itrim5_bit
 ivrst
 ivrst_bit
 izq
+izq_giro
 izq_m
 kbi0
 kbi0_bit
@@ -1862,6 +1863,7 @@ strtok
 sub_32x32_fp
 sub_cmb_der
 sub_cmb_izq
+sub_cmb_izq_giro
 sub_cmb_rec
 swap
 swdte
@@ -1877,6 +1879,7 @@ sync2
 sync2_bit
 t_cmb_der
 t_cmb_izq
+t_cmb_izq_giro
 t_cmb_rec
 t08bit
 t08bit_bit

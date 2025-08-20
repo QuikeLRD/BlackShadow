@@ -15,6 +15,8 @@ void DER_Z();
 void DER_M();
 void IZQ();
 void IZQ_M();
+void IZQ_GIRO();
+
 void BRAKE();
 void LIBRE();
 void GIRO180();
@@ -67,6 +69,12 @@ typedef enum{
  SUB_REC_FIN
 
 } SubEstadoREC;
+typedef enum{
+ SUB_IZQ_GIRO_INICIO,
+ SUB_IZQ_BUSCAR_CENTRO,
+ SUB_IZQ_ATAQUE
+
+} SubEstadoIZQ_GIRO;
 
 extern unsigned long millis();
 extern volatile unsigned long ms_ticks;
@@ -87,6 +95,10 @@ extern volatile unsigned long t_cmb_der = 0;
 
 extern volatile SubEstadoREC sub_cmb_rec = SUB_REC_INICIO;
 extern volatile unsigned long t_cmb_rec = 0;
+
+
+extern volatile SubEstadoIZQ_GIRO sub_cmb_izq_giro = SUB_IZQ_GIRO_INICIO;
+extern volatile unsigned long t_cmb_izq_giro = 0;
 #line 1 "g:/mi unidad/upiita/ar upiita/diseños de minisumos/black shadow/programación/milis.h"
 
 
@@ -115,6 +127,11 @@ volatile unsigned long t_cmb_der = 0;
 
 volatile unsigned long t_cmb_rec = 0;
 volatile SubEstadoREC sub_cmb_rec = SUB_REC_INICIO;
+
+
+volatile unsigned long t_cmb_izq_giro =0;
+volatile SubEstadoIZQ_GIRO sub_cmb_izq_giro = SUB_IZQ_GIRO;
+
 
 
 
@@ -308,11 +325,7 @@ void combate_estado() {
 
  case CMB_IZQ_GOLPE:
   PORTA.F6 = PORTA.F7 =0;  PORTA.F5 = PORTA.F4 =1;
- IZQ();
- delay_ms(20);
- HARD;
- delay_ms(100);
- estado_combate = CMB_ESPERA;
+ IZQ_GIRO();
  break;
 
  case CMB_DER:
@@ -624,6 +637,31 @@ void REC_M() {
  case SUB_REC_FIN:
  estado_combate = CMB_ESPERA;
  sub_cmb_rec = SUB_REC_INICIO;
+ break;
+ }
+}
+void IZQ_GIRO(){
+unsigned long now = millis();
+ switch (sub_cmb_izq_giro) {
+ case SUB_IZQ_GIRO:
+
+ IZQ();
+ t_cmb_izq_giro = now;
+ sub_cmb_izq_giro = SUB_IZQ_BUSCAR_CENTRO;
+ break;
+
+ case SUB_IZQ_BUSCAR_CENTRO:
+
+ if ( PORTC.F0  == 0 &&  PORTC.F6  == 1 &&  PORTB.F4  == 0) {
+ sub_cmb_izq_giro = SUB_IZQ_ATAQUE;
+ }
+ break;
+
+ case SUB_IZQ_ATAQUE:
+
+ HIT();
+ estado_combate = CMB_ESPERA;
+ sub_cmb_izq_giro = SUB_IZQ_GIRO;
  break;
  }
 }
