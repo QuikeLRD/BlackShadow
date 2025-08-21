@@ -248,13 +248,13 @@ void combate_estado() {
 
     case CMB_HIT_FULL:
         L0=L1=L2=0; L3=1;
-        HIT();
-        estado_combate = CMB_ESPERA;
+        HIT_NO_BLOQUEANTE();
         break;
 
     default:
-        LIBRE();
-        estado_combate = CMB_ESPERA;
+        LIBRE(); // Detén motores, ponlo en modo seguro
+        estado_combate = CMB_ESPERA; // Vuelve a esperar nueva condición
+        estado_movimiento = MOV_IDLE; // Resetea movimiento si lo usas
         break;
     }
 }

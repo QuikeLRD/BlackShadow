@@ -376,13 +376,13 @@ void combate_estado() {
 
  case CMB_HIT_FULL:
   PORTA.F6 = PORTA.F7 = PORTA.F5 =0;  PORTA.F4 =1;
- HIT();
- estado_combate = CMB_ESPERA;
+ HIT_NO_BLOQUEANTE();
  break;
 
  default:
  LIBRE();
  estado_combate = CMB_ESPERA;
+ estado_movimiento = MOV_IDLE;
  break;
  }
 }

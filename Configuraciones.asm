@@ -1174,18 +1174,18 @@ L__combate_estado306:
 	BSF         PORTA+0, 6 
 L__combate_estado307:
 	BSF         PORTA+0, 4 
-;Configuraciones.c,251 :: 		HIT();
-	CALL        _HIT+0, 0
-;Configuraciones.c,252 :: 		estado_combate = CMB_ESPERA;
-	CLRF        _estado_combate+0 
-;Configuraciones.c,253 :: 		break;
+;Configuraciones.c,251 :: 		HIT_NO_BLOQUEANTE();
+	CALL        _HIT_NO_BLOQUEANTE+0, 0
+;Configuraciones.c,252 :: 		break;
 	GOTO        L_combate_estado44
-;Configuraciones.c,255 :: 		default:
+;Configuraciones.c,254 :: 		default:
 L_combate_estado86:
-;Configuraciones.c,256 :: 		LIBRE();
+;Configuraciones.c,255 :: 		LIBRE(); // Detén motores, ponlo en modo seguro
 	CALL        _LIBRE+0, 0
-;Configuraciones.c,257 :: 		estado_combate = CMB_ESPERA;
+;Configuraciones.c,256 :: 		estado_combate = CMB_ESPERA; // Vuelve a esperar nueva condición
 	CLRF        _estado_combate+0 
+;Configuraciones.c,257 :: 		estado_movimiento = MOV_IDLE; // Resetea movimiento si lo usas
+	CLRF        _estado_movimiento+0 
 ;Configuraciones.c,258 :: 		break;
 	GOTO        L_combate_estado44
 ;Configuraciones.c,259 :: 		}
