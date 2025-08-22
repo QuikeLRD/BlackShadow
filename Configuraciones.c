@@ -75,7 +75,7 @@ void SELEC(){
 
 
    break;
-
+    //S4 IZQ  S3 DER
    case 1: L0=0; L3=L2=L1=1;
     if(S4 != 0 && S3 != 0){
         REC();
@@ -89,14 +89,16 @@ void SELEC(){
     else if (S3 == 0){
         HARD();
         delay_ms(100);
-        GIRO360();
+        IZQ();                         //de la Izquierda
         delay_ms(100);
+        HARD();
     }
     else if (S4 == 0){
         HARD();
         delay_ms(100);
         DER();
         delay_ms(100);
+        HARD();
     }
 
    break;
@@ -321,6 +323,17 @@ void IZQ(){
      PWM4_Set_Duty(0);
      }
 
+void IZQ_L(){
+     Start();
+     PWM1_Set_Duty(0);
+     PWM2_Set_Duty(0);
+
+     PWM3_Set_Duty(180);
+     PWM4_Set_Duty(0);
+
+}
+     
+
 void REV(){
      Start();
      PWM1_Set_Duty(0);
@@ -342,15 +355,10 @@ void LIBRE(){
 
 void GIRO180(){
      Start();
-
      PWM1_Set_Duty(0);
      PWM2_Set_Duty(0);
-
      PWM3_Set_Duty(0);
      PWM4_Set_Duty(180);
-     delay_ms(200);
-     HARD();
-
 
 }
 

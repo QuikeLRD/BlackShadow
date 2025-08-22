@@ -17,6 +17,7 @@ void DER_M();
 void IZQ();
 void IZQ_M();
 void IZQ_GIRO();
+void IZQ_L();
 
 void BRAKE();
 void LIBRE();
@@ -217,14 +218,16 @@ void SELEC(){
  else if ( PORTB.F1  == 0){
  HARD();
  delay_ms(100);
- GIRO360();
+ IZQ();
  delay_ms(100);
+ HARD();
  }
  else if ( PORTB.F2  == 0){
  HARD();
  delay_ms(100);
  DER();
  delay_ms(100);
+ HARD();
  }
 
  break;
@@ -449,6 +452,17 @@ void IZQ(){
  PWM4_Set_Duty(0);
  }
 
+void IZQ_L(){
+ Start();
+ PWM1_Set_Duty(0);
+ PWM2_Set_Duty(0);
+
+ PWM3_Set_Duty(180);
+ PWM4_Set_Duty(0);
+
+}
+
+
 void REV(){
  Start();
  PWM1_Set_Duty(0);
@@ -470,15 +484,10 @@ void LIBRE(){
 
 void GIRO180(){
  Start();
-
  PWM1_Set_Duty(0);
  PWM2_Set_Duty(0);
-
  PWM3_Set_Duty(0);
  PWM4_Set_Duty(180);
- delay_ms(200);
- HARD();
-
 
 }
 
