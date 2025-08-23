@@ -626,6 +626,7 @@ delay_8ms
 delay_cyc
 der
 der_giro
+der_l
 der_m
 der_z
 dhen

@@ -48,6 +48,7 @@ void IZQ();
 void IZQ_M();
 void IZQ_GIRO();
 void IZQ_L();
+void DER_L();
 
 void BRAKE();
 void LIBRE();

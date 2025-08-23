@@ -191,25 +191,65 @@ L__SELEC198:
 	BTFSS       PORTB+0, 1 
 	GOTO        L_SELEC9
 L__SELEC170:
-;Configuraciones.c,81 :: 		REC();
+;Configuraciones.c,81 :: 		L0=L3=L2=L1=1;
+	BSF         PORTA+0, 7 
+	BTFSC       PORTA+0, 7 
+	GOTO        L__SELEC199
+	BCF         PORTA+0, 5 
+	GOTO        L__SELEC200
+L__SELEC199:
+	BSF         PORTA+0, 5 
+L__SELEC200:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__SELEC201
+	BCF         PORTA+0, 4 
+	GOTO        L__SELEC202
+L__SELEC201:
+	BSF         PORTA+0, 4 
+L__SELEC202:
+	BTFSC       PORTA+0, 4 
+	GOTO        L__SELEC203
+	BCF         PORTA+0, 6 
+	GOTO        L__SELEC204
+L__SELEC203:
+	BSF         PORTA+0, 6 
+L__SELEC204:
+;Configuraciones.c,83 :: 		REC();
 	CALL        _REC+0, 0
-;Configuraciones.c,82 :: 		}
+;Configuraciones.c,84 :: 		}
 	GOTO        L_SELEC10
 L_SELEC9:
-;Configuraciones.c,83 :: 		else if(S4 == 0 && S3 == 0){
+;Configuraciones.c,85 :: 		else if(S4 == 0 && S3 == 0){
 	BTFSC       PORTB+0, 2 
 	GOTO        L_SELEC13
 	BTFSC       PORTB+0, 1 
 	GOTO        L_SELEC13
 L__SELEC169:
-;Configuraciones.c,84 :: 		HARD();
-	CALL        _HARD+0, 0
-;Configuraciones.c,85 :: 		delay_ms(100);
-	MOVLW       2
-	MOVWF       R11, 0
+;Configuraciones.c,86 :: 		L0=L3=1; L2=L1=0;
+	BSF         PORTA+0, 4 
+	BTFSC       PORTA+0, 4 
+	GOTO        L__SELEC205
+	BCF         PORTA+0, 6 
+	GOTO        L__SELEC206
+L__SELEC205:
+	BSF         PORTA+0, 6 
+L__SELEC206:
+	BCF         PORTA+0, 7 
+	BTFSC       PORTA+0, 7 
+	GOTO        L__SELEC207
+	BCF         PORTA+0, 5 
+	GOTO        L__SELEC208
+L__SELEC207:
+	BSF         PORTA+0, 5 
+L__SELEC208:
+;Configuraciones.c,87 :: 		GIRO180();
+	CALL        _GIRO180+0, 0
+;Configuraciones.c,88 :: 		delay_ms(300);
 	MOVLW       4
+	MOVWF       R11, 0
+	MOVLW       12
 	MOVWF       R12, 0
-	MOVLW       186
+	MOVLW       51
 	MOVWF       R13, 0
 L_SELEC14:
 	DECFSZ      R13, 1, 1
@@ -219,9 +259,10 @@ L_SELEC14:
 	DECFSZ      R11, 1, 1
 	BRA         L_SELEC14
 	NOP
-;Configuraciones.c,86 :: 		GIRO180();
-	CALL        _GIRO180+0, 0
-;Configuraciones.c,87 :: 		delay_ms(100);
+	NOP
+;Configuraciones.c,89 :: 		HARD();
+	CALL        _HARD+0, 0
+;Configuraciones.c,90 :: 		delay_ms(100);
 	MOVLW       2
 	MOVWF       R11, 0
 	MOVLW       4
@@ -236,15 +277,32 @@ L_SELEC15:
 	DECFSZ      R11, 1, 1
 	BRA         L_SELEC15
 	NOP
-;Configuraciones.c,88 :: 		}
+;Configuraciones.c,93 :: 		}
 	GOTO        L_SELEC16
 L_SELEC13:
-;Configuraciones.c,89 :: 		else if (S3 == 0){
+;Configuraciones.c,94 :: 		else if (S3 == 0){
 	BTFSC       PORTB+0, 1 
 	GOTO        L_SELEC17
-;Configuraciones.c,90 :: 		HARD();
+;Configuraciones.c,95 :: 		L2=0; L0=L3=L1=1;
+	BCF         PORTA+0, 5 
+	BSF         PORTA+0, 7 
+	BTFSC       PORTA+0, 7 
+	GOTO        L__SELEC209
+	BCF         PORTA+0, 4 
+	GOTO        L__SELEC210
+L__SELEC209:
+	BSF         PORTA+0, 4 
+L__SELEC210:
+	BTFSC       PORTA+0, 4 
+	GOTO        L__SELEC211
+	BCF         PORTA+0, 6 
+	GOTO        L__SELEC212
+L__SELEC211:
+	BSF         PORTA+0, 6 
+L__SELEC212:
+;Configuraciones.c,96 :: 		HARD();
 	CALL        _HARD+0, 0
-;Configuraciones.c,91 :: 		delay_ms(100);
+;Configuraciones.c,97 :: 		delay_ms(100);
 	MOVLW       2
 	MOVWF       R11, 0
 	MOVLW       4
@@ -259,9 +317,9 @@ L_SELEC18:
 	DECFSZ      R11, 1, 1
 	BRA         L_SELEC18
 	NOP
-;Configuraciones.c,92 :: 		IZQ();                         //de la Izquierda
-	CALL        _IZQ+0, 0
-;Configuraciones.c,93 :: 		delay_ms(100);
+;Configuraciones.c,98 :: 		IZQ_L();
+	CALL        _IZQ_L+0, 0
+;Configuraciones.c,99 :: 		delay_ms(100);
 	MOVLW       2
 	MOVWF       R11, 0
 	MOVLW       4
@@ -276,17 +334,32 @@ L_SELEC19:
 	DECFSZ      R11, 1, 1
 	BRA         L_SELEC19
 	NOP
-;Configuraciones.c,94 :: 		HARD();
-	CALL        _HARD+0, 0
-;Configuraciones.c,95 :: 		}
+;Configuraciones.c,103 :: 		}
 	GOTO        L_SELEC20
 L_SELEC17:
-;Configuraciones.c,96 :: 		else if (S4 == 0){
+;Configuraciones.c,104 :: 		else if (S4 == 0){
 	BTFSC       PORTB+0, 2 
 	GOTO        L_SELEC21
-;Configuraciones.c,97 :: 		HARD();
+;Configuraciones.c,105 :: 		L0=0; L3=L2=L1=1;
+	BCF         PORTA+0, 6 
+	BSF         PORTA+0, 7 
+	BTFSC       PORTA+0, 7 
+	GOTO        L__SELEC213
+	BCF         PORTA+0, 5 
+	GOTO        L__SELEC214
+L__SELEC213:
+	BSF         PORTA+0, 5 
+L__SELEC214:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__SELEC215
+	BCF         PORTA+0, 4 
+	GOTO        L__SELEC216
+L__SELEC215:
+	BSF         PORTA+0, 4 
+L__SELEC216:
+;Configuraciones.c,106 :: 		HARD();
 	CALL        _HARD+0, 0
-;Configuraciones.c,98 :: 		delay_ms(100);
+;Configuraciones.c,107 :: 		delay_ms(100);
 	MOVLW       2
 	MOVWF       R11, 0
 	MOVLW       4
@@ -301,9 +374,9 @@ L_SELEC22:
 	DECFSZ      R11, 1, 1
 	BRA         L_SELEC22
 	NOP
-;Configuraciones.c,99 :: 		DER();
-	CALL        _DER+0, 0
-;Configuraciones.c,100 :: 		delay_ms(100);
+;Configuraciones.c,108 :: 		DER_L();
+	CALL        _DER_L+0, 0
+;Configuraciones.c,109 :: 		delay_ms(100);
 	MOVLW       2
 	MOVWF       R11, 0
 	MOVLW       4
@@ -318,57 +391,55 @@ L_SELEC23:
 	DECFSZ      R11, 1, 1
 	BRA         L_SELEC23
 	NOP
-;Configuraciones.c,101 :: 		HARD();
-	CALL        _HARD+0, 0
-;Configuraciones.c,102 :: 		}
+;Configuraciones.c,111 :: 		}
 L_SELEC21:
 L_SELEC20:
 L_SELEC16:
 L_SELEC10:
-;Configuraciones.c,104 :: 		break;
+;Configuraciones.c,113 :: 		break;
 	GOTO        L_SELEC4
-;Configuraciones.c,106 :: 		case 2: L1=0; L3=L2=L0=1;
+;Configuraciones.c,115 :: 		case 2: L1=0; L3=L2=L0=1;
 L_SELEC24:
 	BCF         PORTA+0, 7 
 	BSF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
-	GOTO        L__SELEC199
+	GOTO        L__SELEC217
 	BCF         PORTA+0, 5 
-	GOTO        L__SELEC200
-L__SELEC199:
+	GOTO        L__SELEC218
+L__SELEC217:
 	BSF         PORTA+0, 5 
-L__SELEC200:
+L__SELEC218:
 	BTFSC       PORTA+0, 5 
-	GOTO        L__SELEC201
+	GOTO        L__SELEC219
 	BCF         PORTA+0, 4 
-	GOTO        L__SELEC202
-L__SELEC201:
+	GOTO        L__SELEC220
+L__SELEC219:
 	BSF         PORTA+0, 4 
-L__SELEC202:
-;Configuraciones.c,107 :: 		combate_estado();
+L__SELEC220:
+;Configuraciones.c,116 :: 		combate_estado();
 	CALL        _combate_estado+0, 0
-;Configuraciones.c,109 :: 		break;
+;Configuraciones.c,118 :: 		break;
 	GOTO        L_SELEC4
-;Configuraciones.c,111 :: 		case 3: L0=L1=0; L2=L3==1;
+;Configuraciones.c,120 :: 		case 3: L0=L1=0; L2=L3==1;
 L_SELEC25:
 	BCF         PORTA+0, 7 
 	BTFSC       PORTA+0, 7 
-	GOTO        L__SELEC203
+	GOTO        L__SELEC221
 	BCF         PORTA+0, 6 
-	GOTO        L__SELEC204
-L__SELEC203:
+	GOTO        L__SELEC222
+L__SELEC221:
 	BSF         PORTA+0, 6 
-L__SELEC204:
+L__SELEC222:
 	BTFSC       PORTA+0, 4 
-	GOTO        L__SELEC205
+	GOTO        L__SELEC223
 	BCF         PORTA+0, 5 
-	GOTO        L__SELEC206
-L__SELEC205:
+	GOTO        L__SELEC224
+L__SELEC223:
 	BSF         PORTA+0, 5 
-L__SELEC206:
-;Configuraciones.c,112 :: 		REC();
+L__SELEC224:
+;Configuraciones.c,121 :: 		REC();
 	CALL        _REC+0, 0
-;Configuraciones.c,113 :: 		delay_ms(2000);
+;Configuraciones.c,122 :: 		delay_ms(2000);
 	MOVLW       21
 	MOVWF       R11, 0
 	MOVLW       75
@@ -383,9 +454,9 @@ L_SELEC26:
 	DECFSZ      R11, 1, 1
 	BRA         L_SELEC26
 	NOP
-;Configuraciones.c,114 :: 		HARD();
+;Configuraciones.c,123 :: 		HARD();
 	CALL        _HARD+0, 0
-;Configuraciones.c,115 :: 		delay_ms(500);
+;Configuraciones.c,124 :: 		delay_ms(500);
 	MOVLW       6
 	MOVWF       R11, 0
 	MOVLW       19
@@ -401,34 +472,34 @@ L_SELEC27:
 	BRA         L_SELEC27
 	NOP
 	NOP
-;Configuraciones.c,120 :: 		break;
+;Configuraciones.c,129 :: 		break;
 	GOTO        L_SELEC4
-;Configuraciones.c,122 :: 		case 4: L2=0; L3=L1=L0=1;
+;Configuraciones.c,131 :: 		case 4: L2=0; L3=L1=L0=1;
 L_SELEC28:
 	BCF         PORTA+0, 5 
 	BSF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
-	GOTO        L__SELEC207
+	GOTO        L__SELEC225
 	BCF         PORTA+0, 7 
-	GOTO        L__SELEC208
-L__SELEC207:
+	GOTO        L__SELEC226
+L__SELEC225:
 	BSF         PORTA+0, 7 
-L__SELEC208:
+L__SELEC226:
 	BTFSC       PORTA+0, 7 
-	GOTO        L__SELEC209
+	GOTO        L__SELEC227
 	BCF         PORTA+0, 4 
-	GOTO        L__SELEC210
-L__SELEC209:
+	GOTO        L__SELEC228
+L__SELEC227:
 	BSF         PORTA+0, 4 
-L__SELEC210:
-;Configuraciones.c,123 :: 		DER();
-	CALL        _DER+0, 0
-;Configuraciones.c,124 :: 		delay_ms(250);
-	MOVLW       3
+L__SELEC228:
+;Configuraciones.c,132 :: 		GIRO180();
+	CALL        _GIRO180+0, 0
+;Configuraciones.c,133 :: 		delay_ms(300);
+	MOVLW       4
 	MOVWF       R11, 0
-	MOVLW       138
+	MOVLW       12
 	MOVWF       R12, 0
-	MOVLW       85
+	MOVLW       51
 	MOVWF       R13, 0
 L_SELEC29:
 	DECFSZ      R13, 1, 1
@@ -439,14 +510,14 @@ L_SELEC29:
 	BRA         L_SELEC29
 	NOP
 	NOP
-;Configuraciones.c,125 :: 		LIBRE();
-	CALL        _LIBRE+0, 0
-;Configuraciones.c,126 :: 		delay_ms(4000);
-	MOVLW       41
+;Configuraciones.c,134 :: 		HARD();
+	CALL        _HARD+0, 0
+;Configuraciones.c,135 :: 		delay_ms(750);
+	MOVLW       8
 	MOVWF       R11, 0
-	MOVLW       150
+	MOVLW       157
 	MOVWF       R12, 0
-	MOVLW       127
+	MOVLW       5
 	MOVWF       R13, 0
 L_SELEC30:
 	DECFSZ      R13, 1, 1
@@ -455,115 +526,21 @@ L_SELEC30:
 	BRA         L_SELEC30
 	DECFSZ      R11, 1, 1
 	BRA         L_SELEC30
-;Configuraciones.c,127 :: 		break;
+	NOP
+	NOP
+;Configuraciones.c,136 :: 		break;
 	GOTO        L_SELEC4
-;Configuraciones.c,129 :: 		case 5: L2=L0=0; L3=L1=1;
+;Configuraciones.c,138 :: 		case 5: L2=L0=0; L3=L1=1;
 L_SELEC31:
 	BCF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
-	GOTO        L__SELEC211
-	BCF         PORTA+0, 5 
-	GOTO        L__SELEC212
-L__SELEC211:
-	BSF         PORTA+0, 5 
-L__SELEC212:
-	BSF         PORTA+0, 7 
-	BTFSC       PORTA+0, 7 
-	GOTO        L__SELEC213
-	BCF         PORTA+0, 4 
-	GOTO        L__SELEC214
-L__SELEC213:
-	BSF         PORTA+0, 4 
-L__SELEC214:
-;Configuraciones.c,130 :: 		DER();
-	CALL        _DER+0, 0
-;Configuraciones.c,131 :: 		break;
-	GOTO        L_SELEC4
-;Configuraciones.c,133 :: 		case 6: L1=L2=0; L3=L0=1;
-L_SELEC32:
-	BCF         PORTA+0, 5 
-	BTFSC       PORTA+0, 5 
-	GOTO        L__SELEC215
-	BCF         PORTA+0, 7 
-	GOTO        L__SELEC216
-L__SELEC215:
-	BSF         PORTA+0, 7 
-L__SELEC216:
-	BSF         PORTA+0, 6 
-	BTFSC       PORTA+0, 6 
-	GOTO        L__SELEC217
-	BCF         PORTA+0, 4 
-	GOTO        L__SELEC218
-L__SELEC217:
-	BSF         PORTA+0, 4 
-L__SELEC218:
-;Configuraciones.c,134 :: 		GIRO180();
-	CALL        _GIRO180+0, 0
-;Configuraciones.c,136 :: 		break;
-	GOTO        L_SELEC4
-;Configuraciones.c,138 :: 		case 7: L2=L1=L0=0; L3=1;
-L_SELEC33:
-	BCF         PORTA+0, 6 
-	BTFSC       PORTA+0, 6 
-	GOTO        L__SELEC219
-	BCF         PORTA+0, 7 
-	GOTO        L__SELEC220
-L__SELEC219:
-	BSF         PORTA+0, 7 
-L__SELEC220:
-	BTFSC       PORTA+0, 7 
-	GOTO        L__SELEC221
-	BCF         PORTA+0, 5 
-	GOTO        L__SELEC222
-L__SELEC221:
-	BSF         PORTA+0, 5 
-L__SELEC222:
-	BSF         PORTA+0, 4 
-;Configuraciones.c,140 :: 		break;
-	GOTO        L_SELEC4
-;Configuraciones.c,142 :: 		case 8: L3=0; L1=L2=L0=1;
-L_SELEC34:
-	BCF         PORTA+0, 4 
-	BSF         PORTA+0, 6 
-	BTFSC       PORTA+0, 6 
-	GOTO        L__SELEC223
-	BCF         PORTA+0, 5 
-	GOTO        L__SELEC224
-L__SELEC223:
-	BSF         PORTA+0, 5 
-L__SELEC224:
-	BTFSC       PORTA+0, 5 
-	GOTO        L__SELEC225
-	BCF         PORTA+0, 7 
-	GOTO        L__SELEC226
-L__SELEC225:
-	BSF         PORTA+0, 7 
-L__SELEC226:
-;Configuraciones.c,144 :: 		break;
-	GOTO        L_SELEC4
-;Configuraciones.c,146 :: 		case 9: L0=L3=0; L1=L2=1;
-L_SELEC35:
-	BCF         PORTA+0, 4 
-	BTFSC       PORTA+0, 4 
-	GOTO        L__SELEC227
-	BCF         PORTA+0, 6 
-	GOTO        L__SELEC228
-L__SELEC227:
-	BSF         PORTA+0, 6 
-L__SELEC228:
-	BSF         PORTA+0, 5 
-	BTFSC       PORTA+0, 5 
 	GOTO        L__SELEC229
-	BCF         PORTA+0, 7 
+	BCF         PORTA+0, 5 
 	GOTO        L__SELEC230
 L__SELEC229:
-	BSF         PORTA+0, 7 
+	BSF         PORTA+0, 5 
 L__SELEC230:
-;Configuraciones.c,149 :: 		break;
-	GOTO        L_SELEC4
-;Configuraciones.c,151 :: 		case 10: L3=L1=0; L2=L0=1;
-L_SELEC36:
-	BCF         PORTA+0, 7 
+	BSF         PORTA+0, 7 
 	BTFSC       PORTA+0, 7 
 	GOTO        L__SELEC231
 	BCF         PORTA+0, 4 
@@ -571,87 +548,96 @@ L_SELEC36:
 L__SELEC231:
 	BSF         PORTA+0, 4 
 L__SELEC232:
-	BSF         PORTA+0, 6 
-	BTFSC       PORTA+0, 6 
-	GOTO        L__SELEC233
-	BCF         PORTA+0, 5 
-	GOTO        L__SELEC234
-L__SELEC233:
-	BSF         PORTA+0, 5 
-L__SELEC234:
-;Configuraciones.c,152 :: 		break;
+;Configuraciones.c,139 :: 		DER();
+	CALL        _DER+0, 0
+;Configuraciones.c,140 :: 		break;
 	GOTO        L_SELEC4
-;Configuraciones.c,154 :: 		case 11: L0=L1=L3=0; L2=1;
-L_SELEC37:
-	BCF         PORTA+0, 4 
-	BTFSC       PORTA+0, 4 
-	GOTO        L__SELEC235
-	BCF         PORTA+0, 7 
-	GOTO        L__SELEC236
-L__SELEC235:
-	BSF         PORTA+0, 7 
-L__SELEC236:
-	BTFSC       PORTA+0, 7 
-	GOTO        L__SELEC237
-	BCF         PORTA+0, 6 
-	GOTO        L__SELEC238
-L__SELEC237:
-	BSF         PORTA+0, 6 
-L__SELEC238:
-	BSF         PORTA+0, 5 
-;Configuraciones.c,155 :: 		break;
-	GOTO        L_SELEC4
-;Configuraciones.c,157 :: 		case 12: L3=L2=0; L1=L0=1;
-L_SELEC38:
+;Configuraciones.c,142 :: 		case 6: L1=L2=0; L3=L0=1;
+L_SELEC32:
 	BCF         PORTA+0, 5 
 	BTFSC       PORTA+0, 5 
-	GOTO        L__SELEC239
+	GOTO        L__SELEC233
+	BCF         PORTA+0, 7 
+	GOTO        L__SELEC234
+L__SELEC233:
+	BSF         PORTA+0, 7 
+L__SELEC234:
+	BSF         PORTA+0, 6 
+	BTFSC       PORTA+0, 6 
+	GOTO        L__SELEC235
 	BCF         PORTA+0, 4 
+	GOTO        L__SELEC236
+L__SELEC235:
+	BSF         PORTA+0, 4 
+L__SELEC236:
+;Configuraciones.c,143 :: 		GIRO180();
+	CALL        _GIRO180+0, 0
+;Configuraciones.c,145 :: 		break;
+	GOTO        L_SELEC4
+;Configuraciones.c,147 :: 		case 7: L2=L1=L0=0; L3=1;
+L_SELEC33:
+	BCF         PORTA+0, 6 
+	BTFSC       PORTA+0, 6 
+	GOTO        L__SELEC237
+	BCF         PORTA+0, 7 
+	GOTO        L__SELEC238
+L__SELEC237:
+	BSF         PORTA+0, 7 
+L__SELEC238:
+	BTFSC       PORTA+0, 7 
+	GOTO        L__SELEC239
+	BCF         PORTA+0, 5 
 	GOTO        L__SELEC240
 L__SELEC239:
-	BSF         PORTA+0, 4 
+	BSF         PORTA+0, 5 
 L__SELEC240:
+	BSF         PORTA+0, 4 
+;Configuraciones.c,149 :: 		break;
+	GOTO        L_SELEC4
+;Configuraciones.c,151 :: 		case 8: L3=0; L1=L2=L0=1;
+L_SELEC34:
+	BCF         PORTA+0, 4 
 	BSF         PORTA+0, 6 
 	BTFSC       PORTA+0, 6 
 	GOTO        L__SELEC241
-	BCF         PORTA+0, 7 
+	BCF         PORTA+0, 5 
 	GOTO        L__SELEC242
 L__SELEC241:
-	BSF         PORTA+0, 7 
+	BSF         PORTA+0, 5 
 L__SELEC242:
-;Configuraciones.c,158 :: 		break;
-	GOTO        L_SELEC4
-;Configuraciones.c,160 :: 		case 13: L3=L2=L0=0; L1=1;
-L_SELEC39:
-	BCF         PORTA+0, 6 
-	BTFSC       PORTA+0, 6 
+	BTFSC       PORTA+0, 5 
 	GOTO        L__SELEC243
-	BCF         PORTA+0, 5 
+	BCF         PORTA+0, 7 
 	GOTO        L__SELEC244
 L__SELEC243:
-	BSF         PORTA+0, 5 
+	BSF         PORTA+0, 7 
 L__SELEC244:
-	BTFSC       PORTA+0, 5 
-	GOTO        L__SELEC245
+;Configuraciones.c,153 :: 		break;
+	GOTO        L_SELEC4
+;Configuraciones.c,155 :: 		case 9: L0=L3=0; L1=L2=1;
+L_SELEC35:
 	BCF         PORTA+0, 4 
+	BTFSC       PORTA+0, 4 
+	GOTO        L__SELEC245
+	BCF         PORTA+0, 6 
 	GOTO        L__SELEC246
 L__SELEC245:
-	BSF         PORTA+0, 4 
+	BSF         PORTA+0, 6 
 L__SELEC246:
-	BSF         PORTA+0, 7 
-;Configuraciones.c,161 :: 		break;
-	GOTO        L_SELEC4
-;Configuraciones.c,163 :: 		case 14: L3=L2=L1=0; L0=1;
-L_SELEC40:
-	BCF         PORTA+0, 7 
-	BTFSC       PORTA+0, 7 
+	BSF         PORTA+0, 5 
+	BTFSC       PORTA+0, 5 
 	GOTO        L__SELEC247
-	BCF         PORTA+0, 5 
+	BCF         PORTA+0, 7 
 	GOTO        L__SELEC248
 L__SELEC247:
-	BSF         PORTA+0, 5 
+	BSF         PORTA+0, 7 
 L__SELEC248:
-	BTFSC       PORTA+0, 5 
+;Configuraciones.c,158 :: 		break;
+	GOTO        L_SELEC4
+;Configuraciones.c,160 :: 		case 10: L3=L1=0; L2=L0=1;
+L_SELEC36:
+	BCF         PORTA+0, 7 
+	BTFSC       PORTA+0, 7 
 	GOTO        L__SELEC249
 	BCF         PORTA+0, 4 
 	GOTO        L__SELEC250
@@ -659,19 +645,19 @@ L__SELEC249:
 	BSF         PORTA+0, 4 
 L__SELEC250:
 	BSF         PORTA+0, 6 
-;Configuraciones.c,164 :: 		break;
-	GOTO        L_SELEC4
-;Configuraciones.c,166 :: 		default: L0=L1=L2=L3=0;
-L_SELEC41:
-	BCF         PORTA+0, 4 
-	BTFSC       PORTA+0, 4 
+	BTFSC       PORTA+0, 6 
 	GOTO        L__SELEC251
 	BCF         PORTA+0, 5 
 	GOTO        L__SELEC252
 L__SELEC251:
 	BSF         PORTA+0, 5 
 L__SELEC252:
-	BTFSC       PORTA+0, 5 
+;Configuraciones.c,161 :: 		break;
+	GOTO        L_SELEC4
+;Configuraciones.c,163 :: 		case 11: L0=L1=L3=0; L2=1;
+L_SELEC37:
+	BCF         PORTA+0, 4 
+	BTFSC       PORTA+0, 4 
 	GOTO        L__SELEC253
 	BCF         PORTA+0, 7 
 	GOTO        L__SELEC254
@@ -685,177 +671,264 @@ L__SELEC254:
 L__SELEC255:
 	BSF         PORTA+0, 6 
 L__SELEC256:
-;Configuraciones.c,167 :: 		}
+	BSF         PORTA+0, 5 
+;Configuraciones.c,164 :: 		break;
+	GOTO        L_SELEC4
+;Configuraciones.c,166 :: 		case 12: L3=L2=0; L1=L0=1;
+L_SELEC38:
+	BCF         PORTA+0, 5 
+	BTFSC       PORTA+0, 5 
+	GOTO        L__SELEC257
+	BCF         PORTA+0, 4 
+	GOTO        L__SELEC258
+L__SELEC257:
+	BSF         PORTA+0, 4 
+L__SELEC258:
+	BSF         PORTA+0, 6 
+	BTFSC       PORTA+0, 6 
+	GOTO        L__SELEC259
+	BCF         PORTA+0, 7 
+	GOTO        L__SELEC260
+L__SELEC259:
+	BSF         PORTA+0, 7 
+L__SELEC260:
+;Configuraciones.c,167 :: 		break;
+	GOTO        L_SELEC4
+;Configuraciones.c,169 :: 		case 13: L3=L2=L0=0; L1=1;
+L_SELEC39:
+	BCF         PORTA+0, 6 
+	BTFSC       PORTA+0, 6 
+	GOTO        L__SELEC261
+	BCF         PORTA+0, 5 
+	GOTO        L__SELEC262
+L__SELEC261:
+	BSF         PORTA+0, 5 
+L__SELEC262:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__SELEC263
+	BCF         PORTA+0, 4 
+	GOTO        L__SELEC264
+L__SELEC263:
+	BSF         PORTA+0, 4 
+L__SELEC264:
+	BSF         PORTA+0, 7 
+;Configuraciones.c,170 :: 		break;
+	GOTO        L_SELEC4
+;Configuraciones.c,172 :: 		case 14: L3=L2=L1=0; L0=1;
+L_SELEC40:
+	BCF         PORTA+0, 7 
+	BTFSC       PORTA+0, 7 
+	GOTO        L__SELEC265
+	BCF         PORTA+0, 5 
+	GOTO        L__SELEC266
+L__SELEC265:
+	BSF         PORTA+0, 5 
+L__SELEC266:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__SELEC267
+	BCF         PORTA+0, 4 
+	GOTO        L__SELEC268
+L__SELEC267:
+	BSF         PORTA+0, 4 
+L__SELEC268:
+	BSF         PORTA+0, 6 
+;Configuraciones.c,173 :: 		break;
+	GOTO        L_SELEC4
+;Configuraciones.c,175 :: 		default: L0=L1=L2=L3=0;
+L_SELEC41:
+	BCF         PORTA+0, 4 
+	BTFSC       PORTA+0, 4 
+	GOTO        L__SELEC269
+	BCF         PORTA+0, 5 
+	GOTO        L__SELEC270
+L__SELEC269:
+	BSF         PORTA+0, 5 
+L__SELEC270:
+	BTFSC       PORTA+0, 5 
+	GOTO        L__SELEC271
+	BCF         PORTA+0, 7 
+	GOTO        L__SELEC272
+L__SELEC271:
+	BSF         PORTA+0, 7 
+L__SELEC272:
+	BTFSC       PORTA+0, 7 
+	GOTO        L__SELEC273
+	BCF         PORTA+0, 6 
+	GOTO        L__SELEC274
+L__SELEC273:
+	BSF         PORTA+0, 6 
+L__SELEC274:
+;Configuraciones.c,176 :: 		}
 	GOTO        L_SELEC4
 L_SELEC3:
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC257
+	GOTO        L__SELEC275
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC257:
+L__SELEC275:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC5
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC258
+	GOTO        L__SELEC276
 	MOVLW       1
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC258:
+L__SELEC276:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC6
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC259
+	GOTO        L__SELEC277
 	MOVLW       2
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC259:
+L__SELEC277:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC24
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC260
+	GOTO        L__SELEC278
 	MOVLW       3
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC260:
+L__SELEC278:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC25
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC261
+	GOTO        L__SELEC279
 	MOVLW       4
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC261:
+L__SELEC279:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC28
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC262
+	GOTO        L__SELEC280
 	MOVLW       5
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC262:
+L__SELEC280:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC31
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC263
+	GOTO        L__SELEC281
 	MOVLW       6
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC263:
+L__SELEC281:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC32
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC264
+	GOTO        L__SELEC282
 	MOVLW       7
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC264:
+L__SELEC282:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC33
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC265
+	GOTO        L__SELEC283
 	MOVLW       8
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC265:
+L__SELEC283:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC34
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC266
+	GOTO        L__SELEC284
 	MOVLW       9
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC266:
+L__SELEC284:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC35
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC267
+	GOTO        L__SELEC285
 	MOVLW       10
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC267:
+L__SELEC285:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC36
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC268
+	GOTO        L__SELEC286
 	MOVLW       11
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC268:
+L__SELEC286:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC37
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC269
+	GOTO        L__SELEC287
 	MOVLW       12
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC269:
+L__SELEC287:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC38
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC270
+	GOTO        L__SELEC288
 	MOVLW       13
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC270:
+L__SELEC288:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC39
 	MOVLW       0
 	XORWF       SELEC_seleccion_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__SELEC271
+	GOTO        L__SELEC289
 	MOVLW       14
 	XORWF       SELEC_seleccion_L0+0, 0 
-L__SELEC271:
+L__SELEC289:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_SELEC40
 	GOTO        L_SELEC41
 L_SELEC4:
-;Configuraciones.c,170 :: 		}
+;Configuraciones.c,179 :: 		}
 L_end_SELEC:
 	RETURN      0
 ; end of _SELEC
 
 _combate_estado:
 
-;Configuraciones.c,174 :: 		void combate_estado() {
-;Configuraciones.c,175 :: 		if(linea_detectada){
+;Configuraciones.c,183 :: 		void combate_estado() {
+;Configuraciones.c,184 :: 		if(linea_detectada){
 	MOVF        _linea_detectada+0, 1 
 	BTFSC       STATUS+0, 2 
 	GOTO        L_combate_estado42
-;Configuraciones.c,176 :: 		HARD();
+;Configuraciones.c,185 :: 		HARD();
 	CALL        _HARD+0, 0
-;Configuraciones.c,177 :: 		LOGICA_LINEA();
+;Configuraciones.c,186 :: 		LOGICA_LINEA();
 	CALL        _LOGICA_LINEA+0, 0
-;Configuraciones.c,178 :: 		linea_detectada = 0;
+;Configuraciones.c,187 :: 		linea_detectada = 0;
 	CLRF        _linea_detectada+0 
-;Configuraciones.c,179 :: 		estado_combate = CMB_ESPERA;
+;Configuraciones.c,188 :: 		estado_combate = CMB_ESPERA;
 	CLRF        _estado_combate+0 
-;Configuraciones.c,180 :: 		estado_movimiento = MOV_IDLE;
+;Configuraciones.c,189 :: 		estado_movimiento = MOV_IDLE;
 	CLRF        _estado_movimiento+0 
-;Configuraciones.c,181 :: 		return;
+;Configuraciones.c,190 :: 		return;
 	GOTO        L_end_combate_estado
-;Configuraciones.c,182 :: 		}
+;Configuraciones.c,191 :: 		}
 L_combate_estado42:
-;Configuraciones.c,183 :: 		switch (estado_combate) {
+;Configuraciones.c,192 :: 		switch (estado_combate) {
 	GOTO        L_combate_estado43
-;Configuraciones.c,184 :: 		case CMB_ESPERA:
+;Configuraciones.c,193 :: 		case CMB_ESPERA:
 L_combate_estado45:
-;Configuraciones.c,185 :: 		if(SL1 == 0 && S2 == 0 && S6 == 0){
+;Configuraciones.c,194 :: 		if(SL1 == 0 && S2 == 0 && S6 == 0){
 	BTFSC       PORTC+0, 0 
 	GOTO        L_combate_estado48
 	BTFSC       PORTC+0, 6 
@@ -863,13 +936,13 @@ L_combate_estado45:
 	BTFSC       PORTB+0, 4 
 	GOTO        L_combate_estado48
 L__combate_estado178:
-;Configuraciones.c,186 :: 		estado_combate = CMB_REC;
+;Configuraciones.c,195 :: 		estado_combate = CMB_REC;
 	MOVLW       1
 	MOVWF       _estado_combate+0 
-;Configuraciones.c,187 :: 		}
+;Configuraciones.c,196 :: 		}
 	GOTO        L_combate_estado49
 L_combate_estado48:
-;Configuraciones.c,188 :: 		else if (SL1 == 1 && S2 == 0 && S6 == 0){
+;Configuraciones.c,197 :: 		else if (SL1 == 1 && S2 == 0 && S6 == 0){
 	BTFSS       PORTC+0, 0 
 	GOTO        L_combate_estado52
 	BTFSC       PORTC+0, 6 
@@ -877,13 +950,13 @@ L_combate_estado48:
 	BTFSC       PORTB+0, 4 
 	GOTO        L_combate_estado52
 L__combate_estado177:
-;Configuraciones.c,189 :: 		estado_combate = CMB_IZQ;
+;Configuraciones.c,198 :: 		estado_combate = CMB_IZQ;
 	MOVLW       2
 	MOVWF       _estado_combate+0 
-;Configuraciones.c,190 :: 		}
+;Configuraciones.c,199 :: 		}
 	GOTO        L_combate_estado53
 L_combate_estado52:
-;Configuraciones.c,191 :: 		else if (SL1 == 0 && S2 == 1 && S6 == 0){
+;Configuraciones.c,200 :: 		else if (SL1 == 0 && S2 == 1 && S6 == 0){
 	BTFSC       PORTC+0, 0 
 	GOTO        L_combate_estado56
 	BTFSS       PORTC+0, 6 
@@ -891,13 +964,13 @@ L_combate_estado52:
 	BTFSC       PORTB+0, 4 
 	GOTO        L_combate_estado56
 L__combate_estado176:
-;Configuraciones.c,192 :: 		estado_combate = CMB_HIT;
+;Configuraciones.c,201 :: 		estado_combate = CMB_HIT;
 	MOVLW       3
 	MOVWF       _estado_combate+0 
-;Configuraciones.c,193 :: 		}
+;Configuraciones.c,202 :: 		}
 	GOTO        L_combate_estado57
 L_combate_estado56:
-;Configuraciones.c,194 :: 		else if (SL1 == 1 && S2 == 1 && S6 == 0){
+;Configuraciones.c,203 :: 		else if (SL1 == 1 && S2 == 1 && S6 == 0){
 	BTFSS       PORTC+0, 0 
 	GOTO        L_combate_estado60
 	BTFSS       PORTC+0, 6 
@@ -905,13 +978,13 @@ L_combate_estado56:
 	BTFSC       PORTB+0, 4 
 	GOTO        L_combate_estado60
 L__combate_estado175:
-;Configuraciones.c,195 :: 		estado_combate = CMB_IZQ_GOLPE;
+;Configuraciones.c,204 :: 		estado_combate = CMB_IZQ_GOLPE;
 	MOVLW       4
 	MOVWF       _estado_combate+0 
-;Configuraciones.c,196 :: 		}
+;Configuraciones.c,205 :: 		}
 	GOTO        L_combate_estado61
 L_combate_estado60:
-;Configuraciones.c,197 :: 		else if (SL1 == 0 && S2 == 0 && S6 == 1){
+;Configuraciones.c,206 :: 		else if (SL1 == 0 && S2 == 0 && S6 == 1){
 	BTFSC       PORTC+0, 0 
 	GOTO        L_combate_estado64
 	BTFSC       PORTC+0, 6 
@@ -919,13 +992,13 @@ L_combate_estado60:
 	BTFSS       PORTB+0, 4 
 	GOTO        L_combate_estado64
 L__combate_estado174:
-;Configuraciones.c,198 :: 		estado_combate = CMB_DER;
+;Configuraciones.c,207 :: 		estado_combate = CMB_DER;
 	MOVLW       5
 	MOVWF       _estado_combate+0 
-;Configuraciones.c,199 :: 		}
+;Configuraciones.c,208 :: 		}
 	GOTO        L_combate_estado65
 L_combate_estado64:
-;Configuraciones.c,200 :: 		else if (SL1 == 1 && S2 == 0 && S6 == 1){
+;Configuraciones.c,209 :: 		else if (SL1 == 1 && S2 == 0 && S6 == 1){
 	BTFSS       PORTC+0, 0 
 	GOTO        L_combate_estado68
 	BTFSC       PORTC+0, 6 
@@ -933,12 +1006,12 @@ L_combate_estado64:
 	BTFSS       PORTB+0, 4 
 	GOTO        L_combate_estado68
 L__combate_estado173:
-;Configuraciones.c,201 :: 		estado_combate = CMB_BUSCAR;
+;Configuraciones.c,210 :: 		estado_combate = CMB_BUSCAR;
 	MOVLW       6
 	MOVWF       _estado_combate+0 
-;Configuraciones.c,202 :: 		sub_cmb_buscar = SUB_BUSCAR_IZQ;
+;Configuraciones.c,211 :: 		sub_cmb_buscar = SUB_BUSCAR_IZQ;
 	CLRF        _sub_cmb_buscar+0 
-;Configuraciones.c,203 :: 		t_cmb_buscar = millis();
+;Configuraciones.c,212 :: 		t_cmb_buscar = millis();
 	CALL        _millis+0, 0
 	MOVF        R0, 0 
 	MOVWF       _t_cmb_buscar+0 
@@ -948,10 +1021,10 @@ L__combate_estado173:
 	MOVWF       _t_cmb_buscar+2 
 	MOVF        R3, 0 
 	MOVWF       _t_cmb_buscar+3 
-;Configuraciones.c,204 :: 		}
+;Configuraciones.c,213 :: 		}
 	GOTO        L_combate_estado69
 L_combate_estado68:
-;Configuraciones.c,205 :: 		else if (SL1 == 0 && S2 == 1 && S6 == 1){
+;Configuraciones.c,214 :: 		else if (SL1 == 0 && S2 == 1 && S6 == 1){
 	BTFSC       PORTC+0, 0 
 	GOTO        L_combate_estado72
 	BTFSS       PORTC+0, 6 
@@ -959,13 +1032,13 @@ L_combate_estado68:
 	BTFSS       PORTB+0, 4 
 	GOTO        L_combate_estado72
 L__combate_estado172:
-;Configuraciones.c,206 :: 		estado_combate = CMB_DER_HIT;
+;Configuraciones.c,215 :: 		estado_combate = CMB_DER_HIT;
 	MOVLW       7
 	MOVWF       _estado_combate+0 
-;Configuraciones.c,207 :: 		}
+;Configuraciones.c,216 :: 		}
 	GOTO        L_combate_estado73
 L_combate_estado72:
-;Configuraciones.c,208 :: 		else if (SL1 == 1 && S2 == 1 && S6 == 1){
+;Configuraciones.c,217 :: 		else if (SL1 == 1 && S2 == 1 && S6 == 1){
 	BTFSS       PORTC+0, 0 
 	GOTO        L_combate_estado76
 	BTFSS       PORTC+0, 6 
@@ -973,15 +1046,15 @@ L_combate_estado72:
 	BTFSS       PORTB+0, 4 
 	GOTO        L_combate_estado76
 L__combate_estado171:
-;Configuraciones.c,209 :: 		estado_combate = CMB_HIT_FULL;
+;Configuraciones.c,218 :: 		estado_combate = CMB_HIT_FULL;
 	MOVLW       8
 	MOVWF       _estado_combate+0 
-;Configuraciones.c,210 :: 		}
+;Configuraciones.c,219 :: 		}
 	GOTO        L_combate_estado77
 L_combate_estado76:
-;Configuraciones.c,212 :: 		LIBRE();
+;Configuraciones.c,221 :: 		LIBRE();
 	CALL        _LIBRE+0, 0
-;Configuraciones.c,213 :: 		}
+;Configuraciones.c,222 :: 		}
 L_combate_estado77:
 L_combate_estado73:
 L_combate_estado69:
@@ -990,156 +1063,49 @@ L_combate_estado61:
 L_combate_estado57:
 L_combate_estado53:
 L_combate_estado49:
-;Configuraciones.c,214 :: 		break;
+;Configuraciones.c,223 :: 		break;
 	GOTO        L_combate_estado44
-;Configuraciones.c,216 :: 		case CMB_REC:
+;Configuraciones.c,225 :: 		case CMB_REC:
 L_combate_estado78:
-;Configuraciones.c,217 :: 		L0=L1=L2=L3=1;
-	BSF         PORTA+0, 4 
-	BTFSC       PORTA+0, 4 
-	GOTO        L__combate_estado273
-	BCF         PORTA+0, 5 
-	GOTO        L__combate_estado274
-L__combate_estado273:
-	BSF         PORTA+0, 5 
-L__combate_estado274:
-	BTFSC       PORTA+0, 5 
-	GOTO        L__combate_estado275
-	BCF         PORTA+0, 7 
-	GOTO        L__combate_estado276
-L__combate_estado275:
-	BSF         PORTA+0, 7 
-L__combate_estado276:
-	BTFSC       PORTA+0, 7 
-	GOTO        L__combate_estado277
-	BCF         PORTA+0, 6 
-	GOTO        L__combate_estado278
-L__combate_estado277:
-	BSF         PORTA+0, 6 
-L__combate_estado278:
-;Configuraciones.c,218 :: 		REC_M();
-	CALL        _REC_M+0, 0
-;Configuraciones.c,219 :: 		break;
-	GOTO        L_combate_estado44
-;Configuraciones.c,221 :: 		case CMB_IZQ:
-L_combate_estado79:
-;Configuraciones.c,222 :: 		L0=0; L1=L2=L3=1;
-	BCF         PORTA+0, 6 
-	BSF         PORTA+0, 4 
-	BTFSC       PORTA+0, 4 
-	GOTO        L__combate_estado279
-	BCF         PORTA+0, 5 
-	GOTO        L__combate_estado280
-L__combate_estado279:
-	BSF         PORTA+0, 5 
-L__combate_estado280:
-	BTFSC       PORTA+0, 5 
-	GOTO        L__combate_estado281
-	BCF         PORTA+0, 7 
-	GOTO        L__combate_estado282
-L__combate_estado281:
-	BSF         PORTA+0, 7 
-L__combate_estado282:
-;Configuraciones.c,223 :: 		IZQ_M();
-	CALL        _IZQ_M+0, 0
-;Configuraciones.c,224 :: 		break;
-	GOTO        L_combate_estado44
-;Configuraciones.c,226 :: 		case CMB_HIT:
-L_combate_estado80:
-;Configuraciones.c,227 :: 		L1=0; L0=L2=L3=1;
-	BCF         PORTA+0, 7 
-	BSF         PORTA+0, 4 
-	BTFSC       PORTA+0, 4 
-	GOTO        L__combate_estado283
-	BCF         PORTA+0, 5 
-	GOTO        L__combate_estado284
-L__combate_estado283:
-	BSF         PORTA+0, 5 
-L__combate_estado284:
-	BTFSC       PORTA+0, 5 
-	GOTO        L__combate_estado285
-	BCF         PORTA+0, 6 
-	GOTO        L__combate_estado286
-L__combate_estado285:
-	BSF         PORTA+0, 6 
-L__combate_estado286:
-;Configuraciones.c,228 :: 		HIT_NO_BLOQUEANTE();
-	CALL        _HIT_NO_BLOQUEANTE+0, 0
-;Configuraciones.c,229 :: 		break;
-	GOTO        L_combate_estado44
-;Configuraciones.c,231 :: 		case CMB_IZQ_GOLPE:
-L_combate_estado81:
-;Configuraciones.c,232 :: 		L0=L1=0; L2=L3=1;
-	BCF         PORTA+0, 7 
-	BTFSC       PORTA+0, 7 
-	GOTO        L__combate_estado287
-	BCF         PORTA+0, 6 
-	GOTO        L__combate_estado288
-L__combate_estado287:
-	BSF         PORTA+0, 6 
-L__combate_estado288:
-	BSF         PORTA+0, 4 
-	BTFSC       PORTA+0, 4 
-	GOTO        L__combate_estado289
-	BCF         PORTA+0, 5 
-	GOTO        L__combate_estado290
-L__combate_estado289:
-	BSF         PORTA+0, 5 
-L__combate_estado290:
-;Configuraciones.c,233 :: 		IZQ_GIRO();
-	CALL        _IZQ_GIRO+0, 0
-;Configuraciones.c,234 :: 		break;
-	GOTO        L_combate_estado44
-;Configuraciones.c,236 :: 		case CMB_DER:
-L_combate_estado82:
-;Configuraciones.c,237 :: 		L2=0; L0=L1=L3=1;
-	BCF         PORTA+0, 5 
+;Configuraciones.c,226 :: 		L0=L1=L2=L3=1;
 	BSF         PORTA+0, 4 
 	BTFSC       PORTA+0, 4 
 	GOTO        L__combate_estado291
-	BCF         PORTA+0, 7 
+	BCF         PORTA+0, 5 
 	GOTO        L__combate_estado292
 L__combate_estado291:
-	BSF         PORTA+0, 7 
+	BSF         PORTA+0, 5 
 L__combate_estado292:
-	BTFSC       PORTA+0, 7 
+	BTFSC       PORTA+0, 5 
 	GOTO        L__combate_estado293
-	BCF         PORTA+0, 6 
+	BCF         PORTA+0, 7 
 	GOTO        L__combate_estado294
 L__combate_estado293:
-	BSF         PORTA+0, 6 
+	BSF         PORTA+0, 7 
 L__combate_estado294:
-;Configuraciones.c,238 :: 		DER_M();
-	CALL        _DER_M+0, 0
-;Configuraciones.c,239 :: 		break;
-	GOTO        L_combate_estado44
-;Configuraciones.c,241 :: 		case CMB_BUSCAR:
-L_combate_estado83:
-;Configuraciones.c,242 :: 		L0=L2=0; L1=L3=1;
-	BCF         PORTA+0, 5 
-	BTFSC       PORTA+0, 5 
+	BTFSC       PORTA+0, 7 
 	GOTO        L__combate_estado295
 	BCF         PORTA+0, 6 
 	GOTO        L__combate_estado296
 L__combate_estado295:
 	BSF         PORTA+0, 6 
 L__combate_estado296:
+;Configuraciones.c,227 :: 		REC_M();
+	CALL        _REC_M+0, 0
+;Configuraciones.c,228 :: 		break;
+	GOTO        L_combate_estado44
+;Configuraciones.c,230 :: 		case CMB_IZQ:
+L_combate_estado79:
+;Configuraciones.c,231 :: 		L0=0; L1=L2=L3=1;
+	BCF         PORTA+0, 6 
 	BSF         PORTA+0, 4 
 	BTFSC       PORTA+0, 4 
 	GOTO        L__combate_estado297
-	BCF         PORTA+0, 7 
+	BCF         PORTA+0, 5 
 	GOTO        L__combate_estado298
 L__combate_estado297:
-	BSF         PORTA+0, 7 
+	BSF         PORTA+0, 5 
 L__combate_estado298:
-;Configuraciones.c,243 :: 		BUSCAR();
-	CALL        _BUSCAR+0, 0
-;Configuraciones.c,244 :: 		break;
-	GOTO        L_combate_estado44
-;Configuraciones.c,246 :: 		case CMB_DER_HIT:
-L_combate_estado84:
-;Configuraciones.c,247 :: 		L1=L2=0; L0=L3=1;
-	BCF         PORTA+0, 5 
 	BTFSC       PORTA+0, 5 
 	GOTO        L__combate_estado299
 	BCF         PORTA+0, 7 
@@ -1147,29 +1113,37 @@ L_combate_estado84:
 L__combate_estado299:
 	BSF         PORTA+0, 7 
 L__combate_estado300:
+;Configuraciones.c,232 :: 		IZQ_M();
+	CALL        _IZQ_M+0, 0
+;Configuraciones.c,233 :: 		break;
+	GOTO        L_combate_estado44
+;Configuraciones.c,235 :: 		case CMB_HIT:
+L_combate_estado80:
+;Configuraciones.c,236 :: 		L1=0; L0=L2=L3=1;
+	BCF         PORTA+0, 7 
 	BSF         PORTA+0, 4 
 	BTFSC       PORTA+0, 4 
 	GOTO        L__combate_estado301
-	BCF         PORTA+0, 6 
+	BCF         PORTA+0, 5 
 	GOTO        L__combate_estado302
 L__combate_estado301:
-	BSF         PORTA+0, 6 
+	BSF         PORTA+0, 5 
 L__combate_estado302:
-;Configuraciones.c,248 :: 		DER_GIRO();
-	CALL        _DER_GIRO+0, 0
-;Configuraciones.c,249 :: 		break;
-	GOTO        L_combate_estado44
-;Configuraciones.c,251 :: 		case CMB_HIT_FULL:
-L_combate_estado85:
-;Configuraciones.c,252 :: 		L0=L1=L2=0; L3=1;
-	BCF         PORTA+0, 5 
 	BTFSC       PORTA+0, 5 
 	GOTO        L__combate_estado303
-	BCF         PORTA+0, 7 
+	BCF         PORTA+0, 6 
 	GOTO        L__combate_estado304
 L__combate_estado303:
-	BSF         PORTA+0, 7 
+	BSF         PORTA+0, 6 
 L__combate_estado304:
+;Configuraciones.c,237 :: 		HIT_NO_BLOQUEANTE();
+	CALL        _HIT_NO_BLOQUEANTE+0, 0
+;Configuraciones.c,238 :: 		break;
+	GOTO        L_combate_estado44
+;Configuraciones.c,240 :: 		case CMB_IZQ_GOLPE:
+L_combate_estado81:
+;Configuraciones.c,241 :: 		L0=L1=0; L2=L3=1;
+	BCF         PORTA+0, 7 
 	BTFSC       PORTA+0, 7 
 	GOTO        L__combate_estado305
 	BCF         PORTA+0, 6 
@@ -1178,21 +1152,120 @@ L__combate_estado305:
 	BSF         PORTA+0, 6 
 L__combate_estado306:
 	BSF         PORTA+0, 4 
-;Configuraciones.c,253 :: 		HIT_NO_BLOQUEANTE();
+	BTFSC       PORTA+0, 4 
+	GOTO        L__combate_estado307
+	BCF         PORTA+0, 5 
+	GOTO        L__combate_estado308
+L__combate_estado307:
+	BSF         PORTA+0, 5 
+L__combate_estado308:
+;Configuraciones.c,242 :: 		IZQ_GIRO();
+	CALL        _IZQ_GIRO+0, 0
+;Configuraciones.c,243 :: 		break;
+	GOTO        L_combate_estado44
+;Configuraciones.c,245 :: 		case CMB_DER:
+L_combate_estado82:
+;Configuraciones.c,246 :: 		L2=0; L0=L1=L3=1;
+	BCF         PORTA+0, 5 
+	BSF         PORTA+0, 4 
+	BTFSC       PORTA+0, 4 
+	GOTO        L__combate_estado309
+	BCF         PORTA+0, 7 
+	GOTO        L__combate_estado310
+L__combate_estado309:
+	BSF         PORTA+0, 7 
+L__combate_estado310:
+	BTFSC       PORTA+0, 7 
+	GOTO        L__combate_estado311
+	BCF         PORTA+0, 6 
+	GOTO        L__combate_estado312
+L__combate_estado311:
+	BSF         PORTA+0, 6 
+L__combate_estado312:
+;Configuraciones.c,247 :: 		DER_M();
+	CALL        _DER_M+0, 0
+;Configuraciones.c,248 :: 		break;
+	GOTO        L_combate_estado44
+;Configuraciones.c,250 :: 		case CMB_BUSCAR:
+L_combate_estado83:
+;Configuraciones.c,251 :: 		L0=L2=0; L1=L3=1;
+	BCF         PORTA+0, 5 
+	BTFSC       PORTA+0, 5 
+	GOTO        L__combate_estado313
+	BCF         PORTA+0, 6 
+	GOTO        L__combate_estado314
+L__combate_estado313:
+	BSF         PORTA+0, 6 
+L__combate_estado314:
+	BSF         PORTA+0, 4 
+	BTFSC       PORTA+0, 4 
+	GOTO        L__combate_estado315
+	BCF         PORTA+0, 7 
+	GOTO        L__combate_estado316
+L__combate_estado315:
+	BSF         PORTA+0, 7 
+L__combate_estado316:
+;Configuraciones.c,252 :: 		BUSCAR();
+	CALL        _BUSCAR+0, 0
+;Configuraciones.c,253 :: 		break;
+	GOTO        L_combate_estado44
+;Configuraciones.c,255 :: 		case CMB_DER_HIT:
+L_combate_estado84:
+;Configuraciones.c,256 :: 		L1=L2=0; L0=L3=1;
+	BCF         PORTA+0, 5 
+	BTFSC       PORTA+0, 5 
+	GOTO        L__combate_estado317
+	BCF         PORTA+0, 7 
+	GOTO        L__combate_estado318
+L__combate_estado317:
+	BSF         PORTA+0, 7 
+L__combate_estado318:
+	BSF         PORTA+0, 4 
+	BTFSC       PORTA+0, 4 
+	GOTO        L__combate_estado319
+	BCF         PORTA+0, 6 
+	GOTO        L__combate_estado320
+L__combate_estado319:
+	BSF         PORTA+0, 6 
+L__combate_estado320:
+;Configuraciones.c,257 :: 		DER_GIRO();
+	CALL        _DER_GIRO+0, 0
+;Configuraciones.c,258 :: 		break;
+	GOTO        L_combate_estado44
+;Configuraciones.c,260 :: 		case CMB_HIT_FULL:
+L_combate_estado85:
+;Configuraciones.c,261 :: 		L0=L1=L2=0; L3=1;
+	BCF         PORTA+0, 5 
+	BTFSC       PORTA+0, 5 
+	GOTO        L__combate_estado321
+	BCF         PORTA+0, 7 
+	GOTO        L__combate_estado322
+L__combate_estado321:
+	BSF         PORTA+0, 7 
+L__combate_estado322:
+	BTFSC       PORTA+0, 7 
+	GOTO        L__combate_estado323
+	BCF         PORTA+0, 6 
+	GOTO        L__combate_estado324
+L__combate_estado323:
+	BSF         PORTA+0, 6 
+L__combate_estado324:
+	BSF         PORTA+0, 4 
+;Configuraciones.c,262 :: 		HIT_NO_BLOQUEANTE();
 	CALL        _HIT_NO_BLOQUEANTE+0, 0
-;Configuraciones.c,254 :: 		break;
+;Configuraciones.c,263 :: 		break;
 	GOTO        L_combate_estado44
-;Configuraciones.c,256 :: 		default:
+;Configuraciones.c,265 :: 		default:
 L_combate_estado86:
-;Configuraciones.c,257 :: 		LIBRE(); // Detén motores, ponlo en modo seguro
+;Configuraciones.c,266 :: 		LIBRE(); // Detén motores, ponlo en modo seguro
 	CALL        _LIBRE+0, 0
-;Configuraciones.c,258 :: 		estado_combate = CMB_ESPERA; // Vuelve a esperar nueva condición
+;Configuraciones.c,267 :: 		estado_combate = CMB_ESPERA; // Vuelve a esperar nueva condición
 	CLRF        _estado_combate+0 
-;Configuraciones.c,259 :: 		estado_movimiento = MOV_IDLE; // Resetea movimiento si lo usas
+;Configuraciones.c,268 :: 		estado_movimiento = MOV_IDLE; // Resetea movimiento si lo usas
 	CLRF        _estado_movimiento+0 
-;Configuraciones.c,260 :: 		break;
+;Configuraciones.c,269 :: 		break;
 	GOTO        L_combate_estado44
-;Configuraciones.c,261 :: 		}
+;Configuraciones.c,270 :: 		}
 L_combate_estado43:
 	MOVF        _estado_combate+0, 0 
 	XORLW       0
@@ -1232,102 +1305,79 @@ L_combate_estado43:
 	GOTO        L_combate_estado85
 	GOTO        L_combate_estado86
 L_combate_estado44:
-;Configuraciones.c,262 :: 		}
+;Configuraciones.c,271 :: 		}
 L_end_combate_estado:
 	RETURN      0
 ; end of _combate_estado
 
 _Start:
 
-;Configuraciones.c,264 :: 		void Start(){
-;Configuraciones.c,265 :: 		PWM1_Start();
+;Configuraciones.c,273 :: 		void Start(){
+;Configuraciones.c,274 :: 		PWM1_Start();
 	CALL        _PWM1_Start+0, 0
-;Configuraciones.c,266 :: 		PWM2_Start();
+;Configuraciones.c,275 :: 		PWM2_Start();
 	CALL        _PWM2_Start+0, 0
-;Configuraciones.c,267 :: 		PWM3_Start();
+;Configuraciones.c,276 :: 		PWM3_Start();
 	CALL        _PWM3_Start+0, 0
-;Configuraciones.c,268 :: 		PWM4_Start();
+;Configuraciones.c,277 :: 		PWM4_Start();
 	CALL        _PWM4_Start+0, 0
-;Configuraciones.c,269 :: 		PWM5_Start();
+;Configuraciones.c,278 :: 		PWM5_Start();
 	CALL        _PWM5_Start+0, 0
-;Configuraciones.c,270 :: 		return;
-;Configuraciones.c,271 :: 		}
+;Configuraciones.c,279 :: 		return;
+;Configuraciones.c,280 :: 		}
 L_end_Start:
 	RETURN      0
 ; end of _Start
 
 _Stop:
 
-;Configuraciones.c,272 :: 		void Stop(){
-;Configuraciones.c,273 :: 		PWM1_Stop();
+;Configuraciones.c,281 :: 		void Stop(){
+;Configuraciones.c,282 :: 		PWM1_Stop();
 	CALL        _PWM1_Stop+0, 0
-;Configuraciones.c,274 :: 		PWM2_Stop();
+;Configuraciones.c,283 :: 		PWM2_Stop();
 	CALL        _PWM2_Stop+0, 0
-;Configuraciones.c,275 :: 		PWM3_Stop();
+;Configuraciones.c,284 :: 		PWM3_Stop();
 	CALL        _PWM3_Stop+0, 0
-;Configuraciones.c,276 :: 		PWM4_Stop();
+;Configuraciones.c,285 :: 		PWM4_Stop();
 	CALL        _PWM4_Stop+0, 0
-;Configuraciones.c,277 :: 		PWM5_Stop();
+;Configuraciones.c,286 :: 		PWM5_Stop();
 	CALL        _PWM5_Stop+0, 0
-;Configuraciones.c,278 :: 		}
+;Configuraciones.c,287 :: 		}
 L_end_Stop:
 	RETURN      0
 ; end of _Stop
 
 _REC:
 
-;Configuraciones.c,285 :: 		void REC(){
-;Configuraciones.c,287 :: 		Start();
+;Configuraciones.c,294 :: 		void REC(){
+;Configuraciones.c,296 :: 		Start();
 	CALL        _Start+0, 0
-;Configuraciones.c,289 :: 		PWM1_Set_Duty(200); // IN1 = PWM
+;Configuraciones.c,298 :: 		PWM1_Set_Duty(200); // IN1 = PWM
 	MOVLW       200
 	MOVWF       FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;Configuraciones.c,290 :: 		PWM2_Set_Duty(0);
+;Configuraciones.c,299 :: 		PWM2_Set_Duty(0);
 	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;Configuraciones.c,293 :: 		PWM3_Set_Duty(140);    // IN1 = 0
+;Configuraciones.c,302 :: 		PWM3_Set_Duty(140);    // IN1 = 0
 	MOVLW       140
 	MOVWF       FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;Configuraciones.c,294 :: 		PWM4_Set_Duty(0);
+;Configuraciones.c,303 :: 		PWM4_Set_Duty(0);
 	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;Configuraciones.c,295 :: 		}
+;Configuraciones.c,304 :: 		}
 L_end_REC:
 	RETURN      0
 ; end of _REC
 
 _DER:
 
-;Configuraciones.c,296 :: 		void DER(){
-;Configuraciones.c,297 :: 		Start();
-	CALL        _Start+0, 0
-;Configuraciones.c,298 :: 		PWM1_Set_Duty(170);
-	MOVLW       170
-	MOVWF       FARG_PWM1_Set_Duty_new_duty+0 
-	CALL        _PWM1_Set_Duty+0, 0
-;Configuraciones.c,299 :: 		PWM2_Set_Duty(0);
-	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
-	CALL        _PWM2_Set_Duty+0, 0
-;Configuraciones.c,301 :: 		PWM3_Set_Duty(0);
-	CLRF        FARG_PWM3_Set_Duty_new_duty+0 
-	CALL        _PWM3_Set_Duty+0, 0
-;Configuraciones.c,302 :: 		PWM4_Set_Duty(0);
-	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
-	CALL        _PWM4_Set_Duty+0, 0
-;Configuraciones.c,304 :: 		}
-L_end_DER:
-	RETURN      0
-; end of _DER
-
-_DER_Z:
-
-;Configuraciones.c,305 :: 		void DER_Z(){
+;Configuraciones.c,305 :: 		void DER(){
 ;Configuraciones.c,306 :: 		Start();
 	CALL        _Start+0, 0
-;Configuraciones.c,307 :: 		PWM1_Set_Duty(230);
-	MOVLW       230
+;Configuraciones.c,307 :: 		PWM1_Set_Duty(180);
+	MOVLW       180
 	MOVWF       FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
 ;Configuraciones.c,308 :: 		PWM2_Set_Duty(0);
@@ -1339,37 +1389,37 @@ _DER_Z:
 ;Configuraciones.c,311 :: 		PWM4_Set_Duty(0);
 	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;Configuraciones.c,314 :: 		}
+;Configuraciones.c,313 :: 		}
+L_end_DER:
+	RETURN      0
+; end of _DER
+
+_DER_Z:
+
+;Configuraciones.c,314 :: 		void DER_Z(){
+;Configuraciones.c,315 :: 		Start();
+	CALL        _Start+0, 0
+;Configuraciones.c,316 :: 		PWM1_Set_Duty(230);
+	MOVLW       230
+	MOVWF       FARG_PWM1_Set_Duty_new_duty+0 
+	CALL        _PWM1_Set_Duty+0, 0
+;Configuraciones.c,317 :: 		PWM2_Set_Duty(0);
+	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
+	CALL        _PWM2_Set_Duty+0, 0
+;Configuraciones.c,319 :: 		PWM3_Set_Duty(0);
+	CLRF        FARG_PWM3_Set_Duty_new_duty+0 
+	CALL        _PWM3_Set_Duty+0, 0
+;Configuraciones.c,320 :: 		PWM4_Set_Duty(0);
+	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
+	CALL        _PWM4_Set_Duty+0, 0
+;Configuraciones.c,323 :: 		}
 L_end_DER_Z:
 	RETURN      0
 ; end of _DER_Z
 
 _IZQ:
 
-;Configuraciones.c,317 :: 		void IZQ(){
-;Configuraciones.c,318 :: 		Start();
-	CALL        _Start+0, 0
-;Configuraciones.c,319 :: 		PWM1_Set_Duty(0);
-	CLRF        FARG_PWM1_Set_Duty_new_duty+0 
-	CALL        _PWM1_Set_Duty+0, 0
-;Configuraciones.c,320 :: 		PWM2_Set_Duty(0);
-	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
-	CALL        _PWM2_Set_Duty+0, 0
-;Configuraciones.c,322 :: 		PWM3_Set_Duty(200);
-	MOVLW       200
-	MOVWF       FARG_PWM3_Set_Duty_new_duty+0 
-	CALL        _PWM3_Set_Duty+0, 0
-;Configuraciones.c,323 :: 		PWM4_Set_Duty(0);
-	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
-	CALL        _PWM4_Set_Duty+0, 0
-;Configuraciones.c,324 :: 		}
-L_end_IZQ:
-	RETURN      0
-; end of _IZQ
-
-_IZQ_L:
-
-;Configuraciones.c,326 :: 		void IZQ_L(){
+;Configuraciones.c,326 :: 		void IZQ(){
 ;Configuraciones.c,327 :: 		Start();
 	CALL        _Start+0, 0
 ;Configuraciones.c,328 :: 		PWM1_Set_Duty(0);
@@ -1378,91 +1428,137 @@ _IZQ_L:
 ;Configuraciones.c,329 :: 		PWM2_Set_Duty(0);
 	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;Configuraciones.c,331 :: 		PWM3_Set_Duty(180);
-	MOVLW       180
+;Configuraciones.c,331 :: 		PWM3_Set_Duty(200);
+	MOVLW       200
 	MOVWF       FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
 ;Configuraciones.c,332 :: 		PWM4_Set_Duty(0);
 	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;Configuraciones.c,334 :: 		}
+;Configuraciones.c,333 :: 		}
+L_end_IZQ:
+	RETURN      0
+; end of _IZQ
+
+_IZQ_L:
+
+;Configuraciones.c,335 :: 		void IZQ_L(){
+;Configuraciones.c,336 :: 		Start();
+	CALL        _Start+0, 0
+;Configuraciones.c,337 :: 		PWM1_Set_Duty(0);
+	CLRF        FARG_PWM1_Set_Duty_new_duty+0 
+	CALL        _PWM1_Set_Duty+0, 0
+;Configuraciones.c,338 :: 		PWM2_Set_Duty(0);
+	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
+	CALL        _PWM2_Set_Duty+0, 0
+;Configuraciones.c,340 :: 		PWM3_Set_Duty(180);
+	MOVLW       180
+	MOVWF       FARG_PWM3_Set_Duty_new_duty+0 
+	CALL        _PWM3_Set_Duty+0, 0
+;Configuraciones.c,341 :: 		PWM4_Set_Duty(0);
+	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
+	CALL        _PWM4_Set_Duty+0, 0
+;Configuraciones.c,343 :: 		}
 L_end_IZQ_L:
 	RETURN      0
 ; end of _IZQ_L
 
+_DER_L:
+
+;Configuraciones.c,344 :: 		void DER_L(){
+;Configuraciones.c,345 :: 		Start();
+	CALL        _Start+0, 0
+;Configuraciones.c,346 :: 		PWM1_Set_Duty(180);
+	MOVLW       180
+	MOVWF       FARG_PWM1_Set_Duty_new_duty+0 
+	CALL        _PWM1_Set_Duty+0, 0
+;Configuraciones.c,347 :: 		PWM2_Set_Duty(0);
+	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
+	CALL        _PWM2_Set_Duty+0, 0
+;Configuraciones.c,349 :: 		PWM3_Set_Duty(0);
+	CLRF        FARG_PWM3_Set_Duty_new_duty+0 
+	CALL        _PWM3_Set_Duty+0, 0
+;Configuraciones.c,350 :: 		PWM4_Set_Duty(0);
+	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
+	CALL        _PWM4_Set_Duty+0, 0
+;Configuraciones.c,354 :: 		}
+L_end_DER_L:
+	RETURN      0
+; end of _DER_L
+
 _REV:
 
-;Configuraciones.c,337 :: 		void REV(){
-;Configuraciones.c,338 :: 		Start();
+;Configuraciones.c,356 :: 		void REV(){
+;Configuraciones.c,357 :: 		Start();
 	CALL        _Start+0, 0
-;Configuraciones.c,339 :: 		PWM1_Set_Duty(0);
+;Configuraciones.c,358 :: 		PWM1_Set_Duty(0);
 	CLRF        FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;Configuraciones.c,340 :: 		PWM2_Set_Duty(190);
+;Configuraciones.c,359 :: 		PWM2_Set_Duty(190);
 	MOVLW       190
 	MOVWF       FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;Configuraciones.c,341 :: 		PWM3_Set_Duty(0);
+;Configuraciones.c,360 :: 		PWM3_Set_Duty(0);
 	CLRF        FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;Configuraciones.c,342 :: 		PWM4_Set_Duty(190);
+;Configuraciones.c,361 :: 		PWM4_Set_Duty(190);
 	MOVLW       190
 	MOVWF       FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;Configuraciones.c,344 :: 		}
+;Configuraciones.c,363 :: 		}
 L_end_REV:
 	RETURN      0
 ; end of _REV
 
 _LIBRE:
 
-;Configuraciones.c,346 :: 		void LIBRE(){
-;Configuraciones.c,348 :: 		PWM1_Set_Duty(0);
+;Configuraciones.c,365 :: 		void LIBRE(){
+;Configuraciones.c,367 :: 		PWM1_Set_Duty(0);
 	CLRF        FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;Configuraciones.c,349 :: 		PWM2_Set_Duty(0);
+;Configuraciones.c,368 :: 		PWM2_Set_Duty(0);
 	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;Configuraciones.c,350 :: 		PWM3_Set_Duty(0);
+;Configuraciones.c,369 :: 		PWM3_Set_Duty(0);
 	CLRF        FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;Configuraciones.c,351 :: 		PWM4_Set_Duty(0);
+;Configuraciones.c,370 :: 		PWM4_Set_Duty(0);
 	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;Configuraciones.c,352 :: 		}
+;Configuraciones.c,371 :: 		}
 L_end_LIBRE:
 	RETURN      0
 ; end of _LIBRE
 
 _GIRO180:
 
-;Configuraciones.c,356 :: 		void GIRO180(){
-;Configuraciones.c,357 :: 		Start();
+;Configuraciones.c,375 :: 		void GIRO180(){
+;Configuraciones.c,376 :: 		Start();
 	CALL        _Start+0, 0
-;Configuraciones.c,358 :: 		PWM1_Set_Duty(0);
+;Configuraciones.c,377 :: 		PWM1_Set_Duty(0);
 	CLRF        FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;Configuraciones.c,359 :: 		PWM2_Set_Duty(0);
+;Configuraciones.c,378 :: 		PWM2_Set_Duty(0);
 	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;Configuraciones.c,360 :: 		PWM3_Set_Duty(0);
+;Configuraciones.c,379 :: 		PWM3_Set_Duty(0);
 	CLRF        FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;Configuraciones.c,361 :: 		PWM4_Set_Duty(180);
-	MOVLW       180
+;Configuraciones.c,380 :: 		PWM4_Set_Duty(200);
+	MOVLW       200
 	MOVWF       FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;Configuraciones.c,363 :: 		}
+;Configuraciones.c,382 :: 		}
 L_end_GIRO180:
 	RETURN      0
 ; end of _GIRO180
 
 _GIRO360:
 
-;Configuraciones.c,365 :: 		void GIRO360(){                     //Produce un grio que beneficia si se activo el sesnor de linea
-;Configuraciones.c,366 :: 		IZQ();                         //de la Izquierda
+;Configuraciones.c,384 :: 		void GIRO360(){                     //Produce un grio que beneficia si se activo el sesnor de linea
+;Configuraciones.c,385 :: 		IZQ();                         //de la Izquierda
 	CALL        _IZQ+0, 0
-;Configuraciones.c,367 :: 		delay_ms(250);
+;Configuraciones.c,386 :: 		delay_ms(250);
 	MOVLW       3
 	MOVWF       R11, 0
 	MOVLW       138
@@ -1478,85 +1574,85 @@ L_GIRO36087:
 	BRA         L_GIRO36087
 	NOP
 	NOP
-;Configuraciones.c,368 :: 		HARD();
+;Configuraciones.c,387 :: 		HARD();
 	CALL        _HARD+0, 0
-;Configuraciones.c,370 :: 		}
+;Configuraciones.c,389 :: 		}
 L_end_GIRO360:
 	RETURN      0
 ; end of _GIRO360
 
 _BRAKE:
 
-;Configuraciones.c,372 :: 		void BRAKE(){
-;Configuraciones.c,374 :: 		Stop();
+;Configuraciones.c,391 :: 		void BRAKE(){
+;Configuraciones.c,393 :: 		Stop();
 	CALL        _Stop+0, 0
-;Configuraciones.c,375 :: 		LATC.F2=0;                                //PWM1
+;Configuraciones.c,394 :: 		LATC.F2=0;                                //PWM1
 	BCF         LATC+0, 2 
-;Configuraciones.c,376 :: 		LATC.F1=0;                                //PWM2                                 -
+;Configuraciones.c,395 :: 		LATC.F1=0;                                //PWM2                                 -
 	BCF         LATC+0, 1 
-;Configuraciones.c,377 :: 		LATB.F5=0;                                //PWM3
+;Configuraciones.c,396 :: 		LATB.F5=0;                                //PWM3
 	BCF         LATB+0, 5 
-;Configuraciones.c,378 :: 		LATB.F0=0;                                //PWM4
+;Configuraciones.c,397 :: 		LATB.F0=0;                                //PWM4
 	BCF         LATB+0, 0 
-;Configuraciones.c,381 :: 		}
+;Configuraciones.c,400 :: 		}
 L_end_BRAKE:
 	RETURN      0
 ; end of _BRAKE
 
 _HARD:
 
-;Configuraciones.c,382 :: 		void HARD(){
-;Configuraciones.c,383 :: 		PWM1_Set_Duty(255);
+;Configuraciones.c,401 :: 		void HARD(){
+;Configuraciones.c,402 :: 		PWM1_Set_Duty(255);
 	MOVLW       255
 	MOVWF       FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;Configuraciones.c,384 :: 		PWM2_Set_Duty(255);
+;Configuraciones.c,403 :: 		PWM2_Set_Duty(255);
 	MOVLW       255
 	MOVWF       FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;Configuraciones.c,385 :: 		PWM3_Set_Duty(255);
+;Configuraciones.c,404 :: 		PWM3_Set_Duty(255);
 	MOVLW       255
 	MOVWF       FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;Configuraciones.c,386 :: 		PWM4_Set_Duty(255);
+;Configuraciones.c,405 :: 		PWM4_Set_Duty(255);
 	MOVLW       255
 	MOVWF       FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;Configuraciones.c,389 :: 		}
+;Configuraciones.c,408 :: 		}
 L_end_HARD:
 	RETURN      0
 ; end of _HARD
 
 _PUSH:
 
-;Configuraciones.c,390 :: 		void PUSH(){
-;Configuraciones.c,391 :: 		Start();
+;Configuraciones.c,409 :: 		void PUSH(){
+;Configuraciones.c,410 :: 		Start();
 	CALL        _Start+0, 0
-;Configuraciones.c,393 :: 		PWM1_Set_Duty(255); // IN1 = PWM
+;Configuraciones.c,412 :: 		PWM1_Set_Duty(255); // IN1 = PWM
 	MOVLW       255
 	MOVWF       FARG_PWM1_Set_Duty_new_duty+0 
 	CALL        _PWM1_Set_Duty+0, 0
-;Configuraciones.c,394 :: 		PWM2_Set_Duty(0);
+;Configuraciones.c,413 :: 		PWM2_Set_Duty(0);
 	CLRF        FARG_PWM2_Set_Duty_new_duty+0 
 	CALL        _PWM2_Set_Duty+0, 0
-;Configuraciones.c,397 :: 		PWM3_Set_Duty(205);    // IN1 = 0
+;Configuraciones.c,416 :: 		PWM3_Set_Duty(205);    // IN1 = 0
 	MOVLW       205
 	MOVWF       FARG_PWM3_Set_Duty_new_duty+0 
 	CALL        _PWM3_Set_Duty+0, 0
-;Configuraciones.c,398 :: 		PWM4_Set_Duty(0);
+;Configuraciones.c,417 :: 		PWM4_Set_Duty(0);
 	CLRF        FARG_PWM4_Set_Duty_new_duty+0 
 	CALL        _PWM4_Set_Duty+0, 0
-;Configuraciones.c,400 :: 		}
+;Configuraciones.c,419 :: 		}
 L_end_PUSH:
 	RETURN      0
 ; end of _PUSH
 
 _HIT:
 
-;Configuraciones.c,401 :: 		void HIT(){
-;Configuraciones.c,403 :: 		REC();
+;Configuraciones.c,420 :: 		void HIT(){
+;Configuraciones.c,422 :: 		REC();
 	CALL        _REC+0, 0
-;Configuraciones.c,404 :: 		delay_ms(20);
+;Configuraciones.c,423 :: 		delay_ms(20);
 	MOVLW       52
 	MOVWF       R12, 0
 	MOVLW       241
@@ -1568,9 +1664,9 @@ L_HIT88:
 	BRA         L_HIT88
 	NOP
 	NOP
-;Configuraciones.c,405 :: 		PUSH();
+;Configuraciones.c,424 :: 		PUSH();
 	CALL        _PUSH+0, 0
-;Configuraciones.c,406 :: 		delay_ms(250);
+;Configuraciones.c,425 :: 		delay_ms(250);
 	MOVLW       3
 	MOVWF       R11, 0
 	MOVLW       138
@@ -1586,15 +1682,15 @@ L_HIT89:
 	BRA         L_HIT89
 	NOP
 	NOP
-;Configuraciones.c,407 :: 		}
+;Configuraciones.c,426 :: 		}
 L_end_HIT:
 	RETURN      0
 ; end of _HIT
 
 _HIT_NO_BLOQUEANTE:
 
-;Configuraciones.c,408 :: 		void HIT_NO_BLOQUEANTE(){
-;Configuraciones.c,409 :: 		unsigned long now = millis(); // Usa tu función de tiempo
+;Configuraciones.c,427 :: 		void HIT_NO_BLOQUEANTE(){
+;Configuraciones.c,428 :: 		unsigned long now = millis(); // Usa tu función de tiempo
 	CALL        _millis+0, 0
 	MOVF        R0, 0 
 	MOVWF       HIT_NO_BLOQUEANTE_now_L0+0 
@@ -1604,13 +1700,13 @@ _HIT_NO_BLOQUEANTE:
 	MOVWF       HIT_NO_BLOQUEANTE_now_L0+2 
 	MOVF        R3, 0 
 	MOVWF       HIT_NO_BLOQUEANTE_now_L0+3 
-;Configuraciones.c,411 :: 		switch (estado_movimiento) {
+;Configuraciones.c,430 :: 		switch (estado_movimiento) {
 	GOTO        L_HIT_NO_BLOQUEANTE90
-;Configuraciones.c,412 :: 		case MOV_IDLE:
+;Configuraciones.c,431 :: 		case MOV_IDLE:
 L_HIT_NO_BLOQUEANTE92:
-;Configuraciones.c,413 :: 		PUSH(); // Avanza rápido
+;Configuraciones.c,432 :: 		PUSH(); // Avanza rápido
 	CALL        _PUSH+0, 0
-;Configuraciones.c,414 :: 		tiempo_movimiento = now;
+;Configuraciones.c,433 :: 		tiempo_movimiento = now;
 	MOVF        HIT_NO_BLOQUEANTE_now_L0+0, 0 
 	MOVWF       _tiempo_movimiento+0 
 	MOVF        HIT_NO_BLOQUEANTE_now_L0+1, 0 
@@ -1619,14 +1715,14 @@ L_HIT_NO_BLOQUEANTE92:
 	MOVWF       _tiempo_movimiento+2 
 	MOVF        HIT_NO_BLOQUEANTE_now_L0+3, 0 
 	MOVWF       _tiempo_movimiento+3 
-;Configuraciones.c,415 :: 		estado_movimiento = MOV_HIT_REC;
+;Configuraciones.c,434 :: 		estado_movimiento = MOV_HIT_REC;
 	MOVLW       1
 	MOVWF       _estado_movimiento+0 
-;Configuraciones.c,416 :: 		break;
+;Configuraciones.c,435 :: 		break;
 	GOTO        L_HIT_NO_BLOQUEANTE91
-;Configuraciones.c,418 :: 		case MOV_HIT_REC:
+;Configuraciones.c,437 :: 		case MOV_HIT_REC:
 L_HIT_NO_BLOQUEANTE93:
-;Configuraciones.c,420 :: 		if (now - tiempo_movimiento >= 20) {
+;Configuraciones.c,439 :: 		if (now - tiempo_movimiento >= 20) {
 	MOVF        HIT_NO_BLOQUEANTE_now_L0+0, 0 
 	MOVWF       R1 
 	MOVF        HIT_NO_BLOQUEANTE_now_L0+1, 0 
@@ -1646,23 +1742,23 @@ L_HIT_NO_BLOQUEANTE93:
 	MOVLW       0
 	SUBWF       R4, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__HIT_NO_BLOQUEANTE323
+	GOTO        L__HIT_NO_BLOQUEANTE342
 	MOVLW       0
 	SUBWF       R3, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__HIT_NO_BLOQUEANTE323
+	GOTO        L__HIT_NO_BLOQUEANTE342
 	MOVLW       0
 	SUBWF       R2, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__HIT_NO_BLOQUEANTE323
+	GOTO        L__HIT_NO_BLOQUEANTE342
 	MOVLW       20
 	SUBWF       R1, 0 
-L__HIT_NO_BLOQUEANTE323:
+L__HIT_NO_BLOQUEANTE342:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_HIT_NO_BLOQUEANTE94
-;Configuraciones.c,421 :: 		PUSH(); // Empuje fuerte
+;Configuraciones.c,440 :: 		PUSH(); // Empuje fuerte
 	CALL        _PUSH+0, 0
-;Configuraciones.c,422 :: 		tiempo_movimiento = now;
+;Configuraciones.c,441 :: 		tiempo_movimiento = now;
 	MOVF        HIT_NO_BLOQUEANTE_now_L0+0, 0 
 	MOVWF       _tiempo_movimiento+0 
 	MOVF        HIT_NO_BLOQUEANTE_now_L0+1, 0 
@@ -1671,21 +1767,21 @@ L__HIT_NO_BLOQUEANTE323:
 	MOVWF       _tiempo_movimiento+2 
 	MOVF        HIT_NO_BLOQUEANTE_now_L0+3, 0 
 	MOVWF       _tiempo_movimiento+3 
-;Configuraciones.c,423 :: 		estado_movimiento = MOV_HIT_PUSH;
+;Configuraciones.c,442 :: 		estado_movimiento = MOV_HIT_PUSH;
 	MOVLW       2
 	MOVWF       _estado_movimiento+0 
-;Configuraciones.c,424 :: 		}
+;Configuraciones.c,443 :: 		}
 L_HIT_NO_BLOQUEANTE94:
-;Configuraciones.c,425 :: 		break;
+;Configuraciones.c,444 :: 		break;
 	GOTO        L_HIT_NO_BLOQUEANTE91
-;Configuraciones.c,427 :: 		case MOV_HIT_PUSH:
+;Configuraciones.c,446 :: 		case MOV_HIT_PUSH:
 L_HIT_NO_BLOQUEANTE95:
-;Configuraciones.c,429 :: 		if (S2 == 0) {
+;Configuraciones.c,448 :: 		if (S2 == 0) {
 	BTFSC       PORTC+0, 6 
 	GOTO        L_HIT_NO_BLOQUEANTE96
-;Configuraciones.c,431 :: 		PUSH();
+;Configuraciones.c,450 :: 		PUSH();
 	CALL        _PUSH+0, 0
-;Configuraciones.c,432 :: 		tiempo_movimiento = now; // Actualiza tiempo si quieres tiempo máximo de empuje
+;Configuraciones.c,451 :: 		tiempo_movimiento = now; // Actualiza tiempo si quieres tiempo máximo de empuje
 	MOVF        HIT_NO_BLOQUEANTE_now_L0+0, 0 
 	MOVWF       _tiempo_movimiento+0 
 	MOVF        HIT_NO_BLOQUEANTE_now_L0+1, 0 
@@ -1694,20 +1790,20 @@ L_HIT_NO_BLOQUEANTE95:
 	MOVWF       _tiempo_movimiento+2 
 	MOVF        HIT_NO_BLOQUEANTE_now_L0+3, 0 
 	MOVWF       _tiempo_movimiento+3 
-;Configuraciones.c,433 :: 		} else {
+;Configuraciones.c,452 :: 		} else {
 	GOTO        L_HIT_NO_BLOQUEANTE97
 L_HIT_NO_BLOQUEANTE96:
-;Configuraciones.c,435 :: 		HARD();
+;Configuraciones.c,454 :: 		HARD();
 	CALL        _HARD+0, 0
-;Configuraciones.c,436 :: 		estado_movimiento = MOV_IDLE;
+;Configuraciones.c,455 :: 		estado_movimiento = MOV_IDLE;
 	CLRF        _estado_movimiento+0 
-;Configuraciones.c,437 :: 		estado_combate = CMB_ESPERA;
+;Configuraciones.c,456 :: 		estado_combate = CMB_ESPERA;
 	CLRF        _estado_combate+0 
-;Configuraciones.c,438 :: 		}
+;Configuraciones.c,457 :: 		}
 L_HIT_NO_BLOQUEANTE97:
-;Configuraciones.c,445 :: 		break;
+;Configuraciones.c,464 :: 		break;
 	GOTO        L_HIT_NO_BLOQUEANTE91
-;Configuraciones.c,446 :: 		}
+;Configuraciones.c,465 :: 		}
 L_HIT_NO_BLOQUEANTE90:
 	MOVF        _estado_movimiento+0, 0 
 	XORLW       0
@@ -1722,15 +1818,15 @@ L_HIT_NO_BLOQUEANTE90:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_HIT_NO_BLOQUEANTE95
 L_HIT_NO_BLOQUEANTE91:
-;Configuraciones.c,447 :: 		}
+;Configuraciones.c,466 :: 		}
 L_end_HIT_NO_BLOQUEANTE:
 	RETURN      0
 ; end of _HIT_NO_BLOQUEANTE
 
 _IZQ_M:
 
-;Configuraciones.c,448 :: 		void IZQ_M(){
-;Configuraciones.c,449 :: 		unsigned long now = millis();
+;Configuraciones.c,467 :: 		void IZQ_M(){
+;Configuraciones.c,468 :: 		unsigned long now = millis();
 	CALL        _millis+0, 0
 	MOVF        R0, 0 
 	MOVWF       IZQ_M_now_L0+0 
@@ -1740,13 +1836,13 @@ _IZQ_M:
 	MOVWF       IZQ_M_now_L0+2 
 	MOVF        R3, 0 
 	MOVWF       IZQ_M_now_L0+3 
-;Configuraciones.c,450 :: 		switch (sub_cmb_izq) {
+;Configuraciones.c,469 :: 		switch (sub_cmb_izq) {
 	GOTO        L_IZQ_M98
-;Configuraciones.c,452 :: 		case SUB_IZQ_INICIO:
+;Configuraciones.c,471 :: 		case SUB_IZQ_INICIO:
 L_IZQ_M100:
-;Configuraciones.c,453 :: 		IZQ();
+;Configuraciones.c,472 :: 		IZQ();
 	CALL        _IZQ+0, 0
-;Configuraciones.c,454 :: 		t_cmb_izq = now;
+;Configuraciones.c,473 :: 		t_cmb_izq = now;
 	MOVF        IZQ_M_now_L0+0, 0 
 	MOVWF       _t_cmb_izq+0 
 	MOVF        IZQ_M_now_L0+1, 0 
@@ -1755,14 +1851,14 @@ L_IZQ_M100:
 	MOVWF       _t_cmb_izq+2 
 	MOVF        IZQ_M_now_L0+3, 0 
 	MOVWF       _t_cmb_izq+3 
-;Configuraciones.c,455 :: 		sub_cmb_izq = SUB_IZQ_GIRO;
+;Configuraciones.c,474 :: 		sub_cmb_izq = SUB_IZQ_GIRO;
 	MOVLW       1
 	MOVWF       _sub_cmb_izq+0 
-;Configuraciones.c,456 :: 		break;
+;Configuraciones.c,475 :: 		break;
 	GOTO        L_IZQ_M99
-;Configuraciones.c,458 :: 		case SUB_IZQ_GIRO:
+;Configuraciones.c,477 :: 		case SUB_IZQ_GIRO:
 L_IZQ_M101:
-;Configuraciones.c,459 :: 		if (now - t_cmb_izq >= 100) {
+;Configuraciones.c,478 :: 		if (now - t_cmb_izq >= 100) {
 	MOVF        IZQ_M_now_L0+0, 0 
 	MOVWF       R1 
 	MOVF        IZQ_M_now_L0+1, 0 
@@ -1782,23 +1878,23 @@ L_IZQ_M101:
 	MOVLW       0
 	SUBWF       R4, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__IZQ_M325
+	GOTO        L__IZQ_M344
 	MOVLW       0
 	SUBWF       R3, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__IZQ_M325
+	GOTO        L__IZQ_M344
 	MOVLW       0
 	SUBWF       R2, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__IZQ_M325
+	GOTO        L__IZQ_M344
 	MOVLW       100
 	SUBWF       R1, 0 
-L__IZQ_M325:
+L__IZQ_M344:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_IZQ_M102
-;Configuraciones.c,460 :: 		HARD();
+;Configuraciones.c,479 :: 		HARD();
 	CALL        _HARD+0, 0
-;Configuraciones.c,461 :: 		t_cmb_izq = now;
+;Configuraciones.c,480 :: 		t_cmb_izq = now;
 	MOVF        IZQ_M_now_L0+0, 0 
 	MOVWF       _t_cmb_izq+0 
 	MOVF        IZQ_M_now_L0+1, 0 
@@ -1807,21 +1903,21 @@ L__IZQ_M325:
 	MOVWF       _t_cmb_izq+2 
 	MOVF        IZQ_M_now_L0+3, 0 
 	MOVWF       _t_cmb_izq+3 
-;Configuraciones.c,462 :: 		sub_cmb_izq = SUB_IZQ_HARD;
+;Configuraciones.c,481 :: 		sub_cmb_izq = SUB_IZQ_HARD;
 	MOVLW       2
 	MOVWF       _sub_cmb_izq+0 
-;Configuraciones.c,463 :: 		} else {
+;Configuraciones.c,482 :: 		} else {
 	GOTO        L_IZQ_M103
 L_IZQ_M102:
-;Configuraciones.c,464 :: 		IZQ(); // si necesitas mantener comando
+;Configuraciones.c,483 :: 		IZQ(); // si necesitas mantener comando
 	CALL        _IZQ+0, 0
-;Configuraciones.c,465 :: 		}
+;Configuraciones.c,484 :: 		}
 L_IZQ_M103:
-;Configuraciones.c,466 :: 		break;
+;Configuraciones.c,485 :: 		break;
 	GOTO        L_IZQ_M99
-;Configuraciones.c,468 :: 		case SUB_IZQ_HARD:
+;Configuraciones.c,487 :: 		case SUB_IZQ_HARD:
 L_IZQ_M104:
-;Configuraciones.c,469 :: 		if (now - t_cmb_izq >= 100) {
+;Configuraciones.c,488 :: 		if (now - t_cmb_izq >= 100) {
 	MOVF        IZQ_M_now_L0+0, 0 
 	MOVWF       R1 
 	MOVF        IZQ_M_now_L0+1, 0 
@@ -1841,34 +1937,34 @@ L_IZQ_M104:
 	MOVLW       0
 	SUBWF       R4, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__IZQ_M326
+	GOTO        L__IZQ_M345
 	MOVLW       0
 	SUBWF       R3, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__IZQ_M326
+	GOTO        L__IZQ_M345
 	MOVLW       0
 	SUBWF       R2, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__IZQ_M326
+	GOTO        L__IZQ_M345
 	MOVLW       100
 	SUBWF       R1, 0 
-L__IZQ_M326:
+L__IZQ_M345:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_IZQ_M105
-;Configuraciones.c,470 :: 		sub_cmb_izq = SUB_IZQ_INICIO;
+;Configuraciones.c,489 :: 		sub_cmb_izq = SUB_IZQ_INICIO;
 	CLRF        _sub_cmb_izq+0 
-;Configuraciones.c,471 :: 		estado_combate = CMB_ESPERA;
+;Configuraciones.c,490 :: 		estado_combate = CMB_ESPERA;
 	CLRF        _estado_combate+0 
-;Configuraciones.c,472 :: 		} else {
+;Configuraciones.c,491 :: 		} else {
 	GOTO        L_IZQ_M106
 L_IZQ_M105:
-;Configuraciones.c,473 :: 		HARD(); // si necesitas mantener comando
+;Configuraciones.c,492 :: 		HARD(); // si necesitas mantener comando
 	CALL        _HARD+0, 0
-;Configuraciones.c,474 :: 		}
+;Configuraciones.c,493 :: 		}
 L_IZQ_M106:
-;Configuraciones.c,475 :: 		break;
+;Configuraciones.c,494 :: 		break;
 	GOTO        L_IZQ_M99
-;Configuraciones.c,476 :: 		}
+;Configuraciones.c,495 :: 		}
 L_IZQ_M98:
 	MOVF        _sub_cmb_izq+0, 0 
 	XORLW       0
@@ -1883,15 +1979,15 @@ L_IZQ_M98:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_IZQ_M104
 L_IZQ_M99:
-;Configuraciones.c,477 :: 		}
+;Configuraciones.c,496 :: 		}
 L_end_IZQ_M:
 	RETURN      0
 ; end of _IZQ_M
 
 _DER_M:
 
-;Configuraciones.c,478 :: 		void DER_M() {
-;Configuraciones.c,479 :: 		unsigned long now = millis();
+;Configuraciones.c,497 :: 		void DER_M() {
+;Configuraciones.c,498 :: 		unsigned long now = millis();
 	CALL        _millis+0, 0
 	MOVF        R0, 0 
 	MOVWF       DER_M_now_L0+0 
@@ -1901,13 +1997,13 @@ _DER_M:
 	MOVWF       DER_M_now_L0+2 
 	MOVF        R3, 0 
 	MOVWF       DER_M_now_L0+3 
-;Configuraciones.c,481 :: 		switch (sub_cmb_der) {
+;Configuraciones.c,500 :: 		switch (sub_cmb_der) {
 	GOTO        L_DER_M107
-;Configuraciones.c,482 :: 		case SUB_DER_INICIO:
+;Configuraciones.c,501 :: 		case SUB_DER_INICIO:
 L_DER_M109:
-;Configuraciones.c,483 :: 		DER_Z();
+;Configuraciones.c,502 :: 		DER_Z();
 	CALL        _DER_Z+0, 0
-;Configuraciones.c,484 :: 		t_cmb_der = now;
+;Configuraciones.c,503 :: 		t_cmb_der = now;
 	MOVF        DER_M_now_L0+0, 0 
 	MOVWF       _t_cmb_der+0 
 	MOVF        DER_M_now_L0+1, 0 
@@ -1916,25 +2012,25 @@ L_DER_M109:
 	MOVWF       _t_cmb_der+2 
 	MOVF        DER_M_now_L0+3, 0 
 	MOVWF       _t_cmb_der+3 
-;Configuraciones.c,485 :: 		sub_cmb_der = SUB_DER_GIRO;
+;Configuraciones.c,504 :: 		sub_cmb_der = SUB_DER_GIRO;
 	MOVLW       1
 	MOVWF       _sub_cmb_der+0 
-;Configuraciones.c,486 :: 		break;
+;Configuraciones.c,505 :: 		break;
 	GOTO        L_DER_M108
-;Configuraciones.c,488 :: 		case SUB_DER_GIRO:
+;Configuraciones.c,507 :: 		case SUB_DER_GIRO:
 L_DER_M110:
-;Configuraciones.c,490 :: 		if (S6 ==0) {
+;Configuraciones.c,509 :: 		if (S6 ==0) {
 	BTFSC       PORTB+0, 4 
 	GOTO        L_DER_M111
-;Configuraciones.c,491 :: 		estado_combate = CMB_ESPERA;
+;Configuraciones.c,510 :: 		estado_combate = CMB_ESPERA;
 	CLRF        _estado_combate+0 
-;Configuraciones.c,492 :: 		sub_cmb_der = SUB_DER_INICIO;
+;Configuraciones.c,511 :: 		sub_cmb_der = SUB_DER_INICIO;
 	CLRF        _sub_cmb_der+0 
-;Configuraciones.c,493 :: 		break;
+;Configuraciones.c,512 :: 		break;
 	GOTO        L_DER_M108
-;Configuraciones.c,494 :: 		}
+;Configuraciones.c,513 :: 		}
 L_DER_M111:
-;Configuraciones.c,495 :: 		if (now - t_cmb_der >= 100) {
+;Configuraciones.c,514 :: 		if (now - t_cmb_der >= 100) {
 	MOVF        DER_M_now_L0+0, 0 
 	MOVWF       R1 
 	MOVF        DER_M_now_L0+1, 0 
@@ -1954,23 +2050,23 @@ L_DER_M111:
 	MOVLW       0
 	SUBWF       R4, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__DER_M328
+	GOTO        L__DER_M347
 	MOVLW       0
 	SUBWF       R3, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__DER_M328
+	GOTO        L__DER_M347
 	MOVLW       0
 	SUBWF       R2, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__DER_M328
+	GOTO        L__DER_M347
 	MOVLW       100
 	SUBWF       R1, 0 
-L__DER_M328:
+L__DER_M347:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_DER_M112
-;Configuraciones.c,496 :: 		HARD();
+;Configuraciones.c,515 :: 		HARD();
 	CALL        _HARD+0, 0
-;Configuraciones.c,497 :: 		t_cmb_der = now;
+;Configuraciones.c,516 :: 		t_cmb_der = now;
 	MOVF        DER_M_now_L0+0, 0 
 	MOVWF       _t_cmb_der+0 
 	MOVF        DER_M_now_L0+1, 0 
@@ -1979,32 +2075,32 @@ L__DER_M328:
 	MOVWF       _t_cmb_der+2 
 	MOVF        DER_M_now_L0+3, 0 
 	MOVWF       _t_cmb_der+3 
-;Configuraciones.c,498 :: 		sub_cmb_der = SUB_DER_HARD;
+;Configuraciones.c,517 :: 		sub_cmb_der = SUB_DER_HARD;
 	MOVLW       2
 	MOVWF       _sub_cmb_der+0 
-;Configuraciones.c,499 :: 		} else {
+;Configuraciones.c,518 :: 		} else {
 	GOTO        L_DER_M113
 L_DER_M112:
-;Configuraciones.c,500 :: 		DER_Z();
+;Configuraciones.c,519 :: 		DER_Z();
 	CALL        _DER_Z+0, 0
-;Configuraciones.c,501 :: 		}
+;Configuraciones.c,520 :: 		}
 L_DER_M113:
-;Configuraciones.c,502 :: 		break;
+;Configuraciones.c,521 :: 		break;
 	GOTO        L_DER_M108
-;Configuraciones.c,504 :: 		case SUB_DER_HARD:
+;Configuraciones.c,523 :: 		case SUB_DER_HARD:
 L_DER_M114:
-;Configuraciones.c,506 :: 		if (S6==0) {
+;Configuraciones.c,525 :: 		if (S6==0) {
 	BTFSC       PORTB+0, 4 
 	GOTO        L_DER_M115
-;Configuraciones.c,507 :: 		estado_combate = CMB_ESPERA;
+;Configuraciones.c,526 :: 		estado_combate = CMB_ESPERA;
 	CLRF        _estado_combate+0 
-;Configuraciones.c,508 :: 		sub_cmb_der = SUB_DER_INICIO;
+;Configuraciones.c,527 :: 		sub_cmb_der = SUB_DER_INICIO;
 	CLRF        _sub_cmb_der+0 
-;Configuraciones.c,509 :: 		break;
+;Configuraciones.c,528 :: 		break;
 	GOTO        L_DER_M108
-;Configuraciones.c,510 :: 		}
+;Configuraciones.c,529 :: 		}
 L_DER_M115:
-;Configuraciones.c,511 :: 		if (now - t_cmb_der >= 100) {
+;Configuraciones.c,530 :: 		if (now - t_cmb_der >= 100) {
 	MOVF        DER_M_now_L0+0, 0 
 	MOVWF       R1 
 	MOVF        DER_M_now_L0+1, 0 
@@ -2024,34 +2120,34 @@ L_DER_M115:
 	MOVLW       0
 	SUBWF       R4, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__DER_M329
+	GOTO        L__DER_M348
 	MOVLW       0
 	SUBWF       R3, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__DER_M329
+	GOTO        L__DER_M348
 	MOVLW       0
 	SUBWF       R2, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__DER_M329
+	GOTO        L__DER_M348
 	MOVLW       100
 	SUBWF       R1, 0 
-L__DER_M329:
+L__DER_M348:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_DER_M116
-;Configuraciones.c,512 :: 		estado_combate = CMB_ESPERA;
+;Configuraciones.c,531 :: 		estado_combate = CMB_ESPERA;
 	CLRF        _estado_combate+0 
-;Configuraciones.c,513 :: 		sub_cmb_der = SUB_DER_INICIO;
+;Configuraciones.c,532 :: 		sub_cmb_der = SUB_DER_INICIO;
 	CLRF        _sub_cmb_der+0 
-;Configuraciones.c,514 :: 		} else {
+;Configuraciones.c,533 :: 		} else {
 	GOTO        L_DER_M117
 L_DER_M116:
-;Configuraciones.c,515 :: 		HARD();
+;Configuraciones.c,534 :: 		HARD();
 	CALL        _HARD+0, 0
-;Configuraciones.c,516 :: 		}
+;Configuraciones.c,535 :: 		}
 L_DER_M117:
-;Configuraciones.c,517 :: 		break;
+;Configuraciones.c,536 :: 		break;
 	GOTO        L_DER_M108
-;Configuraciones.c,518 :: 		}
+;Configuraciones.c,537 :: 		}
 L_DER_M107:
 	MOVF        _sub_cmb_der+0, 0 
 	XORLW       0
@@ -2066,15 +2162,15 @@ L_DER_M107:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_DER_M114
 L_DER_M108:
-;Configuraciones.c,519 :: 		}
+;Configuraciones.c,538 :: 		}
 L_end_DER_M:
 	RETURN      0
 ; end of _DER_M
 
 _REC_M:
 
-;Configuraciones.c,520 :: 		void REC_M() {
-;Configuraciones.c,521 :: 		unsigned long now = millis();
+;Configuraciones.c,539 :: 		void REC_M() {
+;Configuraciones.c,540 :: 		unsigned long now = millis();
 	CALL        _millis+0, 0
 	MOVF        R0, 0 
 	MOVWF       REC_M_now_L0+0 
@@ -2084,13 +2180,13 @@ _REC_M:
 	MOVWF       REC_M_now_L0+2 
 	MOVF        R3, 0 
 	MOVWF       REC_M_now_L0+3 
-;Configuraciones.c,522 :: 		switch (sub_cmb_rec) {
+;Configuraciones.c,541 :: 		switch (sub_cmb_rec) {
 	GOTO        L_REC_M118
-;Configuraciones.c,523 :: 		case SUB_REC_INICIO:
+;Configuraciones.c,542 :: 		case SUB_REC_INICIO:
 L_REC_M120:
-;Configuraciones.c,524 :: 		REC();
+;Configuraciones.c,543 :: 		REC();
 	CALL        _REC+0, 0
-;Configuraciones.c,525 :: 		t_cmb_rec = now;
+;Configuraciones.c,544 :: 		t_cmb_rec = now;
 	MOVF        REC_M_now_L0+0, 0 
 	MOVWF       _t_cmb_rec+0 
 	MOVF        REC_M_now_L0+1, 0 
@@ -2099,14 +2195,14 @@ L_REC_M120:
 	MOVWF       _t_cmb_rec+2 
 	MOVF        REC_M_now_L0+3, 0 
 	MOVWF       _t_cmb_rec+3 
-;Configuraciones.c,526 :: 		sub_cmb_rec = SUB_REC_REC;
+;Configuraciones.c,545 :: 		sub_cmb_rec = SUB_REC_REC;
 	MOVLW       1
 	MOVWF       _sub_cmb_rec+0 
-;Configuraciones.c,527 :: 		break;
+;Configuraciones.c,546 :: 		break;
 	GOTO        L_REC_M119
-;Configuraciones.c,529 :: 		case SUB_REC_REC:
+;Configuraciones.c,548 :: 		case SUB_REC_REC:
 L_REC_M121:
-;Configuraciones.c,530 :: 		if (now - t_cmb_rec >= 50) { // Espera 250 ms
+;Configuraciones.c,549 :: 		if (now - t_cmb_rec >= 50) { // Espera 250 ms
 	MOVF        REC_M_now_L0+0, 0 
 	MOVWF       R1 
 	MOVF        REC_M_now_L0+1, 0 
@@ -2126,23 +2222,23 @@ L_REC_M121:
 	MOVLW       0
 	SUBWF       R4, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__REC_M331
+	GOTO        L__REC_M350
 	MOVLW       0
 	SUBWF       R3, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__REC_M331
+	GOTO        L__REC_M350
 	MOVLW       0
 	SUBWF       R2, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__REC_M331
+	GOTO        L__REC_M350
 	MOVLW       50
 	SUBWF       R1, 0 
-L__REC_M331:
+L__REC_M350:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_REC_M122
-;Configuraciones.c,531 :: 		LIBRE();
+;Configuraciones.c,550 :: 		LIBRE();
 	CALL        _LIBRE+0, 0
-;Configuraciones.c,532 :: 		t_cmb_rec = now;
+;Configuraciones.c,551 :: 		t_cmb_rec = now;
 	MOVF        REC_M_now_L0+0, 0 
 	MOVWF       _t_cmb_rec+0 
 	MOVF        REC_M_now_L0+1, 0 
@@ -2151,16 +2247,16 @@ L__REC_M331:
 	MOVWF       _t_cmb_rec+2 
 	MOVF        REC_M_now_L0+3, 0 
 	MOVWF       _t_cmb_rec+3 
-;Configuraciones.c,533 :: 		sub_cmb_rec = SUB_REC_LIBRE;
+;Configuraciones.c,552 :: 		sub_cmb_rec = SUB_REC_LIBRE;
 	MOVLW       2
 	MOVWF       _sub_cmb_rec+0 
-;Configuraciones.c,534 :: 		}
+;Configuraciones.c,553 :: 		}
 L_REC_M122:
-;Configuraciones.c,535 :: 		break;
+;Configuraciones.c,554 :: 		break;
 	GOTO        L_REC_M119
-;Configuraciones.c,537 :: 		case SUB_REC_LIBRE:
+;Configuraciones.c,556 :: 		case SUB_REC_LIBRE:
 L_REC_M123:
-;Configuraciones.c,538 :: 		if (now - t_cmb_rec >= 100) { // Espera 200 ms
+;Configuraciones.c,557 :: 		if (now - t_cmb_rec >= 100) { // Espera 200 ms
 	MOVF        REC_M_now_L0+0, 0 
 	MOVWF       R1 
 	MOVF        REC_M_now_L0+1, 0 
@@ -2180,36 +2276,36 @@ L_REC_M123:
 	MOVLW       0
 	SUBWF       R4, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__REC_M332
+	GOTO        L__REC_M351
 	MOVLW       0
 	SUBWF       R3, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__REC_M332
+	GOTO        L__REC_M351
 	MOVLW       0
 	SUBWF       R2, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__REC_M332
+	GOTO        L__REC_M351
 	MOVLW       100
 	SUBWF       R1, 0 
-L__REC_M332:
+L__REC_M351:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_REC_M124
-;Configuraciones.c,539 :: 		sub_cmb_rec = SUB_REC_FIN;
+;Configuraciones.c,558 :: 		sub_cmb_rec = SUB_REC_FIN;
 	MOVLW       3
 	MOVWF       _sub_cmb_rec+0 
-;Configuraciones.c,540 :: 		}
+;Configuraciones.c,559 :: 		}
 L_REC_M124:
-;Configuraciones.c,541 :: 		break;
+;Configuraciones.c,560 :: 		break;
 	GOTO        L_REC_M119
-;Configuraciones.c,543 :: 		case SUB_REC_FIN:
+;Configuraciones.c,562 :: 		case SUB_REC_FIN:
 L_REC_M125:
-;Configuraciones.c,544 :: 		estado_combate = CMB_ESPERA;
+;Configuraciones.c,563 :: 		estado_combate = CMB_ESPERA;
 	CLRF        _estado_combate+0 
-;Configuraciones.c,545 :: 		sub_cmb_rec = SUB_REC_INICIO; // Reinicia para próxima vez
+;Configuraciones.c,564 :: 		sub_cmb_rec = SUB_REC_INICIO; // Reinicia para próxima vez
 	CLRF        _sub_cmb_rec+0 
-;Configuraciones.c,546 :: 		break;
+;Configuraciones.c,565 :: 		break;
 	GOTO        L_REC_M119
-;Configuraciones.c,547 :: 		}
+;Configuraciones.c,566 :: 		}
 L_REC_M118:
 	MOVF        _sub_cmb_rec+0, 0 
 	XORLW       0
@@ -2228,15 +2324,15 @@ L_REC_M118:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_REC_M125
 L_REC_M119:
-;Configuraciones.c,548 :: 		}
+;Configuraciones.c,567 :: 		}
 L_end_REC_M:
 	RETURN      0
 ; end of _REC_M
 
 _IZQ_GIRO:
 
-;Configuraciones.c,549 :: 		void IZQ_GIRO(){
-;Configuraciones.c,550 :: 		unsigned long now = millis();
+;Configuraciones.c,568 :: 		void IZQ_GIRO(){
+;Configuraciones.c,569 :: 		unsigned long now = millis();
 	CALL        _millis+0, 0
 	MOVF        R0, 0 
 	MOVWF       IZQ_GIRO_now_L0+0 
@@ -2246,13 +2342,13 @@ _IZQ_GIRO:
 	MOVWF       IZQ_GIRO_now_L0+2 
 	MOVF        R3, 0 
 	MOVWF       IZQ_GIRO_now_L0+3 
-;Configuraciones.c,551 :: 		switch (sub_cmb_izq_giro) {
+;Configuraciones.c,570 :: 		switch (sub_cmb_izq_giro) {
 	GOTO        L_IZQ_GIRO126
-;Configuraciones.c,552 :: 		case SUB_IZQ_GIRO:
+;Configuraciones.c,571 :: 		case SUB_IZQ_GIRO:
 L_IZQ_GIRO128:
-;Configuraciones.c,554 :: 		IZQ(); // función de giro izquierda
+;Configuraciones.c,573 :: 		IZQ(); // función de giro izquierda
 	CALL        _IZQ+0, 0
-;Configuraciones.c,555 :: 		t_cmb_izq_giro = now;
+;Configuraciones.c,574 :: 		t_cmb_izq_giro = now;
 	MOVF        IZQ_GIRO_now_L0+0, 0 
 	MOVWF       _t_cmb_izq_giro+0 
 	MOVF        IZQ_GIRO_now_L0+1, 0 
@@ -2261,14 +2357,14 @@ L_IZQ_GIRO128:
 	MOVWF       _t_cmb_izq_giro+2 
 	MOVF        IZQ_GIRO_now_L0+3, 0 
 	MOVWF       _t_cmb_izq_giro+3 
-;Configuraciones.c,556 :: 		sub_cmb_izq_giro = SUB_IZQ_BUSCAR_CENTRO;
+;Configuraciones.c,575 :: 		sub_cmb_izq_giro = SUB_IZQ_BUSCAR_CENTRO;
 	MOVLW       1
 	MOVWF       _sub_cmb_izq_giro+0 
-;Configuraciones.c,557 :: 		break;
+;Configuraciones.c,576 :: 		break;
 	GOTO        L_IZQ_GIRO127
-;Configuraciones.c,559 :: 		case SUB_IZQ_BUSCAR_CENTRO:
+;Configuraciones.c,578 :: 		case SUB_IZQ_BUSCAR_CENTRO:
 L_IZQ_GIRO129:
-;Configuraciones.c,561 :: 		if (SL1 == 0 && S2 == 1 && S6 == 0) {
+;Configuraciones.c,580 :: 		if (SL1 == 0 && S2 == 1 && S6 == 0) {
 	BTFSC       PORTC+0, 0 
 	GOTO        L_IZQ_GIRO132
 	BTFSS       PORTC+0, 6 
@@ -2276,25 +2372,25 @@ L_IZQ_GIRO129:
 	BTFSC       PORTB+0, 4 
 	GOTO        L_IZQ_GIRO132
 L__IZQ_GIRO179:
-;Configuraciones.c,562 :: 		sub_cmb_izq_giro = SUB_IZQ_ATAQUE;
+;Configuraciones.c,581 :: 		sub_cmb_izq_giro = SUB_IZQ_ATAQUE;
 	MOVLW       2
 	MOVWF       _sub_cmb_izq_giro+0 
-;Configuraciones.c,563 :: 		}
+;Configuraciones.c,582 :: 		}
 L_IZQ_GIRO132:
-;Configuraciones.c,564 :: 		break;
+;Configuraciones.c,583 :: 		break;
 	GOTO        L_IZQ_GIRO127
-;Configuraciones.c,566 :: 		case SUB_IZQ_ATAQUE:
+;Configuraciones.c,585 :: 		case SUB_IZQ_ATAQUE:
 L_IZQ_GIRO133:
-;Configuraciones.c,568 :: 		HIT_NO_BLOQUEANTE(); // función de ataque
+;Configuraciones.c,587 :: 		HIT_NO_BLOQUEANTE(); // función de ataque
 	CALL        _HIT_NO_BLOQUEANTE+0, 0
-;Configuraciones.c,569 :: 		estado_combate = CMB_ESPERA;
+;Configuraciones.c,588 :: 		estado_combate = CMB_ESPERA;
 	CLRF        _estado_combate+0 
-;Configuraciones.c,570 :: 		sub_cmb_izq_giro = SUB_IZQ_GIRO; // Reinicia para próxima vez
+;Configuraciones.c,589 :: 		sub_cmb_izq_giro = SUB_IZQ_GIRO; // Reinicia para próxima vez
 	MOVLW       1
 	MOVWF       _sub_cmb_izq_giro+0 
-;Configuraciones.c,571 :: 		break;
+;Configuraciones.c,590 :: 		break;
 	GOTO        L_IZQ_GIRO127
-;Configuraciones.c,572 :: 		}
+;Configuraciones.c,591 :: 		}
 L_IZQ_GIRO126:
 	MOVF        _sub_cmb_izq_giro+0, 0 
 	XORLW       1
@@ -2309,15 +2405,15 @@ L_IZQ_GIRO126:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_IZQ_GIRO133
 L_IZQ_GIRO127:
-;Configuraciones.c,573 :: 		}
+;Configuraciones.c,592 :: 		}
 L_end_IZQ_GIRO:
 	RETURN      0
 ; end of _IZQ_GIRO
 
 _DER_GIRO:
 
-;Configuraciones.c,574 :: 		void DER_GIRO(){
-;Configuraciones.c,575 :: 		unsigned long now = millis();
+;Configuraciones.c,593 :: 		void DER_GIRO(){
+;Configuraciones.c,594 :: 		unsigned long now = millis();
 	CALL        _millis+0, 0
 	MOVF        R0, 0 
 	MOVWF       DER_GIRO_now_L0+0 
@@ -2327,13 +2423,13 @@ _DER_GIRO:
 	MOVWF       DER_GIRO_now_L0+2 
 	MOVF        R3, 0 
 	MOVWF       DER_GIRO_now_L0+3 
-;Configuraciones.c,576 :: 		switch(sub_cmb_der_giro){
+;Configuraciones.c,595 :: 		switch(sub_cmb_der_giro){
 	GOTO        L_DER_GIRO134
-;Configuraciones.c,577 :: 		case SUB_DER_GIRO_INICIO:
+;Configuraciones.c,596 :: 		case SUB_DER_GIRO_INICIO:
 L_DER_GIRO136:
-;Configuraciones.c,578 :: 		DER();
+;Configuraciones.c,597 :: 		DER();
 	CALL        _DER+0, 0
-;Configuraciones.c,579 :: 		t_cmb_der_giro = now;
+;Configuraciones.c,598 :: 		t_cmb_der_giro = now;
 	MOVF        DER_GIRO_now_L0+0, 0 
 	MOVWF       _t_cmb_der_giro+0 
 	MOVF        DER_GIRO_now_L0+1, 0 
@@ -2342,14 +2438,14 @@ L_DER_GIRO136:
 	MOVWF       _t_cmb_der_giro+2 
 	MOVF        DER_GIRO_now_L0+3, 0 
 	MOVWF       _t_cmb_der_giro+3 
-;Configuraciones.c,580 :: 		sub_cmb_der_giro = SUB_DER_BUSCAR_CENTRO;
+;Configuraciones.c,599 :: 		sub_cmb_der_giro = SUB_DER_BUSCAR_CENTRO;
 	MOVLW       1
 	MOVWF       _sub_cmb_der_giro+0 
-;Configuraciones.c,581 :: 		break;
+;Configuraciones.c,600 :: 		break;
 	GOTO        L_DER_GIRO135
-;Configuraciones.c,583 :: 		case SUB_DER_BUSCAR_CENTRO:
+;Configuraciones.c,602 :: 		case SUB_DER_BUSCAR_CENTRO:
 L_DER_GIRO137:
-;Configuraciones.c,584 :: 		if(SL1 ==0 && S2 ==1 && S6==0){
+;Configuraciones.c,603 :: 		if(SL1 ==0 && S2 ==1 && S6==0){
 	BTFSC       PORTC+0, 0 
 	GOTO        L_DER_GIRO140
 	BTFSS       PORTC+0, 6 
@@ -2357,24 +2453,24 @@ L_DER_GIRO137:
 	BTFSC       PORTB+0, 4 
 	GOTO        L_DER_GIRO140
 L__DER_GIRO180:
-;Configuraciones.c,585 :: 		sub_cmb_der_giro = SUB_DER_ATAQUE;
+;Configuraciones.c,604 :: 		sub_cmb_der_giro = SUB_DER_ATAQUE;
 	MOVLW       2
 	MOVWF       _sub_cmb_der_giro+0 
-;Configuraciones.c,586 :: 		}
+;Configuraciones.c,605 :: 		}
 L_DER_GIRO140:
-;Configuraciones.c,587 :: 		break;
+;Configuraciones.c,606 :: 		break;
 	GOTO        L_DER_GIRO135
-;Configuraciones.c,589 :: 		case SUB_DER_ATAQUE:
+;Configuraciones.c,608 :: 		case SUB_DER_ATAQUE:
 L_DER_GIRO141:
-;Configuraciones.c,590 :: 		HIT_NO_BLOQUEANTE();
+;Configuraciones.c,609 :: 		HIT_NO_BLOQUEANTE();
 	CALL        _HIT_NO_BLOQUEANTE+0, 0
-;Configuraciones.c,591 :: 		estado_combate = CMB_ESPERA;
+;Configuraciones.c,610 :: 		estado_combate = CMB_ESPERA;
 	CLRF        _estado_combate+0 
-;Configuraciones.c,592 :: 		sub_cmb_der_giro = SUB_DER_GIRO_INICIO;
+;Configuraciones.c,611 :: 		sub_cmb_der_giro = SUB_DER_GIRO_INICIO;
 	CLRF        _sub_cmb_der_giro+0 
-;Configuraciones.c,593 :: 		break;
+;Configuraciones.c,612 :: 		break;
 	GOTO        L_DER_GIRO135
-;Configuraciones.c,594 :: 		}
+;Configuraciones.c,613 :: 		}
 L_DER_GIRO134:
 	MOVF        _sub_cmb_der_giro+0, 0 
 	XORLW       0
@@ -2389,27 +2485,27 @@ L_DER_GIRO134:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_DER_GIRO141
 L_DER_GIRO135:
-;Configuraciones.c,596 :: 		}
+;Configuraciones.c,615 :: 		}
 L_end_DER_GIRO:
 	RETURN      0
 ; end of _DER_GIRO
 
 _BUSCAR:
 
-;Configuraciones.c,597 :: 		void BUSCAR(){
-;Configuraciones.c,598 :: 		switch (sub_cmb_buscar) {
+;Configuraciones.c,616 :: 		void BUSCAR(){
+;Configuraciones.c,617 :: 		switch (sub_cmb_buscar) {
 	GOTO        L_BUSCAR142
-;Configuraciones.c,599 :: 		case SUB_BUSCAR_IZQ:
+;Configuraciones.c,618 :: 		case SUB_BUSCAR_IZQ:
 L_BUSCAR144:
-;Configuraciones.c,600 :: 		IZQ(); // Ejecuta giro izquierda
+;Configuraciones.c,619 :: 		IZQ(); // Ejecuta giro izquierda
 	CALL        _IZQ+0, 0
-;Configuraciones.c,601 :: 		if (S2 == 1) { // Rival al frente detectado
+;Configuraciones.c,620 :: 		if (S2 == 1) { // Rival al frente detectado
 	BTFSS       PORTC+0, 6 
 	GOTO        L_BUSCAR145
-;Configuraciones.c,602 :: 		estado_combate = CMB_HIT;
+;Configuraciones.c,621 :: 		estado_combate = CMB_HIT;
 	MOVLW       3
 	MOVWF       _estado_combate+0 
-;Configuraciones.c,603 :: 		} else if (millis() - t_cmb_buscar > T_BUSCAR_GIRO_MS) {
+;Configuraciones.c,622 :: 		} else if (millis() - t_cmb_buscar > T_BUSCAR_GIRO_MS) {
 	GOTO        L_BUSCAR146
 L_BUSCAR145:
 	CALL        _millis+0, 0
@@ -2432,24 +2528,24 @@ L_BUSCAR145:
 	MOVF        R7, 0 
 	SUBLW       0
 	BTFSS       STATUS+0, 2 
-	GOTO        L__BUSCAR336
+	GOTO        L__BUSCAR355
 	MOVF        R6, 0 
 	SUBLW       0
 	BTFSS       STATUS+0, 2 
-	GOTO        L__BUSCAR336
+	GOTO        L__BUSCAR355
 	MOVF        R5, 0 
 	SUBLW       0
 	BTFSS       STATUS+0, 2 
-	GOTO        L__BUSCAR336
+	GOTO        L__BUSCAR355
 	MOVF        R4, 0 
 	SUBLW       200
-L__BUSCAR336:
+L__BUSCAR355:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_BUSCAR147
-;Configuraciones.c,604 :: 		sub_cmb_buscar = SUB_BUSCAR_DER;
+;Configuraciones.c,623 :: 		sub_cmb_buscar = SUB_BUSCAR_DER;
 	MOVLW       1
 	MOVWF       _sub_cmb_buscar+0 
-;Configuraciones.c,605 :: 		t_cmb_buscar = millis();
+;Configuraciones.c,624 :: 		t_cmb_buscar = millis();
 	CALL        _millis+0, 0
 	MOVF        R0, 0 
 	MOVWF       _t_cmb_buscar+0 
@@ -2459,22 +2555,22 @@ L__BUSCAR336:
 	MOVWF       _t_cmb_buscar+2 
 	MOVF        R3, 0 
 	MOVWF       _t_cmb_buscar+3 
-;Configuraciones.c,606 :: 		}
+;Configuraciones.c,625 :: 		}
 L_BUSCAR147:
 L_BUSCAR146:
-;Configuraciones.c,607 :: 		break;
+;Configuraciones.c,626 :: 		break;
 	GOTO        L_BUSCAR143
-;Configuraciones.c,608 :: 		case SUB_BUSCAR_DER:
+;Configuraciones.c,627 :: 		case SUB_BUSCAR_DER:
 L_BUSCAR148:
-;Configuraciones.c,609 :: 		DER(); // Ejecuta giro derecha
+;Configuraciones.c,628 :: 		DER(); // Ejecuta giro derecha
 	CALL        _DER+0, 0
-;Configuraciones.c,610 :: 		if (S2 == 1) { // Rival al frente detectado
+;Configuraciones.c,629 :: 		if (S2 == 1) { // Rival al frente detectado
 	BTFSS       PORTC+0, 6 
 	GOTO        L_BUSCAR149
-;Configuraciones.c,611 :: 		estado_combate = CMB_HIT;
+;Configuraciones.c,630 :: 		estado_combate = CMB_HIT;
 	MOVLW       3
 	MOVWF       _estado_combate+0 
-;Configuraciones.c,612 :: 		} else if (millis() - t_cmb_buscar > T_BUSCAR_GIRO_MS) {
+;Configuraciones.c,631 :: 		} else if (millis() - t_cmb_buscar > T_BUSCAR_GIRO_MS) {
 	GOTO        L_BUSCAR150
 L_BUSCAR149:
 	CALL        _millis+0, 0
@@ -2497,28 +2593,28 @@ L_BUSCAR149:
 	MOVF        R7, 0 
 	SUBLW       0
 	BTFSS       STATUS+0, 2 
-	GOTO        L__BUSCAR337
+	GOTO        L__BUSCAR356
 	MOVF        R6, 0 
 	SUBLW       0
 	BTFSS       STATUS+0, 2 
-	GOTO        L__BUSCAR337
+	GOTO        L__BUSCAR356
 	MOVF        R5, 0 
 	SUBLW       0
 	BTFSS       STATUS+0, 2 
-	GOTO        L__BUSCAR337
+	GOTO        L__BUSCAR356
 	MOVF        R4, 0 
 	SUBLW       200
-L__BUSCAR337:
+L__BUSCAR356:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_BUSCAR151
-;Configuraciones.c,613 :: 		estado_combate = CMB_ESPERA; // O vuelve a búsqueda, como prefieras
+;Configuraciones.c,632 :: 		estado_combate = CMB_ESPERA; // O vuelve a búsqueda, como prefieras
 	CLRF        _estado_combate+0 
-;Configuraciones.c,614 :: 		}
+;Configuraciones.c,633 :: 		}
 L_BUSCAR151:
 L_BUSCAR150:
-;Configuraciones.c,615 :: 		break;
+;Configuraciones.c,634 :: 		break;
 	GOTO        L_BUSCAR143
-;Configuraciones.c,616 :: 		}
+;Configuraciones.c,635 :: 		}
 L_BUSCAR142:
 	MOVF        _sub_cmb_buscar+0, 0 
 	XORLW       0
@@ -2529,34 +2625,34 @@ L_BUSCAR142:
 	BTFSC       STATUS+0, 2 
 	GOTO        L_BUSCAR148
 L_BUSCAR143:
-;Configuraciones.c,617 :: 		}
+;Configuraciones.c,636 :: 		}
 L_end_BUSCAR:
 	RETURN      0
 ; end of _BUSCAR
 
 _LOGICA_LINEA:
 
-;Configuraciones.c,618 :: 		void LOGICA_LINEA(){
-;Configuraciones.c,619 :: 		if(S4 != 0 && S3 != 0){
+;Configuraciones.c,637 :: 		void LOGICA_LINEA(){
+;Configuraciones.c,638 :: 		if(S4 != 0 && S3 != 0){
 	BTFSS       PORTB+0, 2 
 	GOTO        L_LOGICA_LINEA154
 	BTFSS       PORTB+0, 1 
 	GOTO        L_LOGICA_LINEA154
 L__LOGICA_LINEA182:
-;Configuraciones.c,620 :: 		REC();
+;Configuraciones.c,639 :: 		REC();
 	CALL        _REC+0, 0
-;Configuraciones.c,621 :: 		}
+;Configuraciones.c,640 :: 		}
 	GOTO        L_LOGICA_LINEA155
 L_LOGICA_LINEA154:
-;Configuraciones.c,622 :: 		else if(S4 == 0 && S3 == 0){
+;Configuraciones.c,641 :: 		else if(S4 == 0 && S3 == 0){
 	BTFSC       PORTB+0, 2 
 	GOTO        L_LOGICA_LINEA158
 	BTFSC       PORTB+0, 1 
 	GOTO        L_LOGICA_LINEA158
 L__LOGICA_LINEA181:
-;Configuraciones.c,623 :: 		HARD();
+;Configuraciones.c,642 :: 		HARD();
 	CALL        _HARD+0, 0
-;Configuraciones.c,624 :: 		delay_ms(100);
+;Configuraciones.c,643 :: 		delay_ms(100);
 	MOVLW       2
 	MOVWF       R11, 0
 	MOVLW       4
@@ -2571,9 +2667,9 @@ L_LOGICA_LINEA159:
 	DECFSZ      R11, 1, 1
 	BRA         L_LOGICA_LINEA159
 	NOP
-;Configuraciones.c,625 :: 		GIRO180();
+;Configuraciones.c,644 :: 		GIRO180();
 	CALL        _GIRO180+0, 0
-;Configuraciones.c,626 :: 		delay_ms(100);
+;Configuraciones.c,645 :: 		delay_ms(100);
 	MOVLW       2
 	MOVWF       R11, 0
 	MOVLW       4
@@ -2588,15 +2684,15 @@ L_LOGICA_LINEA160:
 	DECFSZ      R11, 1, 1
 	BRA         L_LOGICA_LINEA160
 	NOP
-;Configuraciones.c,627 :: 		}
+;Configuraciones.c,646 :: 		}
 	GOTO        L_LOGICA_LINEA161
 L_LOGICA_LINEA158:
-;Configuraciones.c,628 :: 		else if (S3 == 0){
+;Configuraciones.c,647 :: 		else if (S3 == 0){
 	BTFSC       PORTB+0, 1 
 	GOTO        L_LOGICA_LINEA162
-;Configuraciones.c,629 :: 		HARD();
+;Configuraciones.c,648 :: 		HARD();
 	CALL        _HARD+0, 0
-;Configuraciones.c,630 :: 		delay_ms(100);
+;Configuraciones.c,649 :: 		delay_ms(100);
 	MOVLW       2
 	MOVWF       R11, 0
 	MOVLW       4
@@ -2611,9 +2707,9 @@ L_LOGICA_LINEA163:
 	DECFSZ      R11, 1, 1
 	BRA         L_LOGICA_LINEA163
 	NOP
-;Configuraciones.c,631 :: 		GIRO360();
+;Configuraciones.c,650 :: 		GIRO360();
 	CALL        _GIRO360+0, 0
-;Configuraciones.c,632 :: 		delay_ms(100);
+;Configuraciones.c,651 :: 		delay_ms(100);
 	MOVLW       2
 	MOVWF       R11, 0
 	MOVLW       4
@@ -2628,15 +2724,15 @@ L_LOGICA_LINEA164:
 	DECFSZ      R11, 1, 1
 	BRA         L_LOGICA_LINEA164
 	NOP
-;Configuraciones.c,633 :: 		}
+;Configuraciones.c,652 :: 		}
 	GOTO        L_LOGICA_LINEA165
 L_LOGICA_LINEA162:
-;Configuraciones.c,634 :: 		else if (S4 == 0){
+;Configuraciones.c,653 :: 		else if (S4 == 0){
 	BTFSC       PORTB+0, 2 
 	GOTO        L_LOGICA_LINEA166
-;Configuraciones.c,635 :: 		HARD();
+;Configuraciones.c,654 :: 		HARD();
 	CALL        _HARD+0, 0
-;Configuraciones.c,636 :: 		delay_ms(100);
+;Configuraciones.c,655 :: 		delay_ms(100);
 	MOVLW       2
 	MOVWF       R11, 0
 	MOVLW       4
@@ -2651,9 +2747,9 @@ L_LOGICA_LINEA167:
 	DECFSZ      R11, 1, 1
 	BRA         L_LOGICA_LINEA167
 	NOP
-;Configuraciones.c,637 :: 		DER();
+;Configuraciones.c,656 :: 		DER();
 	CALL        _DER+0, 0
-;Configuraciones.c,638 :: 		delay_ms(100);
+;Configuraciones.c,657 :: 		delay_ms(100);
 	MOVLW       2
 	MOVWF       R11, 0
 	MOVLW       4
@@ -2668,12 +2764,12 @@ L_LOGICA_LINEA168:
 	DECFSZ      R11, 1, 1
 	BRA         L_LOGICA_LINEA168
 	NOP
-;Configuraciones.c,639 :: 		}
+;Configuraciones.c,658 :: 		}
 L_LOGICA_LINEA166:
 L_LOGICA_LINEA165:
 L_LOGICA_LINEA161:
 L_LOGICA_LINEA155:
-;Configuraciones.c,640 :: 		}
+;Configuraciones.c,659 :: 		}
 L_end_LOGICA_LINEA:
 	RETURN      0
 ; end of _LOGICA_LINEA

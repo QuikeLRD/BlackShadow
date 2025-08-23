@@ -18,6 +18,7 @@ void IZQ();
 void IZQ_M();
 void IZQ_GIRO();
 void IZQ_L();
+void DER_L();
 
 void BRAKE();
 void LIBRE();
@@ -207,27 +208,36 @@ void SELEC(){
 
  case 1:  PORTA.F6 =0;  PORTA.F4 = PORTA.F5 = PORTA.F7 =1;
  if( PORTB.F2  != 0 &&  PORTB.F1  != 0){
+  PORTA.F6 = PORTA.F4 = PORTA.F5 = PORTA.F7 =1;
+
  REC();
  }
  else if( PORTB.F2  == 0 &&  PORTB.F1  == 0){
+  PORTA.F6 = PORTA.F4 =1;  PORTA.F5 = PORTA.F7 =0;
+ GIRO180();
+ delay_ms(300);
  HARD();
  delay_ms(100);
- GIRO180();
- delay_ms(100);
+
+
  }
  else if ( PORTB.F1  == 0){
+  PORTA.F5 =0;  PORTA.F6 = PORTA.F4 = PORTA.F7 =1;
  HARD();
  delay_ms(100);
- IZQ();
+ IZQ_L();
  delay_ms(100);
- HARD();
+
+
+
  }
  else if ( PORTB.F2  == 0){
+  PORTA.F6 =0;  PORTA.F4 = PORTA.F5 = PORTA.F7 =1;
  HARD();
  delay_ms(100);
- DER();
+ DER_L();
  delay_ms(100);
- HARD();
+
  }
 
  break;
@@ -249,10 +259,10 @@ void SELEC(){
  break;
 
  case 4:  PORTA.F5 =0;  PORTA.F4 = PORTA.F7 = PORTA.F6 =1;
- DER();
- delay_ms(250);
- LIBRE();
- delay_ms(4000);
+ GIRO180();
+ delay_ms(300);
+ HARD();
+ delay_ms(750);
  break;
 
  case 5:  PORTA.F5 = PORTA.F6 =0;  PORTA.F4 = PORTA.F7 =1;
@@ -424,7 +434,7 @@ void REC(){
  }
 void DER(){
  Start();
- PWM1_Set_Duty(170);
+ PWM1_Set_Duty(180);
  PWM2_Set_Duty(0);
 
  PWM3_Set_Duty(0);
@@ -461,7 +471,17 @@ void IZQ_L(){
  PWM4_Set_Duty(0);
 
 }
+void DER_L(){
+ Start();
+ PWM1_Set_Duty(180);
+ PWM2_Set_Duty(0);
 
+ PWM3_Set_Duty(0);
+ PWM4_Set_Duty(0);
+
+
+
+}
 
 void REV(){
  Start();
@@ -487,7 +507,7 @@ void GIRO180(){
  PWM1_Set_Duty(0);
  PWM2_Set_Duty(0);
  PWM3_Set_Duty(0);
- PWM4_Set_Duty(180);
+ PWM4_Set_Duty(200);
 
 }
 
