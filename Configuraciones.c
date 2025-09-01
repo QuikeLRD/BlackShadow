@@ -84,6 +84,8 @@ void SELEC(){
     }
     else if(S4 == 0 && S3 == 0){
          L0=L3=1; L2=L1=0;
+         HARD();
+         delay_ms(100);
          GIRO180();
          delay_ms(300);
          HARD();
@@ -100,14 +102,14 @@ void SELEC(){
 
 
 
-    }
+    }    //Caso a revisar
     else if (S4 == 0){
         L0=0; L3=L2=L1=1;
-        HARD();
-        delay_ms(100);
-        DER_L();
-        delay_ms(100);
 
+        HARD();
+        delay_ms(50);
+        DER_L();
+        delay_ms(20);
     }
 
    break;
@@ -343,7 +345,7 @@ void IZQ_L(){
 }
 void DER_L(){
      Start();
-     PWM1_Set_Duty(180);
+     PWM1_Set_Duty(200);
      PWM2_Set_Duty(0);
 
      PWM3_Set_Duty(0);

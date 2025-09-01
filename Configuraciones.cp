@@ -214,6 +214,8 @@ void SELEC(){
  }
  else if( PORTB.F2  == 0 &&  PORTB.F1  == 0){
   PORTA.F6 = PORTA.F4 =1;  PORTA.F5 = PORTA.F7 =0;
+ HARD();
+ delay_ms(100);
  GIRO180();
  delay_ms(300);
  HARD();
@@ -233,11 +235,11 @@ void SELEC(){
  }
  else if ( PORTB.F2  == 0){
   PORTA.F6 =0;  PORTA.F4 = PORTA.F5 = PORTA.F7 =1;
- HARD();
- delay_ms(100);
- DER_L();
- delay_ms(100);
 
+ HARD();
+ delay_ms(50);
+ DER_L();
+ delay_ms(20);
  }
 
  break;
@@ -473,7 +475,7 @@ void IZQ_L(){
 }
 void DER_L(){
  Start();
- PWM1_Set_Duty(180);
+ PWM1_Set_Duty(200);
  PWM2_Set_Duty(0);
 
  PWM3_Set_Duty(0);

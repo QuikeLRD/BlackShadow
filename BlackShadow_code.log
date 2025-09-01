@@ -27,13 +27,13 @@ warning: 151	1504	Initialization of extern object 'sub_cmb_der_giro'	configuraci
 warning: 152	1504	Initialization of extern object 't_cmb_der_giro'	configuraciones.h
 warning: 155	1504	Initialization of extern object 'sub_cmb_buscar'	configuraciones.h
 warning: 156	1504	Initialization of extern object 't_cmb_buscar'	configuraciones.h
-diagnostics: 659	123	Compiled Successfully	Configuraciones.c
+diagnostics: 661	123	Compiled Successfully	Configuraciones.c
 diagnostics: 0	122	Compilation Started	milis.h
 diagnostics: 25	123	Compiled Successfully	millis.c
-diagnostics: 0	127	All files Compiled in 984 ms	 
+diagnostics: 0	127	All files Compiled in 468 ms	 
 hint: 0	1144	Used RAM (bytes): 56 (1%)  Free RAM (bytes): 3819 (99%)	Used RAM (bytes): 56 (1%)  Free RAM (bytes): 3819 (99%)
-hint: 0	1144	Used ROM (bytes): 4927 (8%)  Free ROM (bytes): 60609 (92%)	Used ROM (bytes): 4927 (8%)  Free ROM (bytes): 60609 (92%)
+hint: 0	1144	Used ROM (bytes): 4945 (8%)  Free ROM (bytes): 60591 (92%)	Used ROM (bytes): 4945 (8%)  Free ROM (bytes): 60591 (92%)
 diagnostics: 0	125	Project Linked Successfully	BlackShadow_code.mcppi
-diagnostics: 0	128	Linked in 500 ms	 
-diagnostics: 0	129	Project 'BlackShadow_code.mcppi' completed: 1516 ms	 
-diagnostics: 0	103	Finished successfully: 22 ago. 2025, 21:09:08	BlackShadow_code.mcppi
+diagnostics: 0	128	Linked in 188 ms	 
+diagnostics: 0	129	Project 'BlackShadow_code.mcppi' completed: 688 ms	 
+diagnostics: 0	103	Finished successfully: 01 sep. 2025, 14:11:45	BlackShadow_code.mcppi
