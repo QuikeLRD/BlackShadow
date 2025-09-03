@@ -93,6 +93,21 @@ typedef enum{
 
 } SubEstadoBUSCAR;
 
+
+
+typedef enum{
+ LINEA_IDLE,
+ LINEA_REC,
+ LINEA_HARD_IZQ,
+ LINEA_IZQ_L,
+ LINEA_HARD_DER,
+ LINEA_DER_L,
+ LINEA_HARD_180,
+ LINEA_GIRO180,
+ LINEA_HARD_FINAL_180
+
+ } SubEstadoLINEA;
+
 extern unsigned long millis();
 extern volatile unsigned long ms_ticks;
 
@@ -124,6 +139,10 @@ extern volatile unsigned long t_cmb_der_giro = 0;
 
 extern volatile SubEstadoBUSCAR sub_cmb_buscar = SUB_BUSCAR_IZQ;
 extern volatile unsigned long t_cmb_buscar = 0;
+
+
+extern volatile SubEstadoLINEA sub_cmb_linea = LINEA_IDLE;
+extern volatile unsigned long t_cmb_linea = 0;
 #line 1 "g:/mi unidad/upiita/ar upiita/diseños de minisumos/black shadow/programación/milis.h"
 
 

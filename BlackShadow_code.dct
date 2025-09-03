@@ -1870,6 +1870,7 @@ sub_cmb_der
 sub_cmb_der_giro
 sub_cmb_izq
 sub_cmb_izq_giro
+sub_cmb_linea
 sub_cmb_rec
 swap
 swdte
@@ -1888,6 +1889,7 @@ t_cmb_der
 t_cmb_der_giro
 t_cmb_izq
 t_cmb_izq_giro
+t_cmb_linea
 t_cmb_rec
 t08bit
 t08bit_bit

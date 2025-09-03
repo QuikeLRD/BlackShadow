@@ -35,6 +35,11 @@ volatile SubEstadoDER_GIRO sub_cmb_der_giro = SUB_DER_GIRO_INICIO;
 volatile unsigned long t_cmb_buscar = 0;
 volatile SubEstadoBUSCAR sub_cmb_buscar = SUB_BUSCAR_IZQ;
 
+//VARIABLES DETECCIÓN
+volatile unsigned long t_cmb_linea = 0;
+volatile SubEstadoLINEA sub_cmb_linea = LINEA_IDLE;
+
+
 //======================//
 //======Funciones======//
 //====================//
@@ -637,25 +642,89 @@ void BUSCAR(){
     }
 }
 void LOGICA_LINEA(){
-   if(S4 != 0 && S3 != 0){
-        REC();
-    }
-    else if(S4 == 0 && S3 == 0){
-         HARD();
-         delay_ms(100);
-         GIRO180();
-         delay_ms(100);
-    }
-    else if (S3 == 0){
-        HARD();
-        delay_ms(100);
-        GIRO360();
-        delay_ms(100);
-    }
-    else if (S4 == 0){
-        HARD();
-        delay_ms(100);
-        DER();
-        delay_ms(100);
+
+     unsigned long now = millis();
+    //ENTEORIA DEBERIA SALIRSE DEBIDO AL CASO QUE LE PUSE AL INICIO DE AVANZAR
+    switch (sub_cmb_linea) {
+        case LINEA_IDLE:
+            if (S4 != 0 && S3 != 0) {
+                L0 = L3 = L2 = L1 = 1;
+                REC();
+                sub_cmb_linea = LINEA_REC;
+            }
+            else if (S4 == 0 && S3 == 0) {
+                L0 = L3 = 1; L2 = L1 = 0;
+                HARD();
+                t_cmb_linea = now;
+                sub_cmb_linea = LINEA_HARD_180;
+            }
+            else if (S3 == 0) {
+                L2 = 0; L0 = L3 = L1 = 1;
+                HARD();
+                t_cmb_linea = now;
+                sub_cmb_linea = LINEA_HARD_IZQ;
+            }
+            else if (S4 == 0) {
+                L0 = 0; L3 = L2 = L1 = 1;
+                HARD();
+                t_cmb_linea = now;
+                sub_cmb_linea = LINEA_HARD_DER;
+            }
+            break;
+
+        case LINEA_REC:
+            // Si quieres que vuelva rápidamente a IDLE, lo puedes dejar así
+            sub_cmb_linea = LINEA_IDLE;
+            break;
+
+        case LINEA_HARD_180:
+            if (now - t_cmb_linea >= 100) {
+                GIRO180();
+                t_cmb_linea = now;
+                sub_cmb_linea = LINEA_GIRO180;
+            }
+            break;
+
+        case LINEA_GIRO180:
+            if (now - t_cmb_linea >= 300) {
+                HARD();
+                t_cmb_linea = now;
+                sub_cmb_linea = LINEA_HARD_FINAL_180;
+            }
+            break;
+
+        case LINEA_HARD_FINAL_180:
+            if (now - t_cmb_linea >= 100) {
+                sub_cmb_linea = LINEA_IDLE;
+            }
+            break;
+
+        case LINEA_HARD_IZQ:
+            if (now - t_cmb_linea >= 100) {
+                IZQ_L();
+                t_cmb_linea = now;
+                sub_cmb_linea = LINEA_IZQ_L;
+            }
+            break;
+
+        case LINEA_IZQ_L:
+            if (now - t_cmb_linea >= 100) {
+                sub_cmb_linea = LINEA_IDLE;
+            }
+            break;
+
+        case LINEA_HARD_DER:
+            if (now - t_cmb_linea >= 50) {
+                DER_L();
+                t_cmb_linea = now;
+                sub_cmb_linea = LINEA_DER_L;
+            }
+            break;
+
+        case LINEA_DER_L:
+            if (now - t_cmb_linea >= 20) {
+                sub_cmb_linea = LINEA_IDLE;
+            }
+            break;
     }
 }
