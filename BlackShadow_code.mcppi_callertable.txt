@@ -105,23 +105,7 @@ main
 					Mul_16X16_U
 				PWM4_Set_Duty
 					Mul_16X16_U
-			LOGICA_LINEA
-				millis
-				REC
-					Start
-						PWM1_Start
-						PWM2_Start
-						PWM3_Start
-						PWM4_Start
-						PWM5_Start
-					PWM1_Set_Duty
-						Mul_16X16_U
-					PWM2_Set_Duty
-						Mul_16X16_U
-					PWM3_Set_Duty
-						Mul_16X16_U
-					PWM4_Set_Duty
-						Mul_16X16_U
+			RUT_LINEA
 				HARD
 					PWM1_Set_Duty
 						Mul_16X16_U
@@ -131,51 +115,7 @@ main
 						Mul_16X16_U
 					PWM4_Set_Duty
 						Mul_16X16_U
-				GIRO180
-					Start
-						PWM1_Start
-						PWM2_Start
-						PWM3_Start
-						PWM4_Start
-						PWM5_Start
-					PWM1_Set_Duty
-						Mul_16X16_U
-					PWM2_Set_Duty
-						Mul_16X16_U
-					PWM3_Set_Duty
-						Mul_16X16_U
-					PWM4_Set_Duty
-						Mul_16X16_U
-				IZQ_L
-					Start
-						PWM1_Start
-						PWM2_Start
-						PWM3_Start
-						PWM4_Start
-						PWM5_Start
-					PWM1_Set_Duty
-						Mul_16X16_U
-					PWM2_Set_Duty
-						Mul_16X16_U
-					PWM3_Set_Duty
-						Mul_16X16_U
-					PWM4_Set_Duty
-						Mul_16X16_U
-				DER_L
-					Start
-						PWM1_Start
-						PWM2_Start
-						PWM3_Start
-						PWM4_Start
-						PWM5_Start
-					PWM1_Set_Duty
-						Mul_16X16_U
-					PWM2_Set_Duty
-						Mul_16X16_U
-					PWM3_Set_Duty
-						Mul_16X16_U
-					PWM4_Set_Duty
-						Mul_16X16_U
+				millis
 			millis
 			LIBRE
 				PWM1_Set_Duty

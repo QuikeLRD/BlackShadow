@@ -31,13 +31,13 @@ warning: 170	1504	Initialization of extern object 'sub_cmb_buscar'	configuracion
 warning: 171	1504	Initialization of extern object 't_cmb_buscar'	configuraciones.h
 warning: 174	1504	Initialization of extern object 'sub_cmb_linea'	configuraciones.h
 warning: 175	1504	Initialization of extern object 't_cmb_linea'	configuraciones.h
-diagnostics: 730	123	Compiled Successfully	Configuraciones.c
+diagnostics: 724	123	Compiled Successfully	Configuraciones.c
 diagnostics: 0	122	Compilation Started	milis.h
 diagnostics: 25	123	Compiled Successfully	millis.c
-diagnostics: 0	127	All files Compiled in 438 ms	 
+diagnostics: 0	127	All files Compiled in 406 ms	 
 hint: 0	1144	Used RAM (bytes): 61 (2%)  Free RAM (bytes): 3814 (98%)	Used RAM (bytes): 61 (2%)  Free RAM (bytes): 3814 (98%)
-hint: 0	1144	Used ROM (bytes): 5534 (8%)  Free ROM (bytes): 60002 (92%)	Used ROM (bytes): 5534 (8%)  Free ROM (bytes): 60002 (92%)
+hint: 0	1144	Used ROM (bytes): 4874 (7%)  Free ROM (bytes): 60662 (93%)	Used ROM (bytes): 4874 (7%)  Free ROM (bytes): 60662 (93%)
 diagnostics: 0	125	Project Linked Successfully	BlackShadow_code.mcppi
-diagnostics: 0	128	Linked in 156 ms	 
-diagnostics: 0	129	Project 'BlackShadow_code.mcppi' completed: 625 ms	 
-diagnostics: 0	103	Finished successfully: 03 sep. 2025, 14:20:25	BlackShadow_code.mcppi
+diagnostics: 0	128	Linked in 172 ms	 
+diagnostics: 0	129	Project 'BlackShadow_code.mcppi' completed: 594 ms	 
+diagnostics: 0	103	Finished successfully: 04 sep. 2025, 12:51:11	BlackShadow_code.mcppi

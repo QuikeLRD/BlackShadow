@@ -37,7 +37,7 @@ volatile SubEstadoBUSCAR sub_cmb_buscar = SUB_BUSCAR_IZQ;
 
 //VARIABLES DETECCIÓN
 volatile unsigned long t_cmb_linea = 0;
-volatile SubEstadoLINEA sub_cmb_linea = LINEA_IDLE;
+volatile SubEstadoLINEA sub_cmb_linea = LINEA_WAIT;
 
 
 //======================//
@@ -190,7 +190,7 @@ void SELEC(){
 void combate_estado() {
     if(linea_detectada){
     HARD();
-    LOGICA_LINEA();
+    RUT_LINEA();
     linea_detectada = 0;
     estado_combate = CMB_ESPERA;
     estado_movimiento = MOV_IDLE;
@@ -641,42 +641,31 @@ void BUSCAR(){
             break;
     }
 }
-void LOGICA_LINEA(){
+void RUT_LINEA(){
+   if(S4 == 0 && S3 == 0){
+        L0 = L3 = 1; L2 = L1 = 0;
+        HARD();
+        t_cmb_linea = millis();
+        sub_cmb_linea = LINEA_HARD_180;
+    }
+    else if (S3 == 0){
+        L2 = 0; L0 = L3 = L1 = 1;
+        HARD();
+        t_cmb_linea = millis();
+        sub_cmb_linea = LINEA_HARD_IZQ;
+    }
+    else if (S4 == 0){
+        L0 = 0; L3 = L2 = L1 = 1;
+        HARD();
+        t_cmb_linea = millis();
+        sub_cmb_linea = LINEA_HARD_DER;
+    }
+}
 
-     unsigned long now = millis();
-    //ENTEORIA DEBERIA SALIRSE DEBIDO AL CASO QUE LE PUSE AL INICIO DE AVANZAR
+void LOGICA_LINEA() {
+    unsigned long now = millis();
+
     switch (sub_cmb_linea) {
-        case LINEA_IDLE:
-            if (S4 != 0 && S3 != 0) {
-                L0 = L3 = L2 = L1 = 1;
-                REC();
-                sub_cmb_linea = LINEA_REC;
-            }
-            else if (S4 == 0 && S3 == 0) {
-                L0 = L3 = 1; L2 = L1 = 0;
-                HARD();
-                t_cmb_linea = now;
-                sub_cmb_linea = LINEA_HARD_180;
-            }
-            else if (S3 == 0) {
-                L2 = 0; L0 = L3 = L1 = 1;
-                HARD();
-                t_cmb_linea = now;
-                sub_cmb_linea = LINEA_HARD_IZQ;
-            }
-            else if (S4 == 0) {
-                L0 = 0; L3 = L2 = L1 = 1;
-                HARD();
-                t_cmb_linea = now;
-                sub_cmb_linea = LINEA_HARD_DER;
-            }
-            break;
-
-        case LINEA_REC:
-            // Si quieres que vuelva rápidamente a IDLE, lo puedes dejar así
-            sub_cmb_linea = LINEA_IDLE;
-            break;
-
         case LINEA_HARD_180:
             if (now - t_cmb_linea >= 100) {
                 GIRO180();
@@ -695,7 +684,7 @@ void LOGICA_LINEA(){
 
         case LINEA_HARD_FINAL_180:
             if (now - t_cmb_linea >= 100) {
-                sub_cmb_linea = LINEA_IDLE;
+                sub_cmb_linea = LINEA_WAIT; // Estado listo/inactivo
             }
             break;
 
@@ -709,7 +698,7 @@ void LOGICA_LINEA(){
 
         case LINEA_IZQ_L:
             if (now - t_cmb_linea >= 100) {
-                sub_cmb_linea = LINEA_IDLE;
+                sub_cmb_linea = LINEA_WAIT; // Estado listo/inactivo
             }
             break;
 
@@ -723,8 +712,13 @@ void LOGICA_LINEA(){
 
         case LINEA_DER_L:
             if (now - t_cmb_linea >= 20) {
-                sub_cmb_linea = LINEA_IDLE;
+                sub_cmb_linea = LINEA_WAIT; // Estado listo/inactivo
             }
+            break;
+
+        case LINEA_WAIT:
+        default:
+            // No hacer nada, esperando nueva detección/activación de rutina
             break;
     }
 }

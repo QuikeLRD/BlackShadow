@@ -31,7 +31,7 @@ void INTERRUPT_ISR();
 void combate_estado();
 void LOGICA_LINEA();
 void BUSCAR();
-
+void RUT_LINEA();
 
 
 typedef enum {
@@ -96,15 +96,15 @@ typedef enum{
 
 
 typedef enum{
- LINEA_IDLE,
  LINEA_REC,
+ LINEA_HARD_180,
+ LINEA_GIRO180,
+ LINEA_HARD_FINAL_180,
  LINEA_HARD_IZQ,
  LINEA_IZQ_L,
  LINEA_HARD_DER,
  LINEA_DER_L,
- LINEA_HARD_180,
- LINEA_GIRO180,
- LINEA_HARD_FINAL_180
+ LINEA_WAIT
 
  } SubEstadoLINEA;
 
@@ -141,7 +141,7 @@ extern volatile SubEstadoBUSCAR sub_cmb_buscar = SUB_BUSCAR_IZQ;
 extern volatile unsigned long t_cmb_buscar = 0;
 
 
-extern volatile SubEstadoLINEA sub_cmb_linea = LINEA_IDLE;
+extern volatile SubEstadoLINEA sub_cmb_linea = LINEA_WAIT;
 extern volatile unsigned long t_cmb_linea = 0;
 #line 1 "g:/mi unidad/upiita/ar upiita/diseños de minisumos/black shadow/programación/milis.h"
 
@@ -186,7 +186,7 @@ volatile SubEstadoBUSCAR sub_cmb_buscar = SUB_BUSCAR_IZQ;
 
 
 volatile unsigned long t_cmb_linea = 0;
-volatile SubEstadoLINEA sub_cmb_linea = LINEA_IDLE;
+volatile SubEstadoLINEA sub_cmb_linea = LINEA_WAIT;
 
 
 
@@ -339,7 +339,7 @@ void SELEC(){
 void combate_estado() {
  if(linea_detectada){
  HARD();
- LOGICA_LINEA();
+ RUT_LINEA();
  linea_detectada = 0;
  estado_combate = CMB_ESPERA;
  estado_movimiento = MOV_IDLE;
@@ -790,42 +790,31 @@ void BUSCAR(){
  break;
  }
 }
-void LOGICA_LINEA(){
+void RUT_LINEA(){
+ if( PORTB.F2  == 0 &&  PORTB.F1  == 0){
+  PORTA.F6  =  PORTA.F4  = 1;  PORTA.F5  =  PORTA.F7  = 0;
+ HARD();
+ t_cmb_linea = millis();
+ sub_cmb_linea = LINEA_HARD_180;
+ }
+ else if ( PORTB.F1  == 0){
+  PORTA.F5  = 0;  PORTA.F6  =  PORTA.F4  =  PORTA.F7  = 1;
+ HARD();
+ t_cmb_linea = millis();
+ sub_cmb_linea = LINEA_HARD_IZQ;
+ }
+ else if ( PORTB.F2  == 0){
+  PORTA.F6  = 0;  PORTA.F4  =  PORTA.F5  =  PORTA.F7  = 1;
+ HARD();
+ t_cmb_linea = millis();
+ sub_cmb_linea = LINEA_HARD_DER;
+ }
+}
 
+void LOGICA_LINEA() {
  unsigned long now = millis();
 
  switch (sub_cmb_linea) {
- case LINEA_IDLE:
- if ( PORTB.F2  != 0 &&  PORTB.F1  != 0) {
-  PORTA.F6  =  PORTA.F4  =  PORTA.F5  =  PORTA.F7  = 1;
- REC();
- sub_cmb_linea = LINEA_REC;
- }
- else if ( PORTB.F2  == 0 &&  PORTB.F1  == 0) {
-  PORTA.F6  =  PORTA.F4  = 1;  PORTA.F5  =  PORTA.F7  = 0;
- HARD();
- t_cmb_linea = now;
- sub_cmb_linea = LINEA_HARD_180;
- }
- else if ( PORTB.F1  == 0) {
-  PORTA.F5  = 0;  PORTA.F6  =  PORTA.F4  =  PORTA.F7  = 1;
- HARD();
- t_cmb_linea = now;
- sub_cmb_linea = LINEA_HARD_IZQ;
- }
- else if ( PORTB.F2  == 0) {
-  PORTA.F6  = 0;  PORTA.F4  =  PORTA.F5  =  PORTA.F7  = 1;
- HARD();
- t_cmb_linea = now;
- sub_cmb_linea = LINEA_HARD_DER;
- }
- break;
-
- case LINEA_REC:
-
- sub_cmb_linea = LINEA_IDLE;
- break;
-
  case LINEA_HARD_180:
  if (now - t_cmb_linea >= 100) {
  GIRO180();
@@ -844,7 +833,7 @@ void LOGICA_LINEA(){
 
  case LINEA_HARD_FINAL_180:
  if (now - t_cmb_linea >= 100) {
- sub_cmb_linea = LINEA_IDLE;
+ sub_cmb_linea = LINEA_WAIT;
  }
  break;
 
@@ -858,7 +847,7 @@ void LOGICA_LINEA(){
 
  case LINEA_IZQ_L:
  if (now - t_cmb_linea >= 100) {
- sub_cmb_linea = LINEA_IDLE;
+ sub_cmb_linea = LINEA_WAIT;
  }
  break;
 
@@ -872,8 +861,13 @@ void LOGICA_LINEA(){
 
  case LINEA_DER_L:
  if (now - t_cmb_linea >= 20) {
- sub_cmb_linea = LINEA_IDLE;
+ sub_cmb_linea = LINEA_WAIT;
  }
+ break;
+
+ case LINEA_WAIT:
+ default:
+
  break;
  }
 }
