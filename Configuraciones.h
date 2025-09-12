@@ -36,6 +36,8 @@ void Start();
 void Stop();
 void HARD();
 void PUSH();
+void WAIT();
+
 
 void REC();
 void REC_M();

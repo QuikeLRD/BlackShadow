@@ -16,15 +16,16 @@ main
 	PWM2_Start
 	PWM3_Start
 	PWM4_Start
-	LIBRE
-		PWM1_Set_Duty
-			Mul_16X16_U
-		PWM2_Set_Duty
-			Mul_16X16_U
-		PWM3_Set_Duty
-			Mul_16X16_U
-		PWM4_Set_Duty
-			Mul_16X16_U
+	WAIT
+		LIBRE
+			PWM1_Set_Duty
+				Mul_16X16_U
+			PWM2_Set_Duty
+				Mul_16X16_U
+			PWM3_Set_Duty
+				Mul_16X16_U
+			PWM4_Set_Duty
+				Mul_16X16_U
 	SELEC
 		REC
 			Start
@@ -65,6 +66,12 @@ main
 				Mul_16X16_U
 			PWM4_Set_Duty
 				Mul_16X16_U
+		Stop
+			PWM1_Stop
+			PWM2_Stop
+			PWM3_Stop
+			PWM4_Stop
+			PWM5_Stop
 		IZQ_L
 			Start
 				PWM1_Start

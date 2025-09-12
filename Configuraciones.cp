@@ -6,6 +6,8 @@ void Start();
 void Stop();
 void HARD();
 void PUSH();
+void WAIT();
+
 
 void REC();
 void REC_M();
@@ -192,6 +194,22 @@ volatile SubEstadoLINEA sub_cmb_linea = LINEA_WAIT;
 
 
 
+void WAIT(){
+ while ( PORTB.F7  == 0) {
+  PORTA.F6 =0;  PORTA.F4 = PORTA.F5 = PORTA.F7 =1;
+ delay_ms(100);
+  PORTA.F7 =0;  PORTA.F4 = PORTA.F5 = PORTA.F6 =1;
+ delay_ms(100);
+  PORTA.F5 =0;  PORTA.F4 = PORTA.F7 = PORTA.F6 =1;
+ delay_ms(100);
+  PORTA.F4 =0;  PORTA.F6 = PORTA.F7 = PORTA.F5 =1;
+ delay_ms(100);
+  PORTA.F4 = PORTA.F5 = PORTA.F7 = PORTA.F6 =1;
+ delay_ms(50);
+ LIBRE();
+ delay_ms(100);
+ }
+}
 void INTERRUPT_ISR(void) {
 
  if (INTCON.TMR0IF) {
@@ -249,7 +267,7 @@ void SELEC(){
  }
  else if ( PORTB.F1  == 0){
   PORTA.F5 =0;  PORTA.F6 = PORTA.F4 = PORTA.F7 =1;
- HARD();
+ Stop();
  delay_ms(100);
  IZQ_L();
  delay_ms(100);
@@ -260,7 +278,7 @@ void SELEC(){
  else if ( PORTB.F2  == 0){
   PORTA.F6 =0;  PORTA.F4 = PORTA.F5 = PORTA.F7 =1;
 
- HARD();
+ Stop();
  delay_ms(50);
  DER_L();
  delay_ms(20);

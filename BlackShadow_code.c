@@ -55,40 +55,11 @@ void main() {
 //==Codigo General=====//
 //====================//
  //Parpadeo de leds para esperar arranque
-while (DAT == 0){
- L0=0; L3=L2=L1=1;
- delay_ms(300);
- L1=0; L3=L2=L0=1;
- delay_ms(300);
- L2=0; L3=L1=L0=1;
- delay_ms(300);
- L3=0; L0=L1=L2=1;
- delay_ms(300);
- L3=L2=L1=L0=1;
- delay_ms(1000);
- LIBRE();
- delay_ms(250);
-}
 while(1){
-         if (DAT==0){
-            LIBRE();                                     //Deten motores
-         //Los leds parpadean mientras se espera nuevo arranque
-             while (DAT == 0){
-             L0=0; L3=L2=L1=1;
-             delay_ms(300);
-             L1=0; L3=L2=L0=1;
-             delay_ms(300);
-             L2=0; L3=L1=L0=1;
-             delay_ms(300);
-             L3=0; L0=L1=L2=1;
-             delay_ms(300);
-             L3=L2=L1=L0=1;
-             delay_ms(1000);
-             LIBRE();
-             delay_ms(250);
-             }
-         }
-         SELEC();
-
-}
+        if (DAT == 0) {
+            WAIT(); // Solo parpadea si DAT se baja
+        } else {
+            SELEC(); // Si go está activo, combate inmediato
+        }
+    }
 }

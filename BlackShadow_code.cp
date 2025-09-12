@@ -6,6 +6,8 @@ void Start();
 void Stop();
 void HARD();
 void PUSH();
+void WAIT();
+
 
 void REC();
 void REC_M();
@@ -207,40 +209,11 @@ void main() {
 
 
 
-while ( PORTB.F7  == 0){
-  PORTA.F6 =0;  PORTA.F4 = PORTA.F5 = PORTA.F7 =1;
- delay_ms(300);
-  PORTA.F7 =0;  PORTA.F4 = PORTA.F5 = PORTA.F6 =1;
- delay_ms(300);
-  PORTA.F5 =0;  PORTA.F4 = PORTA.F7 = PORTA.F6 =1;
- delay_ms(300);
-  PORTA.F4 =0;  PORTA.F6 = PORTA.F7 = PORTA.F5 =1;
- delay_ms(300);
-  PORTA.F4 = PORTA.F5 = PORTA.F7 = PORTA.F6 =1;
- delay_ms(1000);
- LIBRE();
- delay_ms(250);
-}
 while(1){
- if ( PORTB.F7 ==0){
- LIBRE();
-
- while ( PORTB.F7  == 0){
-  PORTA.F6 =0;  PORTA.F4 = PORTA.F5 = PORTA.F7 =1;
- delay_ms(300);
-  PORTA.F7 =0;  PORTA.F4 = PORTA.F5 = PORTA.F6 =1;
- delay_ms(300);
-  PORTA.F5 =0;  PORTA.F4 = PORTA.F7 = PORTA.F6 =1;
- delay_ms(300);
-  PORTA.F4 =0;  PORTA.F6 = PORTA.F7 = PORTA.F5 =1;
- delay_ms(300);
-  PORTA.F4 = PORTA.F5 = PORTA.F7 = PORTA.F6 =1;
- delay_ms(1000);
- LIBRE();
- delay_ms(250);
- }
- }
+ if ( PORTB.F7  == 0) {
+ WAIT();
+ } else {
  SELEC();
-
-}
+ }
+ }
 }

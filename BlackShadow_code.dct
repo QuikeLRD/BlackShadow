@@ -2344,6 +2344,7 @@ vrefn_bit
 vrefp
 vrefp_bit
 w
+wait
 wcol
 wcol_bit
 wcol_ssp1con1_bit

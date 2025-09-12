@@ -43,6 +43,22 @@ volatile SubEstadoLINEA sub_cmb_linea = LINEA_WAIT;
 //======================//
 //======Funciones======//
 //====================//
+void WAIT(){
+  while (DAT == 0) {
+        L0=0; L3=L2=L1=1;
+        delay_ms(100); // Menor delay: parpadeo más rápido
+        L1=0; L3=L2=L0=1;
+        delay_ms(100);
+        L2=0; L3=L1=L0=1;
+        delay_ms(100);
+        L3=0; L0=L1=L2=1;
+        delay_ms(100);
+        L3=L2=L1=L0=1;
+        delay_ms(50);
+        LIBRE();
+        delay_ms(100);
+    }
+}
 void INTERRUPT_ISR(void) {
     // Timer0: incremento de milisegundos
     if (INTCON.TMR0IF) {
@@ -85,7 +101,7 @@ void SELEC(){
     if(S4 != 0 && S3 != 0){
         L0=L3=L2=L1=1;
         
-        REC();
+         REC();
     }
     else if(S4 == 0 && S3 == 0){
          L0=L3=1; L2=L1=0;
@@ -99,11 +115,11 @@ void SELEC(){
 
     }
     else if (S3 == 0){
-        L2=0; L0=L3=L1=1;
-        HARD();
-        delay_ms(100);
-        IZQ_L();
-        delay_ms(100);
+         L2=0; L0=L3=L1=1;
+         Stop();
+         delay_ms(100);
+         IZQ_L();
+         delay_ms(100);
 
 
 
@@ -111,7 +127,7 @@ void SELEC(){
     else if (S4 == 0){
         L0=0; L3=L2=L1=1;
 
-        HARD();
+        Stop();
         delay_ms(50);
         DER_L();
         delay_ms(20);
