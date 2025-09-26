@@ -1,6 +1,6 @@
-#BlackShadow
+# BlackShadow minisumo Firmware
 
-**BlackShadow** es un sistema de control avanzado para un robot minisumo autónomo, desarrollado en C, C++ y Assembly. Este proyecto implementa lógica de combate, evasión y búsqueda de oponentes, integrando control eficiente de hardware, manejo de sensores en tiempo real y una arquitectura modular basada en máquinas de estados.
+**BlackShadow** es un robot minisumo autónomo profesional, desarrollado en C++ con el objetivo de competir en torneos nacionales e internacionales de miniróbotica. Este proyecto implementa lógica de combate, evasión y búsqueda de oponentes, integrando control de hardware, manejo de sensores en tiempo real y una arquitectura modular basada en máquinas de estados.
 
 ---
 
@@ -25,53 +25,17 @@ El firmware está diseñado para robots minisumo de competencia, gestionando de 
 - `Configuraciones.h` — Definiciones de hardware, enums, constantes y configuración adaptable.
 - `milis.h` — Utilidad para temporización no bloqueante.
 - Archivos `.c` / `.cpp` — Implementación de lógicas de combate, movimiento y máquinas de estados.
-- Archivos `.asm` — Rutinas de bajo nivel para inicialización y control específico de hardware.
 
 ---
 
 ## Requisitos de hardware
 
-- Microcontrolador (por ejemplo, PIC, AVR, STM32, Arduino, etc.)
-- Módulo de control de motores (puente H, drivers PWM)
-- Sensores de línea (al menos dos para los bordes izquierdo y derecho)
-- Sensores de oponente (IR, ultrasónicos, etc.)
-- Chasis y motores para minisumo
-- Fuente de alimentación adecuada
+- Microcontrolador: PIC18F26K22
+- Módulo de control de motores: DRV8871
+- Sensores de línea: Micro Line sensor M1
+- Sensores IR: JS40F Digital distance sensor
 
 ---
-
-## Compilación y uso
-
-1. Configura tu entorno de desarrollo según tu microcontrolador (MPLAB X, Arduino IDE, PlatformIO, etc.).
-2. Ajusta los parámetros de hardware en `Configuraciones.h` para tu robot específico.
-3. Compila el firmware y cárgalo en el microcontrolador.
-4. Coloca el robot en la pista y enciéndelo para iniciar la lógica de combate autónoma.
-
----
-
-## Ejemplo de máquina de estados
-
-```c
-void combate_estado() {
-    if (linea_detectada || sub_cmb_linea != LINEA_IDLE) {
-        // Rutina de recuperación de línea
-        // ...
-        return;
-    }
-    switch (estado_combate) {
-        case CMB_ESPERA:
-            // Lógica de detección de oponente
-            break;
-        case CMB_REC:
-            // Rutina de retroceso
-            break;
-        // Otros estados...
-    }
-}
-```
-
----
-
 ## Funcionalidades implementadas
 
 - Detección y evasión automática de línea/borde.
@@ -79,17 +43,5 @@ void combate_estado() {
 - Control preciso y seguro de motores.
 - Recuperación ante posibles errores o condiciones peligrosas.
 - Lógica no bloqueante para máxima eficiencia en tiempo real.
-
----
-
-## Autor
-
-Desarrollado por [QuikeLRD](https://github.com/QuikeLRD).
-
----
-
-## Licencia
-
-Este proyecto se distribuye con fines educativos y profesionales. Consulta el archivo de licencia o contacta al autor para más información.
 
 ---
